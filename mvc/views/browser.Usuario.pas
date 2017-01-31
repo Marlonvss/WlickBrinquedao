@@ -34,7 +34,7 @@ implementation
 
 function TBrowserUsuario.GetCaption: String;
 begin
-  Result := 'Browser de Usuários';
+  Result := 'Usuários do sistema';
 end;
 
 function TBrowserUsuario.GetIDSelecionado: TGuid;

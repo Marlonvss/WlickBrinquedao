@@ -12,12 +12,12 @@ uses
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, ORM.images, browser.Usuario,
   dxStatusBar, WLick.Miscelania, dxRibbonStatusBar, dxSkinsForm, dxRibbonCustomizationForm,
   dxBarBuiltInMenu, Vcl.AppEvnts, WLick.ClassHelper, ORM.ViewManager,
-  viewLoginForm;
+  viewLoginForm, browser.Criancas, WLick.Sessao;
 
 type
   TfrmMain = class(TForm)
     actManager: TActionManager;
-    Action1: TAction;
+    actUsuarios: TAction;
     barPrincipar: TdxBarManager;
     tabMDIManager: TdxTabbedMDIManager;
     dxBarLargeButton1: TdxBarLargeButton;
@@ -28,10 +28,19 @@ type
     barPrinciparBar1: TdxBar;
     appEvents: TApplicationEvents;
     dxBarLargeButton2: TdxBarLargeButton;
-    procedure Action1Execute(Sender: TObject);
+    actCriancas: TAction;
+    actValores: TAction;
+    actPreferencias: TAction;
+    barPrinciparBar2: TdxBar;
+    barPrinciparBar3: TdxBar;
+    dxBarLargeButton3: TdxBarLargeButton;
+    dxBarLargeButton4: TdxBarLargeButton;
+    dxBarLargeButton5: TdxBarLargeButton;
+    procedure actUsuariosExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure appEventsException(Sender: TObject; E: Exception);
-    procedure dxBarLargeButton2Click(Sender: TObject);
+    procedure actCriancasExecute(Sender: TObject);
+    procedure actValoresExecute(Sender: TObject);
 
   private
     procedure LoadBarManager();
@@ -49,9 +58,19 @@ implementation
 
 uses viewErrorForm, ORM.Connection;
 
-procedure TfrmMain.Action1Execute(Sender: TObject);
+procedure TfrmMain.actCriancasExecute(Sender: TObject);
+begin
+  ORM.ViewManager.TORMViewManager.AbreBrowser(TBrowserCriancas);
+end;
+
+procedure TfrmMain.actUsuariosExecute(Sender: TObject);
 begin
   ORM.ViewManager.TORMViewManager.AbreBrowser(TBrowserUsuario);
+end;
+
+procedure TfrmMain.actValoresExecute(Sender: TObject);
+begin
+  ORM.ViewManager.TORMViewManager.AbreBrowser(TBrowserCriancas);
 end;
 
 procedure TfrmMain.appEventsException(Sender: TObject; E: Exception);
@@ -59,23 +78,24 @@ begin
   TviewErro.ExibeMensagem(E);
 end;
 
-procedure TfrmMain.dxBarLargeButton2Click(Sender: TObject);
-begin
-  with TfrmLogin.create(self) do
-  begin
-    ShowModal;
-  end;
-end;
-
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
+  with viewLoginForm.TfrmLogin.Create(self) do
+  try
+    if ShowModal = mrCancel then
+      Application.Terminate;
+  finally
+    Free;
+  end;
+
+
   LoadBarManager();
 end;
 
 procedure TfrmMain.LoadBarManager;
 begin
   Bar.Panels.Items[0].Text := ' Versão: ' + TMisc.GetVersaoSistema();
-  Bar.Panels.Items[1].Text := ' Usuário: Marlon';
+  Bar.Panels.Items[1].Text := ' Usuário: '+ WLick.Sessao.GetInstance.Usuario.Login;
 end;
 
 end.

@@ -32,7 +32,17 @@ uses
   ORM.Connection in '..\..\WlickORM\connection\ORM.Connection.pas',
   assembler.Usuarios in '..\mvc\assembler\assembler.Usuarios.pas',
   ORM.images in '..\..\WlickORM\images\ORM.images.pas' {DImages: TDataModule},
-  WLick.InitSistema in '..\units\WLick.InitSistema.pas';
+  WLick.InitSistema in '..\units\WLick.InitSistema.pas',
+  browser.Criancas in '..\mvc\views\browser.Criancas.pas',
+  ficha.Criancas in '..\mvc\views\ficha.Criancas.pas',
+  assembler.Criancas in '..\mvc\assembler\assembler.Criancas.pas',
+  controller.Criancas in '..\mvc\controllers\controller.Criancas.pas',
+  dao.Criancas in '..\mvc\daos\dao.Criancas.pas',
+  dto.Criancas in '..\mvc\dto\dto.Criancas.pas',
+  mapper.Criancas in '..\mvc\mappers\mapper.Criancas.pas',
+  model.Criancas in '..\mvc\models\model.Criancas.pas',
+  frame.Criancas in '..\mvc\views\frame.Criancas.pas' {frameCriancas: TFrame},
+  WLick.Sessao in '..\units\WLick.Sessao.pas';
 
 {$R *.res}
 
@@ -40,6 +50,7 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDModule, DModule);
+  Application.CreateForm(TDImages, DImages);
   if TInitSistema.IniciarSistema then
   begin
     Application.CreateForm(TfrmMain, frmMain);

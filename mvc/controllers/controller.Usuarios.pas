@@ -12,6 +12,9 @@ type
   private
   protected
     function ClassDAO(): TORMDAOBaseClass; override;
+    function GetDAO(): TDAOUsuario;
+  public
+    procedure GetUsuarioByLoginSenha(var aDTO: TDTOUsuario);
   end;
 
 implementation
@@ -19,6 +22,17 @@ implementation
 function TControllerUsuario.ClassDAO: TORMDAOBaseClass;
 begin
   Result := TDAOUsuario;
+end;
+
+function TControllerUsuario.GetDAO: TDAOUsuario;
+begin
+  Result := (FDAO as TDAOUsuario);
+end;
+
+procedure TControllerUsuario.GetUsuarioByLoginSenha(var aDTO: TDTOUsuario);
+begin
+  if Assigned(aDTO) then
+    GetDAO().GetUsuarioByLoginSenha(aDTO);
 end;
 
 end.

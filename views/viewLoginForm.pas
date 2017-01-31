@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dxGDIPlusClasses, Vcl.ExtCtrls,
   cxGraphics, cxLookAndFeels, cxLookAndFeelPainters, Vcl.Menus, Vcl.StdCtrls,
   System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
-  cxButtons;
+  cxButtons, controller.Usuarios, dto.Usuarios, WLick.Sessao;
 
 type
   TfrmLogin = class(TForm)
@@ -26,6 +26,7 @@ type
     procedure actOKExecute(Sender: TObject);
   private
     { Private declarations }
+    function ValidarLogin(): Boolean;
   public
     { Public declarations }
   end;
@@ -44,7 +45,37 @@ end;
 
 procedure TfrmLogin.actOKExecute(Sender: TObject);
 begin
-  Self.ModalResult := mrOK;
+  if ValidarLogin() then
+    Self.ModalResult := mrOK;
+end;
+
+function TfrmLogin.ValidarLogin: Boolean;
+var
+  vUsuario, vSenha: String;
+  vDTO: TDTOUsuario;
+begin
+  Result := False;
+
+  vDTO := TDTOUsuario.Create;
+  vDTO.Login := edtLogin.Text;
+  vDTO.Senha := edtSenha.Text;
+
+  with TControllerUsuario.Create do
+  try
+    GetUsuarioByLoginSenha(vDTO);
+    Result := Assigned(vDTO);
+    if Result then
+    begin
+      WLick.Sessao.GetInstance().SetUsuario(vDTO);
+    end else
+    begin
+      ShowMessage('Usuário ou senha informada não confere.');
+    end;
+
+  finally
+    Free;
+  end;
+
 end;
 
 end.

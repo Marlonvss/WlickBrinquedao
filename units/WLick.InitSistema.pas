@@ -4,12 +4,13 @@ interface
 
 uses Winapi.Windows, Winapi.Messages, System.SysUtils, System.Classes, vcl.Forms,
   ORM.Connection, model.Usuarios, dto.Usuarios,
-  assembler.Usuarios, IniFiles;
+  assembler.Usuarios, IniFiles, Dialogs;
 
 Type
   TInitSistema = class
   private
     procedure ConectaBD;
+    function LicencaValida: Boolean;
   public
     class function IniciarSistema(): Boolean;
   end;
@@ -55,22 +56,29 @@ end;
 
 class function TInitSistema.IniciarSistema: Boolean;
 begin
-  Result := True;
+  Result := False;
   with TInitSistema.Create() do
   try
+    if LicencaValida then
     try
       ConectaBD;
+      Result := True;
     except
       on e: exception do
-      begin
-        Result := False;
         raise Exception.Create('Ocorreu um erro ao Iniciar o Sistema!'+#13+'Entre em contato com o Suporte WebLick.'+#13+e.Message);
-      end;
+    end else
+    begin
+      ShowMessage('Licença invalida!');
     end;
   finally
     Free;
   end;
 
+end;
+
+function TInitSistema.LicencaValida: Boolean;
+begin
+  Result := not (Trunc(Now) > StrToDate('01/04/2017'));
 end;
 
 end.
