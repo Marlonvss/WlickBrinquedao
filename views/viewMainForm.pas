@@ -12,7 +12,7 @@ uses
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, ORM.images, browser.Usuario,
   dxStatusBar, WLick.Miscelania, dxRibbonStatusBar, dxSkinsForm, dxRibbonCustomizationForm,
   dxBarBuiltInMenu, Vcl.AppEvnts, WLick.ClassHelper, ORM.ViewManager,
-  viewLoginForm, browser.Criancas, WLick.Sessao;
+  viewLoginForm, browser.Criancas, WLick.Sessao, viewAtividadesPrincipal;
 
 type
   TfrmMain = class(TForm)
@@ -44,6 +44,7 @@ type
 
   private
     procedure LoadBarManager();
+    procedure LoadAtividadeMain();
 
   public
     { Public declarations }
@@ -80,6 +81,7 @@ end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
+
   with viewLoginForm.TfrmLogin.Create(self) do
   try
     if ShowModal = mrCancel then
@@ -88,8 +90,18 @@ begin
     Free;
   end;
 
-
+  LoadAtividadeMain();
   LoadBarManager();
+end;
+
+procedure TfrmMain.LoadAtividadeMain;
+begin
+  with TfrmAtividades.Create(self) do
+  begin
+    Parent := Self;
+    Align := alClient;
+    Show;
+  end;
 end;
 
 procedure TfrmMain.LoadBarManager;

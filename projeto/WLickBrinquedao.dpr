@@ -42,7 +42,8 @@ uses
   mapper.Criancas in '..\mvc\mappers\mapper.Criancas.pas',
   model.Criancas in '..\mvc\models\model.Criancas.pas',
   frame.Criancas in '..\mvc\views\frame.Criancas.pas' {frameCriancas: TFrame},
-  WLick.Sessao in '..\units\WLick.Sessao.pas';
+  WLick.Sessao in '..\units\WLick.Sessao.pas',
+  viewAtividadesPrincipal in '..\views\viewAtividadesPrincipal.pas' {frmAtividades};
 
 {$R *.res}
 
