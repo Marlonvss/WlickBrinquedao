@@ -4,7 +4,7 @@ interface
 
 uses Winapi.Windows, Winapi.Messages, System.SysUtils, System.Classes, vcl.Forms,
   ORM.Connection, model.Usuarios, dto.Usuarios,
-  assembler.Usuarios, IniFiles, Dialogs;
+  assembler.Usuarios, IniFiles, Dialogs, WLick.Constantes;
 
 Type
   TInitSistema = class
@@ -68,7 +68,7 @@ begin
         raise Exception.Create('Ocorreu um erro ao Iniciar o Sistema!'+#13+'Entre em contato com o Suporte WebLick.'+#13+e.Message);
     end else
     begin
-      ShowMessage('Licença invalida!');
+      ShowMessage('Licença invalida! '+CRLF+'Vencimento até 01/04/2017.');
     end;
   finally
     Free;

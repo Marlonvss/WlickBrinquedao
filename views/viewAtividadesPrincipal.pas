@@ -11,11 +11,11 @@ uses
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
   System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
   cxTimeEdit, Vcl.Menus, DBAccess, Uni, cxGridCardView, cxGridDBCardView,
-  cxGridCustomLayoutView, MemDS, ORM.Connection, cxLabel;
+  cxGridCustomLayoutView, MemDS, ORM.Connection, cxLabel, brinquedao.Images;
 
 type
   TfrmAtividades = class(TForm)
-    Panel1: TPanel;
+    pnlTop: TPanel;
     Button1: TButton;
     ActManager: TActionManager;
     actNovo: TAction;
@@ -43,7 +43,9 @@ type
     lblHora: TLabel;
     UniConnection1: TUniConnection;
     cxGrid1DBCardView2DBCardViewRow6: TcxGridDBCardViewRow;
-    Edit1: TEdit;
+    pnlBusca: TPanel;
+    edtBusca: TEdit;
+    lblBusca: TLabel;
     procedure actFinalizarExecute(Sender: TObject);
     procedure TimerRefreshTimer(Sender: TObject);
     procedure actNovoExecute(Sender: TObject);
@@ -53,6 +55,7 @@ type
     procedure cxGrid1DBCardView2DBCardViewRow4GetDisplayText(
       Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
       var AText: string);
+    procedure edtBuscaChange(Sender: TObject);
   private
     procedure StopAutoRefresh();
     procedure StartAutoRefresh();
@@ -95,6 +98,22 @@ procedure TfrmAtividades.cxGrid1DBCardView2DBCardViewRow4GetDisplayText(
   var AText: string);
 begin
   AText := 'Em andamento';
+end;
+
+procedure TfrmAtividades.edtBuscaChange(Sender: TObject);
+var
+  vFind : String;
+begin
+  uniPrincipal.Filter := EmptyStr;
+  vFind := '%' + LowerCase(edtBusca.Text) + '%';
+  if (vFind <> EmptyStr) then
+  begin
+    uniPrincipal.Filter :=
+      ' (lower(NOME) = ' + vFind.QuotedString + ')'+
+      ' OR (lower(RESPONSAVELNOME) = ' + vFind.QuotedString + ')'+
+      ' OR (lower(RESPONSAVELDOCUMENTO) = ' + vFind.QuotedString + ')';
+  end;
+  uniPrincipal.Filtered := (uniPrincipal.Filter <> EmptyStr);
 end;
 
 procedure TfrmAtividades.FormCreate(Sender: TObject);

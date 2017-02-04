@@ -17,7 +17,7 @@ object frmAtividades: TfrmAtividades
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object Panel1: TPanel
+  object pnlTop: TPanel
     AlignWithMargins = True
     Left = 3
     Top = 3
@@ -26,7 +26,6 @@ object frmAtividades: TfrmAtividades
     Margins.Bottom = 0
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 675
     object lblHora: TLabel
       AlignWithMargins = True
       Left = 769
@@ -44,14 +43,13 @@ object frmAtividades: TfrmAtividades
       Font.Style = [fsBold]
       ParentFont = False
       Layout = tlCenter
-      ExplicitLeft = 572
       ExplicitHeight = 25
     end
     object Button1: TButton
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 85
+      Width = 110
       Height = 44
       Margins.Right = 0
       Action = actNovo
@@ -62,17 +60,42 @@ object frmAtividades: TfrmAtividades
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ImageMargins.Left = 3
-      Images = DImages.img32
+      Images = DMImageBrinquedao.img32
       ParentFont = False
       TabOrder = 0
     end
-    object Edit1: TEdit
-      Left = 108
-      Top = 16
-      Width = 121
-      Height = 21
+    object pnlBusca: TPanel
+      Left = 114
+      Top = 1
+      Width = 356
+      Height = 50
+      Align = alLeft
+      BevelOuter = bvNone
       TabOrder = 1
-      Text = 'Edit1'
+      ExplicitLeft = 89
+      object lblBusca: TLabel
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 350
+        Height = 20
+        Margins.Bottom = 0
+        Align = alClient
+        Caption = 'Localizar [Nome, Respons'#225'vel ou Documento]:'
+        Layout = tlBottom
+        ExplicitWidth = 223
+        ExplicitHeight = 13
+      end
+      object edtBusca: TEdit
+        AlignWithMargins = True
+        Left = 3
+        Top = 26
+        Width = 350
+        Height = 21
+        Align = alBottom
+        TabOrder = 0
+        OnChange = edtBuscaChange
+      end
     end
   end
   object cxGrid1: TcxGrid
@@ -83,8 +106,6 @@ object frmAtividades: TfrmAtividades
     Height = 456
     Align = alClient
     TabOrder = 1
-    ExplicitWidth = 675
-    ExplicitHeight = 321
     object cxGrid1DBTableView1: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
       DataController.Summary.DefaultGroupSummaryItems = <>
@@ -151,11 +172,13 @@ object frmAtividades: TfrmAtividades
       Navigator.Buttons.Filter.Visible = True
       Navigator.InfoPanel.DisplayMask = '[RecordIndex] de [RecordCount]'
       FilterBox.Visible = fvNever
+      FindPanel.InfoText = 'Buscar'
       DataController.DataSource = dsPrincipal
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <>
       DataController.Summary.SummaryGroups = <>
       OptionsCustomize.CardSizing = False
+      OptionsCustomize.RowExpanding = False
       OptionsCustomize.RowFiltering = False
       OptionsData.Deleting = False
       OptionsData.DeletingConfirmation = False
@@ -165,13 +188,14 @@ object frmAtividades: TfrmAtividades
       OptionsSelection.HideSelection = True
       OptionsSelection.MultiSelect = True
       OptionsSelection.CardBorderSelection = False
-      OptionsView.NoDataToDisplayInfoText = '<Nenhuma atividade>'
+      OptionsView.NoDataToDisplayInfoText = '<Nenhuma atividade registrada at'#233' o momento>'
       OptionsView.CardAutoWidth = True
-      OptionsView.CardIndent = 1
-      OptionsView.CardWidth = 174
+      OptionsView.CardIndent = 0
+      OptionsView.CardWidth = 217
       OptionsView.CategorySeparatorWidth = 0
       OptionsView.CellAutoHeight = True
       OptionsView.SeparatorWidth = 0
+      OptionsView.ShowRowFilterButtons = sfbAlways
       object cxGrid1DBCardView2DBCardViewRow1: TcxGridDBCardViewRow
         Caption = 'Crian'#231'a'
         DataBinding.FieldName = 'nome'
@@ -188,6 +212,7 @@ object frmAtividades: TfrmAtividades
         Caption = 'Entrada'
         DataBinding.FieldName = 'entrada'
         PropertiesClassName = 'TcxTimeEditProperties'
+        Properties.TimeFormat = tfHourMin
         Kind = rkCaption
         Position.BeginsLayer = True
       end
@@ -203,8 +228,9 @@ object frmAtividades: TfrmAtividades
         Caption = 'Previs'#227'o'
         DataBinding.FieldName = 'previsao'
         PropertiesClassName = 'TcxTimeEditProperties'
+        Properties.TimeFormat = tfHourMin
         Kind = rkCaption
-        Position.BeginsLayer = False
+        Position.BeginsLayer = True
       end
       object cxGrid1DBCardView2DBCardViewRow4: TcxGridDBCardViewRow
         Caption = 'Situa'#231#227'o'
@@ -216,7 +242,7 @@ object frmAtividades: TfrmAtividades
         Position.BeginsLayer = True
       end
       object cxGrid1DBCardView2DBCardViewRow6: TcxGridDBCardViewRow
-        Caption = 'Obs:'
+        Caption = 'Obs'
         DataBinding.FieldName = 'obs'
         Kind = rkCaption
         Position.BeginsLayer = True
@@ -234,7 +260,7 @@ object frmAtividades: TfrmAtividades
     Top = 72
     StyleName = 'Platform Default'
     object actNovo: TAction
-      Caption = 'Novo'
+      Caption = 'Registrar'
       ImageIndex = 4
       OnExecute = actNovoExecute
     end
@@ -251,14 +277,20 @@ object frmAtividades: TfrmAtividades
         'SELECT ATIVIDADES.ID, ATIVIDADES.OBS, ATIVIDADES.ENTRADA, ATIVID' +
         'ADES.VALOR, ATIVIDADES.TEMPO, ATIVIDADES.SITUACAO, ATIVIDADES.EN' +
         'TRADA + ATIVIDADES.TEMPO AS PREVISAO,'
+      '       CRIANCAS.NOME, CRIANCAS.NASCIMENTO,'
       
-        '       CRIANCAS.NOME, CRIANCAS.NASCIMENTO, CRIANCAS.RESPONSAVELN' +
-        'OME, CRIANCAS.RESPONSAVELDOCUMENTO, CRIANCAS.RESPONSAVELCONTATO'
+        '       RESPONSAVEIS.NOME AS RESPONSAVELNOME, RESPONSAVEIS.DOCUME' +
+        'NTO AS RESPONSAVELDOCUMENTO, RESPONSAVEIS.CONTATO AS RESPONSAVEL' +
+        'CONTATO'
       '  FROM ATIVIDADES'
       '  JOIN CRIANCAS ON CRIANCAS.ID = ATIVIDADES.ID_CRIANCA'
+      
+        '  JOIN RESPONSAVEIS ON RESPONSAVEIS.ID = ATIVIDADES.ID_RESPONSAV' +
+        'EL'
       ' WHERE ATIVIDADES.SITUACAO = 1'
       ' ORDER BY ATIVIDADES.ENTRADA + ATIVIDADES.TEMPO')
     Active = True
+    Filtered = True
     Left = 80
     Top = 72
   end
@@ -276,6 +308,7 @@ object frmAtividades: TfrmAtividades
     end
     object Estenderatividade1: TMenuItem
       Caption = 'Estender atividade'
+      Visible = False
     end
   end
   object TimerRefresh: TTimer

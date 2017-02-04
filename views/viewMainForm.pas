@@ -9,10 +9,11 @@ uses
   controller.Usuarios, cxGraphics, cxControls, cxLookAndFeels,
   cxLookAndFeelPainters, dxRibbonSkins, cxClasses, dxRibbon, cxPC,
   cxPCdxBarPopupMenu, dxBar, dxTabbedMDI, System.Actions, Vcl.ActnList,
-  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, ORM.images, browser.Usuario,
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, browser.Usuario,
   dxStatusBar, WLick.Miscelania, dxRibbonStatusBar, dxSkinsForm, dxRibbonCustomizationForm,
   dxBarBuiltInMenu, Vcl.AppEvnts, WLick.ClassHelper, ORM.ViewManager,
-  viewLoginForm, browser.Criancas, WLick.Sessao, viewAtividadesPrincipal;
+  viewLoginForm, browser.Criancas, WLick.Sessao, viewAtividadesPrincipal,
+  brinquedao.Images, Vcl.ExtCtrls;
 
 type
   TfrmMain = class(TForm)
@@ -36,13 +37,17 @@ type
     dxBarLargeButton3: TdxBarLargeButton;
     dxBarLargeButton4: TdxBarLargeButton;
     dxBarLargeButton5: TdxBarLargeButton;
+    timerAtividades: TTimer;
     procedure actUsuariosExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure appEventsException(Sender: TObject; E: Exception);
     procedure actCriancasExecute(Sender: TObject);
     procedure actValoresExecute(Sender: TObject);
+    procedure timerAtividadesTimer(Sender: TObject);
 
   private
+    FTelaAtividades: TfrmAtividades;
+
     procedure LoadBarManager();
     procedure LoadAtividadeMain();
 
@@ -81,11 +86,15 @@ end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
+  Ribbon.ActiveTab := RibbonTabPrincipal;
 
   with viewLoginForm.TfrmLogin.Create(self) do
   try
-    if ShowModal = mrCancel then
-      Application.Terminate;
+    if not Assigned(WLick.Sessao.GetInstance.Usuario) then
+    begin
+      if ShowModal = mrCancel then
+        Application.Terminate;
+    end;
   finally
     Free;
   end;
@@ -96,7 +105,8 @@ end;
 
 procedure TfrmMain.LoadAtividadeMain;
 begin
-  with TfrmAtividades.Create(self) do
+  FTelaAtividades := TfrmAtividades.Create(nil);
+  with FTelaAtividades do
   begin
     Parent := Self;
     Align := alClient;
@@ -108,6 +118,13 @@ procedure TfrmMain.LoadBarManager;
 begin
   Bar.Panels.Items[0].Text := ' Versão: ' + TMisc.GetVersaoSistema();
   Bar.Panels.Items[1].Text := ' Usuário: '+ WLick.Sessao.GetInstance.Usuario.Login;
+end;
+
+procedure TfrmMain.timerAtividadesTimer(Sender: TObject);
+begin
+  { T - Ao exibir um FormChildren, esconder a tela de atividades para exibir as abas }
+  if Assigned(FTelaAtividades) then
+    FTelaAtividades.Visible := Self.MDIChildCount = 0;
 end;
 
 end.

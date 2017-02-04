@@ -29,8 +29,8 @@ begin
     .Where(mapper.Usuarios.field_Login, aDTO.Login.Quoted)
     .Where(mapper.Usuarios.field_Senha, aDTO.Senha.Quoted);
 
-  with GetAssembler(aDTO.AssemblerClass) do
-  begin
+  with ORM.assemblerBase.TORMAssemblerBase.GetAssembler(aDTO.AssemblerClass) do
+  try
     vQry := TUniQuery.Create(nil);
     try
       OpenSQL(vSQL,vQry);
@@ -45,6 +45,8 @@ begin
     finally
       vQry.Free;
     end;
+  finally
+    Free;
   end;
 end;
 

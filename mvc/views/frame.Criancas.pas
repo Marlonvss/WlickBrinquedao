@@ -7,7 +7,9 @@ uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls,
   cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit, Vcl.ComCtrls,
   dxCore, cxDateUtils, cxImage, cxGroupBox, cxTextEdit, cxMaskEdit,
-  cxDropDownEdit, cxCalendar, Vcl.StdCtrls;
+  cxDropDownEdit, cxCalendar, Vcl.StdCtrls, dxBarBuiltInMenu, cxPC, Vcl.Buttons,
+  Vcl.ExtCtrls, cxCustomData, cxStyles, cxTL, cxTLdxBarBuiltInMenu,
+  cxInplaceContainer, brinquedao.Images;
 
 type
   TframeCriancas = class(TFrame)
@@ -17,19 +19,22 @@ type
     edtCodigo: TcxTextEdit;
     edtNome: TcxTextEdit;
     lblNascimento: TLabel;
-    grpResponsavel: TcxGroupBox;
-    lblResponsavelNome: TLabel;
-    edtResponsavelNome: TcxTextEdit;
-    edtResponsavelEmail: TcxTextEdit;
-    lblResponsavelEmail: TLabel;
-    edtResponsavelContato: TcxTextEdit;
-    lblResponsavelContato: TLabel;
-    lblResponsavelDocumento: TLabel;
-    edtResponsavelDocumento: TcxTextEdit;
-    grpFotoCrianca: TcxGroupBox;
-    grpFotoResponsavel: TcxGroupBox;
+    pgControl: TcxPageControl;
+    tsFoto: TcxTabSheet;
+    cxTabSheet2: TcxTabSheet;
+    lblCaptionIdade: TLabel;
+    lblIdade: TLabel;
     cxImage1: TcxImage;
-    cxImage2: TcxImage;
+    pnlCtrlImagem: TPanel;
+    pnlCtrlResponsavel: TPanel;
+    treeListResponsaveis: TcxTreeList;
+    btnLoad: TButton;
+    btnWebCam: TButton;
+    btnClear: TButton;
+    btnNovo: TButton;
+    btnDeletar: TButton;
+    treeListColumn_Nome: TcxTreeListColumn;
+    treeListColumn_Documento: TcxTreeListColumn;
   private
     { Private declarations }
   public
@@ -39,5 +44,6 @@ type
 implementation
 
 {$R *.dfm}
+
 
 end.

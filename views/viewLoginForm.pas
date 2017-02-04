@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dxGDIPlusClasses, Vcl.ExtCtrls,
   cxGraphics, cxLookAndFeels, cxLookAndFeelPainters, Vcl.Menus, Vcl.StdCtrls,
   System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
-  cxButtons, controller.Usuarios, dto.Usuarios, WLick.Sessao;
+  cxButtons, controller.Usuarios, dto.Usuarios, WLick.Sessao, IniFiles;
 
 type
   TfrmLogin = class(TForm)
@@ -29,10 +29,9 @@ type
     function ValidarLogin(): Boolean;
   public
     { Public declarations }
+    constructor Create(AOwner: TComponent); override;
+    function SilentLogin(aUser, aPassword: String): Boolean;
   end;
-
-var
-  frmLogin: TfrmLogin;
 
 implementation
 
@@ -47,6 +46,36 @@ procedure TfrmLogin.actOKExecute(Sender: TObject);
 begin
   if ValidarLogin() then
     Self.ModalResult := mrOK;
+end;
+
+constructor TfrmLogin.Create(AOwner: TComponent);
+var
+  ArquivoINI: TIniFile;
+
+  vUsuario, vSenha : string;
+const
+  cTagName = 'Sessao';
+begin
+  inherited Create(AOwner);
+
+  ArquivoINI := TIniFile.Create( ExtractFilePath(Application.ExeName) + '\conexao.ini' );
+  try
+    edtLogin.Text := ArquivoINI.ReadString(cTagName, 'Usuario','');
+    edtSenha.Text := ArquivoINI.ReadString(cTagName, 'Senha','');
+
+    if ((edtLogin.Text <> EmptyStr) and (edtSenha.Text <> EmptyStr)) then
+      ValidarLogin();
+  finally
+    ArquivoINI.Free;
+  end;
+
+end;
+
+function TfrmLogin.SilentLogin(aUser, aPassword: String): Boolean;
+begin
+  edtLogin.Text := aUser;
+  edtSenha.Text := aPassword;
+
 end;
 
 function TfrmLogin.ValidarLogin: Boolean;

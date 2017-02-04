@@ -15,11 +15,6 @@ type
     FNome: String;
     FNascimento: TDateTime;
     FFoto: String;
-    FResponsavelNome: String;
-    FResponsavelDocumento: String;
-    FResponsavelContato: String;
-    FResponsavelEmail: String;
-    FResponsavelFoto: String;
 
   published
 
@@ -37,21 +32,6 @@ type
 
     [TORMFieldCRUD(mapper.Criancas.field_foto)]
     property Foto: String read FFoto write FFoto;
-
-    [TORMFieldCRUD(mapper.Criancas.field_responsavelNome)]
-    property ResponsavelNome: String read FResponsavelNome write FResponsavelNome;
-
-    [TORMFieldCRUD(mapper.Criancas.field_responsavelDocumento)]
-    property ResponsavelDocumento: String read FResponsavelDocumento write FResponsavelDocumento;
-
-    [TORMFieldCRUD(mapper.Criancas.field_responsavelContato)]
-    property ResponsavelContato: String read FResponsavelContato write FResponsavelContato;
-
-    [TORMFieldCRUD(mapper.Criancas.field_responsavelEmail)]
-    property ResponsavelEmail: String read FResponsavelEmail write FResponsavelEmail;
-
-    [TORMFieldCRUD(mapper.Criancas.field_responsavelFoto)]
-    property ResponsavelFoto: String read FResponsavelFoto write FResponsavelFoto;
 
   public
     function AssemblerClass: String; override;

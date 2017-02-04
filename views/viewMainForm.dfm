@@ -28,6 +28,7 @@
     TabOrder = 4
     TabStop = False
     object RibbonTabPrincipal: TdxRibbonTab
+      Active = True
       Caption = 'Principal'
       Groups = <
         item
@@ -37,7 +38,6 @@
       Index = 0
     end
     object RibbonTabConfigurações: TdxRibbonTab
-      Active = True
       Caption = 'Outros'
       Groups = <
         item
@@ -73,8 +73,6 @@
     Font.Style = []
   end
   object actManager: TActionManager
-    LargeImages = DImages.img32
-    Images = DImages.img16
     Left = 104
     Top = 144
     StyleName = 'Platform Default'
@@ -110,8 +108,8 @@
       2)
     Categories.Visibles = (
       True)
-    ImageOptions.Images = DImages.img16
-    ImageOptions.LargeImages = DImages.img32
+    ImageOptions.Images = DMImageBrinquedao.img16
+    ImageOptions.LargeImages = DMImageBrinquedao.img32
     ImageOptions.LargeIcons = True
     PopupMenuLinks = <>
     UseSystemFont = True
@@ -229,5 +227,11 @@
     OnException = appEventsException
     Left = 104
     Top = 192
+  end
+  object timerAtividades: TTimer
+    Interval = 100
+    OnTimer = timerAtividadesTimer
+    Left = 176
+    Top = 144
   end
 end

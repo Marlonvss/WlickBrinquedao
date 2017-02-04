@@ -18,7 +18,7 @@ implementation
 
 function TControllerCriancas.ClassDAO: TORMDAOBaseClass;
 begin
-  Result := TDAOUsuario;
+  Result := TDAOCriancas;
 end;
 
 end.

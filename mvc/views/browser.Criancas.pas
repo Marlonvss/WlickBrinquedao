@@ -61,10 +61,10 @@ begin
     .Select(mapper.Criancas.field_nome)
     .Select(mapper.Criancas.field_nascimento)
     .Select(mapper.Criancas.field_foto)
-    .Select(mapper.Criancas.field_responsavelNome)
-    .Select(mapper.Criancas.field_responsavelDocumento)
-    .Select(mapper.Criancas.field_responsavelContato)
-    .Select(mapper.Criancas.field_responsavelFoto)
+//    .Select(mapper.Criancas.field_responsavelNome)
+//    .Select(mapper.Criancas.field_responsavelDocumento)
+//    .Select(mapper.Criancas.field_responsavelContato)
+//    .Select(mapper.Criancas.field_responsavelFoto)
     .From(mapper.Criancas.tableName);
 end;
 
@@ -81,11 +81,11 @@ begin
   Self.AddColumnBrowser(mapper.Criancas.field_nascimento, mapper.Criancas.field_nascimento_Caption)
     .SetDataType(dtDate);
 
-  Self.AddColumnBrowser(mapper.Criancas.field_responsavelNome, mapper.Criancas.field_responsavelNome_Caption);
+//  Self.AddColumnBrowser(mapper.Criancas.field_responsavelNome, mapper.Criancas.field_responsavelNome_Caption);
 
-  Self.AddColumnBrowser(mapper.Criancas.field_responsavelDocumento, mapper.Criancas.field_responsavelDocumento_Caption);
+//  Self.AddColumnBrowser(mapper.Criancas.field_responsavelDocumento, mapper.Criancas.field_responsavelDocumento_Caption);
 
-  Self.AddColumnBrowser(mapper.Criancas.field_responsavelContato, mapper.Criancas.field_responsavelContato_Caption);
+//  Self.AddColumnBrowser(mapper.Criancas.field_responsavelContato, mapper.Criancas.field_responsavelContato_Caption);
 
 end;
 

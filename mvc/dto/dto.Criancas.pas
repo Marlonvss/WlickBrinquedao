@@ -2,7 +2,8 @@ unit dto.Criancas;
 
 interface
 
-uses Rtti, ORM.attributes, ORM.dtoBase, Classes, mapper.Criancas, Vcl.Graphics;
+uses Rtti, ORM.attributes, ORM.dtoBase, Classes, mapper.Criancas,
+  Vcl.Graphics, generics.collections, WLick.Types, dto.Responsaveis;
 
 type
   TDTOCriancas = class(TORMdtoBase)
@@ -11,23 +12,18 @@ type
       FNome: String;
       FNascimento: TDateTime;
       FFoto: TBitmap;
-      FResponsavelNome: String;
-      FResponsavelDocumento: String;
-      FResponsavelContato: String;
-      FResponsavelEmail: String;
-      FResponsavelFoto: TBitmap;
+      FListaResponsaveis: TObjectList<TDTOResponsaveis>;
     published
       property Codigo: String read FCodigo write FCodigo;
       property Nome: String read FNome write FNome;
       property Nascimento: TDateTime read FNascimento write FNascimento;
       property Foto: TBitmap read FFoto write FFoto;
-      property ResponsavelNome: String read FResponsavelNome write FResponsavelNome;
-      property ResponsavelDocumento: String read FResponsavelDocumento write FResponsavelDocumento;
-      property ResponsavelContato: String read FResponsavelContato write FResponsavelContato;
-      property ResponsavelEmail: String read FResponsavelEmail write FResponsavelEmail;
-      property ResponsavelFoto: TBitmap read FResponsavelFoto write FResponsavelFoto;
+      property ListaResponsaveis: TObjectList<TDTOResponsaveis> read FListaResponsaveis write FListaResponsaveis;
     public
       function AssemblerClass: String; override;
+
+      constructor Create();
+      destructor Destroy(); Override;
   end;
 
 implementation
@@ -37,6 +33,18 @@ implementation
 function TDTOCriancas.AssemblerClass: String;
 begin
   Result := 'TAssemblerCriancas';
+end;
+
+constructor TDTOCriancas.Create;
+begin
+  inherited;
+  Self.FListaResponsaveis := TObjectList<TDTOResponsaveis>.Create();
+end;
+
+destructor TDTOCriancas.Destroy;
+begin
+  Self.FListaResponsaveis.Free;
+  inherited;
 end;
 
 end.

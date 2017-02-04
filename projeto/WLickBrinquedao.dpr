@@ -43,7 +43,21 @@ uses
   model.Criancas in '..\mvc\models\model.Criancas.pas',
   frame.Criancas in '..\mvc\views\frame.Criancas.pas' {frameCriancas: TFrame},
   WLick.Sessao in '..\units\WLick.Sessao.pas',
-  viewAtividadesPrincipal in '..\views\viewAtividadesPrincipal.pas' {frmAtividades};
+  viewAtividadesPrincipal in '..\views\viewAtividadesPrincipal.pas' {frmAtividades},
+  brinquedao.Images in '..\img\brinquedao.Images.pas' {DMImageBrinquedao: TDataModule},
+  model.Responsaveis in '..\mvc\models\model.Responsaveis.pas',
+  mapper.Responsaveis in '..\mvc\mappers\mapper.Responsaveis.pas',
+  dto.Responsaveis in '..\mvc\dto\dto.Responsaveis.pas',
+  assembler.Responsaveis in '..\mvc\assembler\assembler.Responsaveis.pas',
+  controller.Responsaveis in '..\mvc\controllers\controller.Responsaveis.pas',
+  dao.Responsaveis in '..\mvc\daos\dao.Responsaveis.pas',
+  mapper.ResponsaveisCriancas in '..\mvc\mappers\mapper.ResponsaveisCriancas.pas',
+  assembler.ResponsaveisCriancas in '..\mvc\assembler\assembler.ResponsaveisCriancas.pas',
+  model.ResponsaveisCriancas in '..\mvc\models\model.ResponsaveisCriancas.pas',
+  dto.ResponsaveisCriancas in '..\mvc\dto\dto.ResponsaveisCriancas.pas',
+  dao.ResponsaveisCriancas in '..\mvc\daos\dao.ResponsaveisCriancas.pas',
+  controller.ResponsaveisCriancas in '..\mvc\controllers\controller.ResponsaveisCriancas.pas',
+  ficha.Responsavel in '..\mvc\views\ficha.Responsavel.pas' {fichaResponsaveis};
 
 {$R *.res}
 
@@ -52,6 +66,7 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDModule, DModule);
   Application.CreateForm(TDImages, DImages);
+  Application.CreateForm(TDMImageBrinquedao, DMImageBrinquedao);
   if TInitSistema.IniciarSistema then
   begin
     Application.CreateForm(TfrmMain, frmMain);
