@@ -19,21 +19,17 @@ object frameUsuario: TframeUsuario
     Height = 13
     Caption = 'Senha'
   end
-  object edtLogin: TEdit
+  object edtLogin: TcxTextEdit
     Left = 0
     Top = 15
-    Width = 121
-    Height = 21
     TabOrder = 0
-    Text = 'Marlon'
+    Width = 121
   end
-  object edtSenha: TEdit
+  object edtSenha: TcxTextEdit
     Left = 127
     Top = 15
-    Width = 187
-    Height = 21
-    PasswordChar = #8226
+    Properties.PasswordChar = #8226
     TabOrder = 1
-    Text = 'Marlon'
+    Width = 187
   end
 end

@@ -11,7 +11,7 @@ uses
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
   System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
   cxTimeEdit, Vcl.Menus, DBAccess, Uni, cxGridCardView, cxGridDBCardView,
-  cxGridCustomLayoutView, MemDS, ORM.Connection, cxLabel, brinquedao.Images;
+  cxGridCustomLayoutView, MemDS, ORM.Connection, cxLabel;
 
 type
   TfrmAtividades = class(TForm)

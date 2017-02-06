@@ -22,8 +22,8 @@ type
     public
       function AssemblerClass: String; override;
 
-      constructor Create();
-      destructor Destroy(); Override;
+      constructor Create(); override;
+      destructor Destroy(); override;
   end;
 
 implementation
@@ -37,7 +37,7 @@ end;
 
 constructor TDTOCriancas.Create;
 begin
-  inherited;
+  inherited Create;
   Self.FListaResponsaveis := TObjectList<TDTOResponsaveis>.Create();
 end;
 

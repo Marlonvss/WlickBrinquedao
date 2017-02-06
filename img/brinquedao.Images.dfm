@@ -1,10 +1,10 @@
 object DMImageBrinquedao: TDMImageBrinquedao
   OldCreateOrder = False
-  Height = 150
-  Width = 215
+  Height = 121
+  Width = 86
   object img16: TcxImageList
     FormatVersion = 1
-    DesignInfo = 524296
+    DesignInfo = 524316
     ImageInfo = <
       item
         Image.Data = {
@@ -233,7 +233,7 @@ object DMImageBrinquedao: TDMImageBrinquedao
     Height = 32
     Width = 32
     FormatVersion = 1
-    DesignInfo = 524336
+    DesignInfo = 3670044
     ImageInfo = <
       item
         Image.Data = {

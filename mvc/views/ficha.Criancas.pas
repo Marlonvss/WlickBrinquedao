@@ -56,7 +56,7 @@ implementation
 
 function TFichaCriancas.GetCaption: String;
 begin
-  Result := 'Ficha de Usuário';
+  Result := 'Ficha de Crianças';
 end;
 
 function TFichaCriancas.GetFrame: TFrame;
@@ -198,9 +198,9 @@ begin
     begin
       vDTO := TDTOResponsaveis(treeListResponsaveis.FocusedNode.Data);
 
-      if vDTO.StatusCrud = tscInsert then
-        FListaResponsaveis.Extract(vDTO);
-      vDTO.StatusCrud := TStatusCRUD.tscDelete;
+      if vDTO.StatusCrud = tscInsert
+        then FListaResponsaveis.Extract(vDTO)
+        else vDTO.StatusCrud := TStatusCRUD.tscDelete;
 
       Self.LoadTreeList;
       OnChangeMethod(Sender);

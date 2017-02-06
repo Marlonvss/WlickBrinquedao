@@ -1,7 +1,7 @@
 object frameUsuario: TframeUsuario
   Left = 0
   Top = 0
-  Width = 314
+  Width = 265
   Height = 36
   AutoSize = True
   TabOrder = 0
@@ -19,21 +19,18 @@ object frameUsuario: TframeUsuario
     Height = 13
     Caption = 'Senha'
   end
-  object edtLogin: TEdit
+  object edtLogin: TcxTextEdit
     Left = 0
     Top = 15
-    Width = 121
-    Height = 21
     TabOrder = 0
-    Text = 'Marlon'
+    Width = 121
   end
   object edtSenha: TEdit
     Left = 127
     Top = 15
-    Width = 187
+    Width = 138
     Height = 21
     PasswordChar = #8226
     TabOrder = 1
-    Text = 'Marlon'
   end
 end

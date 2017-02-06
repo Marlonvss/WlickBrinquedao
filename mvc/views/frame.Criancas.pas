@@ -9,7 +9,7 @@ uses
   dxCore, cxDateUtils, cxImage, cxGroupBox, cxTextEdit, cxMaskEdit,
   cxDropDownEdit, cxCalendar, Vcl.StdCtrls, dxBarBuiltInMenu, cxPC, Vcl.Buttons,
   Vcl.ExtCtrls, cxCustomData, cxStyles, cxTL, cxTLdxBarBuiltInMenu,
-  cxInplaceContainer, brinquedao.Images;
+  cxInplaceContainer, brinquedao.Images, Vcl.Menus, cxButtons;
 
 type
   TframeCriancas = class(TFrame)
@@ -25,16 +25,16 @@ type
     lblCaptionIdade: TLabel;
     lblIdade: TLabel;
     cxImage1: TcxImage;
-    pnlCtrlImagem: TPanel;
     pnlCtrlResponsavel: TPanel;
     treeListResponsaveis: TcxTreeList;
-    btnLoad: TButton;
-    btnWebCam: TButton;
-    btnClear: TButton;
-    btnNovo: TButton;
-    btnDeletar: TButton;
     treeListColumn_Nome: TcxTreeListColumn;
     treeListColumn_Documento: TcxTreeListColumn;
+    pnlCtrlImagem: TPanel;
+    btnLoad: TcxButton;
+    btnWebCam: TcxButton;
+    btnClear: TcxButton;
+    btnNovo: TcxButton;
+    btnDeletar: TcxButton;
   private
     { Private declarations }
   public

@@ -12,8 +12,8 @@ uses
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, browser.Usuario,
   dxStatusBar, WLick.Miscelania, dxRibbonStatusBar, dxSkinsForm, dxRibbonCustomizationForm,
   dxBarBuiltInMenu, Vcl.AppEvnts, WLick.ClassHelper, ORM.ViewManager,
-  viewLoginForm, browser.Criancas, WLick.Sessao, viewAtividadesPrincipal,
-  brinquedao.Images, Vcl.ExtCtrls;
+  viewLoginForm, browser.Criancas, WLick.Sessao, viewAtividadesPrincipal, Vcl.ExtCtrls,
+  brinquedao.Images, browser.ValorTempo;
 
 type
   TfrmMain = class(TForm)
@@ -76,7 +76,7 @@ end;
 
 procedure TfrmMain.actValoresExecute(Sender: TObject);
 begin
-  ORM.ViewManager.TORMViewManager.AbreBrowser(TBrowserCriancas);
+  ORM.ViewManager.TORMViewManager.AbreBrowser(TBrowserValorTempo);
 end;
 
 procedure TfrmMain.appEventsException(Sender: TObject; E: Exception);

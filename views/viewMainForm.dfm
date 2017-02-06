@@ -28,7 +28,6 @@
     TabOrder = 4
     TabStop = False
     object RibbonTabPrincipal: TdxRibbonTab
-      Active = True
       Caption = 'Principal'
       Groups = <
         item
@@ -38,6 +37,7 @@
       Index = 0
     end
     object RibbonTabConfigurações: TdxRibbonTab
+      Active = True
       Caption = 'Outros'
       Groups = <
         item
@@ -108,7 +108,6 @@
       2)
     Categories.Visibles = (
       True)
-    ImageOptions.Images = DMImageBrinquedao.img16
     ImageOptions.LargeImages = DMImageBrinquedao.img32
     ImageOptions.LargeIcons = True
     PopupMenuLinks = <>
@@ -189,7 +188,7 @@
       Category = 0
       LargeImageIndex = 0
       SyncImageIndex = False
-      ImageIndex = 248
+      ImageIndex = 0
     end
     object dxBarLargeButton2: TdxBarLargeButton
       Caption = 'New Button'

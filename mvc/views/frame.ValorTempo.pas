@@ -1,4 +1,4 @@
-unit frame.Usuario;
+unit frame.ValorTempo;
 
 interface
 
@@ -6,14 +6,14 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, cxGraphics,
   cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit,
-  cxTextEdit;
+  cxMaskEdit, cxSpinEdit, cxTextEdit, cxCurrencyEdit;
 
 type
-  TframeUsuario = class(TFrame)
-    lblLogin: TLabel;
-    lblSenha: TLabel;
-    edtLogin: TcxTextEdit;
-    edtSenha: TEdit;
+  TframeValorTempo = class(TFrame)
+    lblValor: TLabel;
+    lblTempo: TLabel;
+    edtValor: TcxCurrencyEdit;
+    edtTempo: TcxSpinEdit;
     private
       { Private declarations }
     public

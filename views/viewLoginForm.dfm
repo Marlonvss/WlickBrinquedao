@@ -27,7 +27,7 @@ object frmLogin: TfrmLogin
     Align = alClient
     BevelOuter = bvNone
     ParentBackground = False
-    TabOrder = 0
+    TabOrder = 2
     object Image1: TImage
       Left = 0
       Top = 0
@@ -1764,6 +1764,7 @@ object frmLogin: TfrmLogin
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
+      Transparent = True
     end
     object lblSenha: TLabel
       Left = 323
@@ -1777,33 +1778,7 @@ object frmLogin: TfrmLogin
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ParentFont = False
-    end
-    object edtLogin: TEdit
-      Left = 323
-      Top = 178
-      Width = 156
-      Height = 24
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-    end
-    object edtSenha: TEdit
-      Left = 323
-      Top = 226
-      Width = 156
-      Height = 24
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      PasswordChar = #8226
-      TabOrder = 1
+      Transparent = True
     end
     object cxButton2: TcxButton
       Left = 323
@@ -1811,7 +1786,7 @@ object frmLogin: TfrmLogin
       Width = 75
       Height = 25
       Action = actOK
-      TabOrder = 2
+      TabOrder = 0
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -1825,7 +1800,7 @@ object frmLogin: TfrmLogin
       Width = 75
       Height = 25
       Action = actCancelar
-      TabOrder = 3
+      TabOrder = 1
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -1833,6 +1808,33 @@ object frmLogin: TfrmLogin
       Font.Style = [fsBold]
       ParentFont = False
     end
+  end
+  object edtLogin: TcxTextEdit
+    Left = 328
+    Top = 183
+    ParentFont = False
+    Style.Font.Charset = DEFAULT_CHARSET
+    Style.Font.Color = clWindowText
+    Style.Font.Height = -13
+    Style.Font.Name = 'Tahoma'
+    Style.Font.Style = []
+    Style.IsFontAssigned = True
+    TabOrder = 0
+    Width = 156
+  end
+  object edtSenha: TEdit
+    Left = 328
+    Top = 231
+    Width = 156
+    Height = 24
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    PasswordChar = #8226
+    TabOrder = 1
   end
   object ActManager: TActionManager
     Left = 128

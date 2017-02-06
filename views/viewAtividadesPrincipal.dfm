@@ -31,7 +31,7 @@ object frmAtividades: TfrmAtividades
       Left = 769
       Top = 4
       Width = 94
-      Height = 44
+      Height = 25
       Margins.Right = 8
       Align = alRight
       Alignment = taRightJustify
@@ -43,7 +43,6 @@ object frmAtividades: TfrmAtividades
       Font.Style = [fsBold]
       ParentFont = False
       Layout = tlCenter
-      ExplicitHeight = 25
     end
     object Button1: TButton
       AlignWithMargins = True
@@ -60,7 +59,6 @@ object frmAtividades: TfrmAtividades
       Font.Name = 'Tahoma'
       Font.Style = [fsBold]
       ImageMargins.Left = 3
-      Images = DMImageBrinquedao.img32
       ParentFont = False
       TabOrder = 0
     end
@@ -77,14 +75,12 @@ object frmAtividades: TfrmAtividades
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 350
-        Height = 20
+        Width = 223
+        Height = 13
         Margins.Bottom = 0
         Align = alClient
         Caption = 'Localizar [Nome, Respons'#225'vel ou Documento]:'
         Layout = tlBottom
-        ExplicitWidth = 223
-        ExplicitHeight = 13
       end
       object edtBusca: TEdit
         AlignWithMargins = True

@@ -7,7 +7,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels,
   cxLookAndFeelPainters, cxContainer, cxEdit, cxImage, Vcl.StdCtrls, cxGroupBox,
   cxTextEdit, Vcl.ExtCtrls, dxBar, cxClasses, System.Actions, Vcl.ActnList,
-  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, dto.Responsaveis;
+  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, dto.Responsaveis,
+  brinquedao.Images, Vcl.Menus, cxButtons;
 
 type
   TfichaResponsaveis = class(TForm)
@@ -30,10 +31,10 @@ type
     edtContato: TcxTextEdit;
     grpFoto: TcxGroupBox;
     pnlCtrlImagem: TPanel;
-    btnLoad: TButton;
-    btnWebCam: TButton;
-    btnClear: TButton;
     cxImage1: TcxImage;
+    btnLoad: TcxButton;
+    btnWebCam: TcxButton;
+    btnClear: TcxButton;
     procedure actSairExecute(Sender: TObject);
     procedure actCancelarExecute(Sender: TObject);
     procedure actGravarExecute(Sender: TObject);

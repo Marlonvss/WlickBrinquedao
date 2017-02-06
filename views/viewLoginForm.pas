@@ -7,7 +7,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dxGDIPlusClasses, Vcl.ExtCtrls,
   cxGraphics, cxLookAndFeels, cxLookAndFeelPainters, Vcl.Menus, Vcl.StdCtrls,
   System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
-  cxButtons, controller.Usuarios, dto.Usuarios, WLick.Sessao, IniFiles;
+  cxButtons, controller.Usuarios, dto.Usuarios, WLick.Sessao, IniFiles,
+  cxControls, cxContainer, cxEdit, cxTextEdit;
 
 type
   TfrmLogin = class(TForm)
@@ -17,11 +18,11 @@ type
     Panel1: TPanel;
     Image1: TImage;
     lblLogin: TLabel;
-    edtLogin: TEdit;
     lblSenha: TLabel;
-    edtSenha: TEdit;
     cxButton2: TcxButton;
     cxButton1: TcxButton;
+    edtLogin: TcxTextEdit;
+    edtSenha: TEdit;
     procedure actCancelarExecute(Sender: TObject);
     procedure actOKExecute(Sender: TObject);
   private

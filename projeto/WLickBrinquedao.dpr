@@ -44,7 +44,6 @@ uses
   frame.Criancas in '..\mvc\views\frame.Criancas.pas' {frameCriancas: TFrame},
   WLick.Sessao in '..\units\WLick.Sessao.pas',
   viewAtividadesPrincipal in '..\views\viewAtividadesPrincipal.pas' {frmAtividades},
-  brinquedao.Images in '..\img\brinquedao.Images.pas' {DMImageBrinquedao: TDataModule},
   model.Responsaveis in '..\mvc\models\model.Responsaveis.pas',
   mapper.Responsaveis in '..\mvc\mappers\mapper.Responsaveis.pas',
   dto.Responsaveis in '..\mvc\dto\dto.Responsaveis.pas',
@@ -57,7 +56,17 @@ uses
   dto.ResponsaveisCriancas in '..\mvc\dto\dto.ResponsaveisCriancas.pas',
   dao.ResponsaveisCriancas in '..\mvc\daos\dao.ResponsaveisCriancas.pas',
   controller.ResponsaveisCriancas in '..\mvc\controllers\controller.ResponsaveisCriancas.pas',
-  ficha.Responsavel in '..\mvc\views\ficha.Responsavel.pas' {fichaResponsaveis};
+  ficha.Responsavel in '..\mvc\views\ficha.Responsavel.pas' {fichaResponsaveis},
+  brinquedao.Images in '..\img\brinquedao.Images.pas' {DMImageBrinquedao: TDataModule},
+  assembler.ValorTempo in '..\mvc\assembler\assembler.ValorTempo.pas',
+  dao.ValorTempo in '..\mvc\daos\dao.ValorTempo.pas',
+  controller.ValorTempo in '..\mvc\controllers\controller.ValorTempo.pas',
+  dto.ValorTempo in '..\mvc\dto\dto.ValorTempo.pas',
+  model.ValorTempo in '..\mvc\models\model.ValorTempo.pas',
+  mapper.ValorTempo in '..\mvc\mappers\mapper.ValorTempo.pas',
+  ficha.ValorTempo in '..\mvc\views\ficha.ValorTempo.pas',
+  frame.ValorTempo in '..\mvc\views\frame.ValorTempo.pas' {frameValorTempo: TFrame},
+  browser.ValorTempo in '..\mvc\views\browser.ValorTempo.pas';
 
 {$R *.res}
 

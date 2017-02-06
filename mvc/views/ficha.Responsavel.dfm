@@ -89,7 +89,9 @@ object fichaResponsaveis: TfichaResponsaveis
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
-        object btnLoad: TButton
+        ExplicitLeft = 3
+        ExplicitTop = 15
+        object btnLoad: TcxButton
           AlignWithMargins = True
           Left = 3
           Top = 0
@@ -100,14 +102,14 @@ object fichaResponsaveis: TfichaResponsaveis
           Margins.Right = 0
           Margins.Bottom = 0
           Align = alLeft
-          ImageAlignment = iaCenter
-          ImageIndex = 0
-          Images = DMImageBrinquedao.img16
+          OptionsImage.ImageIndex = 0
+          OptionsImage.Images = DMImageBrinquedao.img16
           ParentShowHint = False
           ShowHint = True
           TabOrder = 0
+          ExplicitLeft = 93
         end
-        object btnWebCam: TButton
+        object btnWebCam: TcxButton
           AlignWithMargins = True
           Left = 33
           Top = 0
@@ -118,14 +120,14 @@ object fichaResponsaveis: TfichaResponsaveis
           Margins.Right = 0
           Margins.Bottom = 0
           Align = alLeft
-          ImageAlignment = iaCenter
-          ImageIndex = 1
-          Images = DMImageBrinquedao.img16
+          OptionsImage.ImageIndex = 1
+          OptionsImage.Images = DMImageBrinquedao.img16
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
+          ExplicitLeft = 189
         end
-        object btnClear: TButton
+        object btnClear: TcxButton
           AlignWithMargins = True
           Left = 63
           Top = 0
@@ -136,12 +138,12 @@ object fichaResponsaveis: TfichaResponsaveis
           Margins.Right = 0
           Margins.Bottom = 0
           Align = alLeft
-          ImageAlignment = iaCenter
-          ImageIndex = 2
-          Images = DMImageBrinquedao.img16
+          OptionsImage.ImageIndex = 2
+          OptionsImage.Images = DMImageBrinquedao.img16
           ParentShowHint = False
           ShowHint = True
           TabOrder = 2
+          ExplicitLeft = 211
         end
       end
       object cxImage1: TcxImage

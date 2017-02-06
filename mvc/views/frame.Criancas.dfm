@@ -51,7 +51,7 @@ object frameCriancas: TframeCriancas
     Left = 128
     Top = 15
     EditValue = 33801d
-    TabOrder = 2
+    TabOrder = 1
     Width = 109
   end
   object edtCodigo: TcxTextEdit
@@ -66,7 +66,7 @@ object frameCriancas: TframeCriancas
     Left = 0
     Top = 55
     Properties.MaxLength = 100
-    TabOrder = 1
+    TabOrder = 2
     Text = 'cxTextEdit1'
     Width = 337
   end
@@ -102,7 +102,7 @@ object frameCriancas: TframeCriancas
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 1
-        object btnLoad: TButton
+        object btnLoad: TcxButton
           AlignWithMargins = True
           Left = 3
           Top = 0
@@ -113,14 +113,13 @@ object frameCriancas: TframeCriancas
           Margins.Right = 0
           Margins.Bottom = 0
           Align = alLeft
-          ImageAlignment = iaCenter
-          ImageIndex = 0
-          Images = DMImageBrinquedao.img16
+          OptionsImage.ImageIndex = 0
+          OptionsImage.Images = DMImageBrinquedao.img16
           ParentShowHint = False
           ShowHint = True
           TabOrder = 0
         end
-        object btnWebCam: TButton
+        object btnWebCam: TcxButton
           AlignWithMargins = True
           Left = 33
           Top = 0
@@ -131,14 +130,13 @@ object frameCriancas: TframeCriancas
           Margins.Right = 0
           Margins.Bottom = 0
           Align = alLeft
-          ImageAlignment = iaCenter
-          ImageIndex = 1
-          Images = DMImageBrinquedao.img16
+          OptionsImage.ImageIndex = 1
+          OptionsImage.Images = DMImageBrinquedao.img16
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
         end
-        object btnClear: TButton
+        object btnClear: TcxButton
           AlignWithMargins = True
           Left = 63
           Top = 0
@@ -149,9 +147,8 @@ object frameCriancas: TframeCriancas
           Margins.Right = 0
           Margins.Bottom = 0
           Align = alLeft
-          ImageAlignment = iaCenter
-          ImageIndex = 2
-          Images = DMImageBrinquedao.img16
+          OptionsImage.ImageIndex = 2
+          OptionsImage.Images = DMImageBrinquedao.img16
           ParentShowHint = False
           ShowHint = True
           TabOrder = 2
@@ -169,38 +166,36 @@ object frameCriancas: TframeCriancas
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
-        object btnNovo: TButton
+        object btnNovo: TcxButton
           AlignWithMargins = True
           Left = 3
           Top = 0
           Width = 27
           Height = 27
-          Hint = 'Carregar do computador'
+          Hint = 'Incluir'
           Margins.Top = 0
           Margins.Right = 0
           Margins.Bottom = 0
           Align = alLeft
-          ImageAlignment = iaCenter
-          ImageIndex = 3
-          Images = DMImageBrinquedao.img16
+          OptionsImage.ImageIndex = 3
+          OptionsImage.Images = DMImageBrinquedao.img16
           ParentShowHint = False
           ShowHint = True
           TabOrder = 0
         end
-        object btnDeletar: TButton
+        object btnDeletar: TcxButton
           AlignWithMargins = True
           Left = 33
           Top = 0
           Width = 27
           Height = 27
-          Hint = 'Abrir pela Webcam'
+          Hint = 'Excluir'
           Margins.Top = 0
           Margins.Right = 0
           Margins.Bottom = 0
           Align = alLeft
-          ImageAlignment = iaCenter
-          ImageIndex = 4
-          Images = DMImageBrinquedao.img16
+          OptionsImage.ImageIndex = 4
+          OptionsImage.Images = DMImageBrinquedao.img16
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
