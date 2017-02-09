@@ -25,6 +25,7 @@ begin
   TResponsaveis(Result).documento := TResponsaveis(aModel).documento;
   TResponsaveis(Result).nome := TResponsaveis(aModel).nome;
   TResponsaveis(Result).contato := TResponsaveis(aModel).contato;
+  TResponsaveis(Result).Email := TResponsaveis(aModel).Email;
 //  TResponsaveis(Result).foto := TResponsaveis(aModel).foto;
 end;
 
@@ -35,6 +36,7 @@ begin
   TDTOResponsaveis(Result).documento := TDTOResponsaveis(aDTO).documento;
   TDTOResponsaveis(Result).nome := TDTOResponsaveis(aDTO).nome;
   TDTOResponsaveis(Result).contato := TDTOResponsaveis(aDTO).contato;
+  TDTOResponsaveis(Result).Email := TDTOResponsaveis(aDTO).Email;
 //  TDTOResponsaveis(Result).foto := TDTOResponsaveis(aDTO).foto;
 end;
 
@@ -45,6 +47,7 @@ begin
   TDTOResponsaveis(Result).documento := TResponsaveis(aModel).documento;
   TDTOResponsaveis(Result).nome := TResponsaveis(aModel).nome;
   TDTOResponsaveis(Result).contato := TResponsaveis(aModel).contato;
+  TDTOResponsaveis(Result).Email := TResponsaveis(aModel).Email;
 //  TDTOResponsaveis(Result).foto := TMisc.BitmapFromBase64( TResponsaveis(aModel).Foto );
 end;
 
@@ -55,6 +58,7 @@ begin
   TResponsaveis(Result).documento := TDTOResponsaveis(aDTO).documento;
   TResponsaveis(Result).nome := TDTOResponsaveis(aDTO).nome;
   TResponsaveis(Result).contato := TDTOResponsaveis(aDTO).contato;
+  TResponsaveis(Result).Email := TDTOResponsaveis(aDTO).Email;
 //  TResponsaveis(Result).foto := TMisc.Base64FromBitmap( TDTOResponsaveis(aDTO).foto );
 end;
 
@@ -73,6 +77,9 @@ begin
 
   if Assigned(aQuery.FindField(mapper.Responsaveis.field_Contato)) then
     TResponsaveis(Result).contato := aQuery.FieldByName(mapper.Responsaveis.field_Contato).AsString;
+
+  if Assigned(aQuery.FindField(mapper.Responsaveis.field_email)) then
+    TResponsaveis(Result).Email := aQuery.FieldByName(mapper.Responsaveis.field_email).AsString;
 
 //  if Assigned(aQuery.FindField(mapper.Responsaveis.field_Foto)) then
 //    TResponsaveis(Result).foto := aQuery.FieldByName(mapper.Responsaveis.field_Foto).AsString;

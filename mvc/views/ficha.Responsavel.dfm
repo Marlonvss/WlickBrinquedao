@@ -4,7 +4,7 @@ object fichaResponsaveis: TfichaResponsaveis
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Responsavel'
-  ClientHeight = 309
+  ClientHeight = 349
   ClientWidth = 353
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,7 +21,7 @@ object fichaResponsaveis: TfichaResponsaveis
     Left = 8
     Top = 32
     Width = 337
-    Height = 269
+    Height = 309
     Margins.Left = 8
     Margins.Top = 8
     Margins.Right = 8
@@ -50,6 +50,13 @@ object fichaResponsaveis: TfichaResponsaveis
       Height = 13
       Caption = 'Contato'
     end
+    object lblEmail: TLabel
+      Left = 0
+      Top = 84
+      Width = 24
+      Height = 13
+      Caption = 'Email'
+    end
     object edtNome: TcxTextEdit
       Left = 0
       Top = 15
@@ -75,11 +82,11 @@ object fichaResponsaveis: TfichaResponsaveis
     end
     object grpFoto: TcxGroupBox
       Left = 0
-      Top = 84
+      Top = 126
       Align = alBottom
       Caption = ' Foto '
-      TabOrder = 3
-      Height = 185
+      TabOrder = 4
+      Height = 183
       Width = 337
       object pnlCtrlImagem: TPanel
         Left = 2
@@ -89,8 +96,6 @@ object fichaResponsaveis: TfichaResponsaveis
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitLeft = 3
-        ExplicitTop = 15
         object btnLoad: TcxButton
           AlignWithMargins = True
           Left = 3
@@ -107,7 +112,6 @@ object fichaResponsaveis: TfichaResponsaveis
           ParentShowHint = False
           ShowHint = True
           TabOrder = 0
-          ExplicitLeft = 93
         end
         object btnWebCam: TcxButton
           AlignWithMargins = True
@@ -125,7 +129,6 @@ object fichaResponsaveis: TfichaResponsaveis
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
-          ExplicitLeft = 189
         end
         object btnClear: TcxButton
           AlignWithMargins = True
@@ -143,7 +146,6 @@ object fichaResponsaveis: TfichaResponsaveis
           ParentShowHint = False
           ShowHint = True
           TabOrder = 2
-          ExplicitLeft = 211
         end
       end
       object cxImage1: TcxImage
@@ -152,9 +154,16 @@ object fichaResponsaveis: TfichaResponsaveis
         Top = 48
         Align = alClient
         TabOrder = 1
-        Height = 132
+        Height = 130
         Width = 327
       end
+    end
+    object edtEmail: TcxTextEdit
+      Left = 0
+      Top = 99
+      Properties.MaxLength = 100
+      TabOrder = 3
+      Width = 337
     end
   end
   object actFicha: TActionManager

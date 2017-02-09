@@ -11,12 +11,12 @@ uses
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
   System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
   cxTimeEdit, Vcl.Menus, DBAccess, Uni, cxGridCardView, cxGridDBCardView,
-  cxGridCustomLayoutView, MemDS, ORM.Connection, cxLabel;
+  cxGridCustomLayoutView, MemDS, ORM.Connection, cxLabel, cxButtons, cxTextEdit,
+  ORM.ViewManager, ficha.Atividades;
 
 type
   TfrmAtividades = class(TForm)
     pnlTop: TPanel;
-    Button1: TButton;
     ActManager: TActionManager;
     actNovo: TAction;
     actFinalizar: TAction;
@@ -44,8 +44,9 @@ type
     UniConnection1: TUniConnection;
     cxGrid1DBCardView2DBCardViewRow6: TcxGridDBCardViewRow;
     pnlBusca: TPanel;
-    edtBusca: TEdit;
     lblBusca: TLabel;
+    cxButton1: TcxButton;
+    edtBusca: TcxTextEdit;
     procedure actFinalizarExecute(Sender: TObject);
     procedure TimerRefreshTimer(Sender: TObject);
     procedure actNovoExecute(Sender: TObject);
@@ -82,7 +83,8 @@ procedure TfrmAtividades.actNovoExecute(Sender: TObject);
 begin
   StopAutoRefresh;
   try
-
+    ORM.ViewManager.TORMViewManager.AbreFicha(TFichaAtividades);
+    TimerRefreshTimer(Sender);
   finally
     StartAutoRefresh;
   end;

@@ -50,7 +50,7 @@ begin
   with (FFrame as TframeUsuario) do
   begin
     edtLogin.Properties.OnChange := OnChangeMethod;
-    edtSenha.OnChange := OnChangeMethod;
+    edtSenha.Properties.OnChange := OnChangeMethod;
   end;
 
 end;

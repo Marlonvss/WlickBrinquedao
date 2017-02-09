@@ -13,7 +13,7 @@ type
     lblLogin: TLabel;
     lblSenha: TLabel;
     edtLogin: TcxTextEdit;
-    edtSenha: TEdit;
+    edtSenha: TcxTextEdit;
     private
       { Private declarations }
     public

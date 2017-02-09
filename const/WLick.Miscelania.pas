@@ -3,14 +3,15 @@ unit WLick.Miscelania;
 interface
 
 uses Winapi.Windows, Winapi.Messages, System.SysUtils, System.Classes, vcl.Forms,
-  ExtCtrls, Vcl.Graphics, JPEG, dto.Usuarios, Soap.EncdDecd;
+  ExtCtrls, Vcl.Graphics, JPEG, dto.Usuarios, Soap.EncdDecd, generics.collections,
+  ORM.dtoBase, cxDropDownEdit;
 
 Type
   TMisc = class
     class function GetVersaoSistema(): String;
+
     class function PictureToString(const pValor : TPicture) : string;
     class function StringToPicture(const pValor : String) : TPicture;
-
     class function BitmapFromBase64(const base64: string): TBitmap;
     class function Base64FromBitmap(Bitmap: TBitmap): string;
   end;
@@ -152,5 +153,6 @@ begin
     end;
   end;
 end;
+
 
 end.

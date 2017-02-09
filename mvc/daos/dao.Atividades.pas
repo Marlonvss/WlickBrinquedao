@@ -7,7 +7,7 @@ uses Rtti, ORM.Attributes, system.SysUtils, Uni, model.Atividades,
   ORM.assemblerBase, assembler.Atividades;
 
 type
-  TDAOUsuario = class(TORMDAOBase)
+  TDAOAtividades = class(TORMDAOBase)
   public
   end;
 

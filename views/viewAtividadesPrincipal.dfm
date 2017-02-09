@@ -25,17 +25,18 @@ object frmAtividades: TfrmAtividades
     Height = 52
     Margins.Bottom = 0
     Align = alTop
+    BevelOuter = bvNone
     TabOrder = 0
     object lblHora: TLabel
       AlignWithMargins = True
-      Left = 769
-      Top = 4
+      Left = 770
+      Top = 3
       Width = 94
-      Height = 25
+      Height = 46
       Margins.Right = 8
       Align = alRight
       Alignment = taRightJustify
-      Caption = '23:58:59'
+      Caption = '00:00:00'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -21
@@ -43,55 +44,52 @@ object frmAtividades: TfrmAtividades
       Font.Style = [fsBold]
       ParentFont = False
       Layout = tlCenter
-    end
-    object Button1: TButton
-      AlignWithMargins = True
-      Left = 4
-      Top = 4
-      Width = 110
-      Height = 44
-      Margins.Right = 0
-      Action = actNovo
-      Align = alLeft
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ImageMargins.Left = 3
-      ParentFont = False
-      TabOrder = 0
+      ExplicitHeight = 25
     end
     object pnlBusca: TPanel
-      Left = 114
-      Top = 1
+      Left = 100
+      Top = 0
       Width = 356
-      Height = 50
+      Height = 52
       Align = alLeft
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitLeft = 89
       object lblBusca: TLabel
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 223
-        Height = 13
+        Width = 350
+        Height = 22
         Margins.Bottom = 0
         Align = alClient
         Caption = 'Localizar [Nome, Respons'#225'vel ou Documento]:'
         Layout = tlBottom
+        ExplicitWidth = 223
+        ExplicitHeight = 13
       end
-      object edtBusca: TEdit
+      object edtBusca: TcxTextEdit
         AlignWithMargins = True
         Left = 3
-        Top = 26
-        Width = 350
-        Height = 21
+        Top = 28
         Align = alBottom
         TabOrder = 0
-        OnChange = edtBuscaChange
+        Width = 350
       end
+    end
+    object cxButton1: TcxButton
+      Left = 0
+      Top = 0
+      Width = 100
+      Height = 52
+      Align = alLeft
+      Action = actNovo
+      TabOrder = 0
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
     end
   end
   object cxGrid1: TcxGrid

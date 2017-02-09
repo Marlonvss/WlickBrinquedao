@@ -1,6 +1,5 @@
 program WLickBrinquedao;
 
-
 uses
   Vcl.Forms,
   DMConnection in '..\..\WlickORM\connection\DMConnection.pas' {DModule: TDataModule},
@@ -66,7 +65,15 @@ uses
   mapper.ValorTempo in '..\mvc\mappers\mapper.ValorTempo.pas',
   ficha.ValorTempo in '..\mvc\views\ficha.ValorTempo.pas',
   frame.ValorTempo in '..\mvc\views\frame.ValorTempo.pas' {frameValorTempo: TFrame},
-  browser.ValorTempo in '..\mvc\views\browser.ValorTempo.pas';
+  browser.ValorTempo in '..\mvc\views\browser.ValorTempo.pas',
+  ficha.Atividades in '..\mvc\views\ficha.Atividades.pas',
+  dao.Atividades in '..\mvc\daos\dao.Atividades.pas',
+  controller.Atividades in '..\mvc\controllers\controller.Atividades.pas',
+  assembler.Atividades in '..\mvc\assembler\assembler.Atividades.pas',
+  dto.Atividades in '..\mvc\dto\dto.Atividades.pas',
+  mapper.Atividades in '..\mvc\mappers\mapper.Atividades.pas',
+  model.Atividades in '..\mvc\models\model.Atividades.pas',
+  frame.Atividades in '..\mvc\views\frame.Atividades.pas' {frameAtividades: TFrame};
 
 {$R *.res}
 
@@ -83,4 +90,3 @@ begin
   end;
 
 end.
-

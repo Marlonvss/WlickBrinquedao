@@ -27,7 +27,7 @@ object frmLogin: TfrmLogin
     Align = alClient
     BevelOuter = bvNone
     ParentBackground = False
-    TabOrder = 2
+    TabOrder = 1
     object Image1: TImage
       Left = 0
       Top = 0
@@ -1808,6 +1808,20 @@ object frmLogin: TfrmLogin
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object edtSenha: TcxTextEdit
+      Left = 323
+      Top = 226
+      ParentFont = False
+      Properties.EchoMode = eemPassword
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -13
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = []
+      Style.IsFontAssigned = True
+      TabOrder = 2
+      Width = 156
+    end
   end
   object edtLogin: TcxTextEdit
     Left = 328
@@ -1821,20 +1835,6 @@ object frmLogin: TfrmLogin
     Style.IsFontAssigned = True
     TabOrder = 0
     Width = 156
-  end
-  object edtSenha: TEdit
-    Left = 328
-    Top = 231
-    Width = 156
-    Height = 24
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-    PasswordChar = #8226
-    TabOrder = 1
   end
   object ActManager: TActionManager
     Left = 128

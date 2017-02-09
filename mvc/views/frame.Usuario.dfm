@@ -1,7 +1,7 @@
 object frameUsuario: TframeUsuario
   Left = 0
   Top = 0
-  Width = 265
+  Width = 248
   Height = 36
   AutoSize = True
   TabOrder = 0
@@ -25,12 +25,11 @@ object frameUsuario: TframeUsuario
     TabOrder = 0
     Width = 121
   end
-  object edtSenha: TEdit
+  object edtSenha: TcxTextEdit
     Left = 127
     Top = 15
-    Width = 138
-    Height = 21
-    PasswordChar = #8226
+    Properties.EchoMode = eemPassword
     TabOrder = 1
+    Width = 121
   end
 end

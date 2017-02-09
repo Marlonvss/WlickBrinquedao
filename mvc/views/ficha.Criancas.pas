@@ -8,17 +8,19 @@ uses
   System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
   dxBar, cxBarEditItem, cxClasses, ORM.DTOBase, ORM.FichaBase, DTO.Criancas,
   controller.Criancas, ORM.controllerBase, frame.Criancas, WLick.ClassHelper,
-  DateUtils, Generics.collections, dto.Responsaveis, controller.Responsaveis,
-  WLick.Types, assembler.Responsaveis, ORM.assemblerBase,
-  dto.ResponsaveisCriancas, controller.ResponsaveisCriancas, ficha.Responsavel;
+  DateUtils, Generics.collections, dto.Responsaveis, WLick.Types,
+  assembler.Responsaveis, ORM.assemblerBase, dto.ResponsaveisCriancas,
+  ficha.Responsavel;
 
 type
 
   TFichaCriancas = class(TORMFichaBase)
     private
-      FControllerResponsaveis: TControllerResponsaveis;
-      FControllerResponsaveisCriancas: TControllerResponsaveisCriancas;
       FListaResponsaveis: TObjectList<TDTOResponsaveis>;
+
+      function MyController: TControllerCriancas;
+      function MyFrame: TframeCriancas;
+      function MyDTO: TDTOCriancas;
 
       procedure edtNascimentoChanged(Sender: TObject);
       procedure SetIdadeLabel();
@@ -39,10 +41,10 @@ type
       function ClassController: TORMControllerBaseClass; override;
       function ClassDTO: TORMDTOBaseClass; override;
 
+      procedure AfterSave(); override;
+
       procedure CreateAllObjects(); override;
       procedure DestroyAllObjects(); override;
-
-      procedure AfterSave(); override;
 
       procedure ViewToDTO(); override;
       procedure DTOToView(); override;
@@ -71,7 +73,7 @@ begin
   inherited;
   if Assigned(FDTO) then
   begin
-    FListaResponsaveis := FControllerResponsaveis.GetAllByCriancaID(TDTOCriancas(Self.FDTO).ID);
+    MyController.GetResponsaveisByCriancaID(MyDTO.ID, FListaResponsaveis);
   end;
 end;
 
@@ -79,7 +81,7 @@ procedure TFichaCriancas.LoadTreeList;
 var
   vDTO: TDTOResponsaveis;
 begin
-  with (FFrame as TframeCriancas) do
+  with MyFrame do
   begin
     treeListResponsaveis.Clear;
     for vDTO in FListaResponsaveis do
@@ -97,11 +99,26 @@ begin
   end;
 end;
 
+function TFichaCriancas.MyController: TControllerCriancas;
+begin
+  Result := (Self.FController as TControllerCriancas);
+end;
+
+function TFichaCriancas.MyDTO: TDTOCriancas;
+begin
+  Result := (Self.FDTO as TDTOCriancas);
+end;
+
+function TFichaCriancas.MyFrame: TframeCriancas;
+begin
+  Result := (Self.FFrame as TframeCriancas);
+end;
+
 procedure TFichaCriancas.SetEvents;
 begin
   inherited;
 
-  with (FFrame as TframeCriancas) do
+  with MyFrame do
   begin
     edtNascimento.Properties.OnEditValueChanged := edtNascimentoChanged;
     btnNovo.OnClick := btnNovoEvent;
@@ -128,7 +145,7 @@ procedure TFichaCriancas.SetOnChange;
 begin
   inherited;
 
-  with (FFrame as TframeCriancas) do
+  with MyFrame do
   begin
     edtCodigo.Properties.OnChange := OnChangeMethod;
     edtNome.Properties.OnChange := OnChangeMethod;
@@ -141,7 +158,7 @@ procedure TFichaCriancas.treeListResponsaveisEvent(Sender: TObject);
 var
   vDTO: TDTOResponsaveis;
 begin
-  with (FFrame as TframeCriancas) do
+  with MyFrame do
   begin
     if Assigned(treeListResponsaveis.FocusedNode) then
     begin
@@ -173,13 +190,13 @@ begin
 
       case vDTO.StatusCrud of
         tscNone: ;
-        tscUpdate: FControllerResponsaveis.Update(vDTO);
-        tscDelete: FControllerResponsaveis.Delete(vDTO);
+        tscUpdate: MyController.Update(vDTO);
+        tscDelete: MyController.Delete(vDTO);
         tscInsert: begin
-                     FControllerResponsaveis.Insert(vDTO);
+                     MyController.Insert(vDTO);
 
                      vDTOResponsaveisCriancas.ID_Responsavel := vDTO.ID;
-                     FControllerResponsaveisCriancas.Insert(vDTOResponsaveisCriancas);
+                     MyController.Insert(vDTOResponsaveisCriancas);
                    end;
       end;
     finally
@@ -192,7 +209,7 @@ procedure TFichaCriancas.btnDeletarEvent(Sender: TObject);
 var
   vDTO: TDTOResponsaveis;
 begin
-  with (FFrame as TframeCriancas) do
+  with MyFrame do
   begin
     if Assigned(treeListResponsaveis.FocusedNode) then
     begin
@@ -212,7 +229,7 @@ procedure TFichaCriancas.btnNovoEvent(Sender: TObject);
 var
   vDTO: TDTOResponsaveis;
 begin
-  with (FFrame as TframeCriancas) do
+  with MyFrame do
   begin
     vDTO := TDTOResponsaveis.Create;
     vDTO.StatusCrud := TStatusCRUD.tscInsert;
@@ -238,27 +255,25 @@ end;
 
 procedure TFichaCriancas.CreateAllObjects;
 begin
-  inherited CreateAllObjects;
-  FControllerResponsaveis := TControllerResponsaveis.Create;
-  FControllerResponsaveisCriancas := TControllerResponsaveisCriancas.Create;
+  inherited CreateAllObjects();
+  Self.FListaResponsaveis := TObjectList<TDTOResponsaveis>.Create();
 end;
 
 procedure TFichaCriancas.DestroyAllObjects;
 begin
-  FControllerResponsaveis.Free;
-  FControllerResponsaveisCriancas.Free;
-  inherited DestroyAllObjects;
+  Self.FListaResponsaveis.Free;
+  inherited DestroyAllObjects();
 end;
 
 procedure TFichaCriancas.DTOToView;
 begin
   inherited;
 
-  with (FFrame as TframeCriancas) do
+  with MyFrame do
   begin
-    edtCodigo.Text := TDTOCriancas(Self.FDTO).Codigo;
-    edtNome.Text := TDTOCriancas(Self.FDTO).Nome;
-    edtNascimento.Date := TDTOCriancas(Self.FDTO).Nascimento;
+    edtCodigo.Text := MyDTO.Codigo;
+    edtNome.Text := MyDTO.Nome;
+    edtNascimento.Date := MyDTO.Nascimento;
     SetIdadeLabel();
 
     {Responsaveis}
@@ -284,7 +299,7 @@ var
 begin
   inherited;
 
-  with TDTOCriancas(Self.FDTO) do
+  with MyDTO do
   begin
     Codigo := (GetFrame as TframeCriancas).edtCodigo.Text;
     Nome := (GetFrame as TframeCriancas).edtNome.Text;

@@ -22,7 +22,7 @@ type
     cxButton2: TcxButton;
     cxButton1: TcxButton;
     edtLogin: TcxTextEdit;
-    edtSenha: TEdit;
+    edtSenha: TcxTextEdit;
     procedure actCancelarExecute(Sender: TObject);
     procedure actOKExecute(Sender: TObject);
   private

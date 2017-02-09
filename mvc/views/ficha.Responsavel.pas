@@ -35,6 +35,8 @@ type
     btnLoad: TcxButton;
     btnWebCam: TcxButton;
     btnClear: TcxButton;
+    lblEmail: TLabel;
+    edtEmail: TcxTextEdit;
     procedure actSairExecute(Sender: TObject);
     procedure actCancelarExecute(Sender: TObject);
     procedure actGravarExecute(Sender: TObject);
@@ -71,6 +73,7 @@ begin
   edtNome.Text := FDTO.Nome;
   edtDocumento.Text := FDTO.Documento;
   edtContato.Text := FDTO.Contato;
+  edtEmail.Text := FDTO.Email;
 end;
 
 class function TfichaResponsaveis.Init(var aDTO: TDTOResponsaveis;
@@ -98,6 +101,7 @@ begin
   FDTO.Nome := edtNome.Text;
   FDTO.Documento := edtDocumento.Text;
   FDTO.Contato := edtContato.Text;
+  FDTO.Email := edtEmail.Text;
 end;
 
 end.
