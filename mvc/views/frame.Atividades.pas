@@ -31,10 +31,10 @@ type
     lblTempoDeServico: TLabel;
     lblPrevisaoDeSaida: TLabel;
     edtEntrada: TcxTimeEdit;
-    edtTempoDeServico: TcxTimeEdit;
     edtPrevisaoSaida: TcxTimeEdit;
     btnAddCrianca: TcxButton;
     edtValor: TcxComboBox;
+    edtTempoServico: TcxComboBox;
     private
       { Private declarations }
     public

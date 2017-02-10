@@ -12,7 +12,7 @@ uses
   System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
   cxTimeEdit, Vcl.Menus, DBAccess, Uni, cxGridCardView, cxGridDBCardView,
   cxGridCustomLayoutView, MemDS, ORM.Connection, cxLabel, cxButtons, cxTextEdit,
-  ORM.ViewManager, ficha.Atividades;
+  ORM.ViewManager, ficha.Atividades, WLick.ClassHelper;
 
 type
   TfrmAtividades = class(TForm)
@@ -56,7 +56,7 @@ type
     procedure cxGrid1DBCardView2DBCardViewRow4GetDisplayText(
       Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
       var AText: string);
-    procedure edtBuscaChange(Sender: TObject);
+    procedure edtBuscaPropertiesChange(Sender: TObject);
   private
     procedure StopAutoRefresh();
     procedure StartAutoRefresh();
@@ -81,13 +81,17 @@ end;
 
 procedure TfrmAtividades.actNovoExecute(Sender: TObject);
 begin
-  StopAutoRefresh;
+
+  with TFichaAtividades.Create(nil) do
   try
-    ORM.ViewManager.TORMViewManager.AbreFicha(TFichaAtividades);
-    TimerRefreshTimer(Sender);
+    StopAutoRefresh;
+    Init(TFuncoesGUID.NullGUID, True);
+    TimerRefreshTimer(Sender)
   finally
     StartAutoRefresh;
+    Free;
   end;
+
 end;
 
 procedure TfrmAtividades.AtualizaHora;
@@ -102,7 +106,7 @@ begin
   AText := 'Em andamento';
 end;
 
-procedure TfrmAtividades.edtBuscaChange(Sender: TObject);
+procedure TfrmAtividades.edtBuscaPropertiesChange(Sender: TObject);
 var
   vFind : String;
 begin
@@ -111,9 +115,9 @@ begin
   if (vFind <> EmptyStr) then
   begin
     uniPrincipal.Filter :=
-      ' (lower(NOME) = ' + vFind.QuotedString + ')'+
-      ' OR (lower(RESPONSAVELNOME) = ' + vFind.QuotedString + ')'+
-      ' OR (lower(RESPONSAVELDOCUMENTO) = ' + vFind.QuotedString + ')';
+      ' (lower(NOME) = ' + vFind.Quoted + ')'+
+      ' OR (lower(RESPONSAVELNOME) = ' + vFind.Quoted + ')'+
+      ' OR (lower(RESPONSAVELDOCUMENTO) = ' + vFind.Quoted + ')';
   end;
   uniPrincipal.Filtered := (uniPrincipal.Filter <> EmptyStr);
 end;

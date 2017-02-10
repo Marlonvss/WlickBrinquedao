@@ -63,14 +63,14 @@ object frameAtividades: TframeAtividades
   end
   object lblValor: TLabel
     Left = 263
-    Top = 168
+    Top = 212
     Width = 24
     Height = 13
     Caption = 'Valor'
   end
   object lblTempoDeServico: TLabel
     Left = 263
-    Top = 210
+    Top = 170
     Width = 84
     Height = 13
     Caption = 'Tempo de servi'#231'o'
@@ -125,8 +125,6 @@ object frameAtividades: TframeAtividades
   object edtObs: TcxMemo
     Left = 0
     Top = 143
-    Lines.Strings = (
-      '')
     TabOrder = 5
     Height = 146
     Width = 257
@@ -138,16 +136,6 @@ object frameAtividades: TframeAtividades
     Properties.ImmediatePost = True
     Properties.TimeFormat = tfHourMin
     TabOrder = 6
-    Width = 90
-  end
-  object edtTempoDeServico: TcxTimeEdit
-    Left = 263
-    Top = 225
-    EditValue = 0d
-    Enabled = False
-    Properties.ImmediatePost = True
-    Properties.TimeFormat = tfHourMin
-    TabOrder = 8
     Width = 90
   end
   object edtPrevisaoSaida: TcxTimeEdit
@@ -173,7 +161,13 @@ object frameAtividades: TframeAtividades
   end
   object edtValor: TcxComboBox
     Left = 263
-    Top = 183
+    Top = 227
+    TabOrder = 8
+    Width = 90
+  end
+  object edtTempoServico: TcxComboBox
+    Left = 263
+    Top = 185
     TabOrder = 7
     Width = 90
   end

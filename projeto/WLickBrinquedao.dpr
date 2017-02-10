@@ -73,7 +73,8 @@ uses
   dto.Atividades in '..\mvc\dto\dto.Atividades.pas',
   mapper.Atividades in '..\mvc\mappers\mapper.Atividades.pas',
   model.Atividades in '..\mvc\models\model.Atividades.pas',
-  frame.Atividades in '..\mvc\views\frame.Atividades.pas' {frameAtividades: TFrame};
+  frame.Atividades in '..\mvc\views\frame.Atividades.pas' {frameAtividades: TFrame},
+  enum.Atividades.Situacao in '..\mvc\enum\enum.Atividades.Situacao.pas';
 
 {$R *.res}
 

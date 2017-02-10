@@ -72,6 +72,7 @@ object frmAtividades: TfrmAtividades
         Left = 3
         Top = 28
         Align = alBottom
+        Properties.OnChange = edtBuscaPropertiesChange
         TabOrder = 0
         Width = 350
       end
@@ -281,9 +282,8 @@ object frmAtividades: TfrmAtividades
       
         '  JOIN RESPONSAVEIS ON RESPONSAVEIS.ID = ATIVIDADES.ID_RESPONSAV' +
         'EL'
-      ' WHERE ATIVIDADES.SITUACAO = 1'
+      ' WHERE ATIVIDADES.SITUACAO = 0'
       ' ORDER BY ATIVIDADES.ENTRADA + ATIVIDADES.TEMPO')
-    Active = True
     Filtered = True
     Left = 80
     Top = 72
@@ -323,7 +323,6 @@ object frmAtividades: TfrmAtividades
     Database = 'brinquedao'
     Username = 'postgres'
     Server = 'localhost'
-    Connected = True
     Left = 328
     Top = 176
     EncryptedPassword = '8FFF90FF8CFF8BFF98FF8DFF9AFF8CFF'

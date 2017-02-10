@@ -9,7 +9,7 @@ uses
   dxBar, cxBarEditItem, cxClasses, ORM.DTOBase, ORM.FichaBase, DTO.Atividades,
   controller.Atividades, ORM.controllerBase, frame.Atividades, WLick.ClassHelper,
   Generics.collections, dto.Criancas, dto.Responsaveis, ORM.ViewManager,
-  ficha.Criancas, dto.ValorTempo;
+  ficha.Criancas, dto.ValorTempo, WLick.Sessao, enum.Atividades.Situacao;
 
 type
 
@@ -19,7 +19,6 @@ type
       FListaCriancas: TObjectList<TDTOCriancas>;
       FListaResponsaveis: TObjectList<TDTOResponsaveis>;
       FListaValorTempo: TObjectList<TDTOValorTempo>;
-      FTimer: TTimer;
 
       function MyController: TControllerAtividades;
       function MyFrame: TframeAtividades;
@@ -37,8 +36,6 @@ type
       procedure OnChangeEdtEntrada(Sender: TObject);
 
       procedure CalculaPrevisaoSaida();
-
-      procedure IniciaTimer();
 
     protected
       function GetCaption: String; override;
@@ -120,23 +117,30 @@ begin
 end;
 
 procedure TFichaAtividades.OnChangeEdtTempoServico(Sender: TObject);
+var
+  vDTO: TDTOValorTempo;
 begin
+  vDTO := TDTOValorTempo(MyFrame.edtTempoServico.ItemObject);
+  if Assigned(vDTO) then
+  begin
+    with MyFrame do
+    begin
+      edtValor.ItemObject := vDTO;
+    end;
+  end;
   CalculaPrevisaoSaida();
 end;
 
 procedure TFichaAtividades.OnChangeEdtValor(Sender: TObject);
 var
   vDTO: TDTOValorTempo;
-  vHora, vMinuto: Integer;
 begin
   vDTO := TDTOValorTempo(MyFrame.edtValor.ItemObject);
   if Assigned(vDTO) then
   begin
     with MyFrame do
     begin
-      vHora := Trunc(vDTO.Tempo / 60);
-      vMinuto := vDTO.Tempo - Trunc(vHora * 60);
-      edtTempoDeServico.Time := StrToTime(IntToStr(vHora)+':'+IntToStr(vMinuto)+':00');
+      edtTempoServico.ItemObject := vDTO;
     end;
   end;
 end;
@@ -152,17 +156,6 @@ begin
   if not Assigned(FFrame) then
     FFrame := TframeAtividades.Create(Self);
   Result := FFrame;
-end;
-
-procedure TFichaAtividades.IniciaTimer;
-
-  function OnTimer
-
-begin
-  if not Assigned(FTimer) then
-    FTimer := TTimer.Create(self);
-  FTimer.OnTimer
-
 end;
 
 procedure TFichaAtividades.LoadCriancasInComboBox;
@@ -210,6 +203,7 @@ end;
 procedure TFichaAtividades.LoadValoresTempoInComboBox;
 var
   vDTO: TDTOValorTempo;
+  vHora, vMinuto: Integer;
 begin
   MyController.GetAllValoresTempo(FListaValorTempo);
   if FListaValorTempo.Count > 0 then
@@ -218,8 +212,10 @@ begin
     MyFrame.edtValor.Properties.Items.Clear;
 
     for vDTO in FListaValorTempo do
+    begin
       MyFrame.edtValor.Properties.Items.AddObject(FormatCurr('R$ ###,##0.00',vDTO.Valor), vDTO);
-
+      MyFrame.edtTempoServico.Properties.Items.AddObject( FormatDateTime('HH:MM',vDTO.TempoCalculado) , vDTO);
+    end;
   finally
     MyFrame.edtValor.Properties.Items.EndUpdate;
   end;
@@ -236,16 +232,22 @@ begin
     edtResponsavel.Properties.OnEditValueChanged := OnChangeComboResponsaveis;
     edtEntrada.Properties.OnEditValueChanged := OnChangeEdtEntrada;
     edtValor.Properties.OnEditValueChanged := OnChangeEdtValor;
-    edtTempoDeServico.Properties.OnEditValueChanged := OnChangeEdtTempoServico;
+    edtTempoServico.Properties.OnEditValueChanged := OnChangeEdtTempoServico;
   end;
 
 end;
 
 procedure TFichaAtividades.CalculaPrevisaoSaida;
+var
+  vDTO: TDTOValorTempo;
 begin
   with MyFrame do
   begin
-    edtPrevisaoSaida.Time := edtEntrada.Time + edtTempoDeServico.Time;
+    vDTO := TDTOValorTempo(edtTempoServico.ItemObject);
+    if Assigned(vDTO) then
+    begin
+      edtPrevisaoSaida.Time := edtEntrada.Time + vDTO.TempoCalculado;
+    end;
   end;
 end;
 
@@ -290,13 +292,30 @@ begin
 end;
 
 procedure TFichaAtividades.ViewToDTO;
+var
+  vDTOCrianca : TDTOCriancas;
+  vDTOResponsavel : TDTOResponsaveis;
+  vDTOValorTempo : TDTOValorTempo;
 begin
   inherited;
 
-  with MyDTO do
+  vDTOCrianca := TDTOCriancas(MyFrame.edtCrianca.ItemObject);
+  vDTOResponsavel := TDTOResponsaveis(MyFrame.edtResponsavel.ItemObject);
+  vDTOValorTempo := TDTOValorTempo(MyFrame.edtValor.ItemObject);
+
+  if Assigned(vDTOCrianca) and Assigned(vDTOResponsavel) and Assigned(vDTOValorTempo) then
   begin
-//    Valor := (GetFrame as TframeAtividades).edtValor.Value;
-//    Tempo := (GetFrame as TframeAtividades).edtTempo.Value;
+    with MyDTO do
+    begin
+      Id_Crianca     := vDTOCrianca.ID;
+      Id_Responsavel := vDTOResponsavel.ID;
+      Id_Usuario     := WLick.Sessao.GetInstance.Usuario.ID;
+      Obs            := MyFrame.edtObs.Text;
+      Entrada        := MyFrame.edtEntrada.Time;
+      Valor          := vDTOValorTempo.Valor;
+      Tempo          := vDTOValorTempo.TempoCalculado;
+      Situacao       := Integer(tsIniciado);
+    end;
   end;
 
 end;
