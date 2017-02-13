@@ -11,13 +11,13 @@ type
       FCodigo: String;
       FNome: String;
       FNascimento: TDateTime;
-      FFoto: TBitmap;
+      FFoto: String;
       FListaResponsaveis: TObjectList<TDTOResponsaveis>;
     published
       property Codigo: String read FCodigo write FCodigo;
       property Nome: String read FNome write FNome;
       property Nascimento: TDateTime read FNascimento write FNascimento;
-      property Foto: TBitmap read FFoto write FFoto;
+      property Foto: String read FFoto write FFoto;
       property ListaResponsaveis: TObjectList<TDTOResponsaveis> read FListaResponsaveis write FListaResponsaveis;
     public
       function AssemblerClass: String; override;

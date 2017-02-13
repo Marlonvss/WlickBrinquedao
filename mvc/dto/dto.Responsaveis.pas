@@ -11,13 +11,13 @@ type
       FDocumento: String;
       FContato: String;
       FEmail: String;
-      FFoto: TBitmap;
+      FFoto: String;
     published
       property Nome: String read FNome write FNome;
       property Documento: String read FDocumento write FDocumento;
       property Contato: String read FContato write FContato;
       property Email: String read FEmail write FEmail;
-      property Foto: TBitmap read FFoto write FFoto;
+      property Foto: String read FFoto write FFoto;
     public
       function AssemblerClass: String; override;
   end;

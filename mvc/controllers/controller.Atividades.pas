@@ -6,7 +6,8 @@ uses model.Atividades, Rtti, ORM.attributes, system.SysUtils, Uni,
   WLick.Constantes, TypInfo, WLick.ClassHelper, Generics.Collections,
   dao.Atividades, dto.Atividades, assembler.Atividades, ORM.controllerBase,
   ORM.assemblerBase, ORM.daoBase, dto.Criancas, dao.Criancas, dao.Responsaveis,
-  dto.Responsaveis, dao.ValorTempo, dto.ValorTempo;
+  dto.Responsaveis, dao.ValorTempo, dto.ValorTempo, dao.Configuracoes,
+  enum.Configuracoes;
 
 type
   TControllerAtividades = class(TORMControllerBase)
@@ -14,6 +15,7 @@ type
     FDAOCriancas: TDAOCriancas;
     FDAOResponsaveis: TDAOResponsaveis;
     FDAOValoresTempo: TDAOValorTempo;
+    FDAOConfiguracoes: TDAOConfiguracoes;
   protected
     function ClassDAO(): TORMDAOBaseClass; override;
 
@@ -24,9 +26,79 @@ type
     procedure GetAllCriancas(var aListaCriancas: TObjectList<TDTOCriancas>);
     procedure GetAllValoresTempo(var aListaValoresTempo: TObjectList<TDTOValorTempo>);
     procedure GetResponsaveisByCriancaID(const aIDCrianca: TGuid; var aListaResponsaveis: TObjectList<TDTOResponsaveis>);
+
+    procedure CalcularValorDeSaida(var aDTO: TDTOAtividades; out aStrExplicacao: String);
+
+    function GetConfiguracao(aConfiguracao: TNomeConfiguracoes): String;
+    procedure ImprimirRelatorio(const aDTO: TDTOAtividades);
   end;
 
 implementation
+
+procedure TControllerAtividades.CalcularValorDeSaida(var aDTO: TDTOAtividades;
+  out aStrExplicacao: String);
+var
+  FListaValorTempo: TObjectList<TDTOValorTempo>;
+
+  vTempoAux,
+  vTempoDeServico: TTime;
+  vTempoDeServicoEmMinutos: Integer;
+  vDTO: TDTOValorTempo;
+  vTempoPacote: TTime;
+  vValorPacote: Currency;
+
+  MyHora, MyMinuto, MySegundo, MyMiliSegundo : Word;
+  vCotacao: Currency;
+  vTolerancia: TTime;
+begin
+  vCotacao := Self.GetConfiguracao(tncCotacaoMinuto).ToCurrency;
+  vTolerancia := Self.GetConfiguracao(tncTempoTolerancia).ToTime;
+  vTempoPacote := 0;
+  vValorPacote := 0;
+
+  if aDTO.TempoSaida > aDTO.Entrada
+    then vTempoDeServico := (aDTO.TempoSaida - aDTO.Entrada)
+    else vTempoDeServico := (aDTO.Entrada - aDTO.TempoSaida);
+
+  FListaValorTempo := TObjectList<TDTOValorTempo>.Create;
+  try
+    FDAOValoresTempo.GetAllValoresTempo(FListaValorTempo);
+
+    { Localiza o pacote mais proximo }
+    for vDTO in FListaValorTempo do
+    begin
+      if (vTempoPacote < vDTO.TempoCalculado) and (vDTO.TempoCalculado <= (vTempoDeServico)) then
+      begin
+        vTempoPacote := vDTO.TempoCalculado;
+        vValorPacote := vDTO.Valor;
+      end;
+    end;
+
+  finally
+    FListaValorTempo.Free;
+  end;
+
+  {Calcula o tempo extra entre a tempo calculada e o tempo de serviço }
+  vTempoAux := vTempoDeServico - vTempoPacote;
+
+  {Valida se a diferença está na carência}
+  if vTempoAux <= vTolerancia then
+  begin
+    vTempoAux := 0;
+  end;
+
+  {Converte a diferença em minutos para aplicar a cotação}
+  DecodeTime(vTempoAux, MyHora, MyMinuto, MySegundo, MyMiliSegundo);
+  vTempoDeServicoEmMinutos := (MyHora * 60) + MyMinuto;
+
+  aDTO.ValorSaida := vValorPacote + (vTempoDeServicoEmMinutos * vCotacao);
+
+
+  aStrExplicacao :=
+    Format('Valor em pacote: %s',[FormatCurr('R$ ,0.00;-R$ ,0.00', vValorPacote)]) + CRLF +
+    Format('Valor sobre tempo excedido: %s',[FormatCurr('R$ ,0.00;-R$ ,0.00', vTempoDeServicoEmMinutos * vCotacao)]);
+
+end;
 
 function TControllerAtividades.ClassDAO: TORMDAOBaseClass;
 begin
@@ -39,6 +111,7 @@ begin
   FDAOCriancas := TDAOCriancas.Create;
   FDAOResponsaveis := TDAOResponsaveis.Create;
   FDAOValoresTempo := TDAOValorTempo.Create;
+  FDAOConfiguracoes := TDAOConfiguracoes.Create;
 end;
 
 procedure TControllerAtividades.DestroyAllObjects;
@@ -47,6 +120,7 @@ begin
   FDAOCriancas.Free;
   FDAOResponsaveis.Free;
   FDAOValoresTempo.Free;
+  FDAOConfiguracoes.Free;
 end;
 
 procedure TControllerAtividades.GetAllCriancas(
@@ -66,11 +140,22 @@ begin
   FDAOValoresTempo.GetAllValoresTempo(aListaValoresTempo);
 end;
 
+function TControllerAtividades.GetConfiguracao(
+  aConfiguracao: TNomeConfiguracoes): String;
+begin
+  Result := FDAOConfiguracoes.GetConfiguracao(aConfiguracao);
+end;
+
 procedure TControllerAtividades.GetResponsaveisByCriancaID(
   const aIDCrianca: TGuid;
   var aListaResponsaveis: TObjectList<TDTOResponsaveis>);
 begin
   FDAOResponsaveis.GetAllByCriancaID(aIDCrianca, aListaResponsaveis);
+end;
+
+procedure TControllerAtividades.ImprimirRelatorio(const aDTO: TDTOAtividades);
+begin
+//
 end;
 
 end.

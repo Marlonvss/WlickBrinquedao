@@ -26,7 +26,7 @@ begin
   TResponsaveis(Result).nome := TResponsaveis(aModel).nome;
   TResponsaveis(Result).contato := TResponsaveis(aModel).contato;
   TResponsaveis(Result).Email := TResponsaveis(aModel).Email;
-//  TResponsaveis(Result).foto := TResponsaveis(aModel).foto;
+  TResponsaveis(Result).foto := TResponsaveis(aModel).foto;
 end;
 
 class function TAssemblerResponsaveis.GetClone(const aDTO: TORMDTOBase): TORMDTOBase;
@@ -37,7 +37,7 @@ begin
   TDTOResponsaveis(Result).nome := TDTOResponsaveis(aDTO).nome;
   TDTOResponsaveis(Result).contato := TDTOResponsaveis(aDTO).contato;
   TDTOResponsaveis(Result).Email := TDTOResponsaveis(aDTO).Email;
-//  TDTOResponsaveis(Result).foto := TDTOResponsaveis(aDTO).foto;
+  TDTOResponsaveis(Result).foto := TDTOResponsaveis(aDTO).foto;
 end;
 
 class function TAssemblerResponsaveis.ModelToDTO(const aModel: TORMModelBase): TORMDTOBase;
@@ -48,7 +48,7 @@ begin
   TDTOResponsaveis(Result).nome := TResponsaveis(aModel).nome;
   TDTOResponsaveis(Result).contato := TResponsaveis(aModel).contato;
   TDTOResponsaveis(Result).Email := TResponsaveis(aModel).Email;
-//  TDTOResponsaveis(Result).foto := TMisc.BitmapFromBase64( TResponsaveis(aModel).Foto );
+  TDTOResponsaveis(Result).foto := TResponsaveis(aModel).Foto;
 end;
 
 class function TAssemblerResponsaveis.DTOToModel(const aDTO: TORMDTOBase): TORMModelBase;
@@ -59,7 +59,7 @@ begin
   TResponsaveis(Result).nome := TDTOResponsaveis(aDTO).nome;
   TResponsaveis(Result).contato := TDTOResponsaveis(aDTO).contato;
   TResponsaveis(Result).Email := TDTOResponsaveis(aDTO).Email;
-//  TResponsaveis(Result).foto := TMisc.Base64FromBitmap( TDTOResponsaveis(aDTO).foto );
+  TResponsaveis(Result).foto := TDTOResponsaveis(aDTO).foto;
 end;
 
 class function TAssemblerResponsaveis.QueryToModel(const aQuery: TUniQuery): TORMModelBase;
@@ -81,8 +81,8 @@ begin
   if Assigned(aQuery.FindField(mapper.Responsaveis.field_email)) then
     TResponsaveis(Result).Email := aQuery.FieldByName(mapper.Responsaveis.field_email).AsString;
 
-//  if Assigned(aQuery.FindField(mapper.Responsaveis.field_Foto)) then
-//    TResponsaveis(Result).foto := aQuery.FieldByName(mapper.Responsaveis.field_Foto).AsString;
+  if Assigned(aQuery.FindField(mapper.Responsaveis.field_foto)) then
+    TResponsaveis(Result).Foto := aQuery.FieldByName(mapper.Responsaveis.field_foto).AsString;
 
 end;
 

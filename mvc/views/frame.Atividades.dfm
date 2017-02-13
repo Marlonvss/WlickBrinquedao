@@ -77,9 +77,9 @@ object frameAtividades: TframeAtividades
   end
   object lblPrevisaoDeSaida: TLabel
     Left = 263
-    Top = 252
+    Top = 254
     Width = 84
-    Height = 13
+    Height = 11
     Caption = 'Previs'#227'o de sa'#237'da'
   end
   object edtCrianca: TcxComboBox

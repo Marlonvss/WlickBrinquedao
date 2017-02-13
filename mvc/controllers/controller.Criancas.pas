@@ -19,6 +19,7 @@ type
     procedure DestroyAllObjects(); override;
 
   public
+    function GetSequenceCodigo: String;
     procedure GetResponsaveisByCriancaID(const aIDCrianca: TGuid; var aListaResponsaveis: TObjectList<TDTOResponsaveis>);
 
   end;
@@ -47,6 +48,11 @@ procedure TControllerCriancas.GetResponsaveisByCriancaID(
   var aListaResponsaveis: TObjectList<TDTOResponsaveis>);
 begin
   FDAOResponsaveis.GetAllByCriancaID(aIDCrianca, aListaResponsaveis);
+end;
+
+function TControllerCriancas.GetSequenceCodigo: String;
+begin
+  Result := (FDAO as TDAOCriancas).GetSequenceCodigo;
 end;
 
 end.

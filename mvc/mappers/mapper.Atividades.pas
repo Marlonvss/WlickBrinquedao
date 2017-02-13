@@ -16,6 +16,8 @@ const
   field_Valor = 'Valor';
   field_Tempo = 'Tempo';
   field_Situacao = 'Situacao';
+  field_TempoSaida = 'TempoSaida';
+  field_ValorSaida = 'ValorSaida';
 
   field_Id_Caption = 'Id';
   field_Id_Crianca_Caption = 'Id_Crianca';
@@ -26,6 +28,8 @@ const
   field_Valor_Caption = 'Valor';
   field_Tempo_Caption = 'Tempo';
   field_Situacao_Caption = 'Situacao';
+  field_TempoSaida_Caption = 'Tempo na saida';
+  field_ValorSaida_Caption = 'Valor na saida';
 
 implementation
 

@@ -15,10 +15,12 @@ type
     FId_Responsavel: TGuid;
     FId_Usuario: TGuid;
     FObs: String;
-    FEntrada: TDateTime;
+    FEntrada: TTime;
     FValor: Currency;
-    FTempo: TDateTime;
+    FTempo: TTime;
     FSituacao: Integer;
+    FTempoSaida: TTime;
+    FValorSaida: Currency;
 
   published
 
@@ -38,16 +40,22 @@ type
     property Obs: String read FObs write FObs;
 
     [TORMFieldCRUD(mapper.Atividades.field_Entrada)]
-    property Entrada: TDateTime read FEntrada write FEntrada;
+    property Entrada: TTime read FEntrada write FEntrada;
 
     [TORMFieldCRUD(mapper.Atividades.field_Valor)]
     property Valor: Currency read FValor write FValor;
 
     [TORMFieldCRUD(mapper.Atividades.field_Tempo)]
-    property Tempo: TDateTime read FTempo write FTempo;
+    property Tempo: TTime read FTempo write FTempo;
 
     [TORMFieldCRUD(mapper.Atividades.field_Situacao)]
     property Situacao: Integer read FSituacao write FSituacao;
+
+    [TORMFieldCRUD(mapper.Atividades.field_TempoSaida)]
+    property TempoSaida: TTime read FTempoSaida write FTempoSaida;
+
+    [TORMFieldCRUD(mapper.Atividades.field_valorSaida)]
+    property ValorSaida: Currency read FValorSaida write FValorSaida;
 
   public
     function AssemblerClass: String; override;

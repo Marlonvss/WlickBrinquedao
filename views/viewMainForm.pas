@@ -13,7 +13,7 @@ uses
   dxStatusBar, WLick.Miscelania, dxRibbonStatusBar, dxSkinsForm, dxRibbonCustomizationForm,
   dxBarBuiltInMenu, Vcl.AppEvnts, WLick.ClassHelper, ORM.ViewManager,
   viewLoginForm, browser.Criancas, WLick.Sessao, viewAtividadesPrincipal, Vcl.ExtCtrls,
-  brinquedao.Images, browser.ValorTempo;
+  brinquedao.Images, browser.ValorTempo, ficha.Configuracoes, MainCamera;
 
 type
   TfrmMain = class(TForm)
@@ -44,6 +44,7 @@ type
     procedure actCriancasExecute(Sender: TObject);
     procedure actValoresExecute(Sender: TObject);
     procedure timerAtividadesTimer(Sender: TObject);
+    procedure actPreferenciasExecute(Sender: TObject);
 
   private
     FTelaAtividades: TfrmAtividades;
@@ -69,6 +70,11 @@ begin
   ORM.ViewManager.TORMViewManager.AbreBrowser(TBrowserCriancas);
 end;
 
+procedure TfrmMain.actPreferenciasExecute(Sender: TObject);
+begin
+  ORM.ViewManager.TORMViewManager.AbreFicha(TFichaConfiguracoes, False);
+end;
+
 procedure TfrmMain.actUsuariosExecute(Sender: TObject);
 begin
   ORM.ViewManager.TORMViewManager.AbreBrowser(TBrowserUsuario);
@@ -87,18 +93,6 @@ end;
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
   Ribbon.ActiveTab := RibbonTabPrincipal;
-
-  with viewLoginForm.TfrmLogin.Create(self) do
-  try
-    if not Assigned(WLick.Sessao.GetInstance.Usuario) then
-    begin
-      if ShowModal = mrCancel then
-        Application.Terminate;
-    end;
-  finally
-    Free;
-  end;
-
   LoadAtividadeMain();
   LoadBarManager();
 end;

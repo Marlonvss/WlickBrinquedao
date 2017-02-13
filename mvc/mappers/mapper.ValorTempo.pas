@@ -13,7 +13,7 @@ const
 
   field_ID_Caption = 'ID';
   field_Valor_Caption = 'Valor';
-  field_Tempo_Caption = 'Tempo';
+  field_Tempo_Caption = 'Tempo(Min)';
 
 implementation
 

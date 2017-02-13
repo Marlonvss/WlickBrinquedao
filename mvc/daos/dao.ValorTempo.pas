@@ -35,7 +35,8 @@ begin
   aListaValoresTempo.Clear;
   vQry := TUniQuery.Create(nil);
   try
-    vSQL := GetSQLBase;
+    vSQL := GetSQLBase
+      .OrderBy(mapper.ValorTempo.field_Tempo);
 
     OpenSQL(vSQL, vQry);
     vQry.First;

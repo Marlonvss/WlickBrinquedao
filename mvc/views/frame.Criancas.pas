@@ -24,7 +24,7 @@ type
     cxTabSheet2: TcxTabSheet;
     lblCaptionIdade: TLabel;
     lblIdade: TLabel;
-    cxImage1: TcxImage;
+    ImgFoto: TcxImage;
     pnlCtrlResponsavel: TPanel;
     treeListResponsaveis: TcxTreeList;
     treeListColumn_Nome: TcxTreeListColumn;
@@ -45,5 +45,7 @@ implementation
 
 {$R *.dfm}
 
+
+{ TframeCriancas }
 
 end.

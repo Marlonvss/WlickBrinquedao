@@ -27,7 +27,7 @@ object frmLogin: TfrmLogin
     Align = alClient
     BevelOuter = bvNone
     ParentBackground = False
-    TabOrder = 1
+    TabOrder = 0
     object Image1: TImage
       Left = 0
       Top = 0
@@ -1780,27 +1780,13 @@ object frmLogin: TfrmLogin
       ParentFont = False
       Transparent = True
     end
-    object cxButton2: TcxButton
-      Left = 323
-      Top = 256
-      Width = 75
-      Height = 25
-      Action = actOK
-      TabOrder = 0
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
     object cxButton1: TcxButton
       Left = 404
       Top = 256
       Width = 75
       Height = 25
       Action = actCancelar
-      TabOrder = 1
+      TabOrder = 3
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -1819,22 +1805,36 @@ object frmLogin: TfrmLogin
       Style.Font.Name = 'Tahoma'
       Style.Font.Style = []
       Style.IsFontAssigned = True
-      TabOrder = 2
+      TabOrder = 1
       Width = 156
     end
-  end
-  object edtLogin: TcxTextEdit
-    Left = 328
-    Top = 183
-    ParentFont = False
-    Style.Font.Charset = DEFAULT_CHARSET
-    Style.Font.Color = clWindowText
-    Style.Font.Height = -13
-    Style.Font.Name = 'Tahoma'
-    Style.Font.Style = []
-    Style.IsFontAssigned = True
-    TabOrder = 0
-    Width = 156
+    object cxButton2: TcxButton
+      Left = 323
+      Top = 256
+      Width = 75
+      Height = 25
+      Action = actOK
+      TabOrder = 2
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object edtLogin: TcxTextEdit
+      Left = 323
+      Top = 178
+      ParentFont = False
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -13
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = []
+      Style.IsFontAssigned = True
+      TabOrder = 0
+      Width = 156
+    end
   end
   object ActManager: TActionManager
     Left = 128

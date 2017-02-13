@@ -25,7 +25,7 @@ begin
   TCriancas(Result).codigo := TCriancas(aModel).codigo;
   TCriancas(Result).nome := TCriancas(aModel).nome;
   TCriancas(Result).nascimento := TCriancas(aModel).nascimento;
-//  TCriancas(Result).foto := TCriancas(aModel).foto;
+  TCriancas(Result).foto := TCriancas(aModel).foto;
 end;
 
 class function TAssemblerCriancas.GetClone(const aDTO: TORMDTOBase): TORMDTOBase;
@@ -35,7 +35,7 @@ begin
   TDTOCriancas(Result).codigo := TDTOCriancas(aDTO).codigo;
   TDTOCriancas(Result).nome := TDTOCriancas(aDTO).nome;
   TDTOCriancas(Result).nascimento := TDTOCriancas(aDTO).nascimento;
-//  TDTOCriancas(Result).foto := TDTOCriancas(aDTO).foto;
+  TDTOCriancas(Result).foto := TDTOCriancas(aDTO).foto;
 end;
 
 class function TAssemblerCriancas.ModelToDTO(const aModel: TORMModelBase): TORMDTOBase;
@@ -45,7 +45,7 @@ begin
   TDTOCriancas(Result).codigo := TCriancas(aModel).codigo;
   TDTOCriancas(Result).nome := TCriancas(aModel).nome;
   TDTOCriancas(Result).nascimento := TCriancas(aModel).nascimento;
-//  TDTOCriancas(Result).foto := TMisc.BitmapFromBase64( TCriancas(aModel).Foto );
+  TDTOCriancas(Result).foto := TCriancas(aModel).Foto;
 end;
 
 class function TAssemblerCriancas.DTOToModel(const aDTO: TORMDTOBase): TORMModelBase;
@@ -55,7 +55,7 @@ begin
   TCriancas(Result).codigo := TDTOCriancas(aDTO).codigo;
   TCriancas(Result).nome := TDTOCriancas(aDTO).nome;
   TCriancas(Result).nascimento := TDTOCriancas(aDTO).nascimento;
-//  TCriancas(Result).foto := TMisc.Base64FromBitmap( TDTOCriancas(aDTO).foto );
+  TCriancas(Result).foto := TDTOCriancas(aDTO).foto;
 end;
 
 class function TAssemblerCriancas.QueryToModel(const aQuery: TUniQuery): TORMModelBase;
@@ -74,8 +74,8 @@ begin
   if Assigned(aQuery.FindField(mapper.Criancas.field_Nascimento)) then
     TCriancas(Result).nascimento := aQuery.FieldByName(mapper.Criancas.field_Nascimento).AsDateTime;
 
-//  if Assigned(aQuery.FindField(mapper.Criancas.field_Foto)) then
-//    TCriancas(Result).foto := aQuery.FieldByName(mapper.Criancas.field_Foto).AsString;
+  if Assigned(aQuery.FindField(mapper.Criancas.field_Foto)) then
+    TCriancas(Result).foto := aQuery.FieldByName(mapper.Criancas.field_Foto).AsString;
 
 end;
 

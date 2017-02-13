@@ -30,6 +30,8 @@ begin
   TAtividades(Result).Valor := TAtividades(aModel).Valor;
   TAtividades(Result).Tempo := TAtividades(aModel).Tempo;
   TAtividades(Result).Situacao := TAtividades(aModel).Situacao;
+  TAtividades(Result).TempoSaida := TAtividades(aModel).TempoSaida;
+  TAtividades(Result).ValorSaida := TAtividades(aModel).ValorSaida;
 end;
 
 class function TAssemblerAtividades.GetClone(const aDTO: TORMDTOBase): TORMDTOBase;
@@ -44,6 +46,8 @@ begin
   TDTOAtividades(Result).Valor := TDTOAtividades(aDTO).Valor;
   TDTOAtividades(Result).Tempo := TDTOAtividades(aDTO).Tempo;
   TDTOAtividades(Result).Situacao := TDTOAtividades(aDTO).Situacao;
+  TDTOAtividades(Result).TempoSaida := TDTOAtividades(aDTO).TempoSaida;
+  TDTOAtividades(Result).ValorSaida := TDTOAtividades(aDTO).ValorSaida;
 end;
 
 class function TAssemblerAtividades.ModelToDTO(const aModel: TORMModelBase): TORMDTOBase;
@@ -58,6 +62,8 @@ begin
   TDTOAtividades(Result).Valor := TAtividades(aModel).Valor;
   TDTOAtividades(Result).Tempo := TAtividades(aModel).Tempo;
   TDTOAtividades(Result).Situacao := TAtividades(aModel).Situacao;
+  TDTOAtividades(Result).TempoSaida := TAtividades(aModel).TempoSaida;
+  TDTOAtividades(Result).ValorSaida := TAtividades(aModel).ValorSaida;
 end;
 
 class function TAssemblerAtividades.DTOToModel(const aDTO: TORMDTOBase): TORMModelBase;
@@ -72,6 +78,8 @@ begin
   TAtividades(Result).Valor := TDTOAtividades(aDTO).Valor;
   TAtividades(Result).Tempo := TDTOAtividades(aDTO).Tempo;
   TAtividades(Result).Situacao := TDTOAtividades(aDTO).Situacao;
+  TAtividades(Result).TempoSaida := TDTOAtividades(aDTO).TempoSaida;
+  TAtividades(Result).ValorSaida := TDTOAtividades(aDTO).ValorSaida;
 end;
 
 class function TAssemblerAtividades.QueryToModel(const aQuery: TUniQuery): TORMModelBase;
@@ -104,6 +112,12 @@ begin
 
   if Assigned(aQuery.FindField(mapper.Atividades.field_Situacao)) then
     TAtividades(Result).Situacao := aQuery.FieldByName(mapper.Atividades.field_Situacao).AsInteger;
+
+  if Assigned(aQuery.FindField(mapper.Atividades.field_TempoSaida)) then
+    TAtividades(Result).TempoSaida := aQuery.FieldByName(mapper.Atividades.field_TempoSaida).AsDateTime;
+
+  if Assigned(aQuery.FindField(mapper.Atividades.field_ValorSaida)) then
+    TAtividades(Result).ValorSaida := aQuery.FieldByName(mapper.Atividades.field_ValorSaida).AsCurrency;
 
 end;
 

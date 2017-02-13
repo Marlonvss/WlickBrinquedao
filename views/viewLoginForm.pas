@@ -19,10 +19,10 @@ type
     Image1: TImage;
     lblLogin: TLabel;
     lblSenha: TLabel;
-    cxButton2: TcxButton;
     cxButton1: TcxButton;
-    edtLogin: TcxTextEdit;
     edtSenha: TcxTextEdit;
+    cxButton2: TcxButton;
+    edtLogin: TcxTextEdit;
     procedure actCancelarExecute(Sender: TObject);
     procedure actOKExecute(Sender: TObject);
   private

@@ -91,6 +91,7 @@
         <DCC_K>false</DCC_K>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <Icon_MainIcon>WLickBrinquedao_Icon1.ico</Icon_MainIcon>
         <AppEnableHighDPI>true</AppEnableHighDPI>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <SanitizedProjectName>WLickBrinquedao</SanitizedProjectName>
@@ -243,6 +244,38 @@
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\mvc\enum\enum.Atividades.Situacao.pas"/>
+        <DCCReference Include="..\mvc\views\ficha.AtividadesSaida.pas">
+            <Form>fichaAtividadesSaida</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\mvc\assembler\assembler.Configuracoes.pas"/>
+        <DCCReference Include="..\mvc\models\model.Configuracoes.pas"/>
+        <DCCReference Include="..\mvc\mappers\mapper.Configuracoes.pas"/>
+        <DCCReference Include="..\mvc\views\frame.Configuracoes.pas">
+            <Form>frameConfiguracoes</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\mvc\daos\dao.Configuracoes.pas"/>
+        <DCCReference Include="..\mvc\views\ficha.Configuracoes.pas"/>
+        <DCCReference Include="..\mvc\controllers\controller.Configuracoes.pas"/>
+        <DCCReference Include="..\mvc\dto\dto.Configuracoes.pas"/>
+        <DCCReference Include="..\mvc\enum\enum.Configuracoes.pas"/>
+        <DCCReference Include="..\views\viewMessageForm.pas">
+            <Form>viewMessage</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\units\Camera\VFrames.pas"/>
+        <DCCReference Include="..\units\Camera\VSample.pas"/>
+        <DCCReference Include="..\units\Camera\MainCamera.pas">
+            <Form>fichaMainCamera</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\units\Camera\DirectX\Direct3D9.pas"/>
+        <DCCReference Include="..\units\Camera\DirectX\DirectDraw.pas"/>
+        <DCCReference Include="..\units\Camera\DirectX\DirectShow9.pas"/>
+        <DCCReference Include="..\units\Camera\DirectX\DirectSound.pas"/>
+        <DCCReference Include="..\units\Camera\DirectX\DXTypes.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

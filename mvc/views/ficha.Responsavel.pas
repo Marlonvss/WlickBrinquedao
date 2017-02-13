@@ -8,7 +8,8 @@ uses
   cxLookAndFeelPainters, cxContainer, cxEdit, cxImage, Vcl.StdCtrls, cxGroupBox,
   cxTextEdit, Vcl.ExtCtrls, dxBar, cxClasses, System.Actions, Vcl.ActnList,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, dto.Responsaveis,
-  brinquedao.Images, Vcl.Menus, cxButtons;
+  brinquedao.Images, Vcl.Menus, cxButtons, viewMessageForm, WLick.Miscelania,
+  MainCamera;
 
 type
   TfichaResponsaveis = class(TForm)
@@ -31,15 +32,18 @@ type
     edtContato: TcxTextEdit;
     grpFoto: TcxGroupBox;
     pnlCtrlImagem: TPanel;
-    cxImage1: TcxImage;
     btnLoad: TcxButton;
     btnWebCam: TcxButton;
     btnClear: TcxButton;
     lblEmail: TLabel;
     edtEmail: TcxTextEdit;
+    ImgFoto: TcxImage;
     procedure actSairExecute(Sender: TObject);
     procedure actCancelarExecute(Sender: TObject);
     procedure actGravarExecute(Sender: TObject);
+    procedure btnClearClick(Sender: TObject);
+    procedure btnLoadClick(Sender: TObject);
+    procedure btnWebCamClick(Sender: TObject);
   private
     FDTO : TDTOResponsaveis;
 
@@ -68,12 +72,46 @@ begin
   Self.Close;
 end;
 
+procedure TfichaResponsaveis.btnClearClick(Sender: TObject);
+begin
+  if TviewMessage.Send_Question('Deseja realmente remover esta image?')
+    then ImgFoto.Clear;
+end;
+
+procedure TfichaResponsaveis.btnLoadClick(Sender: TObject);
+var
+  vDlgImage: TOpenDialog;
+begin
+  vDlgImage := TOpenDialog.Create(nil);
+  try
+    vDlgImage.Filter := '*.JPG|*.JPG|*.BMP|*.BMP';
+
+    if vDlgImage.Execute() then
+    begin
+      ImgFoto.Picture.LoadFromFile(vDlgImage.FileName);
+    end;
+  finally
+    vDlgImage.Free;
+  end;
+end;
+
+procedure TfichaResponsaveis.btnWebCamClick(Sender: TObject);
+var
+  vImg: String;
+begin
+  TfichaMainCamera.Init(vImg);
+  if (vImg <> EmptyStr) then
+    ImgFoto.Picture := TMisc.StringToPicture(vImg);
+end;
+
 procedure TfichaResponsaveis.DTOToView;
 begin
   edtNome.Text := FDTO.Nome;
   edtDocumento.Text := FDTO.Documento;
   edtContato.Text := FDTO.Contato;
   edtEmail.Text := FDTO.Email;
+  if FDTO.Foto <> EmptyStr then
+    ImgFoto.Picture := TMisc.StringToPicture(FDTO.Foto);
 end;
 
 class function TfichaResponsaveis.Init(var aDTO: TDTOResponsaveis;
@@ -102,6 +140,7 @@ begin
   FDTO.Documento := edtDocumento.Text;
   FDTO.Contato := edtContato.Text;
   FDTO.Email := edtEmail.Text;
+  FDTO.Foto := TMisc.PictureToString( ImgFoto.Picture );
 end;
 
 end.

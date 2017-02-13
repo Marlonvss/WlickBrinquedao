@@ -37,7 +37,7 @@ type
     [TORMFieldCRUD(mapper.Responsaveis.field_foto)]
     property Foto: String read FFoto write FFoto;
 
-    public
+  public
     function AssemblerClass: String; override;
 
   end;

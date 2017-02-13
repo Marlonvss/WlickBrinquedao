@@ -4,7 +4,8 @@ interface
 
 uses Winapi.Windows, Winapi.Messages, System.SysUtils, System.Classes, vcl.Forms,
   ORM.Connection, model.Usuarios, dto.Usuarios,
-  assembler.Usuarios, IniFiles, Dialogs, WLick.Constantes;
+  assembler.Usuarios, IniFiles, Dialogs, WLick.Constantes, viewLoginForm,
+  WLick.Sessao, Controls;
 
 Type
   TInitSistema = class
@@ -62,7 +63,18 @@ begin
     if LicencaValida then
     try
       ConectaBD;
-      Result := True;
+
+      with viewLoginForm.TfrmLogin.Create(nil) do
+      try
+        Result := Assigned(WLick.Sessao.GetInstance.Usuario);
+        if not Result then
+        begin
+          Result := (ShowModal = mrOK);
+        end;
+      finally
+        Free;
+      end;
+
     except
       on e: exception do
         raise Exception.Create('Ocorreu um erro ao Iniciar o Sistema!'+#13+'Entre em contato com o Suporte WebLick.'+#13+e.Message);

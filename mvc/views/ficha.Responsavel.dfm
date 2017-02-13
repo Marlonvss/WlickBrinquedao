@@ -69,7 +69,6 @@ object fichaResponsaveis: TfichaResponsaveis
       Top = 57
       Properties.MaxLength = 30
       TabOrder = 1
-      Text = 'edtDocumento'
       Width = 166
     end
     object edtContato: TcxTextEdit
@@ -77,7 +76,6 @@ object fichaResponsaveis: TfichaResponsaveis
       Top = 57
       Properties.MaxLength = 50
       TabOrder = 2
-      Text = 'edtDocumento'
       Width = 165
     end
     object grpFoto: TcxGroupBox
@@ -112,6 +110,7 @@ object fichaResponsaveis: TfichaResponsaveis
           ParentShowHint = False
           ShowHint = True
           TabOrder = 0
+          OnClick = btnLoadClick
         end
         object btnWebCam: TcxButton
           AlignWithMargins = True
@@ -129,6 +128,7 @@ object fichaResponsaveis: TfichaResponsaveis
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
+          OnClick = btnWebCamClick
         end
         object btnClear: TcxButton
           AlignWithMargins = True
@@ -146,9 +146,10 @@ object fichaResponsaveis: TfichaResponsaveis
           ParentShowHint = False
           ShowHint = True
           TabOrder = 2
+          OnClick = btnClearClick
         end
       end
-      object cxImage1: TcxImage
+      object ImgFoto: TcxImage
         AlignWithMargins = True
         Left = 5
         Top = 48

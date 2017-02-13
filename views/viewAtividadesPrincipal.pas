@@ -12,7 +12,9 @@ uses
   System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
   cxTimeEdit, Vcl.Menus, DBAccess, Uni, cxGridCardView, cxGridDBCardView,
   cxGridCustomLayoutView, MemDS, ORM.Connection, cxLabel, cxButtons, cxTextEdit,
-  ORM.ViewManager, ficha.Atividades, WLick.ClassHelper;
+  ORM.ViewManager, ficha.Atividades, WLick.ClassHelper, dxLayoutContainer,
+  cxGridViewLayoutContainer, cxGridLayoutView, cxGridDBLayoutView,
+  cxCurrencyEdit, ficha.AtividadesSaida, cxMemo;
 
 type
   TfrmAtividades = class(TForm)
@@ -20,43 +22,44 @@ type
     ActManager: TActionManager;
     actNovo: TAction;
     actFinalizar: TAction;
-    cxGrid1DBTableView1: TcxGridDBTableView;
-    cxGrid1: TcxGrid;
     uniPrincipal: TUniQuery;
     dsPrincipal: TDataSource;
-    cxGrid1DBCardView1: TcxGridDBCardView;
-    cxGrid1DBCardView1DBCardViewRow1: TcxGridDBCardViewRow;
-    cxGrid1DBCardView1DBCardViewRow2: TcxGridDBCardViewRow;
-    cxGrid1DBCardView2: TcxGridDBCardView;
-    cxGrid1Level1: TcxGridLevel;
-    cxGrid1DBCardView2DBCardViewRow5: TcxGridDBCardViewRow;
-    cxGrid1DBCardView2DBCardViewRow7: TcxGridDBCardViewRow;
-    cxGrid1DBCardView2DBCardViewRow4: TcxGridDBCardViewRow;
-    cxGrid1DBCardView2DBCardViewRow2: TcxGridDBCardViewRow;
-    cxGrid1DBCardView2DBCardViewRow1: TcxGridDBCardViewRow;
-    cxGrid1DBCardView2DBCardViewRow3: TcxGridDBCardViewRow;
     menu: TPopupMenu;
     Finalizaratividade1: TMenuItem;
-    Estenderatividade1: TMenuItem;
     TimerRefresh: TTimer;
     TimerHora: TTimer;
     lblHora: TLabel;
     UniConnection1: TUniConnection;
-    cxGrid1DBCardView2DBCardViewRow6: TcxGridDBCardViewRow;
     pnlBusca: TPanel;
     lblBusca: TLabel;
     cxButton1: TcxButton;
     edtBusca: TcxTextEdit;
+    grdAtividade: TcxGrid;
+    grdAtividadeLevel1: TcxGridLevel;
+    grdAtividadeDBLayoutView3DBLayoutViewItem2: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem3: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem4: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem5: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem6: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem7: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem8: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem9: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem10: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem11: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem12: TcxGridDBLayoutViewItem;
+    actVisualizar: TAction;
+    Visualizar1: TMenuItem;
     procedure actFinalizarExecute(Sender: TObject);
     procedure TimerRefreshTimer(Sender: TObject);
     procedure actNovoExecute(Sender: TObject);
     procedure TimerHoraTimer(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure cxGrid1DBCardView2DBCardViewRow4GetDisplayText(
+    procedure grdAtividadeDBCardView2DBCardViewRow4GetDisplayText(
       Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
       var AText: string);
     procedure edtBuscaPropertiesChange(Sender: TObject);
+    procedure actVisualizarExecute(Sender: TObject);
   private
     procedure StopAutoRefresh();
     procedure StartAutoRefresh();
@@ -73,7 +76,13 @@ procedure TfrmAtividades.actFinalizarExecute(Sender: TObject);
 begin
   StopAutoRefresh;
   try
-    ShowMessage(FloatToStr(uniPrincipal.FieldByName('valor').AsCurrency));
+    with TfichaAtividadesSaida.Create(nil) do
+    try
+      Init(uniPrincipal.FieldByName('id').AsGuid);
+      TimerRefreshTimer(Sender);
+    finally
+      Free;
+    end;
   finally
     StartAutoRefresh;
   end;
@@ -81,17 +90,34 @@ end;
 
 procedure TfrmAtividades.actNovoExecute(Sender: TObject);
 begin
-
-  with TFichaAtividades.Create(nil) do
+  StopAutoRefresh;
   try
-    StopAutoRefresh;
-    Init(TFuncoesGUID.NullGUID, True);
-    TimerRefreshTimer(Sender)
+    with TFichaAtividades.Create(nil) do
+    try
+      Init(TFuncoesGUID.NullGUID, True);
+      TimerRefreshTimer(Sender)
+    finally
+      Free;
+    end;
   finally
     StartAutoRefresh;
-    Free;
   end;
+end;
 
+procedure TfrmAtividades.actVisualizarExecute(Sender: TObject);
+begin
+  StopAutoRefresh;
+  try
+    with TFichaAtividades.Create(nil) do
+    try
+      Init(uniPrincipal.FieldByName('id').AsGuid, false);
+      TimerRefreshTimer(Sender);
+    finally
+      Free;
+    end;
+  finally
+    StartAutoRefresh;
+  end;
 end;
 
 procedure TfrmAtividades.AtualizaHora;
@@ -99,7 +125,7 @@ begin
   lblHora.Caption := FormatDateTime('HH:MM:SS',Now);
 end;
 
-procedure TfrmAtividades.cxGrid1DBCardView2DBCardViewRow4GetDisplayText(
+procedure TfrmAtividades.grdAtividadeDBCardView2DBCardViewRow4GetDisplayText(
   Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
   var AText: string);
 begin

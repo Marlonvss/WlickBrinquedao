@@ -10,7 +10,7 @@ uses
   controller.Criancas, ORM.controllerBase, frame.Criancas, WLick.ClassHelper,
   DateUtils, Generics.collections, dto.Responsaveis, WLick.Types,
   assembler.Responsaveis, ORM.assemblerBase, dto.ResponsaveisCriancas,
-  ficha.Responsavel;
+  ficha.Responsavel, viewMessageForm, WLick.Miscelania, MainCamera;
 
 type
 
@@ -25,6 +25,10 @@ type
       procedure edtNascimentoChanged(Sender: TObject);
       procedure SetIdadeLabel();
       procedure LoadTreeList();
+
+      procedure btnCarregarEvent(Sender: TObject);
+      procedure btnWebCanEvent(Sender: TObject);
+      procedure btnLimparEvent(Sender: TObject);
 
       procedure btnDeletarEvent(Sender: TObject);
       procedure btnNovoEvent(Sender: TObject);
@@ -124,6 +128,10 @@ begin
     btnNovo.OnClick := btnNovoEvent;
     btnDeletar.OnClick := btnDeletarEvent;
     treeListResponsaveis.OnDblClick := treeListResponsaveisEvent;
+
+    btnLoad.OnClick := btnCarregarEvent;
+    btnWebCam.OnClick := btnWebCanEvent;
+    btnClear.OnClick := btnLimparEvent;
   end;
 
 end;
@@ -132,13 +140,13 @@ procedure TFichaCriancas.SetIdadeLabel;
 var
   vIdade: Integer;
 begin
-  (GetFrame as TframeCriancas).lblCaptionIdade.Visible := not (GetFrame as TframeCriancas).edtNascimento.Date.IsNull;
-  (GetFrame as TframeCriancas).lblIdade.Visible := not (GetFrame as TframeCriancas).edtNascimento.Date.IsNull;
+  MyFrame.lblCaptionIdade.Visible := not (GetFrame as TframeCriancas).edtNascimento.Date.IsNull;
+  MyFrame.lblIdade.Visible := not (GetFrame as TframeCriancas).edtNascimento.Date.IsNull;
 
    vIdade := YearsBetween((GetFrame as TframeCriancas).edtNascimento.Date,Trunc(Now));
   if vIdade > 1
-    then (GetFrame as TframeCriancas).lblIdade.Caption := Format('%d anos',[vIdade])
-    else (GetFrame as TframeCriancas).lblIdade.Caption := Format('%d ano',[vIdade]);
+    then MyFrame.lblIdade.Caption := Format('%d anos',[vIdade])
+    else MyFrame.lblIdade.Caption := Format('%d ano',[vIdade]);
 end;
 
 procedure TFichaCriancas.SetOnChange;
@@ -150,6 +158,7 @@ begin
     edtCodigo.Properties.OnChange := OnChangeMethod;
     edtNome.Properties.OnChange := OnChangeMethod;
     edtNascimento.Properties.OnChange := OnChangeMethod;
+    ImgFoto.Properties.OnChange := OnChangeMethod;
   end;
 
 end;
@@ -205,6 +214,23 @@ begin
   end;
 end;
 
+procedure TFichaCriancas.btnCarregarEvent(Sender: TObject);
+var
+  vDlgImage: TOpenDialog;
+begin
+  vDlgImage := TOpenDialog.Create(nil);
+  try
+    vDlgImage.Filter := '*.JPG|*.JPG|*.BMP|*.BMP';
+
+    if vDlgImage.Execute() then
+    begin
+      MyFrame.ImgFoto.Picture.LoadFromFile(vDlgImage.FileName);
+    end;
+  finally
+    vDlgImage.Free;
+  end;
+end;
+
 procedure TFichaCriancas.btnDeletarEvent(Sender: TObject);
 var
   vDTO: TDTOResponsaveis;
@@ -225,6 +251,12 @@ begin
   end;
 end;
 
+procedure TFichaCriancas.btnLimparEvent(Sender: TObject);
+begin
+  if TviewMessage.Send_Question('Deseja realmente remover esta image?')
+    then MyFrame.ImgFoto.Clear;
+end;
+
 procedure TFichaCriancas.btnNovoEvent(Sender: TObject);
 var
   vDTO: TDTOResponsaveis;
@@ -241,6 +273,15 @@ begin
       OnChangeMethod(Sender);
     end;
   end;
+end;
+
+procedure TFichaCriancas.btnWebCanEvent(Sender: TObject);
+var
+  vImg: String;
+begin
+  TfichaMainCamera.Init(vImg);
+  if (vImg <> EmptyStr) then
+    MyFrame.ImgFoto.Picture := TMisc.StringToPicture(vImg);
 end;
 
 function TFichaCriancas.ClassController: TORMControllerBaseClass;
@@ -271,10 +312,15 @@ begin
 
   with MyFrame do
   begin
-    edtCodigo.Text := MyDTO.Codigo;
+
+    if FStatusFicha = sfInsert
+      then edtCodigo.Text := MyController.GetSequenceCodigo
+      else edtCodigo.Text := MyDTO.Codigo;
     edtNome.Text := MyDTO.Nome;
     edtNascimento.Date := MyDTO.Nascimento;
     SetIdadeLabel();
+    if MyDTO.Foto <> EmptyStr then
+      ImgFoto.Picture := TMisc.StringToPicture( MyDTO.Foto );
 
     {Responsaveis}
     Self.LoadTreeList;
@@ -301,9 +347,10 @@ begin
 
   with MyDTO do
   begin
-    Codigo := (GetFrame as TframeCriancas).edtCodigo.Text;
-    Nome := (GetFrame as TframeCriancas).edtNome.Text;
-    Nascimento := (GetFrame as TframeCriancas).edtNascimento.Date;
+    Codigo := MyFrame.edtCodigo.Text;
+    Nome := MyFrame.edtNome.Text;
+    Nascimento := MyFrame.edtNascimento.Date;
+    Foto := TMisc.PictureToString( MyFrame.ImgFoto.Picture );
 
     ListaResponsaveis.Clear;
     for vDTO in FListaResponsaveis do

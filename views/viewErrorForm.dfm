@@ -1,11 +1,11 @@
 object viewErro: TviewErro
   Left = 0
   Top = 0
-  BorderIcons = [biSystemMenu]
+  BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Aten'#231#227'o'
-  ClientHeight = 302
-  ClientWidth = 409
+  ClientHeight = 257
+  ClientWidth = 378
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,8 +15,8 @@ object viewErro: TviewErro
   OldCreateOrder = False
   Position = poDesktopCenter
   DesignSize = (
-    409
-    302)
+    378
+    257)
   PixelsPerInch = 96
   TextHeight = 13
   object lbl2: TLabel
@@ -70,32 +70,23 @@ object viewErro: TviewErro
     StyleFocused.LookAndFeel.NativeStyle = False
     StyleHot.LookAndFeel.NativeStyle = False
     TabOrder = 0
-    Height = 207
-    Width = 393
+    Height = 162
+    Width = 362
   end
   object pnlBotton: TPanel
     Left = 0
-    Top = 264
-    Width = 409
-    Height = 38
+    Top = 221
+    Width = 378
+    Height = 36
     Align = alBottom
     BevelOuter = bvNone
     Color = 4105706
     ParentBackground = False
     TabOrder = 1
-    object Button1: TButton
-      Left = 326
-      Top = 6
-      Width = 75
-      Height = 27
-      Caption = 'OK'
-      ModalResult = 1
-      TabOrder = 0
-    end
     object chkGravaLog: TCheckBox
       Left = 8
-      Top = 6
-      Width = 312
+      Top = 11
+      Width = 291
       Height = 13
       Caption = 'Gravar no arquivo de log?'
       Checked = True
@@ -106,21 +97,19 @@ object viewErro: TviewErro
       Font.Style = []
       ParentFont = False
       State = cbChecked
-      TabOrder = 1
+      TabOrder = 0
     end
-    object chkEnviarPorEmail: TCheckBox
-      Left = 8
-      Top = 20
-      Width = 312
-      Height = 13
-      Caption = 'Enviar para o email do Suporte WebLick?'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 2
+    object btnOk: TcxButton
+      AlignWithMargins = True
+      Left = 300
+      Top = 3
+      Width = 75
+      Height = 30
+      Align = alRight
+      Caption = 'OK'
+      ModalResult = 1
+      TabOrder = 1
+      OnClick = btnOkClick
     end
   end
 end

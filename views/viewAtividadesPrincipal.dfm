@@ -62,9 +62,9 @@ object frmAtividades: TfrmAtividades
         Height = 22
         Margins.Bottom = 0
         Align = alClient
-        Caption = 'Localizar [Nome, Respons'#225'vel ou Documento]:'
+        Caption = 'Filtrar atividades por Nome/Respons'#225'vel/Documento:'
         Layout = tlBottom
-        ExplicitWidth = 223
+        ExplicitWidth = 256
         ExplicitHeight = 13
       end
       object edtBusca: TcxTextEdit
@@ -93,7 +93,7 @@ object frmAtividades: TfrmAtividades
       ParentFont = False
     end
   end
-  object cxGrid1: TcxGrid
+  object grdAtividade: TcxGrid
     AlignWithMargins = True
     Left = 3
     Top = 58
@@ -101,7 +101,7 @@ object frmAtividades: TfrmAtividades
     Height = 456
     Align = alClient
     TabOrder = 1
-    object cxGrid1DBTableView1: TcxGridDBTableView
+    object grdAtividadeDBTableView1: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <>
@@ -110,7 +110,7 @@ object frmAtividades: TfrmAtividades
       OptionsView.ScrollBars = ssVertical
       OptionsView.GroupByBox = False
     end
-    object cxGrid1DBCardView1: TcxGridDBCardView
+    object grdAtividadeDBCardView1: TcxGridDBCardView
       Navigator.Buttons.CustomButtons = <>
       Navigator.Buttons.First.Visible = True
       Navigator.Buttons.PriorPage.Visible = True
@@ -136,17 +136,8 @@ object frmAtividades: TfrmAtividades
       OptionsData.Editing = False
       OptionsData.Inserting = False
       OptionsView.CardIndent = 7
-      object cxGrid1DBCardView1DBCardViewRow1: TcxGridDBCardViewRow
-        Position.BeginsLayer = True
-      end
-      object cxGrid1DBCardView1DBCardViewRow2: TcxGridDBCardViewRow
-        Caption = 'Category'
-        Kind = rkCategory
-        Options.ShowData = False
-        Position.BeginsLayer = True
-      end
     end
-    object cxGrid1DBCardView2: TcxGridDBCardView
+    object grdAtividadeDBCardView2: TcxGridDBCardView
       PopupMenu = menu
       Navigator.Buttons.CustomButtons = <>
       Navigator.Buttons.First.Visible = True
@@ -191,19 +182,19 @@ object frmAtividades: TfrmAtividades
       OptionsView.CellAutoHeight = True
       OptionsView.SeparatorWidth = 0
       OptionsView.ShowRowFilterButtons = sfbAlways
-      object cxGrid1DBCardView2DBCardViewRow1: TcxGridDBCardViewRow
+      object grdAtividadeDBCardView2DBCardViewRow1: TcxGridDBCardViewRow
         Caption = 'Crian'#231'a'
         DataBinding.FieldName = 'nome'
         Kind = rkCaption
         Position.BeginsLayer = True
       end
-      object cxGrid1DBCardView2DBCardViewRow3: TcxGridDBCardViewRow
+      object grdAtividadeDBCardView2DBCardViewRow3: TcxGridDBCardViewRow
         Caption = 'Nascimento'
         DataBinding.FieldName = 'nascimento'
         Kind = rkCaption
         Position.BeginsLayer = True
       end
-      object cxGrid1DBCardView2DBCardViewRow5: TcxGridDBCardViewRow
+      object grdAtividadeDBCardView2DBCardViewRow5: TcxGridDBCardViewRow
         Caption = 'Entrada'
         DataBinding.FieldName = 'entrada'
         PropertiesClassName = 'TcxTimeEditProperties'
@@ -211,7 +202,7 @@ object frmAtividades: TfrmAtividades
         Kind = rkCaption
         Position.BeginsLayer = True
       end
-      object cxGrid1DBCardView2DBCardViewRow7: TcxGridDBCardViewRow
+      object grdAtividadeDBCardView2DBCardViewRow7: TcxGridDBCardViewRow
         Caption = 'Tempo'
         DataBinding.FieldName = 'tempo'
         PropertiesClassName = 'TcxTimeEditProperties'
@@ -219,7 +210,7 @@ object frmAtividades: TfrmAtividades
         Kind = rkCaption
         Position.BeginsLayer = True
       end
-      object cxGrid1DBCardView2DBCardViewRow2: TcxGridDBCardViewRow
+      object grdAtividadeDBCardView2DBCardViewRow2: TcxGridDBCardViewRow
         Caption = 'Previs'#227'o'
         DataBinding.FieldName = 'previsao'
         PropertiesClassName = 'TcxTimeEditProperties'
@@ -227,25 +218,641 @@ object frmAtividades: TfrmAtividades
         Kind = rkCaption
         Position.BeginsLayer = True
       end
-      object cxGrid1DBCardView2DBCardViewRow4: TcxGridDBCardViewRow
+      object grdAtividadeDBCardView2DBCardViewRow4: TcxGridDBCardViewRow
         Caption = 'Situa'#231#227'o'
         DataBinding.FieldName = 'situacao'
         PropertiesClassName = 'TcxLabelProperties'
         Properties.Alignment.Horz = taLeftJustify
-        OnGetDisplayText = cxGrid1DBCardView2DBCardViewRow4GetDisplayText
+        OnGetDisplayText = grdAtividadeDBCardView2DBCardViewRow4GetDisplayText
         Kind = rkCaption
         Position.BeginsLayer = True
       end
-      object cxGrid1DBCardView2DBCardViewRow6: TcxGridDBCardViewRow
+      object grdAtividadeDBCardView2DBCardViewRow6: TcxGridDBCardViewRow
         Caption = 'Obs'
         DataBinding.FieldName = 'obs'
         Kind = rkCaption
         Position.BeginsLayer = True
       end
     end
-    object cxGrid1Level1: TcxGridLevel
-      Caption = 'cxGrid1Level1'
-      GridView = cxGrid1DBCardView2
+    object grdAtividadeDBLayoutView1: TcxGridDBLayoutView
+      Navigator.Buttons.CustomButtons = <>
+      Navigator.Buttons.First.Visible = True
+      Navigator.Buttons.PriorPage.Visible = True
+      Navigator.Buttons.Prior.Visible = True
+      Navigator.Buttons.Next.Visible = True
+      Navigator.Buttons.NextPage.Visible = True
+      Navigator.Buttons.Last.Visible = True
+      Navigator.Buttons.Insert.Visible = True
+      Navigator.Buttons.Append.Visible = False
+      Navigator.Buttons.Delete.Visible = True
+      Navigator.Buttons.Edit.Visible = True
+      Navigator.Buttons.Post.Visible = True
+      Navigator.Buttons.Cancel.Visible = True
+      Navigator.Buttons.Refresh.Visible = True
+      Navigator.Buttons.SaveBookmark.Visible = True
+      Navigator.Buttons.GotoBookmark.Visible = True
+      Navigator.Buttons.Filter.Visible = True
+      FilterBox.Visible = fvNever
+      DataController.DataSource = dsPrincipal
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      OptionsCustomize.ItemFiltering = False
+      OptionsData.Deleting = False
+      OptionsData.Editing = False
+      OptionsData.Inserting = False
+      OptionsView.RecordCaption.Visible = False
+      OptionsView.ViewMode = lvvmMultiRow
+      object grdAtividadeDBLayoutView1DBLayoutViewItem13: TcxGridDBLayoutViewItem
+        DataBinding.FieldName = 'id'
+        LayoutItem = cxGridLayoutItem1
+      end
+      object grdAtividadeDBLayoutView1DBLayoutViewItem1: TcxGridDBLayoutViewItem
+        Caption = 'Obs'
+        DataBinding.FieldName = 'obs'
+        LayoutItem = grdAtividadeDBLayoutView1LayoutItem2
+      end
+      object grdAtividadeDBLayoutView1DBLayoutViewItem2: TcxGridDBLayoutViewItem
+        Caption = 'Entrada'
+        DataBinding.FieldName = 'entrada'
+        LayoutItem = grdAtividadeDBLayoutView1LayoutItem3
+      end
+      object grdAtividadeDBLayoutView1DBLayoutViewItem3: TcxGridDBLayoutViewItem
+        Caption = 'Valor'
+        DataBinding.FieldName = 'valor'
+        LayoutItem = grdAtividadeDBLayoutView1LayoutItem4
+      end
+      object grdAtividadeDBLayoutView1DBLayoutViewItem4: TcxGridDBLayoutViewItem
+        Caption = 'Tempo'
+        DataBinding.FieldName = 'tempo'
+        LayoutItem = grdAtividadeDBLayoutView1LayoutItem5
+      end
+      object grdAtividadeDBLayoutView1DBLayoutViewItem5: TcxGridDBLayoutViewItem
+        Caption = 'Situa'#231#227'o'
+        DataBinding.FieldName = 'situacao'
+        LayoutItem = grdAtividadeDBLayoutView1LayoutItem6
+      end
+      object grdAtividadeDBLayoutView1DBLayoutViewItem6: TcxGridDBLayoutViewItem
+        Caption = 'Previs'#227'o'
+        DataBinding.FieldName = 'previsao'
+        LayoutItem = grdAtividadeDBLayoutView1LayoutItem7
+      end
+      object grdAtividadeDBLayoutView1DBLayoutViewItem7: TcxGridDBLayoutViewItem
+        Caption = 'Nome'
+        DataBinding.FieldName = 'nome'
+        LayoutItem = grdAtividadeDBLayoutView1LayoutItem8
+      end
+      object grdAtividadeDBLayoutView1DBLayoutViewItem8: TcxGridDBLayoutViewItem
+        Caption = 'Nascimento'
+        DataBinding.FieldName = 'nascimento'
+        LayoutItem = grdAtividadeDBLayoutView1LayoutItem9
+      end
+      object grdAtividadeDBLayoutView1DBLayoutViewItem9: TcxGridDBLayoutViewItem
+        Caption = 'Nome'
+        DataBinding.FieldName = 'responsavelnome'
+        LayoutItem = grdAtividadeDBLayoutView1LayoutItem10
+      end
+      object grdAtividadeDBLayoutView1DBLayoutViewItem10: TcxGridDBLayoutViewItem
+        Caption = 'Documento'
+        DataBinding.FieldName = 'responsaveldocumento'
+        LayoutItem = grdAtividadeDBLayoutView1LayoutItem11
+      end
+      object grdAtividadeDBLayoutView1DBLayoutViewItem11: TcxGridDBLayoutViewItem
+        Caption = 'Contato'
+        DataBinding.FieldName = 'responsavelcontato'
+        LayoutItem = grdAtividadeDBLayoutView1LayoutItem12
+      end
+      object grdAtividadeDBLayoutView1Group_Root: TdxLayoutGroup
+        AlignHorz = ahLeft
+        AlignVert = avTop
+        CaptionOptions.Text = 'Template Card'
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        ShowBorder = False
+        Index = -1
+      end
+      object cxGridLayoutItem1: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView1Group_Root
+        Index = 0
+      end
+      object grdAtividadeDBLayoutView1LayoutItem2: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView1Group_Root
+        CaptionOptions.Layout = clTop
+        Index = 9
+      end
+      object grdAtividadeDBLayoutView1LayoutItem3: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView1Group_Root
+        Index = 1
+      end
+      object grdAtividadeDBLayoutView1LayoutItem4: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView1Group_Root
+        Index = 2
+      end
+      object grdAtividadeDBLayoutView1LayoutItem5: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView1Group_Root
+        Index = 3
+      end
+      object grdAtividadeDBLayoutView1LayoutItem6: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView1Group_Root
+        Index = 4
+      end
+      object grdAtividadeDBLayoutView1LayoutItem7: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView1Group_Root
+        Index = 5
+      end
+      object grdAtividadeDBLayoutView1LayoutItem8: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView1Group_Root
+        Index = 6
+      end
+      object grdAtividadeDBLayoutView1LayoutItem9: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView1Group_Root
+        Index = 7
+      end
+      object grdAtividadeDBLayoutView1LayoutItem10: TcxGridLayoutItem
+        Parent = dxLayoutGroup1
+        Index = 0
+      end
+      object grdAtividadeDBLayoutView1LayoutItem11: TcxGridLayoutItem
+        Parent = dxLayoutGroup1
+        Index = 1
+      end
+      object grdAtividadeDBLayoutView1LayoutItem12: TcxGridLayoutItem
+        Parent = dxLayoutGroup1
+        Index = 2
+      end
+      object dxLayoutGroup1: TdxLayoutGroup
+        Parent = grdAtividadeDBLayoutView1Group_Root
+        CaptionOptions.Text = 'Respons'#225'vel'
+        ButtonOptions.Buttons = <>
+        Index = 8
+      end
+    end
+    object grdAtividadeDBCardView: TcxGridDBCardView
+      Navigator.Buttons.CustomButtons = <>
+      Navigator.Buttons.First.Visible = True
+      Navigator.Buttons.PriorPage.Visible = True
+      Navigator.Buttons.Prior.Visible = True
+      Navigator.Buttons.Next.Visible = True
+      Navigator.Buttons.NextPage.Visible = True
+      Navigator.Buttons.Last.Visible = True
+      Navigator.Buttons.Insert.Visible = True
+      Navigator.Buttons.Append.Visible = False
+      Navigator.Buttons.Delete.Visible = True
+      Navigator.Buttons.Edit.Visible = True
+      Navigator.Buttons.Post.Visible = True
+      Navigator.Buttons.Cancel.Visible = True
+      Navigator.Buttons.Refresh.Visible = True
+      Navigator.Buttons.SaveBookmark.Visible = True
+      Navigator.Buttons.GotoBookmark.Visible = True
+      Navigator.Buttons.Filter.Visible = True
+      FilterBox.Visible = fvNever
+      DataController.DataSource = dsPrincipal
+      DataController.KeyFieldNames = 'id'
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      OptionsCustomize.RowFiltering = False
+      OptionsCustomize.RowMoving = True
+      OptionsData.Deleting = False
+      OptionsData.Editing = False
+      OptionsData.Inserting = False
+      OptionsView.CardIndent = 7
+      OptionsView.CellAutoHeight = True
+      OptionsView.ShowRowFilterButtons = sfbAlways
+      object grdAtividadeDBCardViewDBCardViewRow1: TcxGridDBCardViewRow
+        DataBinding.FieldName = 'id'
+        Visible = False
+        Position.BeginsLayer = True
+      end
+      object grdAtividadeDBCardViewDBCardViewRow3: TcxGridDBCardViewRow
+        DataBinding.FieldName = 'entrada'
+        Position.BeginsLayer = True
+      end
+      object grdAtividadeDBCardViewDBCardViewRow4: TcxGridDBCardViewRow
+        DataBinding.FieldName = 'valor'
+        Position.BeginsLayer = True
+      end
+      object grdAtividadeDBCardViewDBCardViewRow6: TcxGridDBCardViewRow
+        DataBinding.FieldName = 'situacao'
+        Position.BeginsLayer = True
+      end
+      object grdAtividadeDBCardViewDBCardViewRow5: TcxGridDBCardViewRow
+        DataBinding.FieldName = 'tempo'
+        Position.BeginsLayer = True
+      end
+      object grdAtividadeDBCardViewDBCardViewRow7: TcxGridDBCardViewRow
+        DataBinding.FieldName = 'previsao'
+        Position.BeginsLayer = True
+      end
+      object grdAtividadeDBCardViewDBCardViewRow8: TcxGridDBCardViewRow
+        DataBinding.FieldName = 'nome'
+        Position.BeginsLayer = True
+      end
+      object grdAtividadeDBCardViewDBCardViewRow9: TcxGridDBCardViewRow
+        DataBinding.FieldName = 'nascimento'
+        Position.BeginsLayer = True
+      end
+      object grdAtividadeDBCardViewDBCardViewRow10: TcxGridDBCardViewRow
+        DataBinding.FieldName = 'responsavelnome'
+        Position.BeginsLayer = True
+      end
+      object grdAtividadeDBCardViewDBCardViewRow11: TcxGridDBCardViewRow
+        DataBinding.FieldName = 'responsaveldocumento'
+        Position.BeginsLayer = True
+      end
+      object grdAtividadeDBCardViewDBCardViewRowobs: TcxGridDBCardViewRow
+        DataBinding.FieldName = 'obs'
+        Position.BeginsLayer = True
+      end
+      object grdAtividadeDBCardViewDBCardViewRow12: TcxGridDBCardViewRow
+        DataBinding.FieldName = 'responsavelcontato'
+        Position.BeginsLayer = False
+      end
+    end
+    object grdAtividadeDBLayoutView2: TcxGridDBLayoutView
+      Navigator.Buttons.CustomButtons = <>
+      DataController.DataSource = dsPrincipal
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      object grdAtividadeDBLayoutView2DBLayoutViewItem1: TcxGridDBLayoutViewItem
+        DataBinding.FieldName = 'id'
+        LayoutItem = grdAtividadeDBLayoutView2LayoutItem1
+      end
+      object grdAtividadeDBLayoutView2DBLayoutViewItem2: TcxGridDBLayoutViewItem
+        DataBinding.FieldName = 'obs'
+        LayoutItem = grdAtividadeDBLayoutView2LayoutItem2
+      end
+      object grdAtividadeDBLayoutView2DBLayoutViewItem3: TcxGridDBLayoutViewItem
+        DataBinding.FieldName = 'entrada'
+        LayoutItem = grdAtividadeDBLayoutView2LayoutItem3
+      end
+      object grdAtividadeDBLayoutView2DBLayoutViewItem4: TcxGridDBLayoutViewItem
+        DataBinding.FieldName = 'valor'
+        LayoutItem = grdAtividadeDBLayoutView2LayoutItem4
+      end
+      object grdAtividadeDBLayoutView2DBLayoutViewItem5: TcxGridDBLayoutViewItem
+        DataBinding.FieldName = 'tempo'
+        LayoutItem = grdAtividadeDBLayoutView2LayoutItem5
+      end
+      object grdAtividadeDBLayoutView2DBLayoutViewItem6: TcxGridDBLayoutViewItem
+        DataBinding.FieldName = 'situacao'
+        LayoutItem = grdAtividadeDBLayoutView2LayoutItem6
+      end
+      object grdAtividadeDBLayoutView2DBLayoutViewItem7: TcxGridDBLayoutViewItem
+        DataBinding.FieldName = 'previsao'
+        LayoutItem = grdAtividadeDBLayoutView2LayoutItem7
+      end
+      object grdAtividadeDBLayoutView2DBLayoutViewItem8: TcxGridDBLayoutViewItem
+        DataBinding.FieldName = 'nome'
+        LayoutItem = grdAtividadeDBLayoutView2LayoutItem8
+      end
+      object grdAtividadeDBLayoutView2DBLayoutViewItem9: TcxGridDBLayoutViewItem
+        DataBinding.FieldName = 'nascimento'
+        LayoutItem = grdAtividadeDBLayoutView2LayoutItem9
+      end
+      object grdAtividadeDBLayoutView2DBLayoutViewItem10: TcxGridDBLayoutViewItem
+        DataBinding.FieldName = 'responsavelnome'
+        LayoutItem = grdAtividadeDBLayoutView2LayoutItem10
+      end
+      object grdAtividadeDBLayoutView2DBLayoutViewItem11: TcxGridDBLayoutViewItem
+        DataBinding.FieldName = 'responsaveldocumento'
+        LayoutItem = grdAtividadeDBLayoutView2LayoutItem11
+      end
+      object grdAtividadeDBLayoutView2DBLayoutViewItem12: TcxGridDBLayoutViewItem
+        DataBinding.FieldName = 'responsavelcontato'
+        LayoutItem = grdAtividadeDBLayoutView2LayoutItem12
+      end
+      object grdAtividadeDBLayoutView2Group_Root: TdxLayoutGroup
+        AlignHorz = ahLeft
+        AlignVert = avTop
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        ShowBorder = False
+        Index = -1
+      end
+      object grdAtividadeDBLayoutView2LayoutItem1: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView2Group_Root
+        Index = 0
+      end
+      object grdAtividadeDBLayoutView2LayoutItem2: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView2Group_Root
+        Index = 1
+      end
+      object grdAtividadeDBLayoutView2LayoutItem3: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView2Group_Root
+        Index = 2
+      end
+      object grdAtividadeDBLayoutView2LayoutItem4: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView2Group_Root
+        Index = 3
+      end
+      object grdAtividadeDBLayoutView2LayoutItem5: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView2Group_Root
+        Index = 4
+      end
+      object grdAtividadeDBLayoutView2LayoutItem6: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView2Group_Root
+        Index = 5
+      end
+      object grdAtividadeDBLayoutView2LayoutItem7: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView2Group_Root
+        Index = 6
+      end
+      object grdAtividadeDBLayoutView2LayoutItem8: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView2Group_Root
+        Index = 7
+      end
+      object grdAtividadeDBLayoutView2LayoutItem9: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView2Group_Root
+        Index = 8
+      end
+      object grdAtividadeDBLayoutView2LayoutItem10: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView2Group_Root
+        Index = 9
+      end
+      object grdAtividadeDBLayoutView2LayoutItem11: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView2Group_Root
+        Index = 10
+      end
+      object grdAtividadeDBLayoutView2LayoutItem12: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView2Group_Root
+        Index = 11
+      end
+    end
+    object grdAtividadeDBLayoutView3: TcxGridDBLayoutView
+      PopupMenu = menu
+      OnDblClick = actVisualizarExecute
+      Navigator.Buttons.CustomButtons = <>
+      Navigator.Buttons.First.Visible = True
+      Navigator.Buttons.PriorPage.Visible = True
+      Navigator.Buttons.Prior.Visible = True
+      Navigator.Buttons.Next.Visible = True
+      Navigator.Buttons.NextPage.Visible = True
+      Navigator.Buttons.Last.Visible = True
+      Navigator.Buttons.Insert.Visible = True
+      Navigator.Buttons.Append.Visible = False
+      Navigator.Buttons.Delete.Visible = True
+      Navigator.Buttons.Edit.Visible = True
+      Navigator.Buttons.Post.Visible = True
+      Navigator.Buttons.Cancel.Visible = True
+      Navigator.Buttons.Refresh.Visible = True
+      Navigator.Buttons.SaveBookmark.Visible = True
+      Navigator.Buttons.GotoBookmark.Visible = True
+      Navigator.Buttons.Filter.Visible = True
+      FilterBox.Visible = fvNever
+      DataController.DataSource = dsPrincipal
+      DataController.KeyFieldNames = 'id'
+      DataController.Summary.DefaultGroupSummaryItems = <>
+      DataController.Summary.FooterSummaryItems = <>
+      DataController.Summary.SummaryGroups = <>
+      OptionsCustomize.ItemFiltering = False
+      OptionsData.Deleting = False
+      OptionsData.Editing = False
+      OptionsData.Inserting = False
+      OptionsView.NoDataToDisplayInfoText = '<Nenhuma atividade>'
+      OptionsView.CenterRecords = False
+      OptionsView.RecordCaption.Visible = False
+      OptionsView.ViewMode = lvvmMultiRow
+      object grdAtividadeDBLayoutView3DBLayoutViewItem2: TcxGridDBLayoutViewItem
+        Caption = 'Obs'
+        DataBinding.FieldName = 'obs'
+        PropertiesClassName = 'TcxMemoProperties'
+        LayoutItem = grdAtividadeDBLayoutView3LayoutItem2
+        Options.Editing = False
+        Options.Filtering = False
+        Options.FilteringAddValueItems = False
+        Options.FilteringFilteredItemsList = False
+        Options.FilteringMRUItemsList = False
+        Options.FilteringPopup = False
+        Options.FilteringPopupMultiSelect = False
+        Options.FilteringWithFindPanel = False
+        Options.Focusing = False
+        Options.ShowEditButtons = isebNever
+      end
+      object grdAtividadeDBLayoutView3DBLayoutViewItem3: TcxGridDBLayoutViewItem
+        Caption = 'Entrada'
+        DataBinding.FieldName = 'entrada'
+        PropertiesClassName = 'TcxTimeEditProperties'
+        Properties.TimeFormat = tfHourMin
+        LayoutItem = grdAtividadeDBLayoutView3LayoutItem3
+        Options.Editing = False
+        Options.Filtering = False
+        Options.FilteringAddValueItems = False
+        Options.FilteringFilteredItemsList = False
+        Options.FilteringMRUItemsList = False
+        Options.FilteringPopup = False
+        Options.FilteringPopupMultiSelect = False
+        Options.FilteringWithFindPanel = False
+        Options.Focusing = False
+        Options.ShowEditButtons = isebNever
+      end
+      object grdAtividadeDBLayoutView3DBLayoutViewItem4: TcxGridDBLayoutViewItem
+        Caption = 'Valor'
+        DataBinding.FieldName = 'valor'
+        PropertiesClassName = 'TcxCurrencyEditProperties'
+        LayoutItem = grdAtividadeDBLayoutView3LayoutItem4
+        Options.Editing = False
+        Options.Filtering = False
+        Options.FilteringAddValueItems = False
+        Options.FilteringFilteredItemsList = False
+        Options.FilteringMRUItemsList = False
+        Options.FilteringPopup = False
+        Options.FilteringPopupMultiSelect = False
+        Options.FilteringWithFindPanel = False
+        Options.Focusing = False
+        Options.ShowEditButtons = isebNever
+      end
+      object grdAtividadeDBLayoutView3DBLayoutViewItem5: TcxGridDBLayoutViewItem
+        Caption = 'Tempo'
+        DataBinding.FieldName = 'tempo'
+        PropertiesClassName = 'TcxTimeEditProperties'
+        Properties.TimeFormat = tfHourMin
+        LayoutItem = grdAtividadeDBLayoutView3LayoutItem5
+        Options.Editing = False
+        Options.Filtering = False
+        Options.FilteringAddValueItems = False
+        Options.FilteringFilteredItemsList = False
+        Options.FilteringMRUItemsList = False
+        Options.FilteringPopup = False
+        Options.FilteringPopupMultiSelect = False
+        Options.FilteringWithFindPanel = False
+        Options.Focusing = False
+        Options.ShowEditButtons = isebNever
+      end
+      object grdAtividadeDBLayoutView3DBLayoutViewItem6: TcxGridDBLayoutViewItem
+        Caption = 'Situa'#231#227'o'
+        DataBinding.FieldName = 'situacao'
+        LayoutItem = grdAtividadeDBLayoutView3LayoutItem6
+        Options.Editing = False
+        Options.Filtering = False
+        Options.FilteringAddValueItems = False
+        Options.FilteringFilteredItemsList = False
+        Options.FilteringMRUItemsList = False
+        Options.FilteringPopup = False
+        Options.FilteringPopupMultiSelect = False
+        Options.FilteringWithFindPanel = False
+        Options.Focusing = False
+        Options.ShowEditButtons = isebNever
+      end
+      object grdAtividadeDBLayoutView3DBLayoutViewItem7: TcxGridDBLayoutViewItem
+        Caption = 'Previs'#227'o'
+        DataBinding.FieldName = 'previsao'
+        PropertiesClassName = 'TcxTimeEditProperties'
+        Properties.TimeFormat = tfHourMin
+        LayoutItem = grdAtividadeDBLayoutView3LayoutItem7
+        Options.Editing = False
+        Options.Filtering = False
+        Options.FilteringAddValueItems = False
+        Options.FilteringFilteredItemsList = False
+        Options.FilteringMRUItemsList = False
+        Options.FilteringPopup = False
+        Options.FilteringPopupMultiSelect = False
+        Options.FilteringWithFindPanel = False
+        Options.Focusing = False
+        Options.ShowEditButtons = isebNever
+      end
+      object grdAtividadeDBLayoutView3DBLayoutViewItem8: TcxGridDBLayoutViewItem
+        Caption = 'Nome'
+        DataBinding.FieldName = 'nome'
+        LayoutItem = grdAtividadeDBLayoutView3LayoutItem8
+        Options.Editing = False
+        Options.Filtering = False
+        Options.FilteringAddValueItems = False
+        Options.FilteringFilteredItemsList = False
+        Options.FilteringMRUItemsList = False
+        Options.FilteringPopup = False
+        Options.FilteringPopupMultiSelect = False
+        Options.FilteringWithFindPanel = False
+        Options.Focusing = False
+        Options.ShowEditButtons = isebNever
+      end
+      object grdAtividadeDBLayoutView3DBLayoutViewItem9: TcxGridDBLayoutViewItem
+        Caption = 'Nascimento'
+        DataBinding.FieldName = 'nascimento'
+        LayoutItem = grdAtividadeDBLayoutView3LayoutItem9
+        Options.Editing = False
+        Options.Filtering = False
+        Options.FilteringAddValueItems = False
+        Options.FilteringFilteredItemsList = False
+        Options.FilteringMRUItemsList = False
+        Options.FilteringPopup = False
+        Options.FilteringPopupMultiSelect = False
+        Options.FilteringWithFindPanel = False
+        Options.Focusing = False
+        Options.ShowEditButtons = isebNever
+      end
+      object grdAtividadeDBLayoutView3DBLayoutViewItem10: TcxGridDBLayoutViewItem
+        Caption = 'Nome'
+        DataBinding.FieldName = 'responsavelnome'
+        LayoutItem = grdAtividadeDBLayoutView3LayoutItem10
+        Options.Editing = False
+        Options.Filtering = False
+        Options.FilteringAddValueItems = False
+        Options.FilteringFilteredItemsList = False
+        Options.FilteringMRUItemsList = False
+        Options.FilteringPopup = False
+        Options.FilteringPopupMultiSelect = False
+        Options.FilteringWithFindPanel = False
+        Options.Focusing = False
+        Options.ShowEditButtons = isebNever
+      end
+      object grdAtividadeDBLayoutView3DBLayoutViewItem11: TcxGridDBLayoutViewItem
+        Caption = 'Documento'
+        DataBinding.FieldName = 'responsaveldocumento'
+        LayoutItem = grdAtividadeDBLayoutView3LayoutItem11
+        Options.Editing = False
+        Options.Filtering = False
+        Options.FilteringAddValueItems = False
+        Options.FilteringFilteredItemsList = False
+        Options.FilteringMRUItemsList = False
+        Options.FilteringPopup = False
+        Options.FilteringPopupMultiSelect = False
+        Options.FilteringWithFindPanel = False
+        Options.Focusing = False
+        Options.ShowEditButtons = isebNever
+      end
+      object grdAtividadeDBLayoutView3DBLayoutViewItem12: TcxGridDBLayoutViewItem
+        Caption = 'Contato'
+        DataBinding.FieldName = 'responsavelcontato'
+        LayoutItem = grdAtividadeDBLayoutView3LayoutItem12
+        Options.Editing = False
+        Options.Filtering = False
+        Options.FilteringAddValueItems = False
+        Options.FilteringFilteredItemsList = False
+        Options.FilteringMRUItemsList = False
+        Options.FilteringPopup = False
+        Options.FilteringPopupMultiSelect = False
+        Options.FilteringWithFindPanel = False
+        Options.Focusing = False
+        Options.ShowEditButtons = isebNever
+      end
+      object grdAtividadeDBLayoutView3Group_Root: TdxLayoutGroup
+        AlignHorz = ahLeft
+        AlignVert = avTop
+        CaptionOptions.Text = 'Template Card'
+        ButtonOptions.Buttons = <>
+        Hidden = True
+        ShowBorder = False
+        Index = -1
+      end
+      object grdAtividadeDBLayoutView3LayoutItem2: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView3Group_Root
+        CaptionOptions.Layout = clTop
+        SizeOptions.Height = 100
+        SizeOptions.Width = 202
+        Index = 8
+      end
+      object grdAtividadeDBLayoutView3LayoutItem3: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView3Group_Root
+        Index = 0
+      end
+      object grdAtividadeDBLayoutView3LayoutItem4: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView3Group_Root
+        Index = 1
+      end
+      object grdAtividadeDBLayoutView3LayoutItem5: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView3Group_Root
+        Index = 2
+      end
+      object grdAtividadeDBLayoutView3LayoutItem6: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView3Group_Root
+        Index = 3
+      end
+      object grdAtividadeDBLayoutView3LayoutItem7: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView3Group_Root
+        Index = 4
+      end
+      object grdAtividadeDBLayoutView3LayoutItem8: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView3Group_Root
+        Index = 5
+      end
+      object grdAtividadeDBLayoutView3LayoutItem9: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView3Group_Root
+        Index = 6
+      end
+      object grdAtividadeDBLayoutView3LayoutItem10: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView3Group1
+        Index = 0
+      end
+      object grdAtividadeDBLayoutView3LayoutItem11: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView3Group1
+        Index = 1
+      end
+      object grdAtividadeDBLayoutView3LayoutItem12: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView3Group1
+        Index = 2
+      end
+      object grdAtividadeDBLayoutView3Group1: TdxLayoutGroup
+        Parent = grdAtividadeDBLayoutView3Group_Root
+        CaptionOptions.Text = 'Respons'#225'vel'
+        ButtonOptions.Buttons = <>
+        Index = 7
+      end
+    end
+    object grdAtividadeLevel1: TcxGridLevel
+      Caption = 'grdAtividadeLevel1'
+      GridView = grdAtividadeDBLayoutView3
     end
   end
   object ActManager: TActionManager
@@ -256,13 +863,18 @@ object frmAtividades: TfrmAtividades
     StyleName = 'Platform Default'
     object actNovo: TAction
       Caption = 'Registrar'
-      ImageIndex = 4
+      ImageIndex = 3
       OnExecute = actNovoExecute
     end
     object actFinalizar: TAction
       Caption = 'Encerrar atividade'
       ImageIndex = 5
       OnExecute = actFinalizarExecute
+    end
+    object actVisualizar: TAction
+      Caption = 'Visualizar'
+      ImageIndex = 4
+      OnExecute = actVisualizarExecute
     end
   end
   object uniPrincipal: TUniQuery
@@ -284,6 +896,7 @@ object frmAtividades: TfrmAtividades
         'EL'
       ' WHERE ATIVIDADES.SITUACAO = 0'
       ' ORDER BY ATIVIDADES.ENTRADA + ATIVIDADES.TEMPO')
+    Active = True
     Filtered = True
     Left = 80
     Top = 72
@@ -300,9 +913,8 @@ object frmAtividades: TfrmAtividades
     object Finalizaratividade1: TMenuItem
       Action = actFinalizar
     end
-    object Estenderatividade1: TMenuItem
-      Caption = 'Estender atividade'
-      Visible = False
+    object Visualizar1: TMenuItem
+      Action = actVisualizar
     end
   end
   object TimerRefresh: TTimer
@@ -323,8 +935,10 @@ object frmAtividades: TfrmAtividades
     Database = 'brinquedao'
     Username = 'postgres'
     Server = 'localhost'
-    Left = 328
-    Top = 176
+    Connected = True
+    LoginPrompt = False
+    Left = 304
+    Top = 128
     EncryptedPassword = '8FFF90FF8CFF8BFF98FF8DFF9AFF8CFF'
   end
 end

@@ -50,7 +50,8 @@ object frameCriancas: TframeCriancas
   object edtNascimento: TcxDateEdit
     Left = 128
     Top = 15
-    EditValue = 33801d
+    EditValue = 0d
+    Properties.AssignedValues.DisplayFormat = True
     TabOrder = 1
     Width = 109
   end
@@ -76,7 +77,7 @@ object frameCriancas: TframeCriancas
     Width = 334
     Height = 249
     TabOrder = 3
-    Properties.ActivePage = cxTabSheet2
+    Properties.ActivePage = tsFoto
     Properties.CustomButtons.Buttons = <>
     ClientRectBottom = 245
     ClientRectLeft = 4
@@ -85,7 +86,11 @@ object frameCriancas: TframeCriancas
     object tsFoto: TcxTabSheet
       Caption = 'Foto'
       ImageIndex = 0
-      object cxImage1: TcxImage
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
+      object ImgFoto: TcxImage
         AlignWithMargins = True
         Left = 3
         Top = 30
@@ -158,6 +163,10 @@ object frameCriancas: TframeCriancas
     object cxTabSheet2: TcxTabSheet
       Caption = 'Respons'#225'veis'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object pnlCtrlResponsavel: TPanel
         Left = 0
         Top = 0

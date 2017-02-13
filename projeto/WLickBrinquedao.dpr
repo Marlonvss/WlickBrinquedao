@@ -74,9 +74,29 @@ uses
   mapper.Atividades in '..\mvc\mappers\mapper.Atividades.pas',
   model.Atividades in '..\mvc\models\model.Atividades.pas',
   frame.Atividades in '..\mvc\views\frame.Atividades.pas' {frameAtividades: TFrame},
-  enum.Atividades.Situacao in '..\mvc\enum\enum.Atividades.Situacao.pas';
+  enum.Atividades.Situacao in '..\mvc\enum\enum.Atividades.Situacao.pas',
+  ficha.AtividadesSaida in '..\mvc\views\ficha.AtividadesSaida.pas' {fichaAtividadesSaida},
+  assembler.Configuracoes in '..\mvc\assembler\assembler.Configuracoes.pas',
+  model.Configuracoes in '..\mvc\models\model.Configuracoes.pas',
+  mapper.Configuracoes in '..\mvc\mappers\mapper.Configuracoes.pas',
+  frame.Configuracoes in '..\mvc\views\frame.Configuracoes.pas' {frameConfiguracoes: TFrame},
+  dao.Configuracoes in '..\mvc\daos\dao.Configuracoes.pas',
+  ficha.Configuracoes in '..\mvc\views\ficha.Configuracoes.pas',
+  controller.Configuracoes in '..\mvc\controllers\controller.Configuracoes.pas',
+  dto.Configuracoes in '..\mvc\dto\dto.Configuracoes.pas',
+  enum.Configuracoes in '..\mvc\enum\enum.Configuracoes.pas',
+  viewMessageForm in '..\views\viewMessageForm.pas' {viewMessage},
+  VFrames in '..\units\Camera\VFrames.pas',
+  VSample in '..\units\Camera\VSample.pas',
+  MainCamera in '..\units\Camera\MainCamera.pas' {fichaMainCamera},
+  Direct3D9 in '..\units\Camera\DirectX\Direct3D9.pas',
+  DirectDraw in '..\units\Camera\DirectX\DirectDraw.pas',
+  DirectShow9 in '..\units\Camera\DirectX\DirectShow9.pas',
+  DirectSound in '..\units\Camera\DirectX\DirectSound.pas',
+  DXTypes in '..\units\Camera\DirectX\DXTypes.pas';
 
 {$R *.res}
+
 
 begin
   Application.Initialize;

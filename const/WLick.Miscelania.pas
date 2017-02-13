@@ -3,8 +3,8 @@ unit WLick.Miscelania;
 interface
 
 uses Winapi.Windows, Winapi.Messages, System.SysUtils, System.Classes, vcl.Forms,
-  ExtCtrls, Vcl.Graphics, JPEG, dto.Usuarios, Soap.EncdDecd, generics.collections,
-  ORM.dtoBase, cxDropDownEdit;
+  ExtCtrls, Vcl.Graphics, JPEG, dto.Usuarios, generics.collections,
+  ORM.dtoBase, cxDropDownEdit, EncdDecd;
 
 Type
   TMisc = class
@@ -12,8 +12,6 @@ Type
 
     class function PictureToString(const pValor : TPicture) : string;
     class function StringToPicture(const pValor : String) : TPicture;
-    class function BitmapFromBase64(const base64: string): TBitmap;
-    class function Base64FromBitmap(Bitmap: TBitmap): string;
   end;
 
 implementation
@@ -61,24 +59,26 @@ begin
   Result := '';
 
   StreamImagem := TStringStream.Create;
-  //objJPEG := TJPEGImage.Create;
+  objJPEG := TJPEGImage.Create;
   try
     if Assigned(pValor) and Assigned(pValor.Graphic) then
     begin
-      //objJPEG.Assign(pValor.Graphic.save);
+      objJPEG.Assign(pValor.Graphic);
+      //objJPEG.CompressionQuality := 100;
+      //objJPEG.Compress;
 
-      pValor.Graphic.SaveToStream(StreamImagem);
+      objJPEG.SaveToStream(StreamImagem);
       StreamImagem.Position := 0;
 
       Result := StreamImagem.ReadString(StreamImagem.Size);
     end;
   finally
-    //objJPEG.Free;
+    objJPEG.Free;
     StreamImagem.Free;
   end;
 end;
 
-class function TMisc.StringToPicture(const pValor : String) : TPicture;
+class function TMisc.StringToPicture(const pValor : String): TPicture;
 var
   StreamImagem : TStringStream;
   objJPEG : TJPEGImage;
@@ -93,6 +93,7 @@ begin
 
       objJPEG.LoadFromStream(StreamImagem);
 
+      Result := TPicture.Create;
       Result.Assign(objJPEG);
     end;
   finally
@@ -100,59 +101,5 @@ begin
     StreamImagem.Free;
   end;
 end;
-
-class function TMisc.Base64FromBitmap(Bitmap: TBitmap): string;
-var
-  Input: TBytesStream;
-  Output: TStringStream;
-begin
-  if Assigned(Bitmap) then
-  begin
-    Input := TBytesStream.Create;
-    try
-      Bitmap.SaveToStream(Input);
-      Input.Position := 0;
-      Output := TStringStream.Create('', TEncoding.ASCII);
-      try
-        Soap.EncdDecd.EncodeStream(Input, Output);
-        Result := Output.DataString;
-      finally
-        Output.Free;
-      end;
-    finally
-      Input.Free;
-    end;
-  end;
-end;
-
-class function TMisc.BitmapFromBase64(const base64: string): TBitmap;
-var
-  Input: TStringStream;
-  Output: TBytesStream;
-begin
-  if base64 <> '' then
-  begin
-    Input := TStringStream.Create(base64, TEncoding.ASCII);
-    try
-      Output := TBytesStream.Create;
-      try
-        Soap.EncdDecd.DecodeStream(Input, Output);
-        Output.Position := 0;
-        Result := TBitmap.Create;
-        try
-          Result.LoadFromStream(Output);
-        except
-          Result.Free;
-          raise;
-        end;
-      finally
-        Output.Free;
-      end;
-    finally
-      Input.Free;
-    end;
-  end;
-end;
-
 
 end.
