@@ -93,7 +93,8 @@ uses
   DirectDraw in '..\units\Camera\DirectX\DirectDraw.pas',
   DirectShow9 in '..\units\Camera\DirectX\DirectShow9.pas',
   DirectSound in '..\units\Camera\DirectX\DirectSound.pas',
-  DXTypes in '..\units\Camera\DirectX\DXTypes.pas';
+  DXTypes in '..\units\Camera\DirectX\DXTypes.pas',
+  DMRelatorio in '..\units\relatorios\DMRelatorio.pas' {DMReport: TDataModule};
 
 {$R *.res}
 

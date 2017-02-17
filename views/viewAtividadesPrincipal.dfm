@@ -876,6 +876,10 @@ object frmAtividades: TfrmAtividades
       ImageIndex = 4
       OnExecute = actVisualizarExecute
     end
+    object actImprimir: TAction
+      Caption = 'Imprimir'
+      OnExecute = actImprimirExecute
+    end
   end
   object uniPrincipal: TUniQuery
     Connection = UniConnection1
@@ -915,6 +919,12 @@ object frmAtividades: TfrmAtividades
     end
     object Visualizar1: TMenuItem
       Action = actVisualizar
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object Imprimir1: TMenuItem
+      Action = actImprimir
     end
   end
   object TimerRefresh: TTimer

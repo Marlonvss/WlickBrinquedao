@@ -14,7 +14,7 @@ uses
   cxGridCustomLayoutView, MemDS, ORM.Connection, cxLabel, cxButtons, cxTextEdit,
   ORM.ViewManager, ficha.Atividades, WLick.ClassHelper, dxLayoutContainer,
   cxGridViewLayoutContainer, cxGridLayoutView, cxGridDBLayoutView,
-  cxCurrencyEdit, ficha.AtividadesSaida, cxMemo;
+  cxCurrencyEdit, ficha.AtividadesSaida, cxMemo, DMRelatorio, WLick.Types;
 
 type
   TfrmAtividades = class(TForm)
@@ -49,6 +49,9 @@ type
     grdAtividadeDBLayoutView3DBLayoutViewItem12: TcxGridDBLayoutViewItem;
     actVisualizar: TAction;
     Visualizar1: TMenuItem;
+    N1: TMenuItem;
+    actImprimir: TAction;
+    Imprimir1: TMenuItem;
     procedure actFinalizarExecute(Sender: TObject);
     procedure TimerRefreshTimer(Sender: TObject);
     procedure actNovoExecute(Sender: TObject);
@@ -60,6 +63,7 @@ type
       var AText: string);
     procedure edtBuscaPropertiesChange(Sender: TObject);
     procedure actVisualizarExecute(Sender: TObject);
+    procedure actImprimirExecute(Sender: TObject);
   private
     procedure StopAutoRefresh();
     procedure StartAutoRefresh();
@@ -86,6 +90,11 @@ begin
   finally
     StartAutoRefresh;
   end;
+end;
+
+procedure TfrmAtividades.actImprimirExecute(Sender: TObject);
+begin
+  DMRelatorio.TDMReport.PrintReport(trtFichaAtividade,[uniPrincipal.FieldByName('id').AsString]);
 end;
 
 procedure TfrmAtividades.actNovoExecute(Sender: TObject);

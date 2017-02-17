@@ -13,7 +13,9 @@ uses
   dxStatusBar, WLick.Miscelania, dxRibbonStatusBar, dxSkinsForm, dxRibbonCustomizationForm,
   dxBarBuiltInMenu, Vcl.AppEvnts, WLick.ClassHelper, ORM.ViewManager,
   viewLoginForm, browser.Criancas, WLick.Sessao, viewAtividadesPrincipal, Vcl.ExtCtrls,
-  brinquedao.Images, browser.ValorTempo, ficha.Configuracoes, MainCamera;
+  brinquedao.Images, browser.ValorTempo, ficha.Configuracoes, MainCamera,
+  ppComm, ppEndUsr, ppPrnabl, ppClass, ppCtrls, ppBands, ppCache, ppDesignLayer,
+  ppParameter, ppRelatv, ppProd, ppReport, DMRelatorio, WLick.Types;
 
 type
   TfrmMain = class(TForm)

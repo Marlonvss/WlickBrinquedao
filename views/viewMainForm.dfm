@@ -28,7 +28,6 @@
     TabOrder = 4
     TabStop = False
     object RibbonTabPrincipal: TdxRibbonTab
-      Active = True
       Caption = 'Principal'
       Groups = <
         item
@@ -38,6 +37,7 @@
       Index = 0
     end
     object RibbonTabConfigurações: TdxRibbonTab
+      Active = True
       Caption = 'Outros'
       Groups = <
         item
