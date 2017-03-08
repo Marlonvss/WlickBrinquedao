@@ -77,7 +77,7 @@ begin
 
     except
       on e: exception do
-        raise Exception.Create('Ocorreu um erro ao Iniciar o Sistema!'+#13+'Entre em contato com o Suporte WebLick.'+#13+e.Message);
+        raise Exception.Create('Ocorreu um erro ao Iniciar o Sistema!'+#13+'Entre em contato com o Suporte WebLick:'+#13#13+e.Message);
     end else
     begin
       ShowMessage('Licença invalida! '+CRLF+'Vencimento até 01/04/2017.');

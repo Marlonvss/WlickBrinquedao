@@ -17,9 +17,11 @@ object DMReport: TDMReport
     Connection = help
     SQL.Strings = (
       
-        'SELECT ATIVIDADES.ID, ATIVIDADES.OBS, ATIVIDADES.ENTRADA, ATIVID' +
-        'ADES.VALOR, ATIVIDADES.TEMPO, ATIVIDADES.SITUACAO, ATIVIDADES.EN' +
-        'TRADA + ATIVIDADES.TEMPO AS PREVISAO,'
+        'SELECT (SELECT VALORBINARIO FROM CONFIGURACOES WHERE CONFIGURACA' +
+        'O = '#39'Logotipo'#39' LIMIT 1) AS LOGOTIPO, '
+      
+        '       ATIVIDADES.ID, ATIVIDADES.OBS, ATIVIDADES.ENTRADA, ATIVID' +
+        'ADES.VALOR, ATIVIDADES.TEMPO, ATIVIDADES.SAIDA,'
       '       CRIANCAS.NOME, CRIANCAS.NASCIMENTO, CRIANCAS.FOTO,'
       
         '       RESPONSAVEIS.NOME AS RESPONSAVELNOME, RESPONSAVEIS.DOCUME' +
@@ -53,57 +55,58 @@ object DMReport: TDMReport
     Left = 12
     Top = 108
     object dbPipelineppField1: TppField
+      FieldAlias = 'logotipo'
+      FieldName = 'logotipo'
+      FieldLength = 0
+      DataType = dtBLOB
+      DisplayWidth = 10
+      Position = 0
+      Searchable = False
+      Sortable = False
+    end
+    object dbPipelineppField2: TppField
       FieldAlias = 'id'
       FieldName = 'id'
       FieldLength = 38
       DataType = dtGUID
       DisplayWidth = 38
-      Position = 0
+      Position = 1
     end
-    object dbPipelineppField2: TppField
+    object dbPipelineppField3: TppField
       FieldAlias = 'obs'
       FieldName = 'obs'
       FieldLength = 1000
       DisplayWidth = 1000
-      Position = 1
+      Position = 2
     end
-    object dbPipelineppField3: TppField
+    object dbPipelineppField4: TppField
       FieldAlias = 'entrada'
       FieldName = 'entrada'
       FieldLength = 0
       DataType = dtDateTime
       DisplayWidth = 18
-      Position = 2
+      Position = 3
     end
-    object dbPipelineppField4: TppField
+    object dbPipelineppField5: TppField
       Alignment = taRightJustify
       FieldAlias = 'valor'
       FieldName = 'valor'
       FieldLength = 0
       DataType = dtDouble
       DisplayWidth = 10
-      Position = 3
+      Position = 4
     end
-    object dbPipelineppField5: TppField
+    object dbPipelineppField6: TppField
       FieldAlias = 'tempo'
       FieldName = 'tempo'
       FieldLength = 0
       DataType = dtTime
       DisplayWidth = 10
-      Position = 4
-    end
-    object dbPipelineppField6: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'situacao'
-      FieldName = 'situacao'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
       Position = 5
     end
     object dbPipelineppField7: TppField
-      FieldAlias = 'previsao'
-      FieldName = 'previsao'
+      FieldAlias = 'saida'
+      FieldName = 'saida'
       FieldLength = 0
       DataType = dtDateTime
       DisplayWidth = 18
@@ -180,9 +183,8 @@ object DMReport: TDMReport
   object reportFichaAtividade: TppReport
     AutoStop = False
     DataPipeline = dbPipeline
-    PassSetting = psTwoPass
     PrinterSetup.BinName = 'Default'
-    PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.DocumentName = 'Relat'#243'rio'
     PrinterSetup.Duplex = dpNone
     PrinterSetup.PaperName = 'A4'
     PrinterSetup.PrinterName = 'Default'
@@ -194,22 +196,25 @@ object DMReport: TDMReport
     PrinterSetup.mmPaperHeight = 297000
     PrinterSetup.mmPaperWidth = 210000
     PrinterSetup.PaperSize = 9
+    Template.FileName = 'C:\Users\marlo\Desktop\123.rtm'
     Template.Format = ftASCII
-    Units = utScreenPixels
+    Units = utMillimeters
     ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
     DeviceType = 'Screen'
     DefaultFileDeviceType = 'PDF'
     EmailSettings.ReportFormat = 'PDF'
-    LanguageID = 'Default'
+    EmailSettings.ShowEmailDialog = True
+    LanguageID = 'Portuguese (Brazil)'
     OpenFile = False
     OutlineSettings.CreateNode = True
     OutlineSettings.CreatePageNodes = True
-    OutlineSettings.Enabled = True
-    OutlineSettings.Visible = True
+    OutlineSettings.Enabled = False
+    OutlineSettings.Visible = False
     ThumbnailSettings.Enabled = True
     ThumbnailSettings.Visible = True
     ThumbnailSettings.DeadSpace = 30
-    PDFSettings.EmbedFontOptions = [efUseSubset]
+    PDFSettings.CacheImages = False
+    PDFSettings.EmbedFontOptions = []
     PDFSettings.EncryptSettings.AllowCopy = True
     PDFSettings.EncryptSettings.AllowInteract = True
     PDFSettings.EncryptSettings.AllowModify = True
@@ -222,11 +227,14 @@ object DMReport: TDMReport
     PDFSettings.EncryptSettings.EncryptionType = etRC4
     PDFSettings.FontEncoding = feAnsi
     PDFSettings.ImageCompressionLevel = 25
+    PreviewFormSettings.WindowState = wsMaximized
+    PreviewFormSettings.ZoomSetting = zsPageWidth
     RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
     RTFSettings.DefaultFont.Color = clWindowText
     RTFSettings.DefaultFont.Height = -13
     RTFSettings.DefaultFont.Name = 'Arial'
     RTFSettings.DefaultFont.Style = []
+    ShowCancelDialog = False
     TextFileName = '($MyDocuments)\Report.pdf'
     TextSearchSettings.DefaultString = '<Texto a localizar>'
     TextSearchSettings.Enabled = True
@@ -235,17 +243,17 @@ object DMReport: TDMReport
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
-    Left = 212
+    Left = 260
     Top = 16
     Version = '17.02'
-    mmColumnWidth = 0
+    mmColumnWidth = 197300
     DataPipelineName = 'dbPipeline'
     object ppDetailBand2: TppDetailBand
       Background1.Brush.Style = bsClear
       Background2.Brush.Style = bsClear
       PrintHeight = phDynamic
       mmBottomOffset = 0
-      mmHeight = 92340
+      mmHeight = 115623
       mmPrintPosition = 0
       object ppLabel12: TppLabel
         DesignLayer = ppDesignLayer2
@@ -256,11 +264,11 @@ object DMReport: TDMReport
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 12
-        Font.Style = []
+        Font.Style = [fsBold]
         Transparent = True
-        mmHeight = 4762
+        mmHeight = 5027
         mmLeft = 2910
-        mmTop = 23548
+        mmTop = 31485
         mmWidth = 35190
         BandType = 4
         LayerName = Foreground1
@@ -277,10 +285,10 @@ object DMReport: TDMReport
         Font.Style = []
         Transparent = True
         DataPipelineName = 'dbPipeline'
-        mmHeight = 4763
-        mmLeft = 39952
-        mmTop = 23548
-        mmWidth = 113256
+        mmHeight = 5028
+        mmLeft = 38100
+        mmTop = 31486
+        mmWidth = 104775
         BandType = 4
         LayerName = Foreground1
       end
@@ -293,12 +301,12 @@ object DMReport: TDMReport
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 12
-        Font.Style = []
+        Font.Style = [fsBold]
         Transparent = True
-        mmHeight = 4763
+        mmHeight = 5027
         mmLeft = 2910
-        mmTop = 28840
-        mmWidth = 27517
+        mmTop = 37304
+        mmWidth = 25665
         BandType = 4
         LayerName = Foreground1
       end
@@ -311,12 +319,12 @@ object DMReport: TDMReport
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 12
-        Font.Style = []
+        Font.Style = [fsBold]
         Transparent = True
-        mmHeight = 4763
+        mmHeight = 5027
         mmLeft = 2910
-        mmTop = 34131
-        mmWidth = 28840
+        mmTop = 43127
+        mmWidth = 28046
         BandType = 4
         LayerName = Foreground1
       end
@@ -329,12 +337,12 @@ object DMReport: TDMReport
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 12
-        Font.Style = []
+        Font.Style = [fsBold]
         Transparent = True
-        mmHeight = 4762
+        mmHeight = 5027
         mmLeft = 2910
-        mmTop = 39423
-        mmWidth = 21167
+        mmTop = 48948
+        mmWidth = 19050
         BandType = 4
         LayerName = Foreground1
       end
@@ -347,12 +355,12 @@ object DMReport: TDMReport
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 12
-        Font.Style = []
+        Font.Style = [fsBold]
         Transparent = True
-        mmHeight = 4763
+        mmHeight = 5027
         mmLeft = 2910
-        mmTop = 44715
-        mmWidth = 15081
+        mmTop = 54769
+        mmWidth = 12700
         BandType = 4
         LayerName = Foreground1
       end
@@ -365,12 +373,12 @@ object DMReport: TDMReport
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 12
-        Font.Style = []
+        Font.Style = [fsBold]
         Transparent = True
-        mmHeight = 4763
+        mmHeight = 5027
         mmLeft = 2910
-        mmTop = 50006
-        mmWidth = 54769
+        mmTop = 60590
+        mmWidth = 57415
         BandType = 4
         LayerName = Foreground1
       end
@@ -378,35 +386,17 @@ object DMReport: TDMReport
         DesignLayer = ppDesignLayer2
         UserName = 'Label18'
         AutoSize = False
-        Caption = 'Tempo utilizado:'
+        Caption = 'Utilizado:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
         Font.Size = 12
-        Font.Style = []
+        Font.Style = [fsBold]
         Transparent = True
-        mmHeight = 4762
-        mmLeft = 2910
-        mmTop = 55298
-        mmWidth = 35190
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppLabel19: TppLabel
-        DesignLayer = ppDesignLayer2
-        UserName = 'Label19'
-        AutoSize = False
-        Caption = 'Observa'#231#227'o:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Name = 'Arial'
-        Font.Size = 12
-        Font.Style = []
-        Transparent = True
-        mmHeight = 4762
-        mmLeft = 2910
-        mmTop = 60590
-        mmWidth = 27517
+        mmHeight = 5027
+        mmLeft = 95776
+        mmTop = 66411
+        mmWidth = 19046
         BandType = 4
         LayerName = Foreground1
       end
@@ -423,10 +413,10 @@ object DMReport: TDMReport
         Font.Style = []
         Transparent = True
         DataPipelineName = 'dbPipeline'
-        mmHeight = 4763
-        mmLeft = 32279
-        mmTop = 28840
-        mmWidth = 120907
+        mmHeight = 5028
+        mmLeft = 29369
+        mmTop = 37307
+        mmWidth = 113506
         BandType = 4
         LayerName = Foreground1
       end
@@ -442,10 +432,10 @@ object DMReport: TDMReport
         Font.Style = []
         Transparent = True
         DataPipelineName = 'dbPipeline'
-        mmHeight = 4763
-        mmLeft = 33867
-        mmTop = 34131
-        mmWidth = 119342
+        mmHeight = 5028
+        mmLeft = 31750
+        mmTop = 43127
+        mmWidth = 111125
         BandType = 4
         LayerName = Foreground1
       end
@@ -461,10 +451,10 @@ object DMReport: TDMReport
         Font.Style = []
         Transparent = True
         DataPipelineName = 'dbPipeline'
-        mmHeight = 4763
-        mmLeft = 25665
-        mmTop = 39423
-        mmWidth = 127544
+        mmHeight = 5028
+        mmLeft = 23285
+        mmTop = 48947
+        mmWidth = 119591
         BandType = 4
         LayerName = Foreground1
       end
@@ -480,10 +470,10 @@ object DMReport: TDMReport
         Font.Style = []
         Transparent = True
         DataPipelineName = 'dbPipeline'
-        mmHeight = 4763
-        mmLeft = 21167
-        mmTop = 44715
-        mmWidth = 132042
+        mmHeight = 5028
+        mmLeft = 16933
+        mmTop = 54769
+        mmWidth = 125942
         BandType = 4
         LayerName = Foreground1
       end
@@ -499,10 +489,10 @@ object DMReport: TDMReport
         Font.Style = []
         Transparent = True
         DataPipelineName = 'dbPipeline'
-        mmHeight = 4763
-        mmLeft = 60590
-        mmTop = 50006
-        mmWidth = 92619
+        mmHeight = 5028
+        mmLeft = 61648
+        mmTop = 60590
+        mmWidth = 81227
         BandType = 4
         LayerName = Foreground1
       end
@@ -511,7 +501,7 @@ object DMReport: TDMReport
         UserName = 'DBText14'
         DataField = 'entrada'
         DataPipeline = dbPipeline
-        DisplayFormat = 'h:nn:ss'
+        DisplayFormat = 'dd/mm/yy hh:nn'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
@@ -520,37 +510,11 @@ object DMReport: TDMReport
         Transparent = True
         DataPipelineName = 'dbPipeline'
         mmHeight = 4763
-        mmLeft = 60590
-        mmTop = 55298
-        mmWidth = 92596
+        mmLeft = 21696
+        mmTop = 66411
+        mmWidth = 30163
         BandType = 4
         LayerName = Foreground1
-      end
-      object ppDBMemo2: TppDBMemo
-        DesignLayer = ppDesignLayer2
-        UserName = 'DBMemo2'
-        CharWrap = False
-        DataField = 'obs'
-        DataPipeline = dbPipeline
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Name = 'Arial'
-        Font.Size = 12
-        Font.Style = []
-        RemoveEmptyLines = False
-        Transparent = True
-        DataPipelineName = 'dbPipeline'
-        mmHeight = 23548
-        mmLeft = 2910
-        mmTop = 65881
-        mmWidth = 150307
-        BandType = 4
-        LayerName = Foreground1
-        mmBottomOffset = 0
-        mmOverFlowOffset = 0
-        mmStopPosition = 0
-        mmMinHeight = 0
-        mmLeading = 0
       end
       object ppDBImage3: TppDBImage
         DesignLayer = ppDesignLayer2
@@ -559,14 +523,16 @@ object DMReport: TDMReport
         AlignVertical = avCenter
         MaintainAspectRatio = False
         Stretch = True
+        Border.BorderPositions = [bpLeft, bpTop, bpRight, bpBottom]
+        Border.Visible = True
         DataField = 'foto'
         DataPipeline = dbPipeline
         GraphicType = 'AutoDetect'
         DataPipelineName = 'dbPipeline'
         mmHeight = 32808
-        mmLeft = 156104
-        mmTop = 16669
-        mmWidth = 35190
+        mmLeft = 145521
+        mmTop = 35983
+        mmWidth = 47625
         BandType = 4
         LayerName = Foreground1
       end
@@ -577,14 +543,16 @@ object DMReport: TDMReport
         AlignVertical = avCenter
         MaintainAspectRatio = False
         Stretch = True
+        Border.BorderPositions = [bpLeft, bpTop, bpRight, bpBottom]
+        Border.Visible = True
         DataField = 'responsavelfoto'
         DataPipeline = dbPipeline
         GraphicType = 'AutoDetect'
         DataPipelineName = 'dbPipeline'
         mmHeight = 32808
-        mmLeft = 156104
-        mmTop = 56621
-        mmWidth = 35190
+        mmLeft = 145521
+        mmTop = 75406
+        mmWidth = 47625
         BandType = 4
         LayerName = Foreground1
       end
@@ -599,8 +567,8 @@ object DMReport: TDMReport
         Font.Style = []
         Transparent = True
         mmHeight = 4233
-        mmLeft = 156104
-        mmTop = 52123
+        mmLeft = 145521
+        mmTop = 70644
         mmWidth = 19315
         BandType = 4
         LayerName = Foreground1
@@ -616,28 +584,172 @@ object DMReport: TDMReport
         Font.Style = []
         Transparent = True
         mmHeight = 4233
-        mmLeft = 156104
-        mmTop = 12171
+        mmLeft = 145521
+        mmTop = 31485
         mmWidth = 11642
         BandType = 4
         LayerName = Foreground1
       end
-      object ppLabel22: TppLabel
+      object ppDBImage1: TppDBImage
         DesignLayer = ppDesignLayer2
-        UserName = 'Label22'
-        Caption = 'ESPACO PARA LOGO'
+        UserName = 'DBImage1'
+        AlignHorizontal = ahCenter
+        AlignVertical = avCenter
+        MaintainAspectRatio = False
+        Transparent = True
+        DataField = 'logotipo'
+        DataPipeline = dbPipeline
+        GraphicType = 'AutoDetect'
+        DataPipelineName = 'dbPipeline'
+        mmHeight = 25135
+        mmLeft = 2910
+        mmTop = 3970
+        mmWidth = 190236
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppLine1: TppLine
+        DesignLayer = ppDesignLayer2
+        UserName = 'Line1'
+        Weight = 0.750000000000000000
+        mmHeight = 260
+        mmLeft = 2910
+        mmTop = 29897
+        mmWidth = 190236
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppLine2: TppLine
+        DesignLayer = ppDesignLayer2
+        UserName = 'Line2'
+        Style = lsDouble
+        Weight = 0.750000000000000000
+        mmHeight = 792
+        mmLeft = 2911
+        mmTop = 109273
+        mmWidth = 190236
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppLabel1: TppLabel
+        DesignLayer = ppDesignLayer2
+        UserName = 'Label1'
+        AutoSize = False
+        Caption = 'Entrada:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = [fsBold]
+        Transparent = True
+        mmHeight = 5027
+        mmLeft = 2910
+        mmTop = 66411
+        mmWidth = 17992
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppDBText1: TppDBText
+        DesignLayer = ppDesignLayer2
+        UserName = 'DBText1'
+        DataField = 'saida'
+        DataPipeline = dbPipeline
+        DisplayFormat = 'dd/mm/yy hh:nn'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'dbPipeline'
+        mmHeight = 4763
+        mmLeft = 64294
+        mmTop = 66411
+        mmWidth = 30163
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppLabel2: TppLabel
+        DesignLayer = ppDesignLayer2
+        UserName = 'Label2'
+        AutoSize = False
+        Caption = 'Sa'#237'da:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = [fsBold]
+        Transparent = True
+        mmHeight = 5027
+        mmLeft = 52916
+        mmTop = 66411
+        mmWidth = 13494
+        BandType = 4
+        LayerName = Foreground1
+      end
+      object ppVariable1: TppVariable
+        DesignLayer = ppDesignLayer2
+        UserName = 'Variable1'
+        BlankWhenZero = False
+        CalcOrder = 0
+        DataType = dtDateTime
+        DisplayFormat = 'hh:nn'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
-        Font.Size = 36
+        Font.Size = 12
         Font.Style = []
         Transparent = True
-        mmHeight = 14553
-        mmLeft = 4763
-        mmTop = 2910
-        mmWidth = 130969
+        mmHeight = 4763
+        mmLeft = 116415
+        mmTop = 66411
+        mmWidth = 26456
         BandType = 4
         LayerName = Foreground1
+      end
+      object ppRichText1: TppRichText
+        DesignLayer = ppDesignLayer2
+        UserName = 'RichText1'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Caption = 'RichText1'
+        ExportRTFAsBitmap = False
+        MailMerge = True
+        RichText = 
+          '{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcha' +
+          'rset0 Arial;}{\f1\fnil Arial;}}'#13#10'\viewkind4\uc1\pard\b\fs24 Obs\' +
+          'b0 : <dbtext>obs</dbtext>\f1\par'#13#10'}'#13#10#0
+        RemoveEmptyLines = False
+        Transparent = True
+        mmHeight = 35719
+        mmLeft = 2910
+        mmTop = 72496
+        mmWidth = 139965
+        BandType = 4
+        LayerName = Foreground1
+        mmBottomOffset = 0
+        mmOverFlowOffset = 0
+        mmStopPosition = 0
+        mmMinHeight = 0
+      end
+    end
+    object raCodeModule1: TraCodeModule
+      object raProgramInfo1: TraProgramInfo
+        raClassName = 'TraEventHandler'
+        raProgram.ProgramName = 'Variable1OnCalc'
+        raProgram.ProgramType = ttProcedure
+        raProgram.Source = 
+          'procedure Variable1OnCalc(var Value: Variant);'#13#10'begin'#13#10#13#10'  Value' +
+          ' := dbPipeline['#39'entrada'#39'] - dbPipeline['#39'saida'#39']; '#13#10#13#10'end;'#13#10
+        raProgram.ComponentName = 'Variable1'
+        raProgram.EventName = 'OnCalc'
+        raProgram.EventID = 33
+        raProgram.CaretPos = (
+          0
+          0)
       end
     end
     object ppDesignLayers2: TppDesignLayers

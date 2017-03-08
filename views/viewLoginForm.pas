@@ -8,7 +8,7 @@ uses
   cxGraphics, cxLookAndFeels, cxLookAndFeelPainters, Vcl.Menus, Vcl.StdCtrls,
   System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
   cxButtons, controller.Usuarios, dto.Usuarios, WLick.Sessao, IniFiles,
-  cxControls, cxContainer, cxEdit, cxTextEdit;
+  cxControls, cxContainer, cxEdit, cxTextEdit, WLick.Miscelania;
 
 type
   TfrmLogin = class(TForm)
@@ -62,7 +62,7 @@ begin
   ArquivoINI := TIniFile.Create( ExtractFilePath(Application.ExeName) + '\conexao.ini' );
   try
     edtLogin.Text := ArquivoINI.ReadString(cTagName, 'Usuario','');
-    edtSenha.Text := ArquivoINI.ReadString(cTagName, 'Senha','');
+    edtSenha.Text := TMisc.Decrypt(ArquivoINI.ReadString(cTagName, 'Senha',''));
 
     if ((edtLogin.Text <> EmptyStr) and (edtSenha.Text <> EmptyStr)) then
       ValidarLogin();

@@ -22,9 +22,9 @@ object frameCriancas: TframeCriancas
   object lblNascimento: TLabel
     Left = 128
     Top = 0
-    Width = 75
+    Width = 81
     Height = 13
-    Caption = 'Dta Nascimento'
+    Caption = 'Data Nascimento'
   end
   object lblCaptionIdade: TLabel
     Left = 241
@@ -86,19 +86,6 @@ object frameCriancas: TframeCriancas
     object tsFoto: TcxTabSheet
       Caption = 'Foto'
       ImageIndex = 0
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
-      object ImgFoto: TcxImage
-        AlignWithMargins = True
-        Left = 3
-        Top = 30
-        Align = alClient
-        TabOrder = 0
-        Height = 188
-        Width = 320
-      end
       object pnlCtrlImagem: TPanel
         Left = 0
         Top = 0
@@ -106,7 +93,7 @@ object frameCriancas: TframeCriancas
         Height = 27
         Align = alTop
         BevelOuter = bvNone
-        TabOrder = 1
+        TabOrder = 0
         object btnLoad: TcxButton
           AlignWithMargins = True
           Left = 3
@@ -159,14 +146,20 @@ object frameCriancas: TframeCriancas
           TabOrder = 2
         end
       end
+      object ImgFoto: TcxImage
+        AlignWithMargins = True
+        Left = 3
+        Top = 30
+        Align = alClient
+        Properties.PopupMenuLayout.MenuItems = []
+        TabOrder = 1
+        Height = 188
+        Width = 320
+      end
     end
     object cxTabSheet2: TcxTabSheet
       Caption = 'Respons'#225'veis'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object pnlCtrlResponsavel: TPanel
         Left = 0
         Top = 0

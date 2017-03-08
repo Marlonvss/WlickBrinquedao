@@ -91,6 +91,8 @@
         <DCC_K>false</DCC_K>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <VerInfo_Keys>CompanyName=Brinquedão;FileDescription=Sistema brinquedao;FileVersion=1.0.0.7;InternalName=WLickBrinquedao;LegalCopyright=WebLick.com.br;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Build>7</VerInfo_Build>
         <Icon_MainIcon>WLickBrinquedao_Icon1.ico</Icon_MainIcon>
         <AppEnableHighDPI>true</AppEnableHighDPI>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -244,10 +246,6 @@
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="..\mvc\enum\enum.Atividades.Situacao.pas"/>
-        <DCCReference Include="..\mvc\views\ficha.AtividadesSaida.pas">
-            <Form>fichaAtividadesSaida</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="..\mvc\assembler\assembler.Configuracoes.pas"/>
         <DCCReference Include="..\mvc\models\model.Configuracoes.pas"/>
         <DCCReference Include="..\mvc\mappers\mapper.Configuracoes.pas"/>
@@ -281,6 +279,13 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="..\mvc\views\browser.AtividadesEncerradas.pas"/>
+        <DCCReference Include="..\mvc\views\frame.AtividadesEntrada.pas">
+            <Form>frameAtividadesEntrada</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\mvc\views\ficha.AtividadesEntrada.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

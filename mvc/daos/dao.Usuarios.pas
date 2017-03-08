@@ -23,14 +23,17 @@ var
   vModel: TUsuario;
   vQry: TUniQuery;
 begin
-  { Monta o SQL }
-  vSQL := Select('*')
-    .From(mapper.Usuarios.tableName)
-    .Where(mapper.Usuarios.field_Login, aDTO.Login.Quoted)
-    .Where(mapper.Usuarios.field_Senha, aDTO.Senha.Quoted);
-
   with ORM.assemblerBase.TORMAssemblerBase.GetAssembler(aDTO.AssemblerClass) do
   try
+
+    { Monta o SQL }
+    vModel := TUsuario(DTOToModel(aDTO));
+    vSQL := Select('*')
+      .From(mapper.Usuarios.tableName)
+      .Where(mapper.Usuarios.field_Login, vModel.Login.Quoted)
+      .Where(mapper.Usuarios.field_Senha, vModel.Senha.Quoted);
+    FreeAndNil(vModel);
+
     vQry := TUniQuery.Create(nil);
     try
       OpenSQL(vSQL,vQry);

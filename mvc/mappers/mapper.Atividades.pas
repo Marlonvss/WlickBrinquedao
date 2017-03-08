@@ -7,17 +7,17 @@ uses SysUtils;
 const
   tableName = 'Atividades';
 
-  field_Id = 'Id';
-  field_Id_Crianca = 'Id_Crianca';
-  field_Id_Responsavel = 'Id_Responsavel';
-  field_Id_Usuario = 'Id_Usuario';
-  field_Obs = 'Obs';
-  field_Entrada = 'Entrada';
-  field_Valor = 'Valor';
-  field_Tempo = 'Tempo';
-  field_Situacao = 'Situacao';
-  field_TempoSaida = 'TempoSaida';
-  field_ValorSaida = 'ValorSaida';
+  field_Id = 'id';
+  field_Id_Crianca = 'id_crianca';
+  field_Id_Responsavel = 'id_responsavel';
+  field_Id_Usuario = 'id_usuario';
+  field_Obs = 'obs';
+  field_Entrada = 'entrada';
+  field_Valor = 'valor';
+  field_Tempo = 'tempo';
+  field_Situacao = 'situacao';
+  field_Saida = 'saida';
+  field_ValorSaida = 'valorsaida';
 
   field_Id_Caption = 'Id';
   field_Id_Crianca_Caption = 'Id_Crianca';
@@ -28,7 +28,7 @@ const
   field_Valor_Caption = 'Valor';
   field_Tempo_Caption = 'Tempo';
   field_Situacao_Caption = 'Situacao';
-  field_TempoSaida_Caption = 'Tempo na saida';
+  field_Saida_Caption = 'Saída';
   field_ValorSaida_Caption = 'Valor na saida';
 
 implementation

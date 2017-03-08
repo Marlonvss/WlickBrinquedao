@@ -9,7 +9,7 @@ uses
   dxBar, cxBarEditItem, cxClasses, ORM.DTOBase, ORM.FichaBase, DTO.Configuracoes,
   controller.Configuracoes, ORM.controllerBase, frame.Configuracoes, WLick.ClassHelper,
   Generics.collections, WLick.Sessao, enum.Configuracoes,
-  assembler.Configuracoes, IniFiles, VFrames;
+  assembler.Configuracoes, IniFiles, VFrames, viewMessageForm, WLick.Miscelania;
 
 type
 
@@ -24,7 +24,10 @@ type
 
       procedure LoadAllConfiguracoes();
       procedure LoadCamerasDevices();
-      procedure SetEvents;
+      procedure SetEvents; override;
+
+      procedure btnCarregarEvent(Sender: TObject);
+      procedure btnLimparEvent(Sender: TObject);
 
     protected
       function GetCaption: String; override;
@@ -80,14 +83,19 @@ end;
 procedure TFichaConfiguracoes.InternalDTOToView(vDTO: TDTOConfiguracoes);
 var
   vConfig: TNomeConfiguracoes;
-  vValor: String;
+  vValorBinario, vValor: String;
 begin
   vValor := vDTO.Valor;
+  vValorBinario := vDTO.ValorBinario;
   vConfig := LocateConfiguracaoByNome(vDTO.Configuracao);
   case vConfig of
     tncNaoEncontrado: ;
     tncCotacaoMinuto: MyFrame.edtValorPorMinuto.Value := vValor.ToCurrency;
     tncTempoTolerancia: MyFrame.edtTolerancia.Time := vValor.ToTime;
+    tncLogotipo: begin
+      if vValorBinario <> EmptyStr then
+        MyFrame.ImgFoto.Picture := TMisc.StringToPicture( vValorBinario );
+    end;
   end;
 end;
 
@@ -95,7 +103,7 @@ procedure TFichaConfiguracoes.InternalViewToDTO(vConfig: TNomeConfiguracoes);
 var
   vDTO: TDTOConfiguracoes;
   vDTOPersist: TDTOConfiguracoes;
-  vValor: String;
+  vValorBinario, vValor: String;
 begin
   vDTOPersist := nil;
 
@@ -119,13 +127,19 @@ begin
     vDTOPersist.Configuracao := NomeConfiguracoes[vConfig];
   end;
 
+  vValor := EmptyStr;
+  vValorBinario := EmptyStr;
+
   case vConfig of
     tncNaoEncontrado: ;
     tncCotacaoMinuto: vValor := MyFrame.edtValorPorMinuto.Value.ToString;
     tncTempoTolerancia: vValor := MyFrame.edtTolerancia.Time.ToString;
+    tncLogotipo: vValorBinario :=  TMisc.PictureToString( MyFrame.ImgFoto.Picture );
   end;
 
   vDTOPersist.Valor := vValor;
+  vDTOPersist.ValorBinario := vValorBinario;
+
   if vDTOPersist.ID.IsNull
     then MyController.Insert(vDTOPersist)
     else MyController.Update(vDTOPersist);
@@ -162,6 +176,8 @@ begin
 
   with MyFrame do
   begin
+    btnLoad.OnClick := btnCarregarEvent;
+    btnClear.OnClick := btnLimparEvent;
   end;
 
 end;
@@ -173,8 +189,34 @@ begin
   begin
     edtValorPorMinuto.Properties.OnChange := OnChangeMethod;
     edtTolerancia.Properties.OnChange := OnChangeMethod;
+    ImgFoto.Properties.OnChange := OnChangeMethod;
     grpCameraDefault.Properties.OnChange := OnChangeMethod;
+    MyFrame.edtLogin.Properties.OnChange := OnChangeMethod;
+    MyFrame.edtSenha.Properties.OnChange := OnChangeMethod;
   end;
+end;
+
+procedure TFichaConfiguracoes.btnCarregarEvent(Sender: TObject);
+var
+  vDlgImage: TOpenDialog;
+begin
+  vDlgImage := TOpenDialog.Create(nil);
+  try
+    vDlgImage.Filter := 'All(*.JPG;*.JPEG)|*.JPG;*.JPEG';
+
+    if vDlgImage.Execute() then
+    begin
+      MyFrame.ImgFoto.Picture.LoadFromFile(vDlgImage.FileName);
+    end;
+  finally
+    vDlgImage.Free;
+  end;
+end;
+
+procedure TFichaConfiguracoes.btnLimparEvent(Sender: TObject);
+begin
+  if TviewMessage.Send_Question('Deseja realmente remover esta imagem?')
+    then MyFrame.ImgFoto.Clear;
 end;
 
 function TFichaConfiguracoes.ClassController: TORMControllerBaseClass;
@@ -205,6 +247,7 @@ var
   ArquivoINI: TIniFile;
 const
   cTagName = 'Configuracao';
+  cTagNameSessao = 'Sessao';
 begin
   inherited;
   LoadAllConfiguracoes;
@@ -218,11 +261,15 @@ begin
   ArquivoINI := TIniFile.Create( ExtractFilePath(Application.ExeName) + '\conexao.ini' );
   try
     MyFrame.grpCameraDefault.ItemIndex := MyFrame.grpCameraDefault.Properties.Items.IndexOf(ArquivoINI.ReadString(cTagName, 'CameraDefault',''));
+
+    {Senha padrão}
+    MyFrame.edtLogin.Text := ArquivoINI.ReadString(cTagNameSessao, 'usuario','');
+    MyFrame.edtSenha.Text := TMisc.Decrypt(ArquivoINI.ReadString(cTagNameSessao, 'senha',''));
   finally
     ArquivoINI.Free;
   end;
 
-  MyFrame.pgConfiguracao.ActivePage := MyFrame.tsAtividades;
+  MyFrame.pgConfiguracao.ActivePageIndex := 0;
 
 end;
 
@@ -232,6 +279,7 @@ var
   ArquivoINI: TIniFile;
 const
   cTagName = 'Configuracao';
+  cTagNameSessao = 'Sessao';
 begin
   inherited;
 
@@ -244,6 +292,10 @@ begin
   ArquivoINI := TIniFile.Create( ExtractFilePath(Application.ExeName) + '\conexao.ini' );
   try
     ArquivoINI.WriteString(cTagName, 'CameraDefault',MyFrame.grpCameraDefault.Text);
+
+    {Senha padrão}
+    ArquivoINI.WriteString(cTagNameSessao, 'usuario',MyFrame.edtLogin.Text);
+    ArquivoINI.WriteString(cTagNameSessao, 'senha', TMisc.Encrypt(MyFrame.edtSenha.Text));
   finally
     ArquivoINI.Free;
   end;

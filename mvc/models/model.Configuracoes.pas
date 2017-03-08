@@ -13,6 +13,7 @@ type
     FId: TGuid;
     FConfiguracao: String;
     FValor: String;
+    FValorBinario: String;
 
   published
 
@@ -24,6 +25,9 @@ type
 
     [TORMFieldCRUD(mapper.Configuracoes.field_Valor)]
     property Valor: String read FValor write FValor;
+
+    [TORMFieldCRUD(mapper.Configuracoes.field_ValorBinario)]
+    property ValorBinario: String read FValorBinario write FValorBinario;
 
   public
     function AssemblerClass: String; override;

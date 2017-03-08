@@ -9,7 +9,7 @@ uses
   cxTextEdit, brinquedao.Images, Vcl.Menus, cxButtons, cxMaskEdit,
   cxDropDownEdit, Vcl.ComCtrls, dxCore, cxDateUtils, cxCalendar, cxMemo,
   cxCurrencyEdit, cxSpinEdit, cxTimeEdit, dxBarBuiltInMenu, dxColorEdit,
-  cxGroupBox, cxPC;
+  cxGroupBox, cxPC, dxGDIPlusClasses, cxImage, Vcl.ExtCtrls;
 
 type
   TframeConfiguracoes = class(TFrame)
@@ -22,6 +22,17 @@ type
     tsCamera: TcxTabSheet;
     lblCameraDefault: TLabel;
     grpCameraDefault: TcxComboBox;
+    tsGeral: TcxTabSheet;
+    cxGroupBox1: TcxGroupBox;
+    pnlCtrlImagem: TPanel;
+    btnLoad: TcxButton;
+    btnClear: TcxButton;
+    ImgFoto: TcxImage;
+    grpSenhaDefault: TcxGroupBox;
+    edtSenha: TcxTextEdit;
+    edtLogin: TcxTextEdit;
+    lblLogin: TLabel;
+    lblSenha: TLabel;
     private
       { Private declarations }
     public

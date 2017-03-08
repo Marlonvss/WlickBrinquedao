@@ -7,8 +7,7 @@ type
     tncNaoEncontrado,
     tncCotacaoMinuto,
     tncTempoTolerancia,
-    tncCorAtividade5Min,
-    tncCorAtividadeAtrasado);
+    tncLogotipo);
 
 
 const
@@ -16,8 +15,7 @@ const
     '<Nothing>',
     'CotacaoMinuto',
     'TempoTolerancia',
-    'CorAtividade5Min',
-    'CorAtividadeAtrasado'
+    'Logotipo'
   );
 
   function LocateConfiguracaoByNome(aNome: String): TNomeConfiguracoes;

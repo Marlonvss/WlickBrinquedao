@@ -89,6 +89,7 @@ begin
     Select(mapper.Configuracoes.field_id, mapper.Configuracoes.field_id)
    .Select(mapper.Configuracoes.field_configuracao, mapper.Configuracoes.field_configuracao)
    .Select(mapper.Configuracoes.field_valor, mapper.Configuracoes.field_valor)
+   .Select(mapper.Configuracoes.field_ValorBinario, mapper.Configuracoes.field_ValorBinario)
    .From(mapper.Configuracoes.tableName);
 end;
 

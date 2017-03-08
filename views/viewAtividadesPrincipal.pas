@@ -14,11 +14,11 @@ uses
   cxGridCustomLayoutView, MemDS, ORM.Connection, cxLabel, cxButtons, cxTextEdit,
   ORM.ViewManager, ficha.Atividades, WLick.ClassHelper, dxLayoutContainer,
   cxGridViewLayoutContainer, cxGridLayoutView, cxGridDBLayoutView,
-  cxCurrencyEdit, ficha.AtividadesSaida, cxMemo, DMRelatorio, WLick.Types;
+  cxCurrencyEdit, ficha.AtividadesEntrada, cxMemo, DMRelatorio, WLick.Types,
+  dxBarBuiltInMenu, cxPC, WLick.Miscelania, enum.Atividades.Situacao;
 
 type
   TfrmAtividades = class(TForm)
-    pnlTop: TPanel;
     ActManager: TActionManager;
     actNovo: TAction;
     actFinalizar: TAction;
@@ -28,14 +28,96 @@ type
     Finalizaratividade1: TMenuItem;
     TimerRefresh: TTimer;
     TimerHora: TTimer;
-    lblHora: TLabel;
     UniConnection1: TUniConnection;
+    actVisualizar: TAction;
+    Visualizar1: TMenuItem;
+    pnlTop: TPanel;
+    lblHora: TLabel;
     pnlBusca: TPanel;
     lblBusca: TLabel;
-    cxButton1: TcxButton;
     edtBusca: TcxTextEdit;
+    cxButton1: TcxButton;
     grdAtividade: TcxGrid;
-    grdAtividadeLevel1: TcxGridLevel;
+    grdAtividadeDBTableView1: TcxGridDBTableView;
+    grdAtividadeDBCardView1: TcxGridDBCardView;
+    grdAtividadeDBCardView2: TcxGridDBCardView;
+    grdAtividadeDBCardView2DBCardViewRow1: TcxGridDBCardViewRow;
+    grdAtividadeDBCardView2DBCardViewRow3: TcxGridDBCardViewRow;
+    grdAtividadeDBCardView2DBCardViewRow5: TcxGridDBCardViewRow;
+    grdAtividadeDBCardView2DBCardViewRow7: TcxGridDBCardViewRow;
+    grdAtividadeDBCardView2DBCardViewRow2: TcxGridDBCardViewRow;
+    grdAtividadeDBCardView2DBCardViewRow4: TcxGridDBCardViewRow;
+    grdAtividadeDBCardView2DBCardViewRow6: TcxGridDBCardViewRow;
+    grdAtividadeDBLayoutView1: TcxGridDBLayoutView;
+    grdAtividadeDBLayoutView1DBLayoutViewItem13: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView1DBLayoutViewItem1: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView1DBLayoutViewItem2: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView1DBLayoutViewItem3: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView1DBLayoutViewItem4: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView1DBLayoutViewItem5: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView1DBLayoutViewItem6: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView1DBLayoutViewItem7: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView1DBLayoutViewItem8: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView1DBLayoutViewItem9: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView1DBLayoutViewItem10: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView1DBLayoutViewItem11: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView1Group_Root: TdxLayoutGroup;
+    cxGridLayoutItem1: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView1LayoutItem2: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView1LayoutItem3: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView1LayoutItem4: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView1LayoutItem5: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView1LayoutItem6: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView1LayoutItem7: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView1LayoutItem8: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView1LayoutItem9: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView1LayoutItem10: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView1LayoutItem11: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView1LayoutItem12: TcxGridLayoutItem;
+    dxLayoutGroup1: TdxLayoutGroup;
+    grdAtividadeDBCardView: TcxGridDBCardView;
+    grdAtividadeDBCardViewDBCardViewRow1: TcxGridDBCardViewRow;
+    grdAtividadeDBCardViewDBCardViewRow3: TcxGridDBCardViewRow;
+    grdAtividadeDBCardViewDBCardViewRow4: TcxGridDBCardViewRow;
+    grdAtividadeDBCardViewDBCardViewRow6: TcxGridDBCardViewRow;
+    grdAtividadeDBCardViewDBCardViewRow5: TcxGridDBCardViewRow;
+    grdAtividadeDBCardViewDBCardViewRow7: TcxGridDBCardViewRow;
+    grdAtividadeDBCardViewDBCardViewRow8: TcxGridDBCardViewRow;
+    grdAtividadeDBCardViewDBCardViewRow9: TcxGridDBCardViewRow;
+    grdAtividadeDBCardViewDBCardViewRow10: TcxGridDBCardViewRow;
+    grdAtividadeDBCardViewDBCardViewRow11: TcxGridDBCardViewRow;
+    grdAtividadeDBCardViewDBCardViewRowobs: TcxGridDBCardViewRow;
+    grdAtividadeDBCardViewDBCardViewRow12: TcxGridDBCardViewRow;
+    grdAtividadeDBLayoutView2: TcxGridDBLayoutView;
+    grdAtividadeDBLayoutView2DBLayoutViewItem1: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView2DBLayoutViewItem2: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView2DBLayoutViewItem3: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView2DBLayoutViewItem4: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView2DBLayoutViewItem5: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView2DBLayoutViewItem6: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView2DBLayoutViewItem7: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView2DBLayoutViewItem8: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView2DBLayoutViewItem9: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView2DBLayoutViewItem10: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView2DBLayoutViewItem11: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView2DBLayoutViewItem12: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView2Group_Root: TdxLayoutGroup;
+    cxGridLayoutItem2: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView2LayoutItem2: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView2LayoutItem3: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView2LayoutItem4: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView2LayoutItem5: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView2LayoutItem6: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView2LayoutItem7: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView2LayoutItem8: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView2LayoutItem9: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView2LayoutItem10: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView2LayoutItem11: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView2LayoutItem12: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3: TcxGridDBLayoutView;
+    grdAtividadeDBLayoutView3DBLayoutViewItem12: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem13: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem1: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem2: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem3: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem4: TcxGridDBLayoutViewItem;
@@ -44,11 +126,35 @@ type
     grdAtividadeDBLayoutView3DBLayoutViewItem7: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem8: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem9: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3Group_Root: TdxLayoutGroup;
+    grdAtividadeLevel1: TcxGridLevel;
     grdAtividadeDBLayoutView3DBLayoutViewItem10: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView3DBLayoutViewItem11: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView3DBLayoutViewItem12: TcxGridDBLayoutViewItem;
-    actVisualizar: TAction;
-    Visualizar1: TMenuItem;
+    uniPrincipalid: TGuidField;
+    uniPrincipalobs: TStringField;
+    uniPrincipalentrada: TDateTimeField;
+    uniPrincipalvalor: TFloatField;
+    uniPrincipaltempo: TTimeField;
+    uniPrincipalsituacao: TSmallintField;
+    uniPrincipalprevisao: TDateTimeField;
+    uniPrincipalnome: TStringField;
+    uniPrincipalnascimento: TDateTimeField;
+    uniPrincipalfoto: TBlobField;
+    uniPrincipalresponsavelnome: TStringField;
+    uniPrincipalresponsaveldocumento: TStringField;
+    uniPrincipalresponsavelcontato: TStringField;
+    grdAtividadeDBLayoutView3LayoutItem1: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem2: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem3: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem4: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem5: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem6: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem7: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem8: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem9: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem10: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem11: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3Group1: TdxLayoutGroup;
+    grdAtividadeDBLayoutView3LayoutItem12: TcxGridLayoutItem;
     N1: TMenuItem;
     actImprimir: TAction;
     Imprimir1: TMenuItem;
@@ -78,9 +184,10 @@ implementation
 
 procedure TfrmAtividades.actFinalizarExecute(Sender: TObject);
 begin
-  StopAutoRefresh;
+  if not uniPrincipal.FieldByName('id').AsGuid.IsNull then
   try
-    with TfichaAtividadesSaida.Create(nil) do
+    StopAutoRefresh;
+    with TFichaAtividades.Create(nil) do
     try
       Init(uniPrincipal.FieldByName('id').AsGuid);
       TimerRefreshTimer(Sender);
@@ -94,14 +201,15 @@ end;
 
 procedure TfrmAtividades.actImprimirExecute(Sender: TObject);
 begin
-  DMRelatorio.TDMReport.PrintReport(trtFichaAtividade,[uniPrincipal.FieldByName('id').AsString]);
+  if not uniPrincipal.FieldByName('id').AsGuid.IsNull then
+    DMRelatorio.TDMReport.PrintReport(trtFichaAtividade,[uniPrincipal.FieldByName('id').AsGuid.ToString]);
 end;
 
 procedure TfrmAtividades.actNovoExecute(Sender: TObject);
 begin
   StopAutoRefresh;
   try
-    with TFichaAtividades.Create(nil) do
+    with TFichaAtividadesEntrada.Create(nil) do
     try
       Init(TFuncoesGUID.NullGUID, True);
       TimerRefreshTimer(Sender)
@@ -115,9 +223,10 @@ end;
 
 procedure TfrmAtividades.actVisualizarExecute(Sender: TObject);
 begin
-  StopAutoRefresh;
+  if not uniPrincipal.FieldByName('id').AsGuid.IsNull then
   try
-    with TFichaAtividades.Create(nil) do
+    StopAutoRefresh;
+    with TFichaAtividadesEntrada.Create(nil) do
     try
       Init(uniPrincipal.FieldByName('id').AsGuid, false);
       TimerRefreshTimer(Sender);

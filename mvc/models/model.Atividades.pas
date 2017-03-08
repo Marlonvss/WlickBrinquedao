@@ -19,7 +19,7 @@ type
     FValor: Currency;
     FTempo: TTime;
     FSituacao: Integer;
-    FTempoSaida: TTime;
+    FSaida: TTime;
     FValorSaida: Currency;
 
   published
@@ -51,8 +51,8 @@ type
     [TORMFieldCRUD(mapper.Atividades.field_Situacao)]
     property Situacao: Integer read FSituacao write FSituacao;
 
-    [TORMFieldCRUD(mapper.Atividades.field_TempoSaida)]
-    property TempoSaida: TTime read FTempoSaida write FTempoSaida;
+    [TORMFieldCRUD(mapper.Atividades.field_Saida)]
+    property Saida: TTime read FSaida write FSaida;
 
     [TORMFieldCRUD(mapper.Atividades.field_valorSaida)]
     property ValorSaida: Currency read FValorSaida write FValorSaida;

@@ -84,7 +84,7 @@ var
 begin
   vDlgImage := TOpenDialog.Create(nil);
   try
-    vDlgImage.Filter := '*.JPG|*.JPG|*.BMP|*.BMP';
+    vDlgImage.Filter := 'All(*.JPG;*.JPEG)|*.JPG;*.JPEG';
 
     if vDlgImage.Execute() then
     begin

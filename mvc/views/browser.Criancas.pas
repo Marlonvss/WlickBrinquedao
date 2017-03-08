@@ -11,14 +11,21 @@ uses
   cxData, cxDataStorage, cxEdit, cxNavigator, Data.DB, cxDBData, cxGridLevel,
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGrid, ORM.Images, ORM.browserBase, ORM.DTOBase, DTO.Criancas, mapper.Criancas,
-  ORM.fichaBase, ficha.Criancas, WLick.ClassHelper;
+  ORM.fichaBase, ficha.Criancas, WLick.ClassHelper, controller.Criancas,
+  viewMessageForm;
 
 type
   TBrowserCriancas = class(TORMBrowserBase)
   private
+    FController : TControllerCriancas;
   protected
     function GetSQLBrowser(): ISQLConstructor; override;
     procedure SetColumnsBrowser(); override;
+
+    function CanDelete(): Boolean; override;
+
+    procedure CreateAllObjects(); override;
+    procedure DestroyAllObjects(); override;
 
     function GetCaption: String; override;
     function ClassDTO(): TORMDTOBaseClass; override;
@@ -42,6 +49,15 @@ begin
   Result := uniBrowser.FieldByName(mapper.Criancas.field_ID).AsGuid;
 end;
 
+function TBrowserCriancas.CanDelete: Boolean;
+var
+  vMsg: WideString;
+begin
+  Result := FController.PodeRemoverCrianca(GetIDSelecionado(), vMsg);
+  if not Result then
+    TviewMessage.Send_Information(vMsg);
+end;
+
 function TBrowserCriancas.ClassDTO: TORMDTOBaseClass;
 begin
   Result := TDTOCriancas;
@@ -50,6 +66,18 @@ end;
 function TBrowserCriancas.ClassFicha: TORMFichaBaseClass;
 begin
   Result := TFichaCriancas;
+end;
+
+procedure TBrowserCriancas.CreateAllObjects;
+begin
+  inherited CreateAllObjects;
+  FController := TControllerCriancas.Create;
+end;
+
+procedure TBrowserCriancas.DestroyAllObjects;
+begin
+  inherited DestroyAllObjects;
+  FController.Free;
 end;
 
 function TBrowserCriancas.GetSQLBrowser: ISQLConstructor;
@@ -61,10 +89,6 @@ begin
     .Select(mapper.Criancas.field_nome)
     .Select(mapper.Criancas.field_nascimento)
     .Select(mapper.Criancas.field_foto)
-//    .Select(mapper.Criancas.field_responsavelNome)
-//    .Select(mapper.Criancas.field_responsavelDocumento)
-//    .Select(mapper.Criancas.field_responsavelContato)
-//    .Select(mapper.Criancas.field_responsavelFoto)
     .From(mapper.Criancas.tableName);
 end;
 
@@ -74,18 +98,13 @@ begin
 
   Self.AddColumnBrowser(mapper.Criancas.field_ID, mapper.Criancas.field_ID_Caption).SetPK();
 
-  Self.AddColumnBrowser(mapper.Criancas.field_codigo, mapper.Criancas.field_codigo_Caption);
+  Self.AddColumnBrowser(mapper.Criancas.field_codigo, mapper.Criancas.field_codigo_Caption)
+    .SetOrder(TColumnOrder.coAsc);
 
   Self.AddColumnBrowser(mapper.Criancas.field_nome, mapper.Criancas.field_nome_Caption);
 
   Self.AddColumnBrowser(mapper.Criancas.field_nascimento, mapper.Criancas.field_nascimento_Caption)
     .SetDataType(dtDate);
-
-//  Self.AddColumnBrowser(mapper.Criancas.field_responsavelNome, mapper.Criancas.field_responsavelNome_Caption);
-
-//  Self.AddColumnBrowser(mapper.Criancas.field_responsavelDocumento, mapper.Criancas.field_responsavelDocumento_Caption);
-
-//  Self.AddColumnBrowser(mapper.Criancas.field_responsavelContato, mapper.Criancas.field_responsavelContato_Caption);
 
 end;
 

@@ -9,9 +9,11 @@ type
     private
       FConfiguracao: String;
       FValor: String;
+      FValorBinario: String;
     published
       property Configuracao: String read FConfiguracao write FConfiguracao;
       property Valor: String read FValor write FValor;
+      property ValorBinario: String read FValorBinario write FValorBinario;
     public
       function AssemblerClass: String; override;
   end;

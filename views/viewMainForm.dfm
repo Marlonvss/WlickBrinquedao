@@ -24,10 +24,13 @@
     BarManager = barPrincipar
     Style = rs2013
     ColorSchemeName = 'White'
+    TabAreaToolbar.Visible = False
+    ShowMinimizeButton = False
     Contexts = <>
     TabOrder = 4
     TabStop = False
     object RibbonTabPrincipal: TdxRibbonTab
+      Active = True
       Caption = 'Principal'
       Groups = <
         item
@@ -37,7 +40,6 @@
       Index = 0
     end
     object RibbonTabConfigurações: TdxRibbonTab
-      Active = True
       Caption = 'Outros'
       Groups = <
         item
@@ -96,6 +98,11 @@
       Caption = 'Prefer'#234'ncias'
       OnExecute = actPreferenciasExecute
     end
+    object actAtividadesEncerradas: TAction
+      Category = 'Principal'
+      Caption = 'Atividades encerradas'
+      OnExecute = actAtividadesEncerradasExecute
+    end
   end
   object barPrincipar: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -103,6 +110,7 @@
     Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
+    CanCustomize = False
     Categories.Strings = (
       'Default')
     Categories.ItemsVisibles = (
@@ -121,6 +129,10 @@
       0
       0)
     object barPrinciparBar1: TdxBar
+      AllowClose = False
+      AllowCustomizing = False
+      AllowQuickCustomizing = False
+      AllowReset = False
       Caption = 'Custom 1'
       CaptionButtons = <>
       DockedLeft = 0
@@ -133,6 +145,10 @@
         item
           Visible = True
           ItemName = 'dxBarLargeButton1'
+        end
+        item
+          Visible = True
+          ItemName = 'dxBarLargeButton6'
         end>
       OneOnRow = True
       Row = 0
@@ -141,6 +157,10 @@
       WholeRow = False
     end
     object barPrinciparBar2: TdxBar
+      AllowClose = False
+      AllowCustomizing = False
+      AllowQuickCustomizing = False
+      AllowReset = False
       Caption = 'Custom 2'
       CaptionButtons = <>
       DockedLeft = 0
@@ -165,9 +185,13 @@
       WholeRow = False
     end
     object barPrinciparBar3: TdxBar
+      AllowClose = False
+      AllowCustomizing = False
+      AllowQuickCustomizing = False
+      AllowReset = False
       Caption = 'Custom 3'
       CaptionButtons = <>
-      DockedLeft = 135
+      DockedLeft = 167
       DockedTop = 0
       FloatLeft = 766
       FloatTop = 8
@@ -211,6 +235,13 @@
       Action = actPreferencias
       Category = 0
       LargeImageIndex = 3
+    end
+    object dxBarLargeButton6: TdxBarLargeButton
+      Action = actAtividadesEncerradas
+      Category = 0
+      LargeImageIndex = 5
+      SyncImageIndex = False
+      ImageIndex = -1
     end
   end
   object tabMDIManager: TdxTabbedMDIManager

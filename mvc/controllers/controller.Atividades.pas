@@ -56,9 +56,9 @@ begin
   vTempoPacote := 0;
   vValorPacote := 0;
 
-  if aDTO.TempoSaida > aDTO.Entrada
-    then vTempoDeServico := (aDTO.TempoSaida - aDTO.Entrada)
-    else vTempoDeServico := (aDTO.Entrada - aDTO.TempoSaida);
+  if aDTO.Saida > aDTO.Entrada
+    then vTempoDeServico := (aDTO.Saida - aDTO.Entrada)
+    else vTempoDeServico := (aDTO.Entrada - aDTO.Saida);
 
   FListaValorTempo := TObjectList<TDTOValorTempo>.Create;
   try

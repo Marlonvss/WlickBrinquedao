@@ -16,7 +16,7 @@ const
   field_id_Caption = 'ID';
   field_codigo_Caption = 'Código';
   field_nome_Caption = 'Nome da Criança';
-  field_nascimento_Caption = 'Dta Nascimento';
+  field_nascimento_Caption = 'Data Nascimento';
   field_foto_Caption = 'Foto';
 
 implementation

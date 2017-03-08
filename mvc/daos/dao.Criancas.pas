@@ -5,7 +5,7 @@ interface
 uses Rtti, ORM.Attributes, system.SysUtils, Uni, model.Criancas,
   WLick.Constantes, TypInfo, WLick.ClassHelper, Generics.Collections, ORM.daoBase,
   ORM.assemblerBase, assembler.Criancas, WLick.ConstrutorSQL, dto.Criancas,
-  mapper.Criancas;
+  mapper.Criancas, mapper.Atividades;
 
 type
   TDAOCriancas = class(TORMDAOBase)
@@ -15,9 +15,30 @@ type
   public
     function GetSequenceCodigo: String;
     procedure GetAllCriancas(var aListaCriancas: TObjectList<TDTOCriancas>);
+    function CriancaPossuiAtividade(const aIDCrianca: TGuid): Boolean;
   end;
 
 implementation
+
+function TDAOCriancas.CriancaPossuiAtividade(const aIDCrianca: TGuid): Boolean;
+var
+  vQry: TUniQuery;
+  vSQL: ISQLConstructor;
+begin
+  vQry := TUniQuery.Create(nil);
+  try
+    vSQL := GetSQLBase
+      .Join(mapper.Atividades.tableName)
+      .&On(mapper.Atividades.tableName+'.'+mapper.Atividades.field_Id_Crianca,mapper.Criancas.tableName+'.'+mapper.Criancas.field_id)
+      .Where(mapper.Criancas.tableName+'.'+mapper.Criancas.field_id, aIDCrianca.ToQuotedString);
+
+    OpenSQL(vSQL, vQry);
+    Result := not vQry.IsEmpty;
+
+  finally
+    vQry.Free;
+  end;
+end;
 
 procedure TDAOCriancas.GetAllCriancas(
   var aListaCriancas: TObjectList<TDTOCriancas>);
@@ -78,11 +99,11 @@ end;
 function TDAOCriancas.GetSQLBase: ISQLConstructor;
 begin
   Result :=
-    Select(mapper.Criancas.field_id, mapper.Criancas.field_id)
-   .Select(mapper.Criancas.field_codigo, mapper.Criancas.field_codigo)
-   .Select(mapper.Criancas.field_nome, mapper.Criancas.field_nome)
-   .Select(mapper.Criancas.field_nascimento, mapper.Criancas.field_nascimento)
-   .Select(mapper.Criancas.field_foto, mapper.Criancas.field_foto)
+    Select(mapper.Criancas.tableName+'.'+mapper.Criancas.field_id)
+   .Select(mapper.Criancas.tableName+'.'+mapper.Criancas.field_codigo)
+   .Select(mapper.Criancas.tableName+'.'+mapper.Criancas.field_nome)
+   .Select(mapper.Criancas.tableName+'.'+mapper.Criancas.field_nascimento)
+   .Select(mapper.Criancas.tableName+'.'+mapper.Criancas.field_foto)
    .From(mapper.Criancas.tableName);
 end;
 

@@ -15,7 +15,8 @@ uses
   viewLoginForm, browser.Criancas, WLick.Sessao, viewAtividadesPrincipal, Vcl.ExtCtrls,
   brinquedao.Images, browser.ValorTempo, ficha.Configuracoes, MainCamera,
   ppComm, ppEndUsr, ppPrnabl, ppClass, ppCtrls, ppBands, ppCache, ppDesignLayer,
-  ppParameter, ppRelatv, ppProd, ppReport, DMRelatorio, WLick.Types;
+  ppParameter, ppRelatv, ppProd, ppReport, DMRelatorio, WLick.Types,
+  browser.AtividadesEncerradas;
 
 type
   TfrmMain = class(TForm)
@@ -40,6 +41,8 @@ type
     dxBarLargeButton4: TdxBarLargeButton;
     dxBarLargeButton5: TdxBarLargeButton;
     timerAtividades: TTimer;
+    dxBarLargeButton6: TdxBarLargeButton;
+    actAtividadesEncerradas: TAction;
     procedure actUsuariosExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure appEventsException(Sender: TObject; E: Exception);
@@ -47,6 +50,7 @@ type
     procedure actValoresExecute(Sender: TObject);
     procedure timerAtividadesTimer(Sender: TObject);
     procedure actPreferenciasExecute(Sender: TObject);
+    procedure actAtividadesEncerradasExecute(Sender: TObject);
 
   private
     FTelaAtividades: TfrmAtividades;
@@ -66,6 +70,11 @@ implementation
 {$R *.dfm}
 
 uses viewErrorForm, ORM.Connection;
+
+procedure TfrmMain.actAtividadesEncerradasExecute(Sender: TObject);
+begin
+  ORM.ViewManager.TORMViewManager.AbreBrowser(TBrowserAtividadesEncerradas);
+end;
 
 procedure TfrmMain.actCriancasExecute(Sender: TObject);
 begin

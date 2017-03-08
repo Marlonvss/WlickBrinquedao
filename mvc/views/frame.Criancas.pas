@@ -24,17 +24,17 @@ type
     cxTabSheet2: TcxTabSheet;
     lblCaptionIdade: TLabel;
     lblIdade: TLabel;
-    ImgFoto: TcxImage;
     pnlCtrlResponsavel: TPanel;
     treeListResponsaveis: TcxTreeList;
     treeListColumn_Nome: TcxTreeListColumn;
     treeListColumn_Documento: TcxTreeListColumn;
+    btnNovo: TcxButton;
+    btnDeletar: TcxButton;
     pnlCtrlImagem: TPanel;
     btnLoad: TcxButton;
     btnWebCam: TcxButton;
     btnClear: TcxButton;
-    btnNovo: TcxButton;
-    btnDeletar: TcxButton;
+    ImgFoto: TcxImage;
   private
     { Private declarations }
   public

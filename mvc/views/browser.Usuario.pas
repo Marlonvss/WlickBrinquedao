@@ -63,10 +63,8 @@ begin
   Self.ClearColumnsBrowser;
 
   Self.AddColumnBrowser(mapper.Usuarios.field_ID, mapper.Usuarios.field_ID_Caption).SetPK();
-
   Self.AddColumnBrowser(mapper.Usuarios.field_Login, mapper.Usuarios.field_Login_Caption);
-
-  Self.AddColumnBrowser(mapper.Usuarios.field_Senha, mapper.Usuarios.field_Senha_Caption);
+  //Self.AddColumnBrowser(mapper.Usuarios.field_Senha, mapper.Usuarios.field_Senha_Caption);
 
 end;
 

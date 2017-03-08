@@ -75,7 +75,6 @@ uses
   model.Atividades in '..\mvc\models\model.Atividades.pas',
   frame.Atividades in '..\mvc\views\frame.Atividades.pas' {frameAtividades: TFrame},
   enum.Atividades.Situacao in '..\mvc\enum\enum.Atividades.Situacao.pas',
-  ficha.AtividadesSaida in '..\mvc\views\ficha.AtividadesSaida.pas' {fichaAtividadesSaida},
   assembler.Configuracoes in '..\mvc\assembler\assembler.Configuracoes.pas',
   model.Configuracoes in '..\mvc\models\model.Configuracoes.pas',
   mapper.Configuracoes in '..\mvc\mappers\mapper.Configuracoes.pas',
@@ -94,7 +93,10 @@ uses
   DirectShow9 in '..\units\Camera\DirectX\DirectShow9.pas',
   DirectSound in '..\units\Camera\DirectX\DirectSound.pas',
   DXTypes in '..\units\Camera\DirectX\DXTypes.pas',
-  DMRelatorio in '..\units\relatorios\DMRelatorio.pas' {DMReport: TDataModule};
+  DMRelatorio in '..\units\relatorios\DMRelatorio.pas' {DMReport: TDataModule},
+  browser.AtividadesEncerradas in '..\mvc\views\browser.AtividadesEncerradas.pas',
+  frame.AtividadesEntrada in '..\mvc\views\frame.AtividadesEntrada.pas' {frameAtividadesEntrada: TFrame},
+  ficha.AtividadesEntrada in '..\mvc\views\ficha.AtividadesEntrada.pas';
 
 {$R *.res}
 

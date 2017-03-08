@@ -3,7 +3,8 @@ unit assembler.Usuarios;
 interface
 
 uses SysUtils, ORM.dtoBase, ORM.modelBase, model.Usuarios, Classes,
-  mapper.Usuarios, Uni, ORM.AssemblerBase, dto.Usuarios, db, WLick.ClassHelper;
+  mapper.Usuarios, Uni, ORM.AssemblerBase, dto.Usuarios, db, WLick.ClassHelper,
+  WLick.Miscelania;
 
 type
   TAssemblerUsuarios = class(TORMAssemblerBase)
@@ -38,7 +39,7 @@ begin
   Result := TDTOUsuario.Create();
   TDTOUsuario(Result).id := TUsuario(aModel).id;
   TDTOUsuario(Result).login := TUsuario(aModel).login;
-  TDTOUsuario(Result).senha := TUsuario(aModel).senha;
+  TDTOUsuario(Result).senha := TMisc.Decrypt(TUsuario(aModel).senha);
 end;
 
 class function TAssemblerUsuarios.DTOToModel(const aDTO: TORMDTOBase): TORMModelBase;
@@ -46,7 +47,7 @@ begin
   Result := TUsuario.Create();
   TUsuario(Result).id := TDTOUsuario(aDTO).id;
   TUsuario(Result).login := TDTOUsuario(aDTO).login;
-  TUsuario(Result).senha := TDTOUsuario(aDTO).senha;
+  TUsuario(Result).senha := TMisc.Encrypt(TDTOUsuario(aDTO).senha);
 end;
 
 class function TAssemblerUsuarios.QueryToModel(const aQuery: TUniQuery): TORMModelBase;

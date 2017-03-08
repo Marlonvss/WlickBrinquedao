@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Classes, ppDB, ppBands, ppCache, ppClass,
   ppDesignLayer, ppParameter, ppDBPipe, Data.DB, DBAccess, Uni, MemDS,
   UniProvider, PostgreSQLUniProvider, ppComm, ppRelatv, ppProd, ppReport,
-  WLick.Types, Vcl.Forms, ppCtrls, ppPrnabl, ORM.Connection, ppStrtch, ppMemo;
+  WLick.Types, Vcl.Forms, ppCtrls, ppPrnabl, ORM.Connection, ppStrtch, ppMemo,
+  ppVar, raCodMod, ppModule, ppRichTx;
 
 type
   TDMReport = class(TDataModule)
@@ -16,10 +17,8 @@ type
     dbPipeline: TppDBPipeline;
     helpPG: TPostgreSQLUniProvider;
     reportFichaAtividade: TppReport;
-    ppDetailBand2: TppDetailBand;
-    ppDesignLayers2: TppDesignLayers;
-    ppDesignLayer2: TppDesignLayer;
     ppParameterList2: TppParameterList;
+    ppDetailBand2: TppDetailBand;
     ppLabel12: TppLabel;
     ppDBText8: TppDBText;
     ppLabel13: TppLabel;
@@ -28,19 +27,28 @@ type
     ppLabel16: TppLabel;
     ppLabel17: TppLabel;
     ppLabel18: TppLabel;
-    ppLabel19: TppLabel;
     ppDBText9: TppDBText;
     ppDBText10: TppDBText;
     ppDBText11: TppDBText;
     ppDBText12: TppDBText;
     ppDBText13: TppDBText;
     ppDBText14: TppDBText;
-    ppDBMemo2: TppDBMemo;
     ppDBImage3: TppDBImage;
     ppDBImage4: TppDBImage;
     ppLabel20: TppLabel;
     ppLabel21: TppLabel;
-    ppLabel22: TppLabel;
+    ppDBImage1: TppDBImage;
+    ppLine1: TppLine;
+    ppLine2: TppLine;
+    ppLabel1: TppLabel;
+    ppDBText1: TppDBText;
+    ppLabel2: TppLabel;
+    ppVariable1: TppVariable;
+    ppRichText1: TppRichText;
+    raCodeModule1: TraCodeModule;
+    raProgramInfo1: TraProgramInfo;
+    ppDesignLayers2: TppDesignLayers;
+    ppDesignLayer2: TppDesignLayer;
   private
     { Private declarations }
     function PreparaQueryReport(aReportType: TReportType; aParametros: TArrayString): TppReport;

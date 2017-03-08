@@ -154,6 +154,7 @@ object fichaResponsaveis: TfichaResponsaveis
         Left = 5
         Top = 48
         Align = alClient
+        Properties.PopupMenuLayout.MenuItems = []
         TabOrder = 1
         Height = 130
         Width = 327

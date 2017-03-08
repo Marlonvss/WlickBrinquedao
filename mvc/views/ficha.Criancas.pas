@@ -220,7 +220,7 @@ var
 begin
   vDlgImage := TOpenDialog.Create(nil);
   try
-    vDlgImage.Filter := '*.JPG|*.JPG|*.BMP|*.BMP';
+    vDlgImage.Filter := 'All(*.JPG;*.JPEG)|*.JPG;*.JPEG';
 
     if vDlgImage.Execute() then
     begin
@@ -234,6 +234,8 @@ end;
 procedure TFichaCriancas.btnDeletarEvent(Sender: TObject);
 var
   vDTO: TDTOResponsaveis;
+  vPodeRemover: Boolean;
+  vMsg: WideString;
 begin
   with MyFrame do
   begin
@@ -243,7 +245,12 @@ begin
 
       if vDTO.StatusCrud = tscInsert
         then FListaResponsaveis.Extract(vDTO)
-        else vDTO.StatusCrud := TStatusCRUD.tscDelete;
+        else begin
+          vPodeRemover := MyController.PodeRemoverResponsavel(vDTO.ID, vMsg);
+          if vPodeRemover
+            then vDTO.StatusCrud := TStatusCRUD.tscDelete
+            else TviewMessage.Send_Information(vMsg);
+        end;
 
       Self.LoadTreeList;
       OnChangeMethod(Sender);
@@ -253,7 +260,7 @@ end;
 
 procedure TFichaCriancas.btnLimparEvent(Sender: TObject);
 begin
-  if TviewMessage.Send_Question('Deseja realmente remover esta image?')
+  if TviewMessage.Send_Question('Deseja realmente remover esta imagem?')
     then MyFrame.ImgFoto.Clear;
 end;
 
@@ -313,11 +320,18 @@ begin
   with MyFrame do
   begin
 
-    if FStatusFicha = sfInsert
-      then edtCodigo.Text := MyController.GetSequenceCodigo
-      else edtCodigo.Text := MyDTO.Codigo;
+    if FStatusFicha = sfInsert then
+    begin
+      edtCodigo.Text := MyController.GetSequenceCodigo;
+      edtNascimento.Date := StrToDate('01/01/1999');
+    end
+    else
+    begin
+      edtCodigo.Text := MyDTO.Codigo;
+      edtNascimento.Date := MyDTO.Nascimento;
+    end;
+
     edtNome.Text := MyDTO.Nome;
-    edtNascimento.Date := MyDTO.Nascimento;
     SetIdadeLabel();
     if MyDTO.Foto <> EmptyStr then
       ImgFoto.Picture := TMisc.StringToPicture( MyDTO.Foto );
