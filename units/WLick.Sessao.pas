@@ -8,14 +8,15 @@ type
   TSessao = class
     private
       FUsuario  : TDTOUsuario;
-      FDataHora : TDateTime;
+      FDataProcesso : TDateTime;
 
     published
       property Usuario  : TDTOUsuario read FUsuario;
-      property DataHora : TDateTime read FDataHora;
+      property DataProcesso : TDateTime read FDataProcesso;
 
     public
       procedure SetUsuario( aUsuario: TDTOUsuario);
+      procedure SetDataProcesso( aData: TDateTime);
 
   end;
 
@@ -39,6 +40,11 @@ begin
 end;
 
 { TSessao }
+
+procedure TSessao.SetDataProcesso(aData: TDateTime);
+begin
+  Self.FDataProcesso := aData;
+end;
 
 procedure TSessao.SetUsuario(aUsuario: TDTOUsuario);
 begin

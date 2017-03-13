@@ -12,13 +12,16 @@ uses
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGrid, ORM.Images, ORM.browserBase, ORM.DTOBase, DTO.Atividades, mapper.Atividades,
   ORM.fichaBase, ficha.Atividades, WLick.ClassHelper, mapper.Criancas,
-  mapper.Responsaveis, enum.Atividades.Situacao, DMRelatorio, WLick.Types;
+  mapper.Responsaveis, enum.Atividades.Situacao, DMRelatorio, WLick.Types,
+  cxBarEditItem, WLick.Sessao, WLick.Miscelania;
 
 
 type
   TBrowserAtividadesEncerradas = class(TORMBrowserBase)
   private
     procedure EventImprimirClick(a_Sender: TObject);
+    procedure EventDataChange(a_Sender: TObject);
+    function GetDataFiltroBrowser: TDate;
   protected
     function GetSQLBrowser(): ISQLConstructor; override;
     procedure SetColumnsBrowser(); override;
@@ -40,6 +43,23 @@ implementation
 function TBrowserAtividadesEncerradas.GetCaption: String;
 begin
   Result := 'Atividades encerradas';
+end;
+
+function TBrowserAtividadesEncerradas.GetDataFiltroBrowser: TDate;
+var
+  vVar: Variant;
+begin
+  with GetEdit('Data') do
+  begin
+    vVar := EditValue;
+    if vVar.IsNull then
+    begin
+      Result := WLick.Sessao.GetInstance.DataProcesso;
+      EditValue := Result;
+    end
+    else
+      Result := vVar.ToDate;
+  end;
 end;
 
 function TBrowserAtividadesEncerradas.GetIDSelecionado: TGuid;
@@ -67,7 +87,13 @@ begin
 
   {Cria o botão de Impressão}
   AddButton('imprimir', 'Imprimir', 7, EventImprimirClick);
+  AddEdit('dataprocesso', 'Data', 'TcxDateEditProperties', EventDataChange);
 
+end;
+
+procedure TBrowserAtividadesEncerradas.EventDataChange(a_Sender: TObject);
+begin
+  Self.RefreshBrowser();
 end;
 
 procedure TBrowserAtividadesEncerradas.EventImprimirClick(a_Sender: TObject);
@@ -84,9 +110,9 @@ begin
     .Select(mapper.Atividades.tableName+'.'+mapper.Atividades.field_Entrada,'DATAENTRADA')
     .Select(mapper.Atividades.tableName+'.'+mapper.Atividades.field_Valor)
     .Select(mapper.Atividades.tableName+'.'+mapper.Atividades.field_Tempo)
-    .Select(mapper.Atividades.tableName+'.'+mapper.Atividades.field_Entrada+'+'+mapper.Atividades.tableName+'.'+mapper.Atividades.field_Tempo,'PREVISAO')
+    .Select(mapper.Atividades.tableName+'.'+mapper.Atividades.field_Entrada+'+ CAST('+mapper.Atividades.tableName+'.'+mapper.Atividades.field_Tempo+' AS INTERVAL)','PREVISAO')
     .Select(mapper.Atividades.tableName+'.'+mapper.Atividades.field_Saida)
-    .Select('cast('+mapper.Atividades.tableName+'.'+mapper.Atividades.field_Saida+'-'+mapper.Atividades.tableName+'.'+mapper.Atividades.field_Entrada+' as time)','TEMPOSERVICO')
+    .Select(mapper.Atividades.tableName+'.'+mapper.Atividades.field_Saida+'- CAST('+mapper.Atividades.tableName+'.'+mapper.Atividades.field_Entrada+' AS INTERVAL)','TEMPOSERVICO')
     .Select(mapper.Criancas.tableName+'.'+mapper.Criancas.field_nome)
     .Select(mapper.Criancas.tableName+'.'+mapper.Criancas.field_nascimento)
     .Select(mapper.Responsaveis.tableName+'.'+mapper.Responsaveis.field_nome, 'RESPONSAVELNOME')
@@ -97,6 +123,8 @@ begin
     .Join(mapper.Criancas.tableName).&On(mapper.Criancas.tableName+'.'+mapper.Criancas.field_id, mapper.Atividades.tableName+'.'+mapper.Atividades.field_Id_Crianca)
     .Join(mapper.Responsaveis.tableName).&On(mapper.Responsaveis.tableName+'.'+mapper.Responsaveis.field_id, mapper.Atividades.tableName+'.'+mapper.Atividades.field_Id_Responsavel)
     .Where(mapper.Atividades.field_Situacao, Integer(enum.Atividades.Situacao.tsFinalizado).ToString())
+    .Where(mapper.Atividades.tableName+'.'+mapper.Atividades.field_DataInsert)
+      .Equals(FormatDateTime('YYYY-MM-DD',GetDataFiltroBrowser).Quoted)
     .OrderBy(mapper.Atividades.tableName+'.'+mapper.Atividades.field_Entrada)
 end;
 

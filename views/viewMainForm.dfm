@@ -13,6 +13,7 @@
   FormStyle = fsMDIForm
   OldCreateOrder = True
   WindowState = wsMaximized
+  OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13

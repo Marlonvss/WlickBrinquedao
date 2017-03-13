@@ -18,6 +18,7 @@ type
 
       FSaida: TDateTime;
       FValorSaida: Currency;
+      FDataInsert: TDate;
     published
       property Id_Crianca: TGuid read FId_Crianca write FId_Crianca;
       property Id_Responsavel: TGuid read FId_Responsavel write FId_Responsavel;
@@ -29,6 +30,7 @@ type
       property Situacao: Integer read FSituacao write FSituacao;
       property Saida: TDateTime read FSaida write FSaida;
       property ValorSaida: Currency read FValorSaida write FValorSaida;
+      property DataInsert: TDate read FDataInsert write FDataInsert;
     public
       function AssemblerClass: String; override;
   end;

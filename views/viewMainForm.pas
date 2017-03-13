@@ -16,7 +16,7 @@ uses
   brinquedao.Images, browser.ValorTempo, ficha.Configuracoes, MainCamera,
   ppComm, ppEndUsr, ppPrnabl, ppClass, ppCtrls, ppBands, ppCache, ppDesignLayer,
   ppParameter, ppRelatv, ppProd, ppReport, DMRelatorio, WLick.Types,
-  browser.AtividadesEncerradas;
+  browser.AtividadesEncerradas, viewMessageForm;
 
 type
   TfrmMain = class(TForm)
@@ -51,6 +51,7 @@ type
     procedure timerAtividadesTimer(Sender: TObject);
     procedure actPreferenciasExecute(Sender: TObject);
     procedure actAtividadesEncerradasExecute(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
 
   private
     FTelaAtividades: TfrmAtividades;
@@ -99,6 +100,18 @@ end;
 procedure TfrmMain.appEventsException(Sender: TObject; E: Exception);
 begin
   TviewErro.ExibeMensagem(E);
+end;
+
+procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  if Assigned(FTelaAtividades) then
+  begin
+    if FTelaAtividades.uniPrincipal.RecordCount > 0 then
+    begin
+      if not viewMessageForm.TviewMessage.Send_Question(Format('Atenção: existe(m) %d atividades abertas.'+CRLF+'Deseja realmente sair?',[FTelaAtividades.uniPrincipal.RecordCount])) then
+        Action := TCloseAction.caNone;
+    end;
+  end;
 end;
 
 procedure TfrmMain.FormShow(Sender: TObject);

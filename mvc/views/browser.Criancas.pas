@@ -12,7 +12,7 @@ uses
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGrid, ORM.Images, ORM.browserBase, ORM.DTOBase, DTO.Criancas, mapper.Criancas,
   ORM.fichaBase, ficha.Criancas, WLick.ClassHelper, controller.Criancas,
-  viewMessageForm;
+  viewMessageForm, WLick.Sessao;
 
 type
   TBrowserCriancas = class(TORMBrowserBase)
@@ -89,7 +89,9 @@ begin
     .Select(mapper.Criancas.field_nome)
     .Select(mapper.Criancas.field_nascimento)
     .Select(mapper.Criancas.field_foto)
-    .From(mapper.Criancas.tableName);
+    .From(mapper.Criancas.tableName)
+    .Where(mapper.Criancas.field_datainsert)
+      .Equals(FormatDateTime('YYYY-MM-DD',WLick.Sessao.GetInstance.DataProcesso).Quoted);
 end;
 
 procedure TBrowserCriancas.SetColumnsBrowser;
@@ -105,7 +107,6 @@ begin
 
   Self.AddColumnBrowser(mapper.Criancas.field_nascimento, mapper.Criancas.field_nascimento_Caption)
     .SetDataType(dtDate);
-
 end;
 
 end.

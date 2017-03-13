@@ -5,7 +5,7 @@ object DMReport: TDMReport
   object help: TUniConnection
     ProviderName = 'PostgreSQL'
     Port = 5432
-    Database = 'brinquedao'
+    Database = 'brinquedao3'
     Username = 'postgres'
     Server = '127.0.0.1'
     Connected = True
@@ -21,7 +21,8 @@ object DMReport: TDMReport
         'O = '#39'Logotipo'#39' LIMIT 1) AS LOGOTIPO, '
       
         '       ATIVIDADES.ID, ATIVIDADES.OBS, ATIVIDADES.ENTRADA, ATIVID' +
-        'ADES.VALOR, ATIVIDADES.TEMPO, ATIVIDADES.SAIDA,'
+        'ADES.VALOR, ATIVIDADES.TEMPO, ATIVIDADES.SAIDA, ATIVIDADES.DATAI' +
+        'NSERT,'
       '       CRIANCAS.NOME, CRIANCAS.NASCIMENTO, CRIANCAS.FOTO,'
       
         '       RESPONSAVEIS.NOME AS RESPONSAVELNOME, RESPONSAVEIS.DOCUME' +
@@ -54,127 +55,6 @@ object DMReport: TDMReport
     UserName = 'dbPipeline'
     Left = 12
     Top = 108
-    object dbPipelineppField1: TppField
-      FieldAlias = 'logotipo'
-      FieldName = 'logotipo'
-      FieldLength = 0
-      DataType = dtBLOB
-      DisplayWidth = 10
-      Position = 0
-      Searchable = False
-      Sortable = False
-    end
-    object dbPipelineppField2: TppField
-      FieldAlias = 'id'
-      FieldName = 'id'
-      FieldLength = 38
-      DataType = dtGUID
-      DisplayWidth = 38
-      Position = 1
-    end
-    object dbPipelineppField3: TppField
-      FieldAlias = 'obs'
-      FieldName = 'obs'
-      FieldLength = 1000
-      DisplayWidth = 1000
-      Position = 2
-    end
-    object dbPipelineppField4: TppField
-      FieldAlias = 'entrada'
-      FieldName = 'entrada'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 3
-    end
-    object dbPipelineppField5: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'valor'
-      FieldName = 'valor'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 4
-    end
-    object dbPipelineppField6: TppField
-      FieldAlias = 'tempo'
-      FieldName = 'tempo'
-      FieldLength = 0
-      DataType = dtTime
-      DisplayWidth = 10
-      Position = 5
-    end
-    object dbPipelineppField7: TppField
-      FieldAlias = 'saida'
-      FieldName = 'saida'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 6
-    end
-    object dbPipelineppField8: TppField
-      FieldAlias = 'nome'
-      FieldName = 'nome'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 7
-    end
-    object dbPipelineppField9: TppField
-      FieldAlias = 'nascimento'
-      FieldName = 'nascimento'
-      FieldLength = 0
-      DataType = dtDateTime
-      DisplayWidth = 18
-      Position = 8
-    end
-    object dbPipelineppField10: TppField
-      FieldAlias = 'foto'
-      FieldName = 'foto'
-      FieldLength = 0
-      DataType = dtBLOB
-      DisplayWidth = 10
-      Position = 9
-      Searchable = False
-      Sortable = False
-    end
-    object dbPipelineppField11: TppField
-      FieldAlias = 'responsavelnome'
-      FieldName = 'responsavelnome'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 10
-    end
-    object dbPipelineppField12: TppField
-      FieldAlias = 'responsaveldocumento'
-      FieldName = 'responsaveldocumento'
-      FieldLength = 30
-      DisplayWidth = 30
-      Position = 11
-    end
-    object dbPipelineppField13: TppField
-      FieldAlias = 'responsavelcontato'
-      FieldName = 'responsavelcontato'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 12
-    end
-    object dbPipelineppField14: TppField
-      FieldAlias = 'responsavelemail'
-      FieldName = 'responsavelemail'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 13
-    end
-    object dbPipelineppField15: TppField
-      FieldAlias = 'responsavelfoto'
-      FieldName = 'responsavelfoto'
-      FieldLength = 0
-      DataType = dtBLOB
-      DisplayWidth = 10
-      Position = 14
-      Searchable = False
-      Sortable = False
-    end
   end
   object helpPG: TPostgreSQLUniProvider
     Left = 12
@@ -394,7 +274,7 @@ object DMReport: TDMReport
         Font.Style = [fsBold]
         Transparent = True
         mmHeight = 5027
-        mmLeft = 95776
+        mmLeft = 101068
         mmTop = 66411
         mmWidth = 19046
         BandType = 4
@@ -493,26 +373,6 @@ object DMReport: TDMReport
         mmLeft = 61648
         mmTop = 60590
         mmWidth = 81227
-        BandType = 4
-        LayerName = Foreground1
-      end
-      object ppDBText14: TppDBText
-        DesignLayer = ppDesignLayer2
-        UserName = 'DBText14'
-        DataField = 'entrada'
-        DataPipeline = dbPipeline
-        DisplayFormat = 'dd/mm/yy hh:nn'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Name = 'Arial'
-        Font.Size = 12
-        Font.Style = []
-        Transparent = True
-        DataPipelineName = 'dbPipeline'
-        mmHeight = 4763
-        mmLeft = 21696
-        mmTop = 66411
-        mmWidth = 30163
         BandType = 4
         LayerName = Foreground1
       end
@@ -654,7 +514,7 @@ object DMReport: TDMReport
         UserName = 'DBText1'
         DataField = 'saida'
         DataPipeline = dbPipeline
-        DisplayFormat = 'dd/mm/yy hh:nn'
+        DisplayFormat = 'hh:nn'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
@@ -663,9 +523,9 @@ object DMReport: TDMReport
         Transparent = True
         DataPipelineName = 'dbPipeline'
         mmHeight = 4763
-        mmLeft = 64294
+        mmLeft = 78580
         mmTop = 66411
-        mmWidth = 30163
+        mmWidth = 21418
         BandType = 4
         LayerName = Foreground1
       end
@@ -681,7 +541,7 @@ object DMReport: TDMReport
         Font.Style = [fsBold]
         Transparent = True
         mmHeight = 5027
-        mmLeft = 52916
+        mmLeft = 64291
         mmTop = 66411
         mmWidth = 13494
         BandType = 4
@@ -701,9 +561,9 @@ object DMReport: TDMReport
         Font.Style = []
         Transparent = True
         mmHeight = 4763
-        mmLeft = 116415
+        mmLeft = 121177
         mmTop = 66411
-        mmWidth = 26456
+        mmWidth = 21696
         BandType = 4
         LayerName = Foreground1
       end
@@ -735,6 +595,35 @@ object DMReport: TDMReport
         mmStopPosition = 0
         mmMinHeight = 0
       end
+      object ppRichText2: TppRichText
+        DesignLayer = ppDesignLayer2
+        UserName = 'RichText2'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 13
+        Font.Style = []
+        Caption = 'RichText2'
+        ExportRTFAsBitmap = False
+        MailMerge = True
+        RichText = 
+          '{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil Aria' +
+          'l;}}'#13#10'\viewkind4\uc1\pard\f0\fs26 <dbtext displayformat='#39'dd/mm/y' +
+          'yyy'#39'>datainsert</dbtext> <dbtext displayformat='#39'hh:nn'#39'>entrada</' +
+          'dbtext>\par'#13#10'}'#13#10#0
+        RemoveEmptyLines = False
+        Transparent = True
+        mmHeight = 5027
+        mmLeft = 21960
+        mmTop = 66411
+        mmWidth = 42069
+        BandType = 4
+        LayerName = Foreground1
+        mmBottomOffset = 0
+        mmOverFlowOffset = 0
+        mmStopPosition = 0
+        mmMinHeight = 0
+      end
     end
     object raCodeModule1: TraCodeModule
       object raProgramInfo1: TraProgramInfo
@@ -743,7 +632,7 @@ object DMReport: TDMReport
         raProgram.ProgramType = ttProcedure
         raProgram.Source = 
           'procedure Variable1OnCalc(var Value: Variant);'#13#10'begin'#13#10#13#10'  Value' +
-          ' := dbPipeline['#39'entrada'#39'] - dbPipeline['#39'saida'#39']; '#13#10#13#10'end;'#13#10
+          ' := dbPipeline['#39'saida'#39'] - dbPipeline['#39'entrada'#39']; '#13#10#13#10'end;'#13#10
         raProgram.ComponentName = 'Variable1'
         raProgram.EventName = 'OnCalc'
         raProgram.EventID = 33

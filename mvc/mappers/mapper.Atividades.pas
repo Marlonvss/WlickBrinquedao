@@ -18,6 +18,7 @@ const
   field_Situacao = 'situacao';
   field_Saida = 'saida';
   field_ValorSaida = 'valorsaida';
+  field_DataInsert = 'datainsert';
 
   field_Id_Caption = 'Id';
   field_Id_Crianca_Caption = 'Id_Crianca';
@@ -30,6 +31,7 @@ const
   field_Situacao_Caption = 'Situacao';
   field_Saida_Caption = 'Saída';
   field_ValorSaida_Caption = 'Valor na saida';
+  field_DataInsert_Caption = 'Data de inserção';
 
 implementation
 

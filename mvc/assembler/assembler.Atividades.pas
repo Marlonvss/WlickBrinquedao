@@ -32,6 +32,7 @@ begin
   TAtividades(Result).Situacao := TAtividades(aModel).Situacao;
   TAtividades(Result).Saida := TAtividades(aModel).Saida;
   TAtividades(Result).ValorSaida := TAtividades(aModel).ValorSaida;
+  TAtividades(Result).DataInsert := TAtividades(aModel).DataInsert;
 end;
 
 class function TAssemblerAtividades.GetClone(const aDTO: TORMDTOBase): TORMDTOBase;
@@ -48,6 +49,7 @@ begin
   TDTOAtividades(Result).Situacao := TDTOAtividades(aDTO).Situacao;
   TDTOAtividades(Result).Saida := TDTOAtividades(aDTO).Saida;
   TDTOAtividades(Result).ValorSaida := TDTOAtividades(aDTO).ValorSaida;
+  TDTOAtividades(Result).DataInsert := TDTOAtividades(aDTO).DataInsert;
 end;
 
 class function TAssemblerAtividades.ModelToDTO(const aModel: TORMModelBase): TORMDTOBase;
@@ -64,6 +66,7 @@ begin
   TDTOAtividades(Result).Situacao := TAtividades(aModel).Situacao;
   TDTOAtividades(Result).Saida := TAtividades(aModel).Saida;
   TDTOAtividades(Result).ValorSaida := TAtividades(aModel).ValorSaida;
+  TDTOAtividades(Result).DataInsert := TAtividades(aModel).DataInsert;
 end;
 
 class function TAssemblerAtividades.DTOToModel(const aDTO: TORMDTOBase): TORMModelBase;
@@ -80,6 +83,7 @@ begin
   TAtividades(Result).Situacao := TDTOAtividades(aDTO).Situacao;
   TAtividades(Result).Saida := TDTOAtividades(aDTO).Saida;
   TAtividades(Result).ValorSaida := TDTOAtividades(aDTO).ValorSaida;
+  TAtividades(Result).DataInsert := TDTOAtividades(aDTO).DataInsert;
 end;
 
 class function TAssemblerAtividades.QueryToModel(const aQuery: TUniQuery): TORMModelBase;
@@ -118,6 +122,9 @@ begin
 
   if Assigned(aQuery.FindField(mapper.Atividades.field_ValorSaida)) then
     TAtividades(Result).ValorSaida := aQuery.FieldByName(mapper.Atividades.field_ValorSaida).AsCurrency;
+
+  if Assigned(aQuery.FindField(mapper.Atividades.field_DataInsert)) then
+    TAtividades(Result).DataInsert := aQuery.FieldByName(mapper.Atividades.field_DataInsert).AsDateTime;
 
 end;
 

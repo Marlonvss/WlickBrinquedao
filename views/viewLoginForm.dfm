@@ -28,8 +28,6 @@ object frmLogin: TfrmLogin
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 490
-    ExplicitHeight = 290
     object Image1: TImage
       Left = 0
       Top = 0

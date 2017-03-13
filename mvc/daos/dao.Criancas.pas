@@ -5,7 +5,7 @@ interface
 uses Rtti, ORM.Attributes, system.SysUtils, Uni, model.Criancas,
   WLick.Constantes, TypInfo, WLick.ClassHelper, Generics.Collections, ORM.daoBase,
   ORM.assemblerBase, assembler.Criancas, WLick.ConstrutorSQL, dto.Criancas,
-  mapper.Criancas, mapper.Atividades;
+  mapper.Criancas, mapper.Atividades, WLick.Sessao;
 
 type
   TDAOCriancas = class(TORMDAOBase)
@@ -104,7 +104,8 @@ begin
    .Select(mapper.Criancas.tableName+'.'+mapper.Criancas.field_nome)
    .Select(mapper.Criancas.tableName+'.'+mapper.Criancas.field_nascimento)
    .Select(mapper.Criancas.tableName+'.'+mapper.Criancas.field_foto)
-   .From(mapper.Criancas.tableName);
+   .Select(mapper.Criancas.tableName+'.'+mapper.Criancas.field_datainsert)
+   .From(mapper.Criancas.tableName)
 end;
 
 end.

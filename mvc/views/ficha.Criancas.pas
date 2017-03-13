@@ -10,7 +10,7 @@ uses
   controller.Criancas, ORM.controllerBase, frame.Criancas, WLick.ClassHelper,
   DateUtils, Generics.collections, dto.Responsaveis, WLick.Types,
   assembler.Responsaveis, ORM.assemblerBase, dto.ResponsaveisCriancas,
-  ficha.Responsavel, viewMessageForm, WLick.Miscelania, MainCamera;
+  ficha.Responsavel, viewMessageForm, WLick.Miscelania, MainCamera, WLick.Sessao;
 
 type
 
@@ -365,6 +365,7 @@ begin
     Nome := MyFrame.edtNome.Text;
     Nascimento := MyFrame.edtNascimento.Date;
     Foto := TMisc.PictureToString( MyFrame.ImgFoto.Picture );
+    DataInsert := WLick.Sessao.GetInstance.DataProcesso;
 
     ListaResponsaveis.Clear;
     for vDTO in FListaResponsaveis do

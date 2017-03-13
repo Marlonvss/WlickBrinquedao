@@ -11,7 +11,7 @@ type
   TControllerCriancas = class(TORMControllerBase)
   private
     FDAOResponsaveis: TDAOResponsaveis;
-    function GetDAO(): TDAOCriancas;
+    function MyDAO(): TDAOCriancas;
 
   protected
     function ClassDAO(): TORMDAOBaseClass; override;
@@ -45,7 +45,7 @@ begin
   FDAOResponsaveis.Free;
 end;
 
-function TControllerCriancas.GetDAO: TDAOCriancas;
+function TControllerCriancas.MyDAO: TDAOCriancas;
 begin
   Result := (FDAO as TDAOCriancas);
 end;
@@ -59,7 +59,7 @@ end;
 
 function TControllerCriancas.GetSequenceCodigo: String;
 begin
-  Result := GetDAO.GetSequenceCodigo;
+  Result := MyDAO.GetSequenceCodigo;
 end;
 
 function TControllerCriancas.PodeRemoverCrianca(const aIDCrianca: TGuid;
@@ -68,7 +68,7 @@ begin
   aMsg := EmptyWideStr;
   Result := True;
 
-  if GetDAO.CriancaPossuiAtividade(aIDCrianca) then
+  if MyDAO.CriancaPossuiAtividade(aIDCrianca) then
   begin
     aMsg := 'Esta criança não pode ser excluída pois está vinculada a uma atividade.'+CRLF;
     Result := False;

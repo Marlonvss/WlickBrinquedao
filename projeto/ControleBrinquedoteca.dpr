@@ -96,7 +96,9 @@ uses
   DMRelatorio in '..\units\relatorios\DMRelatorio.pas' {DMReport: TDataModule},
   browser.AtividadesEncerradas in '..\mvc\views\browser.AtividadesEncerradas.pas',
   frame.AtividadesEntrada in '..\mvc\views\frame.AtividadesEntrada.pas' {frameAtividadesEntrada: TFrame},
-  ficha.AtividadesEntrada in '..\mvc\views\ficha.AtividadesEntrada.pas';
+  ficha.AtividadesEntrada in '..\mvc\views\ficha.AtividadesEntrada.pas',
+  ORM.DataBaseManager in '..\..\WlickORM\bases\ORM.DataBaseManager.pas',
+  WLick.DataBaseManager in '..\units\WLick.DataBaseManager.pas';
 
 {$R *.res}
 

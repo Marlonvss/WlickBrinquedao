@@ -13,12 +13,14 @@ type
       FNascimento: TDateTime;
       FFoto: String;
       FListaResponsaveis: TObjectList<TDTOResponsaveis>;
+      FDataInsert: TDate;
     published
       property Codigo: String read FCodigo write FCodigo;
       property Nome: String read FNome write FNome;
       property Nascimento: TDateTime read FNascimento write FNascimento;
       property Foto: String read FFoto write FFoto;
       property ListaResponsaveis: TObjectList<TDTOResponsaveis> read FListaResponsaveis write FListaResponsaveis;
+      property DataInsert: TDate read FDataInsert write FDataInsert;
     public
       function AssemblerClass: String; override;
 

@@ -21,6 +21,7 @@ type
     FSituacao: Integer;
     FSaida: TTime;
     FValorSaida: Currency;
+    FDataInsert: TDate;
 
   published
 
@@ -56,6 +57,9 @@ type
 
     [TORMFieldCRUD(mapper.Atividades.field_valorSaida)]
     property ValorSaida: Currency read FValorSaida write FValorSaida;
+
+    [TORMFieldCRUD(mapper.Atividades.field_DataInsert)]
+    property DataInsert: TDate read FDataInsert write FDataInsert;
 
   public
     function AssemblerClass: String; override;

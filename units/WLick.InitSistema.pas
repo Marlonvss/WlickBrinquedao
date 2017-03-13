@@ -5,12 +5,13 @@ interface
 uses Winapi.Windows, Winapi.Messages, System.SysUtils, System.Classes, vcl.Forms,
   ORM.Connection, model.Usuarios, dto.Usuarios,
   assembler.Usuarios, IniFiles, Dialogs, WLick.Constantes, viewLoginForm,
-  WLick.Sessao, Controls;
+  WLick.Sessao, Controls, WLick.DataBaseManager;
 
 Type
   TInitSistema = class
   private
     procedure ConectaBD;
+    procedure AtualizaBancoDeDados;
     function LicencaValida: Boolean;
   public
     class function IniciarSistema(): Boolean;
@@ -21,6 +22,16 @@ implementation
 
 
 { TInitSistema }
+
+procedure TInitSistema.AtualizaBancoDeDados;
+begin
+  with WLick.DataBaseManager.TDataBaseManager.Create do
+  try
+    Execute;
+  finally
+    Free;
+  end;
+end;
 
 procedure TInitSistema.ConectaBD;
 var
@@ -63,6 +74,7 @@ begin
     if LicencaValida then
     try
       ConectaBD;
+      AtualizaBancoDeDados;
 
       with viewLoginForm.TfrmLogin.Create(nil) do
       try
@@ -90,7 +102,7 @@ end;
 
 function TInitSistema.LicencaValida: Boolean;
 begin
-  Result := not (Trunc(Now) > StrToDate('01/04/2017'));
+  Result := not (Trunc(Now) > StrToDate('01/05/2017'));
 end;
 
 end.

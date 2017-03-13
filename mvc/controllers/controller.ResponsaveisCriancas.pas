@@ -12,7 +12,7 @@ type
   private
   protected
     function ClassDAO(): TORMDAOBaseClass; override;
-    function GetDAO(): TDAOResponsaveisCriancas;
+    function MyDAO(): TDAOResponsaveisCriancas;
   public
 
   end;
@@ -24,7 +24,7 @@ begin
   Result := TDAOResponsaveisCriancas;
 end;
 
-function TControllerResponsaveisCriancas.GetDAO: TDAOResponsaveisCriancas;
+function TControllerResponsaveisCriancas.MyDAO: TDAOResponsaveisCriancas;
 begin
   Result := (FDAO as TDAOResponsaveisCriancas);
 end;

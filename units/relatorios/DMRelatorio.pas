@@ -32,7 +32,6 @@ type
     ppDBText11: TppDBText;
     ppDBText12: TppDBText;
     ppDBText13: TppDBText;
-    ppDBText14: TppDBText;
     ppDBImage3: TppDBImage;
     ppDBImage4: TppDBImage;
     ppLabel20: TppLabel;
@@ -45,6 +44,7 @@ type
     ppLabel2: TppLabel;
     ppVariable1: TppVariable;
     ppRichText1: TppRichText;
+    ppRichText2: TppRichText;
     raCodeModule1: TraCodeModule;
     raProgramInfo1: TraProgramInfo;
     ppDesignLayers2: TppDesignLayers;

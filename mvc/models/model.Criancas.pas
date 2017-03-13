@@ -15,6 +15,7 @@ type
     FNome: String;
     FNascimento: TDateTime;
     FFoto: String;
+    FDataInsert: TDate;
 
   published
 
@@ -32,6 +33,9 @@ type
 
     [TORMFieldCRUD(mapper.Criancas.field_foto)]
     property Foto: String read FFoto write FFoto;
+
+    [TORMFieldCRUD(mapper.Criancas.field_datainsert)]
+    property DataInsert: TDate read FDataInsert write FDataInsert;
 
   public
     function AssemblerClass: String; override;

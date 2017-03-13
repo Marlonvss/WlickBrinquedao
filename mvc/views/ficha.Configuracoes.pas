@@ -285,7 +285,7 @@ begin
 
   for vConfig := Low(NomeConfiguracoes) to High(NomeConfiguracoes) do
   begin
-    if vConfig <> tncNaoEncontrado then
+    if not (vConfig in [tncNaoEncontrado, tncVersaoBD, tncDataOperacao]) then
       InternalViewToDTO(vConfig);
   end;
 

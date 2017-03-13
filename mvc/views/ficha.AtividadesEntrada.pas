@@ -191,9 +191,12 @@ begin
 
     for vDTO in FListaCriancas do
     begin
-      MyFrame.edtCrianca.Properties.Items.AddObject(vDTO.Nome, vDTO);
-      if (vDTO.ID = MyDTO.Id_Crianca) then
-        vSelectedDTO := vDTO;
+      if (vDTO.DataInsert = WLick.Sessao.GetInstance.DataProcesso) then
+      begin
+        MyFrame.edtCrianca.Properties.Items.AddObject(vDTO.Nome, vDTO);
+        if (vDTO.ID = MyDTO.Id_Crianca) then
+          vSelectedDTO := vDTO;
+      end;
     end;
 
   finally
@@ -314,16 +317,30 @@ begin
     begin
       if vStr <> EmptyWideStr
         then vStr := vStr + CRLF;
-      vStr := vStr + 'Informe a criança!';
+      vStr := vStr + 'Favor informar a criança.';
     end;
 
     if MyDTO.Id_Responsavel.IsNull then
     begin
       if vStr <> EmptyWideStr
         then vStr := vStr + CRLF;
-      vStr := vStr + 'Informe o responsável!';
+      vStr := vStr + 'Favor informar o responsável.';
     end;
 
+    if MyDTO.Valor = 0 then
+    begin
+      if vStr <> EmptyWideStr
+        then vStr := vStr + CRLF;
+      vStr := vStr + 'Favor informar o valor ou o tempo de serviço.';
+    end;
+
+    { Valida se a criança já está em uma atividade aberta }
+    if MyController.CriancaEmAtividade(MyDTO) then
+    begin
+      if vStr <> EmptyWideStr
+        then vStr := vStr + CRLF;
+      vStr := vStr + 'A criança selecionada já está em atividade.';
+    end;
 
     if vStr <> EmptyWideStr then
     begin
@@ -403,19 +420,26 @@ begin
   vDTOResponsavel := TDTOResponsaveis(MyFrame.edtResponsavel.ItemObject);
   vDTOValorTempo := TDTOValorTempo(MyFrame.edtValor.ItemObject);
 
-  if Assigned(vDTOCrianca) and Assigned(vDTOResponsavel) and Assigned(vDTOValorTempo) then
+  with MyDTO do
   begin
-    with MyDTO do
+    if Assigned(vDTOCrianca)
+      then Id_Crianca   := vDTOCrianca.ID;
+
+    if Assigned(vDTOResponsavel)
+      then Id_Responsavel := vDTOResponsavel.ID;
+
+    if Assigned(vDTOValorTempo) then
     begin
-      Id_Crianca     := vDTOCrianca.ID;
-      Id_Responsavel := vDTOResponsavel.ID;
-      Id_Usuario     := WLick.Sessao.GetInstance.Usuario.ID;
-      Obs            := MyFrame.edtObs.Text;
-      Entrada        := Trunc(now) + MyFrame.edtEntrada.Time;
       Valor          := vDTOValorTempo.Valor;
       Tempo          := vDTOValorTempo.TempoCalculado;
-      Situacao       := Integer(tsIniciado);
     end;
+
+    Id_Usuario     := WLick.Sessao.GetInstance.Usuario.ID;
+    Obs            := MyFrame.edtObs.Text;
+    Entrada        := Trunc(now) + MyFrame.edtEntrada.Time;
+    Situacao       := Integer(tsIniciado);
+    if (FStatusFicha = sfInsert)
+      then DataInsert := WLick.Sessao.GetInstance.DataProcesso;
   end;
 
 end;

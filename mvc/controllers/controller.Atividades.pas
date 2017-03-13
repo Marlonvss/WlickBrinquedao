@@ -18,6 +18,7 @@ type
     FDAOConfiguracoes: TDAOConfiguracoes;
   protected
     function ClassDAO(): TORMDAOBaseClass; override;
+    function MyDAO: TDAOAtividades;
 
     procedure CreateAllObjects(); override;
     procedure DestroyAllObjects(); override;
@@ -26,6 +27,7 @@ type
     procedure GetAllCriancas(var aListaCriancas: TObjectList<TDTOCriancas>);
     procedure GetAllValoresTempo(var aListaValoresTempo: TObjectList<TDTOValorTempo>);
     procedure GetResponsaveisByCriancaID(const aIDCrianca: TGuid; var aListaResponsaveis: TObjectList<TDTOResponsaveis>);
+    function CriancaEmAtividade(aDTO: TDTOAtividades): boolean;
 
     procedure CalcularValorDeSaida(var aDTO: TDTOAtividades; out aStrExplicacao: String);
 
@@ -114,6 +116,11 @@ begin
   FDAOConfiguracoes := TDAOConfiguracoes.Create;
 end;
 
+function TControllerAtividades.CriancaEmAtividade(aDTO: TDTOAtividades): Boolean;
+begin
+  Result := MyDAO.CriancaEmAtividade(aDTO);
+end;
+
 procedure TControllerAtividades.DestroyAllObjects;
 begin
   inherited DestroyAllObjects;
@@ -156,6 +163,11 @@ end;
 procedure TControllerAtividades.ImprimirRelatorio(const aDTO: TDTOAtividades);
 begin
 //
+end;
+
+function TControllerAtividades.MyDAO: TDAOAtividades;
+begin
+  Result := (FDAO as TDAOAtividades);
 end;
 
 end.

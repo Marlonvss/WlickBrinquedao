@@ -101,6 +101,7 @@ object frmAtividades: TfrmAtividades
     Height = 456
     Align = alClient
     TabOrder = 1
+    ExplicitLeft = -2
     object grdAtividadeDBTableView1: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
       DataController.Summary.DefaultGroupSummaryItems = <>
@@ -602,18 +603,25 @@ object frmAtividades: TfrmAtividades
       Navigator.Buttons.Filter.Visible = True
       FilterBox.Visible = fvNever
       DataController.DataSource = dsPrincipal
+      DataController.KeyFieldNames = 'id'
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <>
       DataController.Summary.SummaryGroups = <>
+      OptionsBehavior.ExpandRecordOnDblClick = False
+      OptionsBehavior.ItemHotTrack = False
       OptionsCustomize.ItemFiltering = False
+      OptionsCustomize.RecordExpanding = True
       OptionsData.Deleting = False
-      OptionsData.Editing = False
       OptionsData.Inserting = False
       OptionsView.NoDataToDisplayInfoText = '<Nenhuma atividade>'
+      OptionsView.ShowEditButtons = gsebAlways
       OptionsView.CenterRecords = False
       OptionsView.RecordCaption.Visible = False
-      OptionsView.ViewMode = lvvmMultiRow
-      object grdAtividadeDBLayoutView3DBLayoutViewItem12: TcxGridDBLayoutViewItem
+      OptionsView.RecordIndent = 5
+      OptionsView.SeparatorWidth = 0
+      OptionsView.SingleRecordStretch = srsClient
+      OptionsView.ViewMode = lvvmSingleRow
+      object grdAtividadeDBLayoutView3DBLayoutViewItem2: TcxGridDBLayoutViewItem
         Caption = 'Obs'
         DataBinding.FieldName = 'obs'
         PropertiesClassName = 'TcxMemoProperties'
@@ -629,7 +637,7 @@ object frmAtividades: TfrmAtividades
         Options.Focusing = False
         Options.ShowEditButtons = isebNever
       end
-      object grdAtividadeDBLayoutView3DBLayoutViewItem13: TcxGridDBLayoutViewItem
+      object grdAtividadeDBLayoutView3DBLayoutViewItem3: TcxGridDBLayoutViewItem
         Caption = 'Entrada'
         DataBinding.FieldName = 'entrada'
         PropertiesClassName = 'TcxTimeEditProperties'
@@ -646,7 +654,7 @@ object frmAtividades: TfrmAtividades
         Options.Focusing = False
         Options.ShowEditButtons = isebNever
       end
-      object grdAtividadeDBLayoutView3DBLayoutViewItem1: TcxGridDBLayoutViewItem
+      object grdAtividadeDBLayoutView3DBLayoutViewItem4: TcxGridDBLayoutViewItem
         Caption = 'Valor'
         DataBinding.FieldName = 'valor'
         PropertiesClassName = 'TcxCurrencyEditProperties'
@@ -662,7 +670,7 @@ object frmAtividades: TfrmAtividades
         Options.Focusing = False
         Options.ShowEditButtons = isebNever
       end
-      object grdAtividadeDBLayoutView3DBLayoutViewItem2: TcxGridDBLayoutViewItem
+      object grdAtividadeDBLayoutView3DBLayoutViewItem5: TcxGridDBLayoutViewItem
         Caption = 'Tempo'
         DataBinding.FieldName = 'tempo'
         PropertiesClassName = 'TcxTimeEditProperties'
@@ -679,7 +687,7 @@ object frmAtividades: TfrmAtividades
         Options.Focusing = False
         Options.ShowEditButtons = isebNever
       end
-      object grdAtividadeDBLayoutView3DBLayoutViewItem3: TcxGridDBLayoutViewItem
+      object grdAtividadeDBLayoutView3DBLayoutViewItem6: TcxGridDBLayoutViewItem
         Caption = 'Situa'#231#227'o'
         DataBinding.FieldName = 'situacao'
         Visible = False
@@ -695,7 +703,7 @@ object frmAtividades: TfrmAtividades
         Options.Focusing = False
         Options.ShowEditButtons = isebNever
       end
-      object grdAtividadeDBLayoutView3DBLayoutViewItem4: TcxGridDBLayoutViewItem
+      object grdAtividadeDBLayoutView3DBLayoutViewItem7: TcxGridDBLayoutViewItem
         Caption = 'Previs'#227'o'
         DataBinding.FieldName = 'previsao'
         PropertiesClassName = 'TcxTimeEditProperties'
@@ -712,7 +720,7 @@ object frmAtividades: TfrmAtividades
         Options.Focusing = False
         Options.ShowEditButtons = isebNever
       end
-      object grdAtividadeDBLayoutView3DBLayoutViewItem5: TcxGridDBLayoutViewItem
+      object grdAtividadeDBLayoutView3DBLayoutViewItem14: TcxGridDBLayoutViewItem
         Caption = 'Nome'
         DataBinding.FieldName = 'nome'
         LayoutItem = grdAtividadeDBLayoutView3LayoutItem7
@@ -727,7 +735,7 @@ object frmAtividades: TfrmAtividades
         Options.Focusing = False
         Options.ShowEditButtons = isebNever
       end
-      object grdAtividadeDBLayoutView3DBLayoutViewItem6: TcxGridDBLayoutViewItem
+      object grdAtividadeDBLayoutView3DBLayoutViewItem8: TcxGridDBLayoutViewItem
         Caption = 'Nascimento'
         DataBinding.FieldName = 'nascimento'
         LayoutItem = grdAtividadeDBLayoutView3LayoutItem8
@@ -742,7 +750,7 @@ object frmAtividades: TfrmAtividades
         Options.Focusing = False
         Options.ShowEditButtons = isebNever
       end
-      object grdAtividadeDBLayoutView3DBLayoutViewItem7: TcxGridDBLayoutViewItem
+      object grdAtividadeDBLayoutView3DBLayoutViewItem9: TcxGridDBLayoutViewItem
         Caption = 'Nome'
         DataBinding.FieldName = 'responsavelnome'
         LayoutItem = grdAtividadeDBLayoutView3LayoutItem9
@@ -757,7 +765,7 @@ object frmAtividades: TfrmAtividades
         Options.Focusing = False
         Options.ShowEditButtons = isebNever
       end
-      object grdAtividadeDBLayoutView3DBLayoutViewItem8: TcxGridDBLayoutViewItem
+      object grdAtividadeDBLayoutView3DBLayoutViewItem10: TcxGridDBLayoutViewItem
         Caption = 'Documento'
         DataBinding.FieldName = 'responsaveldocumento'
         LayoutItem = grdAtividadeDBLayoutView3LayoutItem10
@@ -772,7 +780,7 @@ object frmAtividades: TfrmAtividades
         Options.Focusing = False
         Options.ShowEditButtons = isebNever
       end
-      object grdAtividadeDBLayoutView3DBLayoutViewItem9: TcxGridDBLayoutViewItem
+      object grdAtividadeDBLayoutView3DBLayoutViewItem11: TcxGridDBLayoutViewItem
         Caption = 'Contato'
         DataBinding.FieldName = 'responsavelcontato'
         LayoutItem = grdAtividadeDBLayoutView3LayoutItem11
@@ -787,10 +795,57 @@ object frmAtividades: TfrmAtividades
         Options.Focusing = False
         Options.ShowEditButtons = isebNever
       end
-      object grdAtividadeDBLayoutView3DBLayoutViewItem10: TcxGridDBLayoutViewItem
+      object grdAtividadeDBLayoutView3DBLayoutViewItem12: TcxGridDBLayoutViewItem
         DataBinding.FieldName = 'foto'
         Visible = False
         LayoutItem = grdAtividadeDBLayoutView3LayoutItem12
+      end
+      object grdAtividadeDBLayoutView3DBLayoutViewItem13: TcxGridDBLayoutViewItem
+        PropertiesClassName = 'TcxButtonEditProperties'
+        Properties.Buttons = <
+          item
+            Action = actFinalizar
+            Default = True
+            Glyph.Data = {
+              36040000424D3604000000000000360000002800000010000000100000000100
+              2000000000000004000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              000000000000000000000F0F0F41000000000000000000000000000000000000
+              0000000000000F0F0F4100000000000000000000000000000000000000000000
+              0000000000001E1E1E813C3C3CFF1E1E1E810000000000000000000000000000
+              00001E1E1E813C3C3CFF1E1E1E81000000000000000000000000000000000000
+              00000F0F0F403C3C3CFF3C3C3CFF3C3C3CFF1E1E1E8100000000000000001E1E
+              1E813C3C3CFF3C3C3CFF3C3C3CFF0F0F0F400000000000000000000000000000
+              0000000000001E1E1E7E3C3C3CFF3C3C3CFF3C3C3CFF1E1E1E811E1E1E813C3C
+              3CFF3C3C3CFF3C3C3CFF1E1E1E7E000000000000000000000000000000000000
+              000000000000000000001E1E1E7E3C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+              3CFF3C3C3CFF1E1E1E7E00000000000000000000000000000000000000000000
+              00000000000000000000000000001E1E1E7E3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+              3CFF1E1E1E7E0000000000000000000000000000000000000000000000000000
+              00000000000000000000000000001E1E1E813C3C3CFF3C3C3CFF3C3C3CFF3C3C
+              3CFF1E1E1E810000000000000000000000000000000000000000000000000000
+              000000000000000000001E1E1E813C3C3CFF3C3C3CFF3C3C3CFF3C3C3CFF3C3C
+              3CFF3C3C3CFF1E1E1E8100000000000000000000000000000000000000000000
+              0000000000001E1E1E813C3C3CFF3C3C3CFF3C3C3CFF1E1E1E7E1E1E1E7E3C3C
+              3CFF3C3C3CFF3C3C3CFF1E1E1E81000000000000000000000000000000000000
+              00000F0F0F403C3C3CFF3C3C3CFF3C3C3CFF1E1E1E7E00000000000000001E1E
+              1E7E3C3C3CFF3C3C3CFF3C3C3CFF0F0F0F400000000000000000000000000000
+              0000000000001E1E1E7E3C3C3CFF1E1E1E7E0000000000000000000000000000
+              00001E1E1E7E3C3C3CFF1E1E1E7E000000000000000000000000000000000000
+              000000000000000000000F0F0F3E000000000000000000000000000000000000
+              0000000000000F0F0F3E00000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000}
+            Kind = bkGlyph
+          end>
+        LayoutItem = grdAtividadeDBLayoutView3LayoutItem13
+        Options.ShowEditButtons = isebAlways
+        IsCaptionAssigned = True
       end
       object grdAtividadeDBLayoutView3Group_Root: TdxLayoutGroup
         AlignHorz = ahLeft
@@ -806,34 +861,34 @@ object frmAtividades: TfrmAtividades
         CaptionOptions.Layout = clTop
         SizeOptions.Height = 100
         SizeOptions.Width = 202
-        Index = 7
+        Index = 8
       end
       object grdAtividadeDBLayoutView3LayoutItem2: TcxGridLayoutItem
         Parent = grdAtividadeDBLayoutView3Group_Root
-        Index = 2
+        Index = 3
       end
       object grdAtividadeDBLayoutView3LayoutItem3: TcxGridLayoutItem
         Parent = grdAtividadeDBLayoutView3Group_Root
-        Index = 3
+        Index = 4
       end
       object grdAtividadeDBLayoutView3LayoutItem4: TcxGridLayoutItem
         Parent = grdAtividadeDBLayoutView3Group_Root
-        Index = 4
+        Index = 5
       end
       object grdAtividadeDBLayoutView3LayoutItem5: TcxGridLayoutItem
         Index = -1
       end
       object grdAtividadeDBLayoutView3LayoutItem6: TcxGridLayoutItem
         Parent = grdAtividadeDBLayoutView3Group_Root
-        Index = 5
+        Index = 6
       end
       object grdAtividadeDBLayoutView3LayoutItem7: TcxGridLayoutItem
         Parent = grdAtividadeDBLayoutView3Group_Root
-        Index = 0
+        Index = 1
       end
       object grdAtividadeDBLayoutView3LayoutItem8: TcxGridLayoutItem
         Parent = grdAtividadeDBLayoutView3Group_Root
-        Index = 1
+        Index = 2
       end
       object grdAtividadeDBLayoutView3LayoutItem9: TcxGridLayoutItem
         Parent = grdAtividadeDBLayoutView3Group1
@@ -851,7 +906,7 @@ object frmAtividades: TfrmAtividades
         Parent = grdAtividadeDBLayoutView3Group_Root
         CaptionOptions.Text = 'Respons'#225'vel'
         ButtonOptions.Buttons = <>
-        Index = 6
+        Index = 7
       end
       object grdAtividadeDBLayoutView3LayoutItem12: TcxGridLayoutItem
         AlignHorz = ahClient
@@ -859,6 +914,13 @@ object frmAtividades: TfrmAtividades
         CaptionOptions.Visible = False
         SizeOptions.Height = 71
         Index = -1
+      end
+      object grdAtividadeDBLayoutView3LayoutItem13: TcxGridLayoutItem
+        Parent = grdAtividadeDBLayoutView3Group_Root
+        CaptionOptions.Visible = False
+        SizeOptions.Height = 2
+        SizeOptions.Width = 136
+        Index = 0
       end
     end
     object grdAtividadeLevel1: TcxGridLevel
@@ -899,19 +961,22 @@ object frmAtividades: TfrmAtividades
       
         'SELECT ATIVIDADES.ID, ATIVIDADES.OBS, ATIVIDADES.ENTRADA, ATIVID' +
         'ADES.VALOR, ATIVIDADES.TEMPO, ATIVIDADES.SITUACAO, ATIVIDADES.EN' +
-        'TRADA + ATIVIDADES.TEMPO AS PREVISAO,'
+        'TRADA + CAST(ATIVIDADES.TEMPO as INTERVAL) AS PREVISAO,'
       '       CRIANCAS.NOME, CRIANCAS.NASCIMENTO, CRIANCAS.FOTO,'
       
         '       RESPONSAVEIS.NOME AS RESPONSAVELNOME, RESPONSAVEIS.DOCUME' +
         'NTO AS RESPONSAVELDOCUMENTO, RESPONSAVEIS.CONTATO AS RESPONSAVEL' +
-        'CONTATO'
+        'CONTATO,'
+      '       '#39'X'#39' as BOTAO'
       '  FROM ATIVIDADES'
       '  JOIN CRIANCAS ON CRIANCAS.ID = ATIVIDADES.ID_CRIANCA'
       
         '  JOIN RESPONSAVEIS ON RESPONSAVEIS.ID = ATIVIDADES.ID_RESPONSAV' +
         'EL'
       ' WHERE ATIVIDADES.SITUACAO = 0'
-      ' ORDER BY ATIVIDADES.ENTRADA + ATIVIDADES.TEMPO')
+      
+        ' ORDER BY ATIVIDADES.ENTRADA + CAST(ATIVIDADES.TEMPO as INTERVAL' +
+        ')')
     Active = True
     Filtered = True
     Left = 80
@@ -925,7 +990,7 @@ object frmAtividades: TfrmAtividades
       FieldName = 'obs'
       Size = 1000
     end
-    object uniPrincipalentrada: TDateTimeField
+    object uniPrincipalentrada: TTimeField
       FieldName = 'entrada'
     end
     object uniPrincipalvalor: TFloatField
@@ -937,7 +1002,7 @@ object frmAtividades: TfrmAtividades
     object uniPrincipalsituacao: TSmallintField
       FieldName = 'situacao'
     end
-    object uniPrincipalprevisao: TDateTimeField
+    object uniPrincipalprevisao: TTimeField
       FieldName = 'previsao'
       ReadOnly = True
     end
@@ -968,6 +1033,11 @@ object frmAtividades: TfrmAtividades
       FieldName = 'responsavelcontato'
       ReadOnly = True
       Size = 50
+    end
+    object uniPrincipalbotao: TMemoField
+      FieldName = 'botao'
+      ReadOnly = True
+      BlobType = ftMemo
     end
   end
   object dsPrincipal: TDataSource

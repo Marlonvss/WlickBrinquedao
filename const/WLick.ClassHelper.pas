@@ -73,6 +73,7 @@ type
   Helper_String = record helper for String
     function OnlyNumbers(): String;
     function ToDate(): TDate;
+    function ToDateFormat(const a_Format: String): TDate;
     function ToDateTime(): TDateTime;
     function ToTime() : TTime;
     function ToInteger(): Integer;
@@ -497,6 +498,25 @@ begin
   try
     if not Self.IsNull()
       then Result := StrToDate(Self);
+  except
+    Result := 0;
+  end;
+end;
+
+function Helper_String.ToDateFormat(const a_Format: String): TDate;
+var
+  vFormat : TFormatSettings;
+Begin
+  vFormat := TFormatSettings.Create;
+  vFormat.DateSeparator := '-';
+  vFormat.ShortDateFormat := a_Format;
+
+  Result := 0;
+  try
+    if not Self.IsNull() then
+    begin
+      Result := StrToDate(Self, vFormat);
+    end;
   except
     Result := 0;
   end;

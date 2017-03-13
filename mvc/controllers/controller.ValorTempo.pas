@@ -12,7 +12,7 @@ type
   private
   protected
     function ClassDAO(): TORMDAOBaseClass; override;
-    function GetDAO(): TDAOValorTempo;
+    function MyDAO(): TDAOValorTempo;
   public
   end;
 
@@ -23,7 +23,7 @@ begin
   Result := TDAOValorTempo;
 end;
 
-function TControllerValorTempo.GetDAO: TDAOValorTempo;
+function TControllerValorTempo.MyDAO: TDAOValorTempo;
 begin
   Result := (FDAO as TDAOValorTempo);
 end;

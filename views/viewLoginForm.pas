@@ -83,6 +83,7 @@ function TfrmLogin.ValidarLogin: Boolean;
 var
   vUsuario, vSenha: String;
   vDTO: TDTOUsuario;
+  vDataProcesso: TDateTime;
 begin
   Result := False;
 
@@ -92,11 +93,18 @@ begin
 
   with TControllerUsuario.Create do
   try
+    AtualizaDataProcesso();
     GetUsuarioByLoginSenha(vDTO);
+    GetDataProcesso(vDataProcesso);
+
     Result := Assigned(vDTO);
     if Result then
     begin
-      WLick.Sessao.GetInstance().SetUsuario(vDTO);
+      with WLick.Sessao.GetInstance() do
+      begin
+        SetUsuario(vDTO);
+        SetDataProcesso(vDataProcesso);
+      end;
     end else
     begin
       ShowMessage('Usuário ou senha informada não confere.');

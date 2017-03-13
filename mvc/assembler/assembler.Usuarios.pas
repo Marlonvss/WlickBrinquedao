@@ -24,6 +24,7 @@ begin
   TUsuario(Result).id := TUsuario(aModel).id;
   TUsuario(Result).login := TUsuario(aModel).login;
   TUsuario(Result).senha := TUsuario(aModel).senha;
+  TUsuario(Result).NivelAcesso := TUsuario(aModel).NivelAcesso;
 end;
 
 class function TAssemblerUsuarios.GetClone(const aDTO: TORMDTOBase): TORMDTOBase;
@@ -32,6 +33,7 @@ begin
   TDTOUsuario(Result).id := TDTOUsuario(aDTO).id;
   TDTOUsuario(Result).login := TDTOUsuario(aDTO).login;
   TDTOUsuario(Result).senha := TDTOUsuario(aDTO).senha;
+  TDTOUsuario(Result).NivelAcesso := TDTOUsuario(aDTO).NivelAcesso;
 end;
 
 class function TAssemblerUsuarios.ModelToDTO(const aModel: TORMModelBase): TORMDTOBase;
@@ -40,6 +42,7 @@ begin
   TDTOUsuario(Result).id := TUsuario(aModel).id;
   TDTOUsuario(Result).login := TUsuario(aModel).login;
   TDTOUsuario(Result).senha := TMisc.Decrypt(TUsuario(aModel).senha);
+  TDTOUsuario(Result).NivelAcesso := TUsuario(aModel).NivelAcesso;
 end;
 
 class function TAssemblerUsuarios.DTOToModel(const aDTO: TORMDTOBase): TORMModelBase;
@@ -48,6 +51,7 @@ begin
   TUsuario(Result).id := TDTOUsuario(aDTO).id;
   TUsuario(Result).login := TDTOUsuario(aDTO).login;
   TUsuario(Result).senha := TMisc.Encrypt(TDTOUsuario(aDTO).senha);
+  TUsuario(Result).NivelAcesso := TDTOUsuario(aDTO).NivelAcesso;
 end;
 
 class function TAssemblerUsuarios.QueryToModel(const aQuery: TUniQuery): TORMModelBase;
@@ -62,6 +66,9 @@ begin
 
   if Assigned(aQuery.FindField(mapper.Usuarios.field_Senha)) then
     TUsuario(Result).senha := aQuery.FieldByName(mapper.Usuarios.field_Senha).AsString;
+
+  if Assigned(aQuery.FindField(mapper.Usuarios.field_NivelAcesso)) then
+    TUsuario(Result).NivelAcesso := aQuery.FieldByName(mapper.Usuarios.field_NivelAcesso).AsInteger;
 
 end;
 

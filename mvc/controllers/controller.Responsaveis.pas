@@ -12,7 +12,7 @@ type
   private
   protected
     function ClassDAO(): TORMDAOBaseClass; override;
-    function GetDAO(): TDAOResponsaveis;
+    function MyDAO(): TDAOResponsaveis;
   public
     procedure GetResponsaveisByCriancaID(const aIDCrianca: TGuid; var aListaResponsaveis: TObjectList<TDTOResponsaveis>);
   end;
@@ -25,7 +25,7 @@ begin
 end;
 
 
-function TControllerResponsaveis.GetDAO: TDAOResponsaveis;
+function TControllerResponsaveis.MyDAO: TDAOResponsaveis;
 begin
   Result := (FDAO as TDAOResponsaveis);
 end;
@@ -34,7 +34,7 @@ procedure TControllerResponsaveis.GetResponsaveisByCriancaID(
   const aIDCrianca: TGuid;
   var aListaResponsaveis: TObjectList<TDTOResponsaveis>);
 begin
-  GetDAO().GetAllByCriancaID(aIDCrianca, aListaResponsaveis);
+  MyDAO().GetAllByCriancaID(aIDCrianca, aListaResponsaveis);
 end;
 
 end.

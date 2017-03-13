@@ -139,8 +139,9 @@ end;
 procedure TFichaAtividades.DTOToView;
 begin
   {Atualiza DTO para encerramento}
-  MyDTO.Saida := Time();
   FEncerrandoAtividade := MyDTO.Situacao <> Integer(tsFinalizado);
+  if FEncerrandoAtividade
+    then MyDTO.Saida := Time();
   MyDTO.Situacao := Integer(tsFinalizado);
 
   inherited;
@@ -180,7 +181,7 @@ end;
 
 procedure TFichaAtividades.OnEdtSaidaChange(Sender: TObject);
 begin
-  MyDTO.Saida := Trunc(now) + MyFrame.edtSaida.Time;
+  MyDTO.Saida := MyFrame.edtSaida.Time;
   MyFrame.edtTempoServico.Time := MyDTO.Saida - MyDTO.Entrada;
   AtualizaValor;
 end;

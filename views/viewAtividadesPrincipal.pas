@@ -15,7 +15,8 @@ uses
   ORM.ViewManager, ficha.Atividades, WLick.ClassHelper, dxLayoutContainer,
   cxGridViewLayoutContainer, cxGridLayoutView, cxGridDBLayoutView,
   cxCurrencyEdit, ficha.AtividadesEntrada, cxMemo, DMRelatorio, WLick.Types,
-  dxBarBuiltInMenu, cxPC, WLick.Miscelania, enum.Atividades.Situacao;
+  dxBarBuiltInMenu, cxPC, WLick.Miscelania, enum.Atividades.Situacao, cxImage,
+  cxButtonEdit;
 
 type
   TfrmAtividades = class(TForm)
@@ -115,33 +116,38 @@ type
     grdAtividadeDBLayoutView2LayoutItem11: TcxGridLayoutItem;
     grdAtividadeDBLayoutView2LayoutItem12: TcxGridLayoutItem;
     grdAtividadeDBLayoutView3: TcxGridDBLayoutView;
-    grdAtividadeDBLayoutView3DBLayoutViewItem12: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView3DBLayoutViewItem13: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView3DBLayoutViewItem1: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem2: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem3: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem4: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem5: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem6: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem7: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem14: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem8: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem9: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem10: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem11: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3Group_Root: TdxLayoutGroup;
     grdAtividadeLevel1: TcxGridLevel;
-    grdAtividadeDBLayoutView3DBLayoutViewItem10: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem12: TcxGridDBLayoutViewItem;
+    N1: TMenuItem;
+    actImprimir: TAction;
+    Imprimir1: TMenuItem;
     uniPrincipalid: TGuidField;
     uniPrincipalobs: TStringField;
-    uniPrincipalentrada: TDateTimeField;
+    uniPrincipalentrada: TTimeField;
     uniPrincipalvalor: TFloatField;
     uniPrincipaltempo: TTimeField;
     uniPrincipalsituacao: TSmallintField;
-    uniPrincipalprevisao: TDateTimeField;
+    uniPrincipalprevisao: TTimeField;
     uniPrincipalnome: TStringField;
     uniPrincipalnascimento: TDateTimeField;
     uniPrincipalfoto: TBlobField;
     uniPrincipalresponsavelnome: TStringField;
     uniPrincipalresponsaveldocumento: TStringField;
     uniPrincipalresponsavelcontato: TStringField;
+    uniPrincipalbotao: TMemoField;
+    grdAtividadeDBLayoutView3DBLayoutViewItem13: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3LayoutItem1: TcxGridLayoutItem;
     grdAtividadeDBLayoutView3LayoutItem2: TcxGridLayoutItem;
     grdAtividadeDBLayoutView3LayoutItem3: TcxGridLayoutItem;
@@ -155,9 +161,7 @@ type
     grdAtividadeDBLayoutView3LayoutItem11: TcxGridLayoutItem;
     grdAtividadeDBLayoutView3Group1: TdxLayoutGroup;
     grdAtividadeDBLayoutView3LayoutItem12: TcxGridLayoutItem;
-    N1: TMenuItem;
-    actImprimir: TAction;
-    Imprimir1: TMenuItem;
+    grdAtividadeDBLayoutView3LayoutItem13: TcxGridLayoutItem;
     procedure actFinalizarExecute(Sender: TObject);
     procedure TimerRefreshTimer(Sender: TObject);
     procedure actNovoExecute(Sender: TObject);
@@ -270,6 +274,8 @@ procedure TfrmAtividades.FormCreate(Sender: TObject);
 begin
   Self.uniPrincipal.Connection := ORM.Connection.GetInstance.DataBase;
   Self.uniPrincipal.Active := True;
+
+  //grdAtividadeDBLayoutView3DBLayoutViewItem7.Properties.Images.
 end;
 
 procedure TfrmAtividades.FormShow(Sender: TObject);

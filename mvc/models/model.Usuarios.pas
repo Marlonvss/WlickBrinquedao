@@ -13,6 +13,7 @@ type
     FID: TGuid;
     FLogin: String;
     FSenha: String;
+    FNivelAcesso: Integer;
 
   published
 
@@ -24,6 +25,9 @@ type
 
     [TORMFieldCRUD(mapper.Usuarios.field_Senha)]
     property Senha: String read FSenha write FSenha;
+
+    [TORMFieldCRUD(mapper.Usuarios.field_NivelAcesso)]
+    property NivelAcesso: Integer read FNivelAcesso write FNivelAcesso;
 
   public
     function AssemblerClass: String; override;
