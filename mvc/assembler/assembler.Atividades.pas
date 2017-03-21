@@ -22,8 +22,14 @@ class function TAssemblerAtividades.GetClone(const aModel: TORMModelBase): TORMM
 begin
   Result := TAtividades.Create();
   TAtividades(Result).id := TAtividades(aModel).id;
-  TAtividades(Result).Id_Crianca := TAtividades(aModel).Id_Crianca;
-  TAtividades(Result).Id_Responsavel := TAtividades(aModel).Id_Responsavel;
+  TAtividades(Result).Crianca_Nome := TAtividades(aModel).Crianca_Nome;
+  TAtividades(Result).Crianca_Nascimento := TAtividades(aModel).Crianca_Nascimento;
+  TAtividades(Result).Crianca_Foto := TAtividades(aModel).Crianca_Foto;
+  TAtividades(Result).Responsavel_Nome := TAtividades(aModel).Responsavel_Nome;
+  TAtividades(Result).Responsavel_Documento := TAtividades(aModel).Responsavel_Documento;
+  TAtividades(Result).Responsavel_Contato := TAtividades(aModel).Responsavel_Contato;
+  TAtividades(Result).Responsavel_Email := TAtividades(aModel).Responsavel_Email;
+  TAtividades(Result).Responsavel_Foto := TAtividades(aModel).Responsavel_Foto;
   TAtividades(Result).Id_Usuario := TAtividades(aModel).Id_Usuario;
   TAtividades(Result).Obs := TAtividades(aModel).Obs;
   TAtividades(Result).Entrada := TAtividades(aModel).Entrada;
@@ -39,8 +45,14 @@ class function TAssemblerAtividades.GetClone(const aDTO: TORMDTOBase): TORMDTOBa
 begin
   Result := TDTOAtividades.Create();
   TDTOAtividades(Result).id := TDTOAtividades(aDTO).id;
-  TDTOAtividades(Result).Id_Crianca := TDTOAtividades(aDTO).Id_Crianca;
-  TDTOAtividades(Result).Id_Responsavel := TDTOAtividades(aDTO).Id_Responsavel;
+  TDTOAtividades(Result).Crianca_Nome := TDTOAtividades(aDTO).Crianca_Nome;
+  TDTOAtividades(Result).Crianca_Nascimento := TDTOAtividades(aDTO).Crianca_Nascimento;
+  TDTOAtividades(Result).Crianca_Foto := TDTOAtividades(aDTO).Crianca_Foto;
+  TDTOAtividades(Result).Responsavel_Nome := TDTOAtividades(aDTO).Responsavel_Nome;
+  TDTOAtividades(Result).Responsavel_Documento := TDTOAtividades(aDTO).Responsavel_Documento;
+  TDTOAtividades(Result).Responsavel_Contato := TDTOAtividades(aDTO).Responsavel_Contato;
+  TDTOAtividades(Result).Responsavel_Email := TDTOAtividades(aDTO).Responsavel_Email;
+  TDTOAtividades(Result).Responsavel_Foto := TDTOAtividades(aDTO).Responsavel_Foto;
   TDTOAtividades(Result).Id_Usuario := TDTOAtividades(aDTO).Id_Usuario;
   TDTOAtividades(Result).Obs := TDTOAtividades(aDTO).Obs;
   TDTOAtividades(Result).Entrada := TDTOAtividades(aDTO).Entrada;
@@ -56,8 +68,14 @@ class function TAssemblerAtividades.ModelToDTO(const aModel: TORMModelBase): TOR
 begin
   Result := TDTOAtividades.Create();
   TDTOAtividades(Result).id := TAtividades(aModel).id;
-  TDTOAtividades(Result).Id_Crianca := TAtividades(aModel).Id_Crianca;
-  TDTOAtividades(Result).Id_Responsavel := TAtividades(aModel).Id_Responsavel;
+  TDTOAtividades(Result).Crianca_Nome := TAtividades(aModel).Crianca_Nome;
+  TDTOAtividades(Result).Crianca_Nascimento := TAtividades(aModel).Crianca_Nascimento;
+  TDTOAtividades(Result).Crianca_Foto := TAtividades(aModel).Crianca_Foto;
+  TDTOAtividades(Result).Responsavel_Nome := TAtividades(aModel).Responsavel_Nome;
+  TDTOAtividades(Result).Responsavel_Documento := TAtividades(aModel).Responsavel_Documento;
+  TDTOAtividades(Result).Responsavel_Contato := TAtividades(aModel).Responsavel_Contato;
+  TDTOAtividades(Result).Responsavel_Email := TAtividades(aModel).Responsavel_Email;
+  TDTOAtividades(Result).Responsavel_Foto := TAtividades(aModel).Responsavel_Foto;
   TDTOAtividades(Result).Id_Usuario := TAtividades(aModel).Id_Usuario;
   TDTOAtividades(Result).Obs := TAtividades(aModel).Obs;
   TDTOAtividades(Result).Entrada := TAtividades(aModel).Entrada;
@@ -73,8 +91,14 @@ class function TAssemblerAtividades.DTOToModel(const aDTO: TORMDTOBase): TORMMod
 begin
   Result := TAtividades.Create();
   TAtividades(Result).id := TDTOAtividades(aDTO).id;
-  TAtividades(Result).Id_Crianca := TDTOAtividades(aDTO).Id_Crianca;
-  TAtividades(Result).Id_Responsavel := TDTOAtividades(aDTO).Id_Responsavel;
+  TAtividades(Result).Crianca_Nome := TDTOAtividades(aDTO).Crianca_Nome;
+  TAtividades(Result).Crianca_Nascimento := TDTOAtividades(aDTO).Crianca_Nascimento;
+  TAtividades(Result).Crianca_Foto := TDTOAtividades(aDTO).Crianca_Foto;
+  TAtividades(Result).Responsavel_Nome := TDTOAtividades(aDTO).Responsavel_Nome;
+  TAtividades(Result).Responsavel_Documento := TDTOAtividades(aDTO).Responsavel_Documento;
+  TAtividades(Result).Responsavel_Contato := TDTOAtividades(aDTO).Responsavel_Contato;
+  TAtividades(Result).Responsavel_Email := TDTOAtividades(aDTO).Responsavel_Email;
+  TAtividades(Result).Responsavel_Foto := TDTOAtividades(aDTO).Responsavel_Foto;
   TAtividades(Result).Id_Usuario := TDTOAtividades(aDTO).Id_Usuario;
   TAtividades(Result).Obs := TDTOAtividades(aDTO).Obs;
   TAtividades(Result).Entrada:= TDTOAtividades(aDTO).Entrada;
@@ -93,11 +117,29 @@ begin
   if Assigned(aQuery.FindField(mapper.Atividades.field_ID)) then
     TAtividades(Result).id := aQuery.FieldByName(mapper.Atividades.field_ID).AsString.ToGUID();
 
-  if Assigned(aQuery.FindField(mapper.Atividades.field_Id_Crianca)) then
-    TAtividades(Result).Id_Crianca := aQuery.FieldByName(mapper.Atividades.field_Id_Crianca).AsString.ToGUID;
+  if Assigned(aQuery.FindField(mapper.Atividades.field_CriancaNome)) then
+    TAtividades(Result).Crianca_Nome := aQuery.FieldByName(mapper.Atividades.field_CriancaNome).AsString;
 
-  if Assigned(aQuery.FindField(mapper.Atividades.field_Id_Responsavel)) then
-    TAtividades(Result).Id_Responsavel := aQuery.FieldByName(mapper.Atividades.field_Id_Responsavel).AsString.ToGUID;
+  if Assigned(aQuery.FindField(mapper.Atividades.field_CriancaNascimento)) then
+    TAtividades(Result).Crianca_Nascimento := aQuery.FieldByName(mapper.Atividades.field_CriancaNascimento).AsDateTime;
+
+  if Assigned(aQuery.FindField(mapper.Atividades.field_CriancaFoto)) then
+    TAtividades(Result).Crianca_Foto := aQuery.FieldByName(mapper.Atividades.field_CriancaFoto).AsString;
+
+  if Assigned(aQuery.FindField(mapper.Atividades.field_ResponsavelNome)) then
+    TAtividades(Result).Responsavel_Nome := aQuery.FieldByName(mapper.Atividades.field_ResponsavelNome).AsString;
+
+  if Assigned(aQuery.FindField(mapper.Atividades.field_ResponsavelDocumento)) then
+    TAtividades(Result).Responsavel_Documento := aQuery.FieldByName(mapper.Atividades.field_ResponsavelDocumento).AsString;
+
+  if Assigned(aQuery.FindField(mapper.Atividades.field_ResponsavelContato)) then
+    TAtividades(Result).Responsavel_Contato := aQuery.FieldByName(mapper.Atividades.field_ResponsavelContato).AsString;
+
+  if Assigned(aQuery.FindField(mapper.Atividades.field_ResponsavelEmail)) then
+    TAtividades(Result).Responsavel_Email := aQuery.FieldByName(mapper.Atividades.field_ResponsavelEmail).AsString;
+
+  if Assigned(aQuery.FindField(mapper.Atividades.field_ResponsavelFoto)) then
+    TAtividades(Result).Responsavel_Foto := aQuery.FieldByName(mapper.Atividades.field_ResponsavelFoto).AsString;
 
   if Assigned(aQuery.FindField(mapper.Atividades.field_Id_Usuario)) then
     TAtividades(Result).Id_Usuario := aQuery.FieldByName(mapper.Atividades.field_Id_Usuario).AsString.ToGUID;

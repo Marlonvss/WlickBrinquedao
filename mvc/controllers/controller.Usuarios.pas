@@ -28,7 +28,7 @@ implementation
 
 procedure TControllerUsuario.AtualizaDataProcesso;
 begin
-    MyDAO.ExecutaSQL('select EncerrarDia()');
+  MyDAO.ExecutaSQL('select Func_Encerrar_Dia()');
 end;
 
 function TControllerUsuario.ClassDAO: TORMDAOBaseClass;

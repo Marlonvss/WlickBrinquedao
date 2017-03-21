@@ -47,7 +47,7 @@ object frmAtividades: TfrmAtividades
       ExplicitHeight = 25
     end
     object pnlBusca: TPanel
-      Left = 100
+      Left = 157
       Top = 0
       Width = 356
       Height = 52
@@ -80,10 +80,11 @@ object frmAtividades: TfrmAtividades
     object cxButton1: TcxButton
       Left = 0
       Top = 0
-      Width = 100
+      Width = 157
       Height = 52
       Align = alLeft
       Action = actNovo
+      Caption = 'Iniciar Atividade'
       TabOrder = 0
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -101,7 +102,6 @@ object frmAtividades: TfrmAtividades
     Height = 456
     Align = alClient
     TabOrder = 1
-    ExplicitLeft = -2
     object grdAtividadeDBTableView1: TcxGridDBTableView
       Navigator.Buttons.CustomButtons = <>
       DataController.Summary.DefaultGroupSummaryItems = <>
@@ -722,7 +722,7 @@ object frmAtividades: TfrmAtividades
       end
       object grdAtividadeDBLayoutView3DBLayoutViewItem14: TcxGridDBLayoutViewItem
         Caption = 'Nome'
-        DataBinding.FieldName = 'nome'
+        DataBinding.FieldName = 'crianca_nome'
         LayoutItem = grdAtividadeDBLayoutView3LayoutItem7
         Options.Editing = False
         Options.Filtering = False
@@ -737,7 +737,7 @@ object frmAtividades: TfrmAtividades
       end
       object grdAtividadeDBLayoutView3DBLayoutViewItem8: TcxGridDBLayoutViewItem
         Caption = 'Nascimento'
-        DataBinding.FieldName = 'nascimento'
+        DataBinding.FieldName = 'crianca_nascimento'
         LayoutItem = grdAtividadeDBLayoutView3LayoutItem8
         Options.Editing = False
         Options.Filtering = False
@@ -752,7 +752,7 @@ object frmAtividades: TfrmAtividades
       end
       object grdAtividadeDBLayoutView3DBLayoutViewItem9: TcxGridDBLayoutViewItem
         Caption = 'Nome'
-        DataBinding.FieldName = 'responsavelnome'
+        DataBinding.FieldName = 'responsavel_nome'
         LayoutItem = grdAtividadeDBLayoutView3LayoutItem9
         Options.Editing = False
         Options.Filtering = False
@@ -767,7 +767,7 @@ object frmAtividades: TfrmAtividades
       end
       object grdAtividadeDBLayoutView3DBLayoutViewItem10: TcxGridDBLayoutViewItem
         Caption = 'Documento'
-        DataBinding.FieldName = 'responsaveldocumento'
+        DataBinding.FieldName = 'responsavel_documento'
         LayoutItem = grdAtividadeDBLayoutView3LayoutItem10
         Options.Editing = False
         Options.Filtering = False
@@ -782,7 +782,7 @@ object frmAtividades: TfrmAtividades
       end
       object grdAtividadeDBLayoutView3DBLayoutViewItem11: TcxGridDBLayoutViewItem
         Caption = 'Contato'
-        DataBinding.FieldName = 'responsavelcontato'
+        DataBinding.FieldName = 'responsavel_contato'
         LayoutItem = grdAtividadeDBLayoutView3LayoutItem11
         Options.Editing = False
         Options.Filtering = False
@@ -796,11 +796,12 @@ object frmAtividades: TfrmAtividades
         Options.ShowEditButtons = isebNever
       end
       object grdAtividadeDBLayoutView3DBLayoutViewItem12: TcxGridDBLayoutViewItem
-        DataBinding.FieldName = 'foto'
+        DataBinding.FieldName = 'crianca_foto'
         Visible = False
         LayoutItem = grdAtividadeDBLayoutView3LayoutItem12
       end
       object grdAtividadeDBLayoutView3DBLayoutViewItem13: TcxGridDBLayoutViewItem
+        Caption = 'Encerrar atividade'
         PropertiesClassName = 'TcxButtonEditProperties'
         Properties.Buttons = <
           item
@@ -845,7 +846,6 @@ object frmAtividades: TfrmAtividades
           end>
         LayoutItem = grdAtividadeDBLayoutView3LayoutItem13
         Options.ShowEditButtons = isebAlways
-        IsCaptionAssigned = True
       end
       object grdAtividadeDBLayoutView3Group_Root: TdxLayoutGroup
         AlignHorz = ahLeft
@@ -931,11 +931,11 @@ object frmAtividades: TfrmAtividades
   object ActManager: TActionManager
     LargeImages = DImages.img16
     Images = DImages.img16
-    Left = 140
-    Top = 72
+    Left = 112
+    Top = 80
     StyleName = 'Platform Default'
     object actNovo: TAction
-      Caption = 'Registrar'
+      Caption = 'Iniciar Atividades'
       ImageIndex = 3
       OnExecute = actNovoExecute
     end
@@ -956,31 +956,26 @@ object frmAtividades: TfrmAtividades
     end
   end
   object uniPrincipal: TUniQuery
-    Connection = UniConnection1
     SQL.Strings = (
       
         'SELECT ATIVIDADES.ID, ATIVIDADES.OBS, ATIVIDADES.ENTRADA, ATIVID' +
         'ADES.VALOR, ATIVIDADES.TEMPO, ATIVIDADES.SITUACAO, ATIVIDADES.EN' +
         'TRADA + CAST(ATIVIDADES.TEMPO as INTERVAL) AS PREVISAO,'
-      '       CRIANCAS.NOME, CRIANCAS.NASCIMENTO, CRIANCAS.FOTO,'
       
-        '       RESPONSAVEIS.NOME AS RESPONSAVELNOME, RESPONSAVEIS.DOCUME' +
-        'NTO AS RESPONSAVELDOCUMENTO, RESPONSAVEIS.CONTATO AS RESPONSAVEL' +
-        'CONTATO,'
+        '       ATIVIDADES.CRIANCA_NOME, ATIVIDADES.CRIANCA_NASCIMENTO, A' +
+        'TIVIDADES.CRIANCA_FOTO,'
+      
+        '       ATIVIDADES.RESPONSAVEL_NOME, ATIVIDADES.RESPONSAVEL_DOCUM' +
+        'ENTO, ATIVIDADES.RESPONSAVEL_CONTATO,'
       '       '#39'X'#39' as BOTAO'
       '  FROM ATIVIDADES'
-      '  JOIN CRIANCAS ON CRIANCAS.ID = ATIVIDADES.ID_CRIANCA'
-      
-        '  JOIN RESPONSAVEIS ON RESPONSAVEIS.ID = ATIVIDADES.ID_RESPONSAV' +
-        'EL'
       ' WHERE ATIVIDADES.SITUACAO = 0'
       
         ' ORDER BY ATIVIDADES.ENTRADA + CAST(ATIVIDADES.TEMPO as INTERVAL' +
         ')')
-    Active = True
     Filtered = True
-    Left = 80
-    Top = 72
+    Left = 68
+    Top = 80
     object uniPrincipalid: TGuidField
       FieldName = 'id'
       Required = True
@@ -1006,32 +1001,26 @@ object frmAtividades: TfrmAtividades
       FieldName = 'previsao'
       ReadOnly = True
     end
-    object uniPrincipalnome: TStringField
-      FieldName = 'nome'
-      ReadOnly = True
+    object uniPrincipalcrianca_nome: TStringField
+      FieldName = 'crianca_nome'
       Size = 100
     end
-    object uniPrincipalnascimento: TDateTimeField
-      FieldName = 'nascimento'
-      ReadOnly = True
+    object uniPrincipalcrianca_nascimento: TDateTimeField
+      FieldName = 'crianca_nascimento'
     end
-    object uniPrincipalfoto: TBlobField
-      FieldName = 'foto'
-      ReadOnly = True
+    object uniPrincipalcrianca_foto: TBlobField
+      FieldName = 'crianca_foto'
     end
-    object uniPrincipalresponsavelnome: TStringField
-      FieldName = 'responsavelnome'
-      ReadOnly = True
+    object uniPrincipalresponsavel_nome: TStringField
+      FieldName = 'responsavel_nome'
       Size = 100
     end
-    object uniPrincipalresponsaveldocumento: TStringField
-      FieldName = 'responsaveldocumento'
-      ReadOnly = True
+    object uniPrincipalresponsavel_documento: TStringField
+      FieldName = 'responsavel_documento'
       Size = 30
     end
-    object uniPrincipalresponsavelcontato: TStringField
-      FieldName = 'responsavelcontato'
-      ReadOnly = True
+    object uniPrincipalresponsavel_contato: TStringField
+      FieldName = 'responsavel_contato'
       Size = 50
     end
     object uniPrincipalbotao: TMemoField
@@ -1043,7 +1032,7 @@ object frmAtividades: TfrmAtividades
   object dsPrincipal: TDataSource
     DataSet = uniPrincipal
     Left = 24
-    Top = 72
+    Top = 80
   end
   object menu: TPopupMenu
     Images = DImages.img16
@@ -1073,17 +1062,5 @@ object frmAtividades: TfrmAtividades
     OnTimer = TimerHoraTimer
     Left = 24
     Top = 176
-  end
-  object UniConnection1: TUniConnection
-    ProviderName = 'PostgreSQL'
-    Port = 5432
-    Database = 'brinquedao'
-    Username = 'postgres'
-    Server = 'localhost'
-    Connected = True
-    LoginPrompt = False
-    Left = 304
-    Top = 128
-    EncryptedPassword = '8FFF90FF8CFF8BFF98FF8DFF9AFF8CFF'
   end
 end

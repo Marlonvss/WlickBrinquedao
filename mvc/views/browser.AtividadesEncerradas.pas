@@ -11,9 +11,8 @@ uses
   cxData, cxDataStorage, cxEdit, cxNavigator, Data.DB, cxDBData, cxGridLevel,
   cxGridCustomView, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGrid, ORM.Images, ORM.browserBase, ORM.DTOBase, DTO.Atividades, mapper.Atividades,
-  ORM.fichaBase, ficha.Atividades, WLick.ClassHelper, mapper.Criancas,
-  mapper.Responsaveis, enum.Atividades.Situacao, DMRelatorio, WLick.Types,
-  cxBarEditItem, WLick.Sessao, WLick.Miscelania;
+  ORM.fichaBase, ficha.Atividades, WLick.ClassHelper, enum.Atividades.Situacao,
+  DMRelatorio, WLick.Types, cxBarEditItem, WLick.Sessao, WLick.Miscelania;
 
 
 type
@@ -113,15 +112,13 @@ begin
     .Select(mapper.Atividades.tableName+'.'+mapper.Atividades.field_Entrada+'+ CAST('+mapper.Atividades.tableName+'.'+mapper.Atividades.field_Tempo+' AS INTERVAL)','PREVISAO')
     .Select(mapper.Atividades.tableName+'.'+mapper.Atividades.field_Saida)
     .Select(mapper.Atividades.tableName+'.'+mapper.Atividades.field_Saida+'- CAST('+mapper.Atividades.tableName+'.'+mapper.Atividades.field_Entrada+' AS INTERVAL)','TEMPOSERVICO')
-    .Select(mapper.Criancas.tableName+'.'+mapper.Criancas.field_nome)
-    .Select(mapper.Criancas.tableName+'.'+mapper.Criancas.field_nascimento)
-    .Select(mapper.Responsaveis.tableName+'.'+mapper.Responsaveis.field_nome, 'RESPONSAVELNOME')
-    .Select(mapper.Responsaveis.tableName+'.'+mapper.Responsaveis.field_documento, 'RESPONSAVELDOCUMENTO')
-    .Select(mapper.Responsaveis.tableName+'.'+mapper.Responsaveis.field_contato, 'RESPONSAVELCONTATO')
-    .Select(mapper.Responsaveis.tableName+'.'+mapper.Responsaveis.field_email, 'RESPONSAVELEMAIL')
+    .Select(mapper.Atividades.tableName+'.'+mapper.Atividades.field_Criancanome)
+    .Select(mapper.Atividades.tableName+'.'+mapper.Atividades.field_Criancanascimento)
+    .Select(mapper.Atividades.tableName+'.'+mapper.Atividades.field_Responsavelnome, 'RESPONSAVELNOME')
+    .Select(mapper.Atividades.tableName+'.'+mapper.Atividades.field_Responsaveldocumento, 'RESPONSAVELDOCUMENTO')
+    .Select(mapper.Atividades.tableName+'.'+mapper.Atividades.field_Responsavelcontato, 'RESPONSAVELCONTATO')
+    .Select(mapper.Atividades.tableName+'.'+mapper.Atividades.field_Responsavelemail, 'RESPONSAVELEMAIL')
     .From(mapper.Atividades.tableName)
-    .Join(mapper.Criancas.tableName).&On(mapper.Criancas.tableName+'.'+mapper.Criancas.field_id, mapper.Atividades.tableName+'.'+mapper.Atividades.field_Id_Crianca)
-    .Join(mapper.Responsaveis.tableName).&On(mapper.Responsaveis.tableName+'.'+mapper.Responsaveis.field_id, mapper.Atividades.tableName+'.'+mapper.Atividades.field_Id_Responsavel)
     .Where(mapper.Atividades.field_Situacao, Integer(enum.Atividades.Situacao.tsFinalizado).ToString())
     .Where(mapper.Atividades.tableName+'.'+mapper.Atividades.field_DataInsert)
       .Equals(FormatDateTime('YYYY-MM-DD',GetDataFiltroBrowser).Quoted)
@@ -133,8 +130,8 @@ begin
   Self.ClearColumnsBrowser;
 
   Self.AddColumnBrowser(mapper.Atividades.field_ID, mapper.Atividades.field_ID_Caption).SetPK();
-  Self.AddColumnBrowser(mapper.Criancas.field_nome, mapper.Criancas.field_nome_Caption);
-  Self.AddColumnBrowser(mapper.Criancas.field_nascimento, mapper.Criancas.field_nascimento_Caption)
+  Self.AddColumnBrowser(mapper.Atividades.field_CriancaNome, mapper.Atividades.field_CriancaNome_Caption);
+  Self.AddColumnBrowser(mapper.Atividades.field_CriancaNascimento, mapper.Atividades.field_CriancaNascimento_Caption)
     .SetDataType(dtDate);
   Self.AddColumnBrowser(mapper.Atividades.field_Entrada, mapper.Atividades.field_Entrada_Caption)
     .SetDataType(dtTime);

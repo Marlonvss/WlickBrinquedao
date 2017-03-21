@@ -7,8 +7,14 @@ uses Rtti, ORM.attributes, ORM.dtoBase, Classes, mapper.Atividades, Vcl.Graphics
 type
   TDTOAtividades = class(TORMdtoBase)
     private
-      FId_Crianca: TGuid;
-      FId_Responsavel: TGuid;
+      FCrianca_Nome: String;
+      FCrianca_Nascimento: TDate;
+      FCrianca_Foto: String;
+      FResponsavel_Nome: String;
+      FResponsavel_Documento: String;
+      FResponsavel_Contato: String;
+      FResponsavel_Email: String;
+      FResponsavel_Foto: String;
       FId_Usuario: TGuid;
       FObs: String;
       FEntrada: TDateTime;
@@ -20,8 +26,14 @@ type
       FValorSaida: Currency;
       FDataInsert: TDate;
     published
-      property Id_Crianca: TGuid read FId_Crianca write FId_Crianca;
-      property Id_Responsavel: TGuid read FId_Responsavel write FId_Responsavel;
+      property Crianca_Nome: String read FCrianca_Nome write FCrianca_Nome;
+      property Crianca_Nascimento: TDate read FCrianca_Nascimento write FCrianca_Nascimento;
+      property Crianca_Foto: String read FCrianca_Foto write FCrianca_Foto;
+      property Responsavel_Nome: String read FResponsavel_Nome write FResponsavel_Nome;
+      property Responsavel_Documento: String read FResponsavel_Documento write FResponsavel_Documento;
+      property Responsavel_Contato: String read FResponsavel_Contato write FResponsavel_Contato;
+      property Responsavel_Email: String read FResponsavel_Email write FResponsavel_Email;
+      property Responsavel_Foto: String read FResponsavel_Foto write FResponsavel_Foto;
       property Id_Usuario: TGuid read FId_Usuario write FId_Usuario;
       property Obs: String read FObs write FObs;
       property Entrada: TDateTime read FEntrada write FEntrada;

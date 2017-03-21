@@ -12,33 +12,36 @@ uses
 
 type
   TframeAtividadesEntrada = class(TFrame)
-    lblLogin: TLabel;
-    lblNascimento: TLabel;
-    lblResponsavel: TLabel;
-    lblContato: TLabel;
-    lblEmail: TLabel;
-    lblDocumento: TLabel;
     lblObs: TLabel;
     lblEntrada: TLabel;
     lblValor: TLabel;
     lblTempoDeServico: TLabel;
     lblPrevisaoDeSaida: TLabel;
-    edtCrianca: TcxComboBox;
-    edtNascimento: TcxDateEdit;
-    edtResponsavel: TcxComboBox;
-    edtContato: TcxTextEdit;
-    edtEmail: TcxTextEdit;
-    edtDocumento: TcxTextEdit;
     edtObs: TcxMemo;
     edtEntrada: TcxTimeEdit;
     edtPrevisaoSaida: TcxTimeEdit;
-    btnAddCrianca: TcxButton;
     edtValor: TcxComboBox;
     edtTempoServico: TcxComboBox;
     imgFotoCrianca: TcxImage;
     lblFotoCrianca: TLabel;
     lblFotoResponsavel: TLabel;
     imgFotoResponsavel: TcxImage;
+    lblLogin: TLabel;
+    lblNascimento: TLabel;
+    lblResponsavel: TLabel;
+    lblContato: TLabel;
+    lblEmail: TLabel;
+    lblDocumento: TLabel;
+    edtNascimento: TcxDateEdit;
+    edtContato: TcxTextEdit;
+    edtEmail: TcxTextEdit;
+    edtDocumento: TcxTextEdit;
+    edtCrianca: TcxTextEdit;
+    edtResponsavel: TcxTextEdit;
+    btnFotoResponsavel: TcxButton;
+    btnFotoCrianca: TcxButton;
+    btnFotoCriancaClear: TcxButton;
+    btnFotoResponsavelClear: TcxButton;
     private
       { Private declarations }
     public

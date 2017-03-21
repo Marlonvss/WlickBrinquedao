@@ -178,6 +178,7 @@ var
   StreamImagem : TStringStream;
   objJPEG : TJPEGImage;
 begin
+  Result := TPicture.Create;
   if (pValor <> '') then
   begin
     StreamImagem := TStringStream.Create;
@@ -188,7 +189,7 @@ begin
 
       objJPEG.LoadFromStream(StreamImagem);
 
-      Result := TPicture.Create;
+      //Result := TPicture.Create;
       Result.Assign(objJPEG);
     finally
       objJPEG.Create;

@@ -35,8 +35,12 @@
       Caption = 'Principal'
       Groups = <
         item
-          Caption = ''
+          Caption = 'Atividades'
           ToolbarName = 'barPrinciparBar1'
+        end
+        item
+          Caption = 'Relat'#243'rios'
+          ToolbarName = 'barOutrosRelatorios'
         end>
       Index = 0
     end
@@ -45,11 +49,11 @@
       Groups = <
         item
           Caption = 'Cadastros'
-          ToolbarName = 'barPrinciparBar2'
+          ToolbarName = 'barOutrosCadastros'
         end
         item
           Caption = 'Config.'
-          ToolbarName = 'barPrinciparBar3'
+          ToolbarName = 'barOutrosConfig'
         end>
       Index = 1
     end
@@ -67,6 +71,10 @@
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
         Width = 200
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        Width = 300
       end>
     Ribbon = Ribbon
     Font.Charset = DEFAULT_CHARSET
@@ -87,7 +95,6 @@
     object actCriancas: TAction
       Category = 'Principal'
       Caption = 'Listagem de crian'#231'as'
-      OnExecute = actCriancasExecute
     end
     object actValores: TAction
       Category = 'Outros'
@@ -103,6 +110,11 @@
       Category = 'Principal'
       Caption = 'Atividades encerradas'
       OnExecute = actAtividadesEncerradasExecute
+    end
+    object actRelatorioGerencial: TAction
+      Category = 'Outros'
+      Caption = 'Relat'#243'rio Gerencial'
+      OnExecute = actRelatorioGerencialExecute
     end
   end
   object barPrincipar: TdxBarManager
@@ -120,6 +132,7 @@
       True)
     ImageOptions.LargeImages = DMImageBrinquedao.img32
     ImageOptions.LargeIcons = True
+    MenuAnimations = maFade
     PopupMenuLinks = <>
     UseSystemFont = True
     Left = 32
@@ -145,19 +158,15 @@
       ItemLinks = <
         item
           Visible = True
-          ItemName = 'dxBarLargeButton1'
-        end
-        item
-          Visible = True
           ItemName = 'dxBarLargeButton6'
         end>
-      OneOnRow = True
+      OneOnRow = False
       Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False
     end
-    object barPrinciparBar2: TdxBar
+    object barOutrosCadastros: TdxBar
       AllowClose = False
       AllowCustomizing = False
       AllowQuickCustomizing = False
@@ -185,14 +194,34 @@
       Visible = True
       WholeRow = False
     end
-    object barPrinciparBar3: TdxBar
+    object barOutrosRelatorios: TdxBar
       AllowClose = False
       AllowCustomizing = False
       AllowQuickCustomizing = False
       AllowReset = False
       Caption = 'Custom 3'
       CaptionButtons = <>
-      DockedLeft = 167
+      DockedLeft = 82
+      DockedTop = 0
+      FloatLeft = 766
+      FloatTop = 8
+      FloatClientWidth = 0
+      FloatClientHeight = 0
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'dxBarLargeButton7'
+        end>
+      OneOnRow = False
+      Row = 0
+      UseOwnFont = False
+      Visible = True
+      WholeRow = False
+    end
+    object barOutrosConfig: TdxBar
+      Caption = 'Custom 4'
+      CaptionButtons = <>
+      DockedLeft = 135
       DockedTop = 0
       FloatLeft = 766
       FloatTop = 8
@@ -243,6 +272,11 @@
       LargeImageIndex = 5
       SyncImageIndex = False
       ImageIndex = -1
+    end
+    object dxBarLargeButton7: TdxBarLargeButton
+      Action = actRelatorioGerencial
+      Category = 0
+      LargeImageIndex = 6
     end
   end
   object tabMDIManager: TdxTabbedMDIManager

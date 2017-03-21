@@ -11,8 +11,14 @@ type
   private
 
     FId: TGuid;
-    FId_Crianca: TGuid;
-    FId_Responsavel: TGuid;
+    FCrianca_Nome: String;
+    FCrianca_Nascimento: TDate;
+    FCrianca_Foto: String;
+    FResponsavel_Nome: String;
+    FResponsavel_Documento: String;
+    FResponsavel_Contato: String;
+    FResponsavel_Email: String;
+    FResponsavel_Foto: String;
     FId_Usuario: TGuid;
     FObs: String;
     FEntrada: TTime;
@@ -28,11 +34,29 @@ type
     [TORMFieldCRUD(mapper.Atividades.field_ID, True)]
     property ID: TGuid read FID write FID;
 
-    [TORMFieldCRUD(mapper.Atividades.field_Id_Crianca)]
-    property Id_Crianca: TGuid read FId_Crianca write FId_Crianca;
+    [TORMFieldCRUD(mapper.Atividades.field_CriancaNome)]
+    property Crianca_Nome: String read FCrianca_Nome write FCrianca_Nome;
 
-    [TORMFieldCRUD(mapper.Atividades.field_Id_Responsavel)]
-    property Id_Responsavel: TGuid read FId_Responsavel write FId_Responsavel;
+    [TORMFieldCRUD(mapper.Atividades.field_CriancaNascimento)]
+    property Crianca_Nascimento: TDate read FCrianca_Nascimento write FCrianca_Nascimento;
+
+    [TORMFieldCRUD(mapper.Atividades.field_CriancaFoto)]
+    property Crianca_Foto: String read FCrianca_Foto write FCrianca_Foto;
+
+    [TORMFieldCRUD(mapper.Atividades.field_ResponsavelNome)]
+    property Responsavel_Nome: String read FResponsavel_Nome write FResponsavel_Nome;
+
+    [TORMFieldCRUD(mapper.Atividades.field_ResponsavelDocumento)]
+    property Responsavel_Documento: String read FResponsavel_Documento write FResponsavel_Documento;
+
+    [TORMFieldCRUD(mapper.Atividades.field_ResponsavelContato)]
+    property Responsavel_Contato: String read FResponsavel_Contato write FResponsavel_Contato;
+
+    [TORMFieldCRUD(mapper.Atividades.field_ResponsavelEmail)]
+    property Responsavel_Email: String read FResponsavel_Email write FResponsavel_Email;
+
+    [TORMFieldCRUD(mapper.Atividades.field_ResponsavelFoto)]
+    property Responsavel_Foto: String read FResponsavel_Foto write FResponsavel_Foto;
 
     [TORMFieldCRUD(mapper.Atividades.field_Id_Usuario)]
     property Id_Usuario: TGuid read FId_Usuario write FId_Usuario;

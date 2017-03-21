@@ -29,7 +29,6 @@ type
     Finalizaratividade1: TMenuItem;
     TimerRefresh: TTimer;
     TimerHora: TTimer;
-    UniConnection1: TUniConnection;
     actVisualizar: TAction;
     Visualizar1: TMenuItem;
     pnlTop: TPanel;
@@ -133,20 +132,6 @@ type
     N1: TMenuItem;
     actImprimir: TAction;
     Imprimir1: TMenuItem;
-    uniPrincipalid: TGuidField;
-    uniPrincipalobs: TStringField;
-    uniPrincipalentrada: TTimeField;
-    uniPrincipalvalor: TFloatField;
-    uniPrincipaltempo: TTimeField;
-    uniPrincipalsituacao: TSmallintField;
-    uniPrincipalprevisao: TTimeField;
-    uniPrincipalnome: TStringField;
-    uniPrincipalnascimento: TDateTimeField;
-    uniPrincipalfoto: TBlobField;
-    uniPrincipalresponsavelnome: TStringField;
-    uniPrincipalresponsaveldocumento: TStringField;
-    uniPrincipalresponsavelcontato: TStringField;
-    uniPrincipalbotao: TMemoField;
     grdAtividadeDBLayoutView3DBLayoutViewItem13: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3LayoutItem1: TcxGridLayoutItem;
     grdAtividadeDBLayoutView3LayoutItem2: TcxGridLayoutItem;
@@ -162,6 +147,20 @@ type
     grdAtividadeDBLayoutView3Group1: TdxLayoutGroup;
     grdAtividadeDBLayoutView3LayoutItem12: TcxGridLayoutItem;
     grdAtividadeDBLayoutView3LayoutItem13: TcxGridLayoutItem;
+    uniPrincipalid: TGuidField;
+    uniPrincipalobs: TStringField;
+    uniPrincipalentrada: TTimeField;
+    uniPrincipalvalor: TFloatField;
+    uniPrincipaltempo: TTimeField;
+    uniPrincipalsituacao: TSmallintField;
+    uniPrincipalprevisao: TTimeField;
+    uniPrincipalcrianca_nome: TStringField;
+    uniPrincipalcrianca_nascimento: TDateTimeField;
+    uniPrincipalcrianca_foto: TBlobField;
+    uniPrincipalresponsavel_nome: TStringField;
+    uniPrincipalresponsavel_documento: TStringField;
+    uniPrincipalresponsavel_contato: TStringField;
+    uniPrincipalbotao: TMemoField;
     procedure actFinalizarExecute(Sender: TObject);
     procedure TimerRefreshTimer(Sender: TObject);
     procedure actNovoExecute(Sender: TObject);
@@ -263,9 +262,9 @@ begin
   if (vFind <> EmptyStr) then
   begin
     uniPrincipal.Filter :=
-      ' (lower(NOME) = ' + vFind.Quoted + ')'+
-      ' OR (lower(RESPONSAVELNOME) = ' + vFind.Quoted + ')'+
-      ' OR (lower(RESPONSAVELDOCUMENTO) = ' + vFind.Quoted + ')';
+      ' (lower(CRIANCA_NOME) = ' + vFind.Quoted + ')'+
+      ' OR (lower(RESPONSAVEL_NOME) = ' + vFind.Quoted + ')'+
+      ' OR (lower(RESPONSAVEL_DOCUMENTO) = ' + vFind.Quoted + ')';
   end;
   uniPrincipal.Filtered := (uniPrincipal.Filter <> EmptyStr);
 end;
@@ -285,6 +284,7 @@ end;
 
 procedure TfrmAtividades.StartAutoRefresh;
 begin
+  edtBusca.Text := EmptyStr;
   TimerRefresh.Enabled := True;
 end;
 

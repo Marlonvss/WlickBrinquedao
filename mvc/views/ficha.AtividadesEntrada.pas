@@ -8,33 +8,31 @@ uses
   System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
   dxBar, cxBarEditItem, cxClasses, ORM.DTOBase, ORM.FichaBase, DTO.Atividades,
   controller.Atividades, ORM.controllerBase, frame.Atividades, WLick.ClassHelper,
-  Generics.collections, dto.Criancas, dto.Responsaveis, ORM.ViewManager,
-  ficha.Criancas, dto.ValorTempo, WLick.Sessao, enum.Atividades.Situacao,
-  frame.AtividadesEntrada, WLick.Miscelania, WLick.Constantes, viewMessageForm;
+  Generics.collections, ORM.ViewManager, dto.ValorTempo,
+  WLick.Sessao, enum.Atividades.Situacao, frame.AtividadesEntrada,
+  WLick.Miscelania, WLick.Constantes, viewMessageForm, MainCamera;
 
 type
 
   TFichaAtividadesEntrada = class(TORMFichaBase)
 
     private
-      FListaCriancas: TObjectList<TDTOCriancas>;
-      FListaResponsaveis: TObjectList<TDTOResponsaveis>;
       FListaValorTempo: TObjectList<TDTOValorTempo>;
 
       function MyController: TControllerAtividades;
       function MyFrame: TframeAtividadesEntrada;
       function MyDTO: TDTOAtividades;
 
-      procedure LoadCriancasInComboBox;
-      procedure LoadResponsaveisInComboBox(const aDTOCrianca: TDTOCriancas);
       procedure LoadValoresTempoInComboBox;
 
-      procedure OnChangeComboCriancas(Sender: TObject);
-      procedure OnChangeComboResponsaveis(Sender: TObject);
-      procedure OnClickBtnAddCrianca(Sender: TObject);
       procedure OnChangeEdtValor(Sender: TObject);
       procedure OnChangeEdtTempoServico(Sender: TObject);
       procedure OnChangeEdtEntrada(Sender: TObject);
+
+      procedure btnFotoCriancaEvent(Sender: TObject);
+      procedure btnFotoCriancaClearEvent(Sender: TObject);
+      procedure btnFotoResponsavelEvent(Sender: TObject);
+      procedure btnFotoResponsavelClearEvent(Sender: TObject);
 
       procedure CalculaPrevisaoSaida();
 
@@ -92,43 +90,6 @@ begin
   ModalResult := mrCancel;
 end;
 
-procedure TFichaAtividadesEntrada.OnChangeComboCriancas(Sender: TObject);
-var
-  vDTOCrianca: TDTOCriancas;
-begin
-  vDTOCrianca := TDTOCriancas(MyFrame.edtCrianca.ItemObject);
-  if Assigned(vDTOCrianca) then
-  begin
-
-    with MyFrame do
-    begin
-      edtNascimento.Date := vDTOCrianca.Nascimento;
-      imgFotoCrianca.Clear;
-      imgFotoCrianca.Picture := TMisc.StringToPicture( vDTOCrianca.Foto );
-    end;
-
-    LoadResponsaveisInComboBox(vDTOCrianca);
-  end;
-end;
-
-procedure TFichaAtividadesEntrada.OnChangeComboResponsaveis(Sender: TObject);
-var
-  vDTOResponsaveis: TDTOResponsaveis;
-begin
-  vDTOResponsaveis := TDTOResponsaveis(MyFrame.edtResponsavel.ItemObject);
-  if Assigned(vDTOResponsaveis) then
-  begin
-    with MyFrame do
-    begin
-      edtContato.Text := vDTOResponsaveis.Contato;
-      edtDocumento.Text := vDTOResponsaveis.Documento;
-      edtEmail.Text := vDTOResponsaveis.Email;
-      imgFotoResponsavel.Clear;
-      imgFotoResponsavel.Picture := TMisc.StringToPicture( vDTOResponsaveis.Foto );
-    end;
-  end;
-end;
-
 procedure TFichaAtividadesEntrada.OnChangeEdtEntrada(Sender: TObject);
 begin
   CalculaPrevisaoSaida();
@@ -163,79 +124,11 @@ begin
   end;
 end;
 
-procedure TFichaAtividadesEntrada.OnClickBtnAddCrianca(Sender: TObject);
-begin
-  ORM.ViewManager.TORMViewManager.AbreFicha(TFichaCriancas);
-  LoadCriancasInComboBox;
-end;
-
 function TFichaAtividadesEntrada.GetFrame: TFrame;
 begin
   if not Assigned(FFrame) then
     FFrame := TframeAtividadesEntrada.Create(Self);
   Result := FFrame;
-end;
-
-procedure TFichaAtividadesEntrada.LoadCriancasInComboBox;
-var
-  vDTO: TDTOCriancas;
-  vSelectedDTO: TDTOCriancas;
-begin
-  vSelectedDTO := nil;
-  
-  MyController.GetAllCriancas(FListaCriancas);
-  if FListaCriancas.Count > 0 then
-  try
-    MyFrame.edtCrianca.Properties.Items.BeginUpdate;
-    MyFrame.edtCrianca.Properties.Items.Clear;
-
-    for vDTO in FListaCriancas do
-    begin
-      if (vDTO.DataInsert = WLick.Sessao.GetInstance.DataProcesso) then
-      begin
-        MyFrame.edtCrianca.Properties.Items.AddObject(vDTO.Nome, vDTO);
-        if (vDTO.ID = MyDTO.Id_Crianca) then
-          vSelectedDTO := vDTO;
-      end;
-    end;
-
-  finally
-    if Assigned(vSelectedDTO)
-      then MyFrame.edtCrianca.ItemObject := vSelectedDTO;
-    MyFrame.edtCrianca.Properties.Items.EndUpdate;
-  end;
-end;
-
-procedure TFichaAtividadesEntrada.LoadResponsaveisInComboBox(const aDTOCrianca: TDTOCriancas);
-var
-  vDTO: TDTOResponsaveis;
-  vSelectedDTO: TDTOResponsaveis;
-begin
-  vSelectedDTO := nil;
-  if Assigned(aDTOCrianca) and (not aDTOCrianca.ID.IsNull) then
-  begin
-    MyController.GetResponsaveisByCriancaID(aDTOCrianca.ID, FListaResponsaveis);
-
-    if FListaResponsaveis.Count > 0 then
-    try
-      MyFrame.edtResponsavel.Properties.Items.BeginUpdate;
-      MyFrame.edtResponsavel.Properties.Items.Clear;
-
-      for vDTO in FListaResponsaveis do
-      begin
-        MyFrame.edtResponsavel.Properties.Items.AddObject(vDTO.Nome, vDTO);
-        if (vDTO.ID = MyDTO.Id_Responsavel) then
-          vSelectedDTO := vDTO;
-      end;
-
-    finally
-      if Assigned(vSelectedDTO)
-        then MyFrame.edtResponsavel.ItemObject := vSelectedDTO
-        else MyFrame.edtResponsavel.ItemObject := FListaResponsaveis.First;
-      MyFrame.edtResponsavel.Properties.Items.EndUpdate;
-    end;
-  end;
-  MyFrame.edtResponsavel.Enabled := (FListaResponsaveis.Count > 0);
 end;
 
 procedure TFichaAtividadesEntrada.LoadValoresTempoInComboBox;
@@ -271,12 +164,14 @@ begin
 
   with MyFrame do
   begin
-    edtCrianca.Properties.OnEditValueChanged := OnChangeComboCriancas;
-    btnAddCrianca.OnClick := OnClickBtnAddCrianca;
-    edtResponsavel.Properties.OnEditValueChanged := OnChangeComboResponsaveis;
     edtEntrada.Properties.OnEditValueChanged := OnChangeEdtEntrada;
     edtValor.Properties.OnEditValueChanged := OnChangeEdtValor;
     edtTempoServico.Properties.OnEditValueChanged := OnChangeEdtTempoServico;
+
+    btnFotoCrianca.OnClick := btnFotoCriancaEvent;
+    btnFotoCriancaClear.OnClick := btnFotoCriancaClearEvent;
+    btnFotoResponsavel.OnClick := btnFotoResponsavelEvent;
+    btnFotoResponsavelClear.OnClick := btnFotoResponsavelClearEvent;
   end;
 
 end;
@@ -293,6 +188,16 @@ begin
     edtEntrada.Properties.OnChange := OnChangeMethod;
     edtTempoServico.Properties.OnChange := OnChangeMethod;
     edtValor.Properties.OnChange := OnChangeMethod;
+
+    edtCrianca.Properties.OnChange := OnChangeMethod;
+    edtNascimento.Properties.OnChange := OnChangeMethod;
+    edtResponsavel.Properties.OnChange := OnChangeMethod;
+    edtDocumento.Properties.OnChange := OnChangeMethod;
+    edtEmail.Properties.OnChange := OnChangeMethod;
+    edtContato.Properties.OnChange := OnChangeMethod;
+
+    imgFotoCrianca.Properties.OnChange := OnChangeMethod;
+    imgFotoResponsavel.Properties.OnChange := OnChangeMethod;
   end;
 end;
 
@@ -313,14 +218,14 @@ begin
 
   with MyDTO, MyFrame do
   begin
-    if MyDTO.Id_Crianca.IsNull then
+    if MyDTO.Crianca_Nome.IsNull then
     begin
       if vStr <> EmptyWideStr
         then vStr := vStr + CRLF;
       vStr := vStr + 'Favor informar a criança.';
     end;
 
-    if MyDTO.Id_Responsavel.IsNull then
+    if MyDTO.Responsavel_Nome.IsNull then
     begin
       if vStr <> EmptyWideStr
         then vStr := vStr + CRLF;
@@ -334,20 +239,40 @@ begin
       vStr := vStr + 'Favor informar o valor ou o tempo de serviço.';
     end;
 
-    { Valida se a criança já está em uma atividade aberta }
-    if MyController.CriancaEmAtividade(MyDTO) then
-    begin
-      if vStr <> EmptyWideStr
-        then vStr := vStr + CRLF;
-      vStr := vStr + 'A criança selecionada já está em atividade.';
-    end;
-
     if vStr <> EmptyWideStr then
     begin
       viewMessageForm.TviewMessage.Send_Atencao(vStr);
       FAbort := True;
     end;
   end;
+end;
+
+procedure TFichaAtividadesEntrada.btnFotoCriancaClearEvent(Sender: TObject);
+begin
+  if TviewMessage.Send_Question('Deseja realmente remover esta imagem?')
+    then MyFrame.imgFotoCrianca.Clear;
+end;
+
+procedure TFichaAtividadesEntrada.btnFotoCriancaEvent(Sender: TObject);
+var
+  vImg: String;
+begin
+  TfichaMainCamera.Init(vImg);
+  MyFrame.imgFotoCrianca.Picture := TMisc.StringToPicture(vImg);
+end;
+
+procedure TFichaAtividadesEntrada.btnFotoResponsavelClearEvent(Sender: TObject);
+begin
+  if TviewMessage.Send_Question('Deseja realmente remover esta imagem?')
+    then MyFrame.imgFotoResponsavel.Clear;
+end;
+
+procedure TFichaAtividadesEntrada.btnFotoResponsavelEvent(Sender: TObject);
+var
+  vImg: String;
+begin
+  TfichaMainCamera.Init(vImg);
+  MyFrame.imgFotoResponsavel.Picture := TMisc.StringToPicture(vImg);
 end;
 
 procedure TFichaAtividadesEntrada.CalculaPrevisaoSaida;
@@ -377,56 +302,58 @@ end;
 procedure TFichaAtividadesEntrada.CreateAllObjects;
 begin
   inherited CreateAllObjects();
-  Self.FListaCriancas := TObjectList<TDTOCriancas>.Create();
-  Self.FListaResponsaveis := TObjectList<TDTOResponsaveis>.Create();
   Self.FListaValorTempo := TObjectList<TDTOValorTempo>.Create();
 end;
 
 procedure TFichaAtividadesEntrada.DestroyAllObjects;
 begin
-  Self.FListaCriancas.Free;
-  Self.FListaResponsaveis.Free;
   Self.FListaValorTempo.Free;
   inherited DestroyAllObjects();
 end;
 
 procedure TFichaAtividadesEntrada.DTOToView;
 begin
-  inherited;
-  LoadCriancasInComboBox;
   LoadValoresTempoInComboBox;
+
+  inherited;
 
   with MyFrame do
   begin
-    if (FStatusFicha = sfInsert) 
+    if (FStatusFicha = sfInsert)
       then edtEntrada.Time := Time()
       else edtEntrada.Time := MyDTO.Entrada;
     edtObs.Text := MyDTO.Obs;
 
-    edtResponsavel.Enabled := (FListaResponsaveis.Count > 0);
+    edtCrianca.Text := MyDTO.Crianca_Nome;
+    if (FStatusFicha = sfInsert)
+      then edtNascimento.Date := StrToDate('01/01/1990')
+      else edtNascimento.Date := MyDTO.Crianca_Nascimento;
+
+    imgFotoCrianca.Clear;
+    imgFotoCrianca.Picture := TMisc.StringToPicture( MyDTO.Crianca_Foto );
+
+    edtResponsavel.Text := MyDTO.Responsavel_Nome;
+    edtContato.Text := MyDTO.Responsavel_Contato;
+    edtDocumento.Text := MyDTO.Responsavel_Documento;
+    edtEmail.Text := MyDTO.Responsavel_Email;
+
+    imgFotoResponsavel.Clear;
+    imgFotoResponsavel.Picture := TMisc.StringToPicture( MyDTO.Responsavel_Foto );
+
   end;
 
 end;
 
 procedure TFichaAtividadesEntrada.ViewToDTO;
 var
-  vDTOCrianca : TDTOCriancas;
-  vDTOResponsavel : TDTOResponsaveis;
   vDTOValorTempo : TDTOValorTempo;
 begin
   inherited;
 
-  vDTOCrianca := TDTOCriancas(MyFrame.edtCrianca.ItemObject);
-  vDTOResponsavel := TDTOResponsaveis(MyFrame.edtResponsavel.ItemObject);
   vDTOValorTempo := TDTOValorTempo(MyFrame.edtValor.ItemObject);
 
   with MyDTO do
   begin
-    if Assigned(vDTOCrianca)
-      then Id_Crianca   := vDTOCrianca.ID;
-
-    if Assigned(vDTOResponsavel)
-      then Id_Responsavel := vDTOResponsavel.ID;
 
     if Assigned(vDTOValorTempo) then
     begin
@@ -440,6 +367,16 @@ begin
     Situacao       := Integer(tsIniciado);
     if (FStatusFicha = sfInsert)
       then DataInsert := WLick.Sessao.GetInstance.DataProcesso;
+
+    Crianca_Nome := MyFrame.edtCrianca.Text;
+    Crianca_Nascimento := MyFrame.edtNascimento.Date;
+    Crianca_Foto := TMisc.PictureToString( MyFrame.imgFotoCrianca.Picture );
+
+    Responsavel_Nome := MyFrame.edtResponsavel.Text;
+    Responsavel_Documento := MyFrame.edtDocumento.Text;
+    Responsavel_Contato := MyFrame.edtContato.Text;
+    Responsavel_Email := MyFrame.edtEmail.Text;
+    Responsavel_Foto := TMisc.PictureToString( MyFrame.imgFotoResponsavel.Picture );
   end;
 
 end;

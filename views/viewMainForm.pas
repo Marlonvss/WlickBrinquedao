@@ -12,11 +12,13 @@ uses
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, browser.Usuario,
   dxStatusBar, WLick.Miscelania, dxRibbonStatusBar, dxSkinsForm, dxRibbonCustomizationForm,
   dxBarBuiltInMenu, Vcl.AppEvnts, WLick.ClassHelper, ORM.ViewManager,
-  viewLoginForm, browser.Criancas, WLick.Sessao, viewAtividadesPrincipal, Vcl.ExtCtrls,
+  viewLoginForm, WLick.Sessao, viewAtividadesPrincipal, Vcl.ExtCtrls,
   brinquedao.Images, browser.ValorTempo, ficha.Configuracoes, MainCamera,
   ppComm, ppEndUsr, ppPrnabl, ppClass, ppCtrls, ppBands, ppCache, ppDesignLayer,
   ppParameter, ppRelatv, ppProd, ppReport, DMRelatorio, WLick.Types,
-  browser.AtividadesEncerradas, viewMessageForm;
+  browser.AtividadesEncerradas, viewMessageForm,
+  Relatorio.Parametros.RelatorioGerencialFicha, enum.Usuarios.NivelAcesso,
+  DMConnection;
 
 type
   TfrmMain = class(TForm)
@@ -35,29 +37,33 @@ type
     actCriancas: TAction;
     actValores: TAction;
     actPreferencias: TAction;
-    barPrinciparBar2: TdxBar;
-    barPrinciparBar3: TdxBar;
+    barOutrosCadastros: TdxBar;
+    barOutrosRelatorios: TdxBar;
     dxBarLargeButton3: TdxBarLargeButton;
     dxBarLargeButton4: TdxBarLargeButton;
     dxBarLargeButton5: TdxBarLargeButton;
     timerAtividades: TTimer;
     dxBarLargeButton6: TdxBarLargeButton;
     actAtividadesEncerradas: TAction;
+    barOutrosConfig: TdxBar;
+    actRelatorioGerencial: TAction;
+    dxBarLargeButton7: TdxBarLargeButton;
     procedure actUsuariosExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure appEventsException(Sender: TObject; E: Exception);
-    procedure actCriancasExecute(Sender: TObject);
     procedure actValoresExecute(Sender: TObject);
     procedure timerAtividadesTimer(Sender: TObject);
     procedure actPreferenciasExecute(Sender: TObject);
     procedure actAtividadesEncerradasExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure actRelatorioGerencialExecute(Sender: TObject);
 
   private
     FTelaAtividades: TfrmAtividades;
 
     procedure LoadBarManager();
     procedure LoadAtividadeMain();
+    procedure RefreshByNivelAcesso();
 
   public
     { Public declarations }
@@ -77,14 +83,14 @@ begin
   ORM.ViewManager.TORMViewManager.AbreBrowser(TBrowserAtividadesEncerradas);
 end;
 
-procedure TfrmMain.actCriancasExecute(Sender: TObject);
-begin
-  ORM.ViewManager.TORMViewManager.AbreBrowser(TBrowserCriancas);
-end;
-
 procedure TfrmMain.actPreferenciasExecute(Sender: TObject);
 begin
   ORM.ViewManager.TORMViewManager.AbreFicha(TFichaConfiguracoes, False);
+end;
+
+procedure TfrmMain.actRelatorioGerencialExecute(Sender: TObject);
+begin
+  Relatorio.Parametros.RelatorioGerencialFicha.TfichaRelatorioGerencial.CallFicha;
 end;
 
 procedure TfrmMain.actUsuariosExecute(Sender: TObject);
@@ -117,6 +123,7 @@ end;
 procedure TfrmMain.FormShow(Sender: TObject);
 begin
   Ribbon.ActiveTab := RibbonTabPrincipal;
+  RefreshByNivelAcesso;
   LoadAtividadeMain();
   LoadBarManager();
 end;
@@ -136,6 +143,12 @@ procedure TfrmMain.LoadBarManager;
 begin
   Bar.Panels.Items[0].Text := ' Versão: ' + TMisc.GetVersaoSistema();
   Bar.Panels.Items[1].Text := ' Usuário: '+ WLick.Sessao.GetInstance.Usuario.Login;
+  Bar.Panels.Items[2].Text := ' Banco de Dados: '+ ORM.Connection.GetInstance().Host +':'+ IntToStr(ORM.Connection.GetInstance().Port) +'/'+ ORM.Connection.GetInstance().DataBaseName;
+end;
+
+procedure TfrmMain.RefreshByNivelAcesso;
+begin
+  barOutrosRelatorios.Visible := WLick.Sessao.GetInstance.Usuario.NivelAcesso = Integer(enum.Usuarios.NivelAcesso.unaAdministrador);
 end;
 
 procedure TfrmMain.timerAtividadesTimer(Sender: TObject);

@@ -7,7 +7,7 @@ type
 
   TStatusCRUD = (tscNone, tscInsert, tscUpdate, tscDelete);
 
-  TReportType = (trtFichaAtividade, trtFichaAtividade2);
+  TReportType = (trtFichaAtividade, trtRelatorioGerencial);
 
 implementation
 

@@ -5,11 +5,17 @@ interface
 uses SysUtils;
 
 const
-  tableName = 'Atividades';
+  tableName = 'atividades';
 
   field_Id = 'id';
-  field_Id_Crianca = 'id_crianca';
-  field_Id_Responsavel = 'id_responsavel';
+  field_CriancaNome = 'crianca_nome';
+  field_CriancaNascimento = 'crianca_nascimento';
+  field_CriancaFoto = 'crianca_foto';
+  field_ResponsavelNome = 'responsavel_nome';
+  field_ResponsavelDocumento = 'responsavel_documento';
+  field_ResponsavelContato = 'responsavel_contato';
+  field_ResponsavelEmail = 'responsavel_email';
+  field_ResponsavelFoto = 'responsavel_Foto';
   field_Id_Usuario = 'id_usuario';
   field_Obs = 'obs';
   field_Entrada = 'entrada';
@@ -21,8 +27,14 @@ const
   field_DataInsert = 'datainsert';
 
   field_Id_Caption = 'Id';
-  field_Id_Crianca_Caption = 'Id_Crianca';
-  field_Id_Responsavel_Caption = 'Id_Responsavel';
+  field_CriancaNome_Caption = 'Crianca';
+  field_CriancaNascimento_Caption = 'Nascimento';
+  field_CriancaFoto_Caption = 'Foto da criança';
+  field_ResponsavelNome_Caption = 'Responsável';
+  field_ResponsavelDocumento_Caption = 'Documento';
+  field_ResponsavelContato_Caption = 'Contato';
+  field_ResponsavelEmail_Caption = 'Email';
+  field_ResponsavelFoto_Caption = 'Foto do responsável';
   field_Id_Usuario_Caption = 'Id_Usuario';
   field_Obs_Caption = 'Obs';
   field_Entrada_Caption = 'Entrada';

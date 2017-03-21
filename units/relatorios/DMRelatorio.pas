@@ -7,11 +7,10 @@ uses
   ppDesignLayer, ppParameter, ppDBPipe, Data.DB, DBAccess, Uni, MemDS,
   UniProvider, PostgreSQLUniProvider, ppComm, ppRelatv, ppProd, ppReport,
   WLick.Types, Vcl.Forms, ppCtrls, ppPrnabl, ORM.Connection, ppStrtch, ppMemo,
-  ppVar, raCodMod, ppModule, ppRichTx;
+  ppVar, raCodMod, ppModule, ppRichTx, viewMessageForm;
 
 type
   TDMReport = class(TDataModule)
-    help: TUniConnection;
     qryFichaAtividade: TUniQuery;
     dsource: TUniDataSource;
     dbPipeline: TppDBPipeline;
@@ -49,6 +48,35 @@ type
     raProgramInfo1: TraProgramInfo;
     ppDesignLayers2: TppDesignLayers;
     ppDesignLayer2: TppDesignLayer;
+    qryRelatorioGerencial: TUniQuery;
+    reportRelatorioGerencial: TppReport;
+    ppDetailBand1: TppDetailBand;
+    ppDBImage6: TppDBImage;
+    ppLine3: TppLine;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer1: TppDesignLayer;
+    ppParameterList1: TppParameterList;
+    ppDBText3: TppDBText;
+    ppHeaderBand1: TppHeaderBand;
+    ppRichText3: TppRichText;
+    ppLabel3: TppLabel;
+    ppLabel4: TppLabel;
+    ppLabel5: TppLabel;
+    ppLabel6: TppLabel;
+    ppLabel7: TppLabel;
+    ppLabel8: TppLabel;
+    ppLabel9: TppLabel;
+    ppLine4: TppLine;
+    ppDBText5: TppDBText;
+    ppDBText6: TppDBText;
+    ppDBText2: TppDBText;
+    ppDBText4: TppDBText;
+    ppDBText7: TppDBText;
+    ppDBText14: TppDBText;
+    ppSummaryBand1: TppSummaryBand;
+    ppDBCalc1: TppDBCalc;
+    ppLabel10: TppLabel;
+    ppLine5: TppLine;
   private
     { Private declarations }
     function PreparaQueryReport(aReportType: TReportType; aParametros: TArrayString): TppReport;
@@ -73,6 +101,10 @@ begin
     trtFichaAtividade: begin
       dsource.DataSet := qryFichaAtividade;
       Result := reportFichaAtividade;
+    end;
+    trtRelatorioGerencial: begin
+      dsource.DataSet := qryRelatorioGerencial;
+      Result := reportRelatorioGerencial;
     end;
     else Result := nil;
   end;

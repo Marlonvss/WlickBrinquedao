@@ -34,7 +34,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "C:\Weblick\Brinquedao\Inno\ControleBrinquedoteca.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Weblick\Brinquedao\Inno\conexao.ini"; DestDir: "{app}";
+Source: "C:\Weblick\Brinquedao\Inno\conexao.ini"; DestDir: "{app}"; Flags: onlyifdoesntexist
 Source: "C:\Weblick\Brinquedao\Inno\Init.backup"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Weblick\Brinquedao\Inno\Icon.ico"; DestDir: "{app}";
 Source: "C:\Weblick\Brinquedao\Inno\pg.exe"; DestDir: "{tmp}"; Tasks: Servidor

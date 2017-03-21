@@ -11,7 +11,7 @@ SET Path=C:\Weblick\Brinquedao
 CD %Path%\PostgreSQL\Bin
 
 @ECHO.
-@ECHO "Aguarde enquanto o banco de dados esta sendo atualizado..."
+@ECHO Aguarde enquanto o banco de dados esta sendo atualizado...
 @ECHO.
 
 createdb -U postgres %Database%

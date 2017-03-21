@@ -93,7 +93,6 @@ begin
 
   with TControllerUsuario.Create do
   try
-    AtualizaDataProcesso();
     GetUsuarioByLoginSenha(vDTO);
     GetDataProcesso(vDataProcesso);
 

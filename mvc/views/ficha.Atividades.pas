@@ -8,17 +8,14 @@ uses
   System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
   dxBar, cxBarEditItem, cxClasses, ORM.DTOBase, ORM.FichaBase, DTO.Atividades,
   controller.Atividades, ORM.controllerBase, frame.Atividades, WLick.ClassHelper,
-  Generics.collections, dto.Criancas, dto.Responsaveis, ORM.ViewManager,
-  ficha.Criancas, dto.ValorTempo, WLick.Sessao, enum.Atividades.Situacao,
-  viewMessageForm, WLick.Miscelania, DMRelatorio, WLick.Types;
+  Generics.collections, ORM.ViewManager, dto.ValorTempo, WLick.Sessao,
+  enum.Atividades.Situacao, viewMessageForm, WLick.Miscelania, DMRelatorio, WLick.Types;
 
 type
 
   TFichaAtividades = class(TORMFichaBase)
 
     private
-      FDTOCrianca : TDTOCriancas;
-      FDTOResponsavel : TDTOResponsaveis;
 
       FEncerrandoAtividade: Boolean;
 
@@ -125,14 +122,10 @@ end;
 procedure TFichaAtividades.CreateAllObjects;
 begin
   inherited CreateAllObjects();
-  Self.FDTOCrianca := TDTOCriancas.Create();
-  Self.FDTOResponsavel := TDTOResponsaveis.Create();
 end;
 
 procedure TFichaAtividades.DestroyAllObjects;
 begin
-  Self.FDTOCrianca.Free;
-  Self.FDTOResponsavel.Free;
   inherited DestroyAllObjects();
 end;
 
@@ -145,24 +138,18 @@ begin
   MyDTO.Situacao := Integer(tsFinalizado);
 
   inherited;
-  Self.FDTOCrianca.ID := MyDTO.Id_Crianca;
-  Self.FController.Select(Self.FDTOCrianca);
-
-  Self.FDTOResponsavel.ID := MyDTO.Id_Responsavel;
-  Self.FController.Select(Self.FDTOResponsavel);
-
   { Atribui os dados da criança }
-  MyFrame.edtCrianca.Text := FDTOCrianca.Nome;
-  MyFrame.edtNascimento.Date := FDTOCrianca.Nascimento;
+  MyFrame.edtCrianca.Text := MyDTO.Crianca_Nome;
+  MyFrame.edtNascimento.Date := MyDTO.Crianca_Nascimento;
   MyFrame.imgFotoCrianca.Clear;
-  MyFrame.imgFotoCrianca.Picture := TMisc.StringToPicture( FDTOCrianca.Foto );
+  MyFrame.imgFotoCrianca.Picture := TMisc.StringToPicture( MyDTO.Crianca_Foto );
   { Atribui os dados do responsavel }
-  MyFrame.edtResponsavel.Text := FDTOResponsavel.Nome;
-  MyFrame.edtContato.Text := FDTOResponsavel.Contato;
-  MyFrame.edtDocumento.Text := FDTOResponsavel.Documento;
-  MyFrame.edtEmail.Text := FDTOResponsavel.Email;
+  MyFrame.edtResponsavel.Text := MyDTO.Responsavel_Nome;
+  MyFrame.edtContato.Text := MyDTO.Responsavel_Contato;
+  MyFrame.edtDocumento.Text := MyDTO.Responsavel_Documento;
+  MyFrame.edtEmail.Text := MyDTO.Responsavel_Email;
   MyFrame.imgFotoResponsavel.Clear;
-  MyFrame.imgFotoResponsavel.Picture := TMisc.StringToPicture( FDTOResponsavel.Foto );
+  MyFrame.imgFotoResponsavel.Picture := TMisc.StringToPicture( MyDTO.Responsavel_Foto );
   { Atribui os dados da atividade }
   MyFrame.edtObs.Text := MyDTO.Obs;
   MyFrame.edtEntrada.Time := MyDTO.Entrada;

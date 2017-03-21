@@ -2,19 +2,7 @@ object DMReport: TDMReport
   OldCreateOrder = False
   Height = 411
   Width = 529
-  object help: TUniConnection
-    ProviderName = 'PostgreSQL'
-    Port = 5432
-    Database = 'brinquedao3'
-    Username = 'postgres'
-    Server = '127.0.0.1'
-    Connected = True
-    Left = 48
-    Top = 12
-    EncryptedPassword = '8FFF90FF8CFF8BFF98FF8DFF9AFF8CFF'
-  end
   object qryFichaAtividade: TUniQuery
-    Connection = help
     SQL.Strings = (
       
         'SELECT (SELECT VALORBINARIO FROM CONFIGURACOES WHERE CONFIGURACA' +
@@ -23,19 +11,15 @@ object DMReport: TDMReport
         '       ATIVIDADES.ID, ATIVIDADES.OBS, ATIVIDADES.ENTRADA, ATIVID' +
         'ADES.VALOR, ATIVIDADES.TEMPO, ATIVIDADES.SAIDA, ATIVIDADES.DATAI' +
         'NSERT,'
-      '       CRIANCAS.NOME, CRIANCAS.NASCIMENTO, CRIANCAS.FOTO,'
       
-        '       RESPONSAVEIS.NOME AS RESPONSAVELNOME, RESPONSAVEIS.DOCUME' +
-        'NTO AS RESPONSAVELDOCUMENTO, RESPONSAVEIS.CONTATO AS RESPONSAVEL' +
-        'CONTATO, RESPONSAVEIS.EMAIL AS RESPONSAVELEMAIL, RESPONSAVEIS.FO' +
-        'TO AS RESPONSAVELFOTO'
+        '       ATIVIDADES.CRIANCA_NOME, ATIVIDADES.CRIANCA_NASCIMENTO, A' +
+        'TIVIDADES.CRIANCA_FOTO,'
+      
+        '       ATIVIDADES.RESPONSAVEL_NOME, ATIVIDADES.RESPONSAVEL_DOCUM' +
+        'ENTO, ATIVIDADES.RESPONSAVEL_CONTATO, ATIVIDADES.RESPONSAVEL_EMA' +
+        'IL, ATIVIDADES.RESPONSAVEL_FOTO'
       '  FROM ATIVIDADES'
-      '  JOIN CRIANCAS ON CRIANCAS.ID = ATIVIDADES.ID_CRIANCA'
-      
-        '  JOIN RESPONSAVEIS ON RESPONSAVEIS.ID = ATIVIDADES.ID_RESPONSAV' +
-        'EL'
       ' WHERE ATIVIDADES.ID = :ATIVIDADE_ID')
-    Active = True
     Left = 164
     Top = 16
     ParamData = <
@@ -46,7 +30,7 @@ object DMReport: TDMReport
       end>
   end
   object dsource: TUniDataSource
-    DataSet = qryFichaAtividade
+    DataSet = qryRelatorioGerencial
     Left = 12
     Top = 64
   end
@@ -156,7 +140,7 @@ object DMReport: TDMReport
       object ppDBText8: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText8'
-        DataField = 'nome'
+        DataField = 'crianca_nome'
         DataPipeline = dbPipeline
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -283,7 +267,7 @@ object DMReport: TDMReport
       object ppDBText9: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText9'
-        DataField = 'nascimento'
+        DataField = 'crianca_nascimento'
         DataPipeline = dbPipeline
         DisplayFormat = 'dd/mm/yyyy'
         Font.Charset = DEFAULT_CHARSET
@@ -303,7 +287,7 @@ object DMReport: TDMReport
       object ppDBText10: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText10'
-        DataField = 'responsavelnome'
+        DataField = 'responsavel_nome'
         DataPipeline = dbPipeline
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -322,7 +306,7 @@ object DMReport: TDMReport
       object ppDBText11: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText11'
-        DataField = 'responsavelcontato'
+        DataField = 'responsavel_contato'
         DataPipeline = dbPipeline
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -341,7 +325,7 @@ object DMReport: TDMReport
       object ppDBText12: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText12'
-        DataField = 'responsavelemail'
+        DataField = 'responsavel_email'
         DataPipeline = dbPipeline
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -360,7 +344,7 @@ object DMReport: TDMReport
       object ppDBText13: TppDBText
         DesignLayer = ppDesignLayer2
         UserName = 'DBText13'
-        DataField = 'responsaveldocumento'
+        DataField = 'responsavel_documento'
         DataPipeline = dbPipeline
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -385,7 +369,7 @@ object DMReport: TDMReport
         Stretch = True
         Border.BorderPositions = [bpLeft, bpTop, bpRight, bpBottom]
         Border.Visible = True
-        DataField = 'foto'
+        DataField = 'crianca_foto'
         DataPipeline = dbPipeline
         GraphicType = 'AutoDetect'
         DataPipelineName = 'dbPipeline'
@@ -405,7 +389,7 @@ object DMReport: TDMReport
         Stretch = True
         Border.BorderPositions = [bpLeft, bpTop, bpRight, bpBottom]
         Border.Visible = True
-        DataField = 'responsavelfoto'
+        DataField = 'responsavel_foto'
         DataPipeline = dbPipeline
         GraphicType = 'AutoDetect'
         DataPipelineName = 'dbPipeline'
@@ -649,6 +633,512 @@ object DMReport: TDMReport
       end
     end
     object ppParameterList2: TppParameterList
+    end
+  end
+  object qryRelatorioGerencial: TUniQuery
+    SQL.Strings = (
+      
+        'SELECT (SELECT VALORBINARIO FROM CONFIGURACOES WHERE CONFIGURACA' +
+        'O = '#39'Logotipo'#39' LIMIT 1) AS LOGOTIPO, '
+      
+        '       ATIVIDADES.ENTRADA, ATIVIDADES.SAIDA, ATIVIDADES.VALORSAI' +
+        'DA, ATIVIDADES.DATAINSERT,'
+      
+        '       ATIVIDADES.CRIANCA_NOME AS NOME_CRIANCA, ATIVIDADES.CRIAN' +
+        'CA_NASCIMENTO,'
+      
+        '       ATIVIDADES.RESPONSAVEL_NOME AS NOME_RESPONSAVEL, ATIVIDAD' +
+        'ES.RESPONSAVEL_DOCUMENTO'
+      '  FROM ATIVIDADES'
+      ' WHERE ATIVIDADES.DATAINSERT = :DTAInsert'
+      '   AND ATIVIDADES.SITUACAO = 1')
+    Left = 164
+    Top = 76
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'DTAInsert'
+        Value = nil
+      end>
+  end
+  object reportRelatorioGerencial: TppReport
+    AutoStop = False
+    DataPipeline = dbPipeline
+    PrinterSetup.BinName = 'Default'
+    PrinterSetup.DocumentName = 'Relat'#243'rio'
+    PrinterSetup.Duplex = dpNone
+    PrinterSetup.Orientation = poLandscape
+    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PrinterName = 'Default'
+    PrinterSetup.SaveDeviceSettings = False
+    PrinterSetup.mmMarginBottom = 6350
+    PrinterSetup.mmMarginLeft = 6350
+    PrinterSetup.mmMarginRight = 6350
+    PrinterSetup.mmMarginTop = 6350
+    PrinterSetup.mmPaperHeight = 210000
+    PrinterSetup.mmPaperWidth = 297000
+    PrinterSetup.PaperSize = 9
+    Template.FileName = 'C:\Users\marlo\Desktop\123.rtm'
+    Template.Format = ftASCII
+    Units = utMillimeters
+    ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
+    DeviceType = 'Screen'
+    DefaultFileDeviceType = 'PDF'
+    EmailSettings.ReportFormat = 'PDF'
+    EmailSettings.ShowEmailDialog = True
+    LanguageID = 'Portuguese (Brazil)'
+    OpenFile = False
+    OutlineSettings.CreateNode = True
+    OutlineSettings.CreatePageNodes = True
+    OutlineSettings.Enabled = False
+    OutlineSettings.Visible = False
+    ThumbnailSettings.Enabled = True
+    ThumbnailSettings.Visible = True
+    ThumbnailSettings.DeadSpace = 30
+    PDFSettings.CacheImages = False
+    PDFSettings.EmbedFontOptions = []
+    PDFSettings.EncryptSettings.AllowCopy = True
+    PDFSettings.EncryptSettings.AllowInteract = True
+    PDFSettings.EncryptSettings.AllowModify = True
+    PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
+    PDFSettings.EncryptSettings.Enabled = False
+    PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
+    PDFSettings.FontEncoding = feAnsi
+    PDFSettings.ImageCompressionLevel = 25
+    PreviewFormSettings.WindowState = wsMaximized
+    PreviewFormSettings.ZoomSetting = zsPageWidth
+    RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
+    RTFSettings.DefaultFont.Color = clWindowText
+    RTFSettings.DefaultFont.Height = -13
+    RTFSettings.DefaultFont.Name = 'Arial'
+    RTFSettings.DefaultFont.Style = []
+    ShowCancelDialog = False
+    TextFileName = '($MyDocuments)\Report.pdf'
+    TextSearchSettings.DefaultString = '<Texto a localizar>'
+    TextSearchSettings.Enabled = True
+    XLSSettings.AppName = 'ReportBuilder'
+    XLSSettings.Author = 'ReportBuilder'
+    XLSSettings.Subject = 'Report'
+    XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
+    Left = 260
+    Top = 76
+    Version = '17.02'
+    mmColumnWidth = 197300
+    DataPipelineName = 'dbPipeline'
+    object ppHeaderBand1: TppHeaderBand
+      Background.Brush.Style = bsClear
+      mmBottomOffset = 0
+      mmHeight = 49742
+      mmPrintPosition = 0
+      object ppDBImage6: TppDBImage
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBImage1'
+        AlignHorizontal = ahCenter
+        AlignVertical = avCenter
+        MaintainAspectRatio = False
+        Transparent = True
+        DataField = 'logotipo'
+        DataPipeline = dbPipeline
+        GraphicType = 'AutoDetect'
+        DataPipelineName = 'dbPipeline'
+        mmHeight = 25135
+        mmLeft = 0
+        mmTop = 0
+        mmWidth = 284692
+        BandType = 0
+        LayerName = BandLayer2
+      end
+      object ppLine3: TppLine
+        DesignLayer = ppDesignLayer1
+        UserName = 'Line1'
+        ParentWidth = True
+        Style = lsDouble
+        Weight = 0.750000000000000000
+        mmHeight = 1060
+        mmLeft = 0
+        mmTop = 26721
+        mmWidth = 284300
+        BandType = 0
+        LayerName = BandLayer2
+      end
+      object ppRichText3: TppRichText
+        DesignLayer = ppDesignLayer1
+        UserName = 'RichText3'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Caption = 'RichText3'
+        ExportRTFAsBitmap = False
+        MailMerge = True
+        RichText = 
+          '{\rtf1\ansi\ansicpg1252\deff0\deflang1046{\fonttbl{\f0\fnil\fcha' +
+          'rset0 Arial;}{\f1\fnil Arial;}}'#13#10'{\colortbl ;\red0\green0\blue0;' +
+          '}'#13#10'\viewkind4\uc1\pard\qc\cf1\fs28 Relat\'#39'f3rio de atividades\pa' +
+          'r'#13#10'\f1\fs24 <dbtext displayformat='#39'dd/mm/yyyy'#39'>datainsert</dbtex' +
+          't>\fs28\par'#13#10'}'#13#10#0
+        RemoveEmptyLines = False
+        Transparent = True
+        mmHeight = 12700
+        mmLeft = 0
+        mmTop = 28575
+        mmWidth = 284692
+        BandType = 0
+        LayerName = BandLayer2
+        mmBottomOffset = 0
+        mmOverFlowOffset = 0
+        mmStopPosition = 0
+        mmMinHeight = 0
+      end
+      object ppLabel3: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label3'
+        Caption = 'Nome da crian'#231'a'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 0
+        mmTop = 44186
+        mmWidth = 31485
+        BandType = 0
+        LayerName = BandLayer2
+      end
+      object ppLabel4: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label4'
+        Caption = 'Nascimento'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 79904
+        mmTop = 44186
+        mmWidth = 21960
+        BandType = 0
+        LayerName = BandLayer2
+      end
+      object ppLabel5: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label5'
+        Caption = 'Respons'#225'vel'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 104511
+        mmTop = 44186
+        mmWidth = 23813
+        BandType = 0
+        LayerName = BandLayer2
+      end
+      object ppLabel6: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label6'
+        Caption = 'Documento'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 179123
+        mmTop = 44186
+        mmWidth = 21167
+        BandType = 0
+        LayerName = BandLayer2
+      end
+      object ppLabel7: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label7'
+        Caption = 'Entrada'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 219340
+        mmTop = 44186
+        mmWidth = 14552
+        BandType = 0
+        LayerName = BandLayer2
+      end
+      object ppLabel8: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label8'
+        Caption = 'Sa'#237'da'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 241830
+        mmTop = 44186
+        mmWidth = 10848
+        BandType = 0
+        LayerName = BandLayer2
+      end
+      object ppLabel9: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label9'
+        Caption = 'Valor total'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        TextAlignment = taRightJustified
+        Transparent = True
+        mmHeight = 4762
+        mmLeft = 266171
+        mmTop = 44186
+        mmWidth = 18521
+        BandType = 0
+        LayerName = BandLayer2
+      end
+      object ppLine4: TppLine
+        DesignLayer = ppDesignLayer1
+        UserName = 'Line4'
+        ParentWidth = True
+        Weight = 0.750000000000000000
+        mmHeight = 259
+        mmLeft = 0
+        mmTop = 49481
+        mmWidth = 284300
+        BandType = 0
+        LayerName = BandLayer2
+      end
+    end
+    object ppDetailBand1: TppDetailBand
+      Background1.Brush.Style = bsClear
+      Background2.Brush.Color = 15132390
+      PrintHeight = phDynamic
+      mmBottomOffset = 0
+      mmHeight = 5821
+      mmPrintPosition = 0
+      object ppDBText3: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText3'
+        DataField = 'nome_crianca'
+        DataPipeline = dbPipeline
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'dbPipeline'
+        mmHeight = 4763
+        mmLeft = 0
+        mmTop = 528
+        mmWidth = 78317
+        BandType = 4
+        LayerName = BandLayer2
+      end
+      object ppDBText5: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText5'
+        DataField = 'nome_responsavel'
+        DataPipeline = dbPipeline
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'dbPipeline'
+        mmHeight = 4763
+        mmLeft = 104511
+        mmTop = 528
+        mmWidth = 74083
+        BandType = 4
+        LayerName = BandLayer2
+      end
+      object ppDBText6: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText6'
+        DataField = 'crianca_nascimento'
+        DataPipeline = dbPipeline
+        DisplayFormat = 'dd/mm/yyyy'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'dbPipeline'
+        mmHeight = 4763
+        mmLeft = 79904
+        mmTop = 528
+        mmWidth = 21960
+        BandType = 4
+        LayerName = BandLayer2
+      end
+      object ppDBText2: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText2'
+        DataField = 'responsavel_documento'
+        DataPipeline = dbPipeline
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'dbPipeline'
+        mmHeight = 4763
+        mmLeft = 179123
+        mmTop = 528
+        mmWidth = 39423
+        BandType = 4
+        LayerName = BandLayer2
+      end
+      object ppDBText4: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText4'
+        DataField = 'entrada'
+        DataPipeline = dbPipeline
+        DisplayFormat = 'h:nn'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'dbPipeline'
+        mmHeight = 4763
+        mmLeft = 219340
+        mmTop = 528
+        mmWidth = 20902
+        BandType = 4
+        LayerName = BandLayer2
+      end
+      object ppDBText7: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText7'
+        DataField = 'saida'
+        DataPipeline = dbPipeline
+        DisplayFormat = 'h:nn'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'dbPipeline'
+        mmHeight = 4763
+        mmLeft = 241830
+        mmTop = 528
+        mmWidth = 18782
+        BandType = 4
+        LayerName = BandLayer2
+      end
+      object ppDBText14: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText14'
+        DataField = 'valorsaida'
+        DataPipeline = dbPipeline
+        DisplayFormat = '$#,0.00;-$#,0.00'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        TextAlignment = taRightJustified
+        Transparent = True
+        DataPipelineName = 'dbPipeline'
+        mmHeight = 4763
+        mmLeft = 261409
+        mmTop = 528
+        mmWidth = 23283
+        BandType = 4
+        LayerName = BandLayer2
+      end
+    end
+    object ppSummaryBand1: TppSummaryBand
+      Background.Brush.Style = bsClear
+      mmBottomOffset = 0
+      mmHeight = 11113
+      mmPrintPosition = 0
+      object ppDBCalc1: TppDBCalc
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBCalc1'
+        DataField = 'valorsaida'
+        DataPipeline = dbPipeline
+        DisplayFormat = '$#,0.00;-$#,0.00'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        TextAlignment = taRightJustified
+        Transparent = True
+        DataPipelineName = 'dbPipeline'
+        mmHeight = 4498
+        mmLeft = 261409
+        mmTop = 1323
+        mmWidth = 23283
+        BandType = 7
+        LayerName = BandLayer2
+      end
+      object ppLabel10: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label10'
+        Caption = 'Total geral'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        mmHeight = 4762
+        mmLeft = 237857
+        mmTop = 1323
+        mmWidth = 20109
+        BandType = 7
+        LayerName = BandLayer2
+      end
+      object ppLine5: TppLine
+        DesignLayer = ppDesignLayer1
+        UserName = 'Line5'
+        ParentWidth = True
+        Weight = 0.750000000000000000
+        mmHeight = 265
+        mmLeft = 0
+        mmTop = 0
+        mmWidth = 284300
+        BandType = 7
+        LayerName = BandLayer2
+      end
+    end
+    object ppDesignLayers1: TppDesignLayers
+      object ppDesignLayer1: TppDesignLayer
+        UserName = 'BandLayer2'
+        LayerType = ltBanded
+        Index = 0
+      end
+    end
+    object ppParameterList1: TppParameterList
     end
   end
 end
