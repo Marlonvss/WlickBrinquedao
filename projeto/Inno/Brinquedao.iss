@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Brinquedoteca"
-#define MyAppVersion "1.0.0.7"
+#define MyAppVersion "1.0.0.9"
 #define MyAppPublisher "WebLick Sistemas"
 #define MyAppURL "http://www.weblick.com.br/"
 #define MyAppExeName "ControleBrinquedoteca.exe"
@@ -21,7 +21,7 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName=C:\WebLick\Brinquedao     
 DisableDirPage=yes
 DisableProgramGroupPage=yes
-OutputDir=C:\Weblick\Brinquedao\Inno\Out
+OutputDir=C:\_Programacao\Delphi\WlickBrinquedao\projeto\Inno\Out
 OutputBaseFilename=Instalador
 Compression=lzma
 SolidCompression=yes
@@ -33,12 +33,12 @@ Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortugue
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Weblick\Brinquedao\Inno\ControleBrinquedoteca.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Weblick\Brinquedao\Inno\conexao.ini"; DestDir: "{app}"; Flags: onlyifdoesntexist
-Source: "C:\Weblick\Brinquedao\Inno\Init.backup"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Weblick\Brinquedao\Inno\Icon.ico"; DestDir: "{app}";
-Source: "C:\Weblick\Brinquedao\Inno\pg.exe"; DestDir: "{tmp}"; Tasks: Servidor
-Source: "C:\Weblick\Brinquedao\Inno\config.bat"; DestDir: "{tmp}"; Tasks: Servidor
+Source: "C:\_Programacao\Delphi\WlickBrinquedao\projeto\Inno\ControleBrinquedoteca.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\_Programacao\Delphi\WlickBrinquedao\projeto\Inno\conexao.ini"; DestDir: "{app}"; Flags: onlyifdoesntexist
+Source: "C:\_Programacao\Delphi\WlickBrinquedao\projeto\Inno\Init.backup"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\_Programacao\Delphi\WlickBrinquedao\projeto\Inno\Icon.ico"; DestDir: "{app}";
+Source: "C:\_Programacao\Delphi\WlickBrinquedao\projeto\Inno\pg.exe"; DestDir: "{tmp}"; Tasks: Servidor
+Source: "C:\_Programacao\Delphi\WlickBrinquedao\projeto\Inno\config.bat"; DestDir: "{tmp}"; Tasks: Servidor
 
 [Types]
 Name: Servidor; Description: Instala o gerenciador do banco de dados e o banco de dados novo;

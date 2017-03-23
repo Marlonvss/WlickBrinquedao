@@ -78,7 +78,8 @@ uses
   ORM.DataBaseManager in '..\..\WlickORM\bases\ORM.DataBaseManager.pas',
   WLick.DataBaseManager in '..\units\WLick.DataBaseManager.pas',
   enum.Usuarios.NivelAcesso in '..\mvc\enum\enum.Usuarios.NivelAcesso.pas',
-  Relatorio.Parametros.RelatorioGerencialFicha in '..\units\relatorios\Relatorio.Parametros.RelatorioGerencialFicha.pas' {fichaRelatorioGerencial};
+  Relatorio.Parametros.RelatorioGerencialFicha in '..\units\relatorios\Relatorio.Parametros.RelatorioGerencialFicha.pas' {fichaRelatorioGerencial},
+  FichaToolBackupRestore in '..\..\WlickORM\bases\FichaToolBackupRestore.pas' {fichaBackupRestore};
 
 {$R *.res}
 

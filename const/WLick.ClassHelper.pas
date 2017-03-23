@@ -134,6 +134,7 @@ type
   Helper_DateTime = record helper for TDateTime
     function ToDate(): TDate;
     function ToString(a_ConsiderarHora: boolean = True): String;
+    function ToFormatString(a_Format: string = 'dd/MM/yyyy'): String;
     function IsNull(): Boolean;
   end;
 
@@ -839,6 +840,11 @@ begin
   if a_ConsiderarHora
     then Result := DateTimeToStr(Self)
     else Result := DateToStr(Self);
+end;
+
+function Helper_DateTime.ToFormatString(a_Format: string): String;
+begin
+  Result := FormatDateTime(a_Format,Self);
 end;
 
 { Helper_ComboBOx }

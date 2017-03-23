@@ -1,7 +1,7 @@
-﻿object frmMain: TfrmMain
+object frmMain: TfrmMain
   Left = 0
   Top = 0
-  Caption = 'Principal'
+  Caption = 'Controle Brinquedoteca'
   ClientHeight = 471
   ClientWidth = 732
   Color = clBtnFace
@@ -31,7 +31,6 @@
     TabOrder = 4
     TabStop = False
     object RibbonTabPrincipal: TdxRibbonTab
-      Active = True
       Caption = 'Principal'
       Groups = <
         item
@@ -44,7 +43,8 @@
         end>
       Index = 0
     end
-    object RibbonTabConfigurações: TdxRibbonTab
+    object RibbonTabOutros: TdxRibbonTab
+      Active = True
       Caption = 'Outros'
       Groups = <
         item
@@ -54,6 +54,10 @@
         item
           Caption = 'Config.'
           ToolbarName = 'barOutrosConfig'
+        end
+        item
+          Caption = 'Banco de dados'
+          ToolbarName = 'barPrinciparBar2'
         end>
       Index = 1
     end
@@ -75,6 +79,9 @@
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
         Width = 300
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
       end>
     Ribbon = Ribbon
     Font.Charset = DEFAULT_CHARSET
@@ -116,6 +123,16 @@
       Caption = 'Relat'#243'rio Gerencial'
       OnExecute = actRelatorioGerencialExecute
     end
+    object actBackup: TAction
+      Category = 'Outros'
+      Caption = 'Backup'
+      OnExecute = actBackupExecute
+    end
+    object actRestore: TAction
+      Category = 'Outros'
+      Caption = 'Restaurar'
+      OnExecute = actRestoreExecute
+    end
   end
   object barPrincipar: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -130,6 +147,7 @@
       2)
     Categories.Visibles = (
       True)
+    ImageOptions.Images = DMImageBrinquedao.img16
     ImageOptions.LargeImages = DMImageBrinquedao.img32
     ImageOptions.LargeIcons = True
     MenuAnimations = maFade
@@ -189,7 +207,7 @@
           ItemName = 'dxBarLargeButton4'
         end>
       OneOnRow = False
-      Row = 0
+      Row = 1
       UseOwnFont = False
       Visible = True
       WholeRow = False
@@ -233,6 +251,30 @@
           ItemName = 'dxBarLargeButton5'
         end>
       OneOnRow = False
+      Row = 1
+      UseOwnFont = False
+      Visible = True
+      WholeRow = False
+    end
+    object barPrinciparBar2: TdxBar
+      Caption = 'Custom 5'
+      CaptionButtons = <>
+      DockedLeft = 224
+      DockedTop = 0
+      FloatLeft = 766
+      FloatTop = 8
+      FloatClientWidth = 0
+      FloatClientHeight = 0
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'dxBarButton1'
+        end
+        item
+          Visible = True
+          ItemName = 'dxBarButton2'
+        end>
+      OneOnRow = True
       Row = 0
       UseOwnFont = False
       Visible = True
@@ -277,6 +319,28 @@
       Action = actRelatorioGerencial
       Category = 0
       LargeImageIndex = 6
+    end
+    object dxBarLargeButton8: TdxBarLargeButton
+      Caption = 'New Button'
+      Category = 0
+      Hint = 'New Button'
+      Visible = ivAlways
+    end
+    object dxBarSubItem1: TdxBarSubItem
+      Caption = 'New SubItem'
+      Category = 0
+      Visible = ivAlways
+      ItemLinks = <>
+    end
+    object dxBarButton1: TdxBarButton
+      Action = actBackup
+      Category = 0
+      ImageIndex = 8
+    end
+    object dxBarButton2: TdxBarButton
+      Action = actRestore
+      Category = 0
+      ImageIndex = 9
     end
   end
   object tabMDIManager: TdxTabbedMDIManager
