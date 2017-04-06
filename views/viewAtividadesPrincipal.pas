@@ -16,7 +16,8 @@ uses
   cxGridViewLayoutContainer, cxGridLayoutView, cxGridDBLayoutView,
   cxCurrencyEdit, ficha.AtividadesEntrada, cxMemo, DMRelatorio, WLick.Types,
   dxBarBuiltInMenu, cxPC, WLick.Miscelania, enum.Atividades.Situacao, cxImage,
-  cxButtonEdit;
+  cxButtonEdit, brinquedao.Images, dxGDIPlusClasses, UniProvider, Jpeg,
+  PostgreSQLUniProvider, dto.Configuracoes, controller.Configuracoes;
 
 type
   TfrmAtividades = class(TForm)
@@ -115,6 +116,10 @@ type
     grdAtividadeDBLayoutView2LayoutItem11: TcxGridLayoutItem;
     grdAtividadeDBLayoutView2LayoutItem12: TcxGridLayoutItem;
     grdAtividadeDBLayoutView3: TcxGridDBLayoutView;
+    grdAtividadeDBLayoutView3DBLayoutViewItem11: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem12: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem13: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem1: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem2: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem3: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem4: TcxGridDBLayoutViewItem;
@@ -122,31 +127,12 @@ type
     grdAtividadeDBLayoutView3DBLayoutViewItem6: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem7: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem14: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView3DBLayoutViewItem8: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView3DBLayoutViewItem9: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView3DBLayoutViewItem10: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView3DBLayoutViewItem11: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3Group_Root: TdxLayoutGroup;
     grdAtividadeLevel1: TcxGridLevel;
-    grdAtividadeDBLayoutView3DBLayoutViewItem12: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem8: TcxGridDBLayoutViewItem;
     N1: TMenuItem;
     actImprimir: TAction;
     Imprimir1: TMenuItem;
-    grdAtividadeDBLayoutView3DBLayoutViewItem13: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView3LayoutItem1: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem2: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem3: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem4: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem5: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem6: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem7: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem8: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem9: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem10: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem11: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3Group1: TdxLayoutGroup;
-    grdAtividadeDBLayoutView3LayoutItem12: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem13: TcxGridLayoutItem;
     uniPrincipalid: TGuidField;
     uniPrincipalobs: TStringField;
     uniPrincipalentrada: TTimeField;
@@ -160,7 +146,26 @@ type
     uniPrincipalresponsavel_nome: TStringField;
     uniPrincipalresponsavel_documento: TStringField;
     uniPrincipalresponsavel_contato: TStringField;
-    uniPrincipalbotao: TMemoField;
+    imgLupa: TImage;
+    UniConnection1: TUniConnection;
+    PostgreSQLUniProvider1: TPostgreSQLUniProvider;
+    grdAtividadeDBLayoutView3LayoutItem1: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem2: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem3: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem4: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem5: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem6: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem7: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem8: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem9: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem10: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem11: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3Group1: TdxLayoutGroup;
+    grdAtividadeDBLayoutView3LayoutItem12: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3LayoutItem14: TcxGridLayoutItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem10: TcxGridDBLayoutViewItem;
+    imgBotao: TcxImage;
+    uniPrincipalbotao: TBlobField;
     procedure actFinalizarExecute(Sender: TObject);
     procedure TimerRefreshTimer(Sender: TObject);
     procedure actNovoExecute(Sender: TObject);
@@ -173,9 +178,15 @@ type
     procedure edtBuscaPropertiesChange(Sender: TObject);
     procedure actVisualizarExecute(Sender: TObject);
     procedure actImprimirExecute(Sender: TObject);
+    procedure grdAtividadeDBLayoutView3CellClick(Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
+    procedure FormDestroy(Sender: TObject);
   private
     procedure StopAutoRefresh();
     procedure StartAutoRefresh();
+
+    procedure AtualizaImagem;
 
     procedure AtualizaHora();
   public
@@ -246,6 +257,27 @@ begin
   lblHora.Caption := FormatDateTime('HH:MM:SS',Now);
 end;
 
+procedure TfrmAtividades.AtualizaImagem;
+var
+  Str: String;
+  Config: TDTOConfiguracoes;
+begin
+  Str := 'DELETE FROM CONFIGURACOES WHERE CONFIGURACAO = ''Atividade''';
+  ORM.Connection.GetInstance.DataBase.ExecSQL(Str);
+
+  With TControllerConfiguracoes.Create do
+  try
+    Config := TDTOConfiguracoes.Create;
+    Config.Configuracao := 'Atividade';
+    Config.ValorBinario := TMisc.PictureToString(imgBotao.Picture);
+    Insert(Config);
+  finally
+    Config.Free;
+    Free;
+  end;
+
+end;
+
 procedure TfrmAtividades.grdAtividadeDBCardView2DBCardViewRow4GetDisplayText(
   Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
   var AText: string);
@@ -253,28 +285,40 @@ begin
   AText := 'Em andamento';
 end;
 
+procedure TfrmAtividades.grdAtividadeDBLayoutView3CellClick(
+  Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
+  AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
+begin
+  if grdAtividadeDBLayoutView3DBLayoutViewItem10.Focused then
+    actFinalizar.Execute;
+end;
+
 procedure TfrmAtividades.edtBuscaPropertiesChange(Sender: TObject);
 var
   vFind : String;
 begin
-  uniPrincipal.Filter := EmptyStr;
-  vFind := '%' + LowerCase(edtBusca.Text) + '%';
+  vFind := edtBusca.Text;
   if (vFind <> EmptyStr) then
   begin
+    vFind := '%' + LowerCase(vFind) + '%';
     uniPrincipal.Filter :=
       ' (lower(CRIANCA_NOME) = ' + vFind.Quoted + ')'+
       ' OR (lower(RESPONSAVEL_NOME) = ' + vFind.Quoted + ')'+
       ' OR (lower(RESPONSAVEL_DOCUMENTO) = ' + vFind.Quoted + ')';
   end;
-  uniPrincipal.Filtered := (uniPrincipal.Filter <> EmptyStr);
+  uniPrincipal.Filtered := (vFind <> EmptyStr);
 end;
 
 procedure TfrmAtividades.FormCreate(Sender: TObject);
 begin
   Self.uniPrincipal.Connection := ORM.Connection.GetInstance.DataBase;
+  AtualizaImagem;
   Self.uniPrincipal.Active := True;
+end;
 
-  //grdAtividadeDBLayoutView3DBLayoutViewItem7.Properties.Images.
+procedure TfrmAtividades.FormDestroy(Sender: TObject);
+begin
+  StopAutoRefresh;
 end;
 
 procedure TfrmAtividades.FormShow(Sender: TObject);
@@ -302,8 +346,9 @@ procedure TfrmAtividades.TimerRefreshTimer(Sender: TObject);
 begin
   StopAutoRefresh;
   try
-    if uniPrincipal.Active then
-      uniPrincipal.Refresh;
+    if not uniPrincipal.Active then
+      Self.uniPrincipal.Active := True;
+    uniPrincipal.Refresh;
   finally
     StartAutoRefresh;
   end;

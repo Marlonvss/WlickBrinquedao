@@ -93,7 +93,7 @@ begin
       objJPEG := TJPEGImage.Create;
 
       objJPEG.Assign(pValor.Graphic);
-
+      objJPEG.Compress;
       objJPEG.SaveToStream(StreamImagem);
       StreamImagem.Position := 0;
 

@@ -2,7 +2,7 @@ object frmMain: TfrmMain
   Left = 0
   Top = 0
   Caption = 'Controle Brinquedoteca'
-  ClientHeight = 471
+  ClientHeight = 491
   ClientWidth = 732
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -31,6 +31,7 @@ object frmMain: TfrmMain
     TabOrder = 4
     TabStop = False
     object RibbonTabPrincipal: TdxRibbonTab
+      Active = True
       Caption = 'Principal'
       Groups = <
         item
@@ -38,33 +39,19 @@ object frmMain: TfrmMain
           ToolbarName = 'barPrinciparBar1'
         end
         item
-          Caption = 'Relat'#243'rios'
-          ToolbarName = 'barOutrosRelatorios'
-        end>
-      Index = 0
-    end
-    object RibbonTabOutros: TdxRibbonTab
-      Active = True
-      Caption = 'Outros'
-      Groups = <
-        item
           Caption = 'Cadastros'
           ToolbarName = 'barOutrosCadastros'
         end
         item
-          Caption = 'Config.'
+          Caption = 'Configura'#231#245'es'
           ToolbarName = 'barOutrosConfig'
-        end
-        item
-          Caption = 'Banco de dados'
-          ToolbarName = 'barPrinciparBar2'
         end>
-      Index = 1
+      Index = 0
     end
   end
   object Bar: TdxRibbonStatusBar
     Left = 0
-    Top = 448
+    Top = 468
     Width = 732
     Height = 23
     Panels = <
@@ -79,9 +66,6 @@ object frmMain: TfrmMain
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
         Width = 300
-      end
-      item
-        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
       end>
     Ribbon = Ribbon
     Font.Charset = DEFAULT_CHARSET
@@ -89,6 +73,7 @@ object frmMain: TfrmMain
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
+    ExplicitTop = 448
   end
   object actManager: TActionManager
     Left = 104
@@ -125,13 +110,8 @@ object frmMain: TfrmMain
     end
     object actBackup: TAction
       Category = 'Outros'
-      Caption = 'Backup'
+      Caption = 'C'#243'pia de seguran'#231'a'
       OnExecute = actBackupExecute
-    end
-    object actRestore: TAction
-      Category = 'Outros'
-      Caption = 'Restaurar'
-      OnExecute = actRestoreExecute
     end
   end
   object barPrincipar: TdxBarManager
@@ -176,7 +156,11 @@ object frmMain: TfrmMain
       ItemLinks = <
         item
           Visible = True
-          ItemName = 'dxBarLargeButton6'
+          ItemName = 'btnAtividadesEncerradas'
+        end
+        item
+          Visible = True
+          ItemName = 'btnRelatorioGerencial'
         end>
       OneOnRow = False
       Row = 0
@@ -191,44 +175,20 @@ object frmMain: TfrmMain
       AllowReset = False
       Caption = 'Custom 2'
       CaptionButtons = <>
-      DockedLeft = 0
+      DockedLeft = 147
       DockedTop = 0
       FloatLeft = 766
       FloatTop = 8
-      FloatClientWidth = 0
-      FloatClientHeight = 0
+      FloatClientWidth = 121
+      FloatClientHeight = 108
       ItemLinks = <
         item
           Visible = True
-          ItemName = 'dxBarLargeButton3'
+          ItemName = 'btnUsuariosDoSistema'
         end
         item
           Visible = True
-          ItemName = 'dxBarLargeButton4'
-        end>
-      OneOnRow = False
-      Row = 1
-      UseOwnFont = False
-      Visible = True
-      WholeRow = False
-    end
-    object barOutrosRelatorios: TdxBar
-      AllowClose = False
-      AllowCustomizing = False
-      AllowQuickCustomizing = False
-      AllowReset = False
-      Caption = 'Custom 3'
-      CaptionButtons = <>
-      DockedLeft = 82
-      DockedTop = 0
-      FloatLeft = 766
-      FloatTop = 8
-      FloatClientWidth = 0
-      FloatClientHeight = 0
-      ItemLinks = <
-        item
-          Visible = True
-          ItemName = 'dxBarLargeButton7'
+          ItemName = 'btnValores'
         end>
       OneOnRow = False
       Row = 0
@@ -239,42 +199,22 @@ object frmMain: TfrmMain
     object barOutrosConfig: TdxBar
       Caption = 'Custom 4'
       CaptionButtons = <>
-      DockedLeft = 135
+      DockedLeft = 282
       DockedTop = 0
-      FloatLeft = 766
-      FloatTop = 8
-      FloatClientWidth = 0
-      FloatClientHeight = 0
+      FloatLeft = 732
+      FloatTop = 100
+      FloatClientWidth = 80
+      FloatClientHeight = 54
       ItemLinks = <
         item
           Visible = True
-          ItemName = 'dxBarLargeButton5'
-        end>
-      OneOnRow = False
-      Row = 1
-      UseOwnFont = False
-      Visible = True
-      WholeRow = False
-    end
-    object barPrinciparBar2: TdxBar
-      Caption = 'Custom 5'
-      CaptionButtons = <>
-      DockedLeft = 224
-      DockedTop = 0
-      FloatLeft = 766
-      FloatTop = 8
-      FloatClientWidth = 0
-      FloatClientHeight = 0
-      ItemLinks = <
-        item
-          Visible = True
-          ItemName = 'dxBarButton1'
+          ItemName = 'btnPreferencias'
         end
         item
           Visible = True
-          ItemName = 'dxBarButton2'
+          ItemName = 'btnCopiaSeguranca'
         end>
-      OneOnRow = True
+      OneOnRow = False
       Row = 0
       UseOwnFont = False
       Visible = True
@@ -293,29 +233,29 @@ object frmMain: TfrmMain
       Hint = 'New Button'
       Visible = ivAlways
     end
-    object dxBarLargeButton3: TdxBarLargeButton
+    object btnUsuariosDoSistema: TdxBarLargeButton
       Action = actUsuarios
       Category = 0
       LargeImageIndex = 2
     end
-    object dxBarLargeButton4: TdxBarLargeButton
+    object btnValores: TdxBarLargeButton
       Action = actValores
       Category = 0
       LargeImageIndex = 1
     end
-    object dxBarLargeButton5: TdxBarLargeButton
+    object btnPreferencias: TdxBarLargeButton
       Action = actPreferencias
       Category = 0
       LargeImageIndex = 3
     end
-    object dxBarLargeButton6: TdxBarLargeButton
+    object btnAtividadesEncerradas: TdxBarLargeButton
       Action = actAtividadesEncerradas
       Category = 0
-      LargeImageIndex = 5
+      LargeImageIndex = 8
       SyncImageIndex = False
       ImageIndex = -1
     end
-    object dxBarLargeButton7: TdxBarLargeButton
+    object btnRelatorioGerencial: TdxBarLargeButton
       Action = actRelatorioGerencial
       Category = 0
       LargeImageIndex = 6
@@ -338,9 +278,15 @@ object frmMain: TfrmMain
       ImageIndex = 8
     end
     object dxBarButton2: TdxBarButton
-      Action = actRestore
+      Caption = 'Restaurar'
       Category = 0
+      Visible = ivAlways
       ImageIndex = 9
+    end
+    object btnCopiaSeguranca: TdxBarLargeButton
+      Action = actBackup
+      Category = 0
+      LargeImageIndex = 7
     end
   end
   object tabMDIManager: TdxTabbedMDIManager

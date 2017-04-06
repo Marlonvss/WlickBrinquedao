@@ -89,8 +89,9 @@
         <DCC_K>false</DCC_K>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <VerInfo_Keys>CompanyName=Brinquedão;FileDescription=Sistema brinquedao;FileVersion=1.0.0.8;InternalName=WLickBrinquedao;LegalCopyright=WebLick.com.br;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <VerInfo_Build>8</VerInfo_Build>
+        <DCC_Optimize>false</DCC_Optimize>
+        <VerInfo_Keys>CompanyName=Brinquedão;FileDescription=Sistema brinquedao;FileVersion=1.0.0.12;InternalName=WLickBrinquedao;LegalCopyright=WebLick.com.br;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Build>12</VerInfo_Build>
         <Icon_MainIcon>WLickBrinquedao_Icon1.ico</Icon_MainIcon>
         <AppEnableHighDPI>true</AppEnableHighDPI>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -261,10 +262,6 @@
         <DCCReference Include="..\mvc\enum\enum.Usuarios.NivelAcesso.pas"/>
         <DCCReference Include="..\units\relatorios\Relatorio.Parametros.RelatorioGerencialFicha.pas">
             <Form>fichaRelatorioGerencial</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\WlickORM\bases\FichaToolBackupRestore.pas">
-            <Form>fichaBackupRestore</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">

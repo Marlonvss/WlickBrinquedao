@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Brinquedoteca"
-#define MyAppVersion "1.0.0.9"
+#define MyAppVersion "1.0.0.12"
 #define MyAppPublisher "WebLick Sistemas"
 #define MyAppURL "http://www.weblick.com.br/"
 #define MyAppExeName "ControleBrinquedoteca.exe"
@@ -34,6 +34,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "C:\_Programacao\Delphi\WlickBrinquedao\projeto\Inno\ControleBrinquedoteca.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\_Programacao\Delphi\WlickBrinquedao\projeto\Inno\WLickBackupManager.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\_Programacao\Delphi\WlickBrinquedao\projeto\Inno\conexao.ini"; DestDir: "{app}"; Flags: onlyifdoesntexist
 Source: "C:\_Programacao\Delphi\WlickBrinquedao\projeto\Inno\Init.backup"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\_Programacao\Delphi\WlickBrinquedao\projeto\Inno\Icon.ico"; DestDir: "{app}";
