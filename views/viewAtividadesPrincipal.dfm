@@ -558,7 +558,6 @@ object frmAtividades: TfrmAtividades
         DataBinding.FieldName = 'situacao'
         PropertiesClassName = 'TcxLabelProperties'
         Properties.Alignment.Horz = taLeftJustify
-        OnGetDisplayText = grdAtividadeDBCardView2DBCardViewRow4GetDisplayText
         Kind = rkCaption
         Position.BeginsLayer = True
       end
@@ -1132,6 +1131,7 @@ object frmAtividades: TfrmAtividades
         DataBinding.FieldName = 'botao'
         PropertiesClassName = 'TcxImageProperties'
         Properties.GraphicClassName = 'TJPEGImage'
+        Properties.ImmediatePost = True
         Properties.PopupMenuLayout.MenuItems = []
         Properties.PopupMenuLayout.CustomMenuItemGlyph.Data = {
           821F0000424D821F0000000000004200000028000000C8000000140000000100
@@ -1496,7 +1496,6 @@ object frmAtividades: TfrmAtividades
     end
   end
   object uniPrincipal: TUniQuery
-    Connection = UniConnection1
     SQL.Strings = (
       
         'SELECT ATIVIDADES.ID, ATIVIDADES.OBS, ATIVIDADES.ENTRADA, ATIVID' +
@@ -1516,7 +1515,6 @@ object frmAtividades: TfrmAtividades
       
         ' ORDER BY ATIVIDADES.ENTRADA + CAST(ATIVIDADES.TEMPO as INTERVAL' +
         ')')
-    Active = True
     Filtered = True
     Left = 356
     Top = 88
@@ -1605,20 +1603,5 @@ object frmAtividades: TfrmAtividades
     OnTimer = TimerHoraTimer
     Left = 312
     Top = 176
-  end
-  object UniConnection1: TUniConnection
-    ProviderName = 'PostgreSQL'
-    Port = 5432
-    Database = 'brinquedao'
-    Username = 'postgres'
-    Server = 'localhost'
-    Connected = True
-    Left = 424
-    Top = 244
-    EncryptedPassword = '8FFF90FF8CFF8BFF98FF8DFF9AFF8CFF'
-  end
-  object PostgreSQLUniProvider1: TPostgreSQLUniProvider
-    Left = 560
-    Top = 284
   end
 end

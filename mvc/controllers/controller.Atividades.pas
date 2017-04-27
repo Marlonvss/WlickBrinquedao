@@ -60,10 +60,10 @@ begin
   try
     FDAOValoresTempo.GetAllValoresTempo(FListaValorTempo);
 
-    { Localiza o pacote mais proximo }
+    { Localiza o pacote mais proximo pra cima }
     for vDTO in FListaValorTempo do
     begin
-      if (vTempoPacote < vDTO.TempoCalculado) and (vDTO.TempoCalculado <= (vTempoDeServico)) then
+      if (vTempoDeServico <= vDTO.TempoCalculado) and ((vDTO.TempoCalculado < vTempoPacote) or (vTempoPacote = 0))then
       begin
         vTempoPacote := vDTO.TempoCalculado;
         vValorPacote := vDTO.Valor;

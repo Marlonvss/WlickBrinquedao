@@ -73,7 +73,6 @@ object frmMain: TfrmMain
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
-    ExplicitTop = 448
   end
   object actManager: TActionManager
     Left = 104

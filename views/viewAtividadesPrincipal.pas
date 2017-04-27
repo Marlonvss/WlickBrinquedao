@@ -39,86 +39,6 @@ type
     edtBusca: TcxTextEdit;
     cxButton1: TcxButton;
     grdAtividade: TcxGrid;
-    grdAtividadeDBTableView1: TcxGridDBTableView;
-    grdAtividadeDBCardView1: TcxGridDBCardView;
-    grdAtividadeDBCardView2: TcxGridDBCardView;
-    grdAtividadeDBCardView2DBCardViewRow1: TcxGridDBCardViewRow;
-    grdAtividadeDBCardView2DBCardViewRow3: TcxGridDBCardViewRow;
-    grdAtividadeDBCardView2DBCardViewRow5: TcxGridDBCardViewRow;
-    grdAtividadeDBCardView2DBCardViewRow7: TcxGridDBCardViewRow;
-    grdAtividadeDBCardView2DBCardViewRow2: TcxGridDBCardViewRow;
-    grdAtividadeDBCardView2DBCardViewRow4: TcxGridDBCardViewRow;
-    grdAtividadeDBCardView2DBCardViewRow6: TcxGridDBCardViewRow;
-    grdAtividadeDBLayoutView1: TcxGridDBLayoutView;
-    grdAtividadeDBLayoutView1DBLayoutViewItem13: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView1DBLayoutViewItem1: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView1DBLayoutViewItem2: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView1DBLayoutViewItem3: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView1DBLayoutViewItem4: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView1DBLayoutViewItem5: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView1DBLayoutViewItem6: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView1DBLayoutViewItem7: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView1DBLayoutViewItem8: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView1DBLayoutViewItem9: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView1DBLayoutViewItem10: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView1DBLayoutViewItem11: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView1Group_Root: TdxLayoutGroup;
-    cxGridLayoutItem1: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView1LayoutItem2: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView1LayoutItem3: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView1LayoutItem4: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView1LayoutItem5: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView1LayoutItem6: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView1LayoutItem7: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView1LayoutItem8: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView1LayoutItem9: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView1LayoutItem10: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView1LayoutItem11: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView1LayoutItem12: TcxGridLayoutItem;
-    dxLayoutGroup1: TdxLayoutGroup;
-    grdAtividadeDBCardView: TcxGridDBCardView;
-    grdAtividadeDBCardViewDBCardViewRow1: TcxGridDBCardViewRow;
-    grdAtividadeDBCardViewDBCardViewRow3: TcxGridDBCardViewRow;
-    grdAtividadeDBCardViewDBCardViewRow4: TcxGridDBCardViewRow;
-    grdAtividadeDBCardViewDBCardViewRow6: TcxGridDBCardViewRow;
-    grdAtividadeDBCardViewDBCardViewRow5: TcxGridDBCardViewRow;
-    grdAtividadeDBCardViewDBCardViewRow7: TcxGridDBCardViewRow;
-    grdAtividadeDBCardViewDBCardViewRow8: TcxGridDBCardViewRow;
-    grdAtividadeDBCardViewDBCardViewRow9: TcxGridDBCardViewRow;
-    grdAtividadeDBCardViewDBCardViewRow10: TcxGridDBCardViewRow;
-    grdAtividadeDBCardViewDBCardViewRow11: TcxGridDBCardViewRow;
-    grdAtividadeDBCardViewDBCardViewRowobs: TcxGridDBCardViewRow;
-    grdAtividadeDBCardViewDBCardViewRow12: TcxGridDBCardViewRow;
-    grdAtividadeDBLayoutView2: TcxGridDBLayoutView;
-    grdAtividadeDBLayoutView2DBLayoutViewItem1: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView2DBLayoutViewItem2: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView2DBLayoutViewItem3: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView2DBLayoutViewItem4: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView2DBLayoutViewItem5: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView2DBLayoutViewItem6: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView2DBLayoutViewItem7: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView2DBLayoutViewItem8: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView2DBLayoutViewItem9: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView2DBLayoutViewItem10: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView2DBLayoutViewItem11: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView2DBLayoutViewItem12: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView2Group_Root: TdxLayoutGroup;
-    cxGridLayoutItem2: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView2LayoutItem2: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView2LayoutItem3: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView2LayoutItem4: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView2LayoutItem5: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView2LayoutItem6: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView2LayoutItem7: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView2LayoutItem8: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView2LayoutItem9: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView2LayoutItem10: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView2LayoutItem11: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView2LayoutItem12: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3: TcxGridDBLayoutView;
-    grdAtividadeDBLayoutView3DBLayoutViewItem11: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView3DBLayoutViewItem12: TcxGridDBLayoutViewItem;
-    grdAtividadeDBLayoutView3DBLayoutViewItem13: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem1: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem2: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem3: TcxGridDBLayoutViewItem;
@@ -126,10 +46,14 @@ type
     grdAtividadeDBLayoutView3DBLayoutViewItem5: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem6: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem7: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem8: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem10: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem11: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem12: TcxGridDBLayoutViewItem;
+    grdAtividadeDBLayoutView3DBLayoutViewItem13: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3DBLayoutViewItem14: TcxGridDBLayoutViewItem;
     grdAtividadeDBLayoutView3Group_Root: TdxLayoutGroup;
     grdAtividadeLevel1: TcxGridLevel;
-    grdAtividadeDBLayoutView3DBLayoutViewItem8: TcxGridDBLayoutViewItem;
     N1: TMenuItem;
     actImprimir: TAction;
     Imprimir1: TMenuItem;
@@ -147,23 +71,6 @@ type
     uniPrincipalresponsavel_documento: TStringField;
     uniPrincipalresponsavel_contato: TStringField;
     imgLupa: TImage;
-    UniConnection1: TUniConnection;
-    PostgreSQLUniProvider1: TPostgreSQLUniProvider;
-    grdAtividadeDBLayoutView3LayoutItem1: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem2: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem3: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem4: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem5: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem6: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem7: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem8: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem9: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem10: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem11: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3Group1: TdxLayoutGroup;
-    grdAtividadeDBLayoutView3LayoutItem12: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3LayoutItem14: TcxGridLayoutItem;
-    grdAtividadeDBLayoutView3DBLayoutViewItem10: TcxGridDBLayoutViewItem;
     imgBotao: TcxImage;
     uniPrincipalbotao: TBlobField;
     procedure actFinalizarExecute(Sender: TObject);
@@ -172,9 +79,6 @@ type
     procedure TimerHoraTimer(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure grdAtividadeDBCardView2DBCardViewRow4GetDisplayText(
-      Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
-      var AText: string);
     procedure edtBuscaPropertiesChange(Sender: TObject);
     procedure actVisualizarExecute(Sender: TObject);
     procedure actImprimirExecute(Sender: TObject);
@@ -275,22 +179,18 @@ begin
     Config.Free;
     Free;
   end;
-
-end;
-
-procedure TfrmAtividades.grdAtividadeDBCardView2DBCardViewRow4GetDisplayText(
-  Sender: TcxCustomGridTableItem; ARecord: TcxCustomGridRecord;
-  var AText: string);
-begin
-  AText := 'Em andamento';
 end;
 
 procedure TfrmAtividades.grdAtividadeDBLayoutView3CellClick(
   Sender: TcxCustomGridTableView; ACellViewInfo: TcxGridTableDataCellViewInfo;
   AButton: TMouseButton; AShift: TShiftState; var AHandled: Boolean);
 begin
+  inherited;
   if grdAtividadeDBLayoutView3DBLayoutViewItem10.Focused then
-    actFinalizar.Execute;
+  begin
+    actFinalizarExecute(Sender);
+    Abort; {T - Abortar para não continuar com os processos internos do componente evitando assim o AcessViolation}
+  end;
 end;
 
 procedure TfrmAtividades.edtBuscaPropertiesChange(Sender: TObject);

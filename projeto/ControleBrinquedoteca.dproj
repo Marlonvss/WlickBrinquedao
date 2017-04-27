@@ -90,8 +90,8 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <DCC_Optimize>false</DCC_Optimize>
-        <VerInfo_Keys>CompanyName=Brinquedão;FileDescription=Sistema brinquedao;FileVersion=1.0.0.12;InternalName=WLickBrinquedao;LegalCopyright=WebLick.com.br;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-        <VerInfo_Build>12</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=Brinquedão;FileDescription=Sistema brinquedao;FileVersion=1.0.0.16;InternalName=WLickBrinquedao;LegalCopyright=WebLick.com.br;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Build>16</VerInfo_Build>
         <Icon_MainIcon>WLickBrinquedao_Icon1.ico</Icon_MainIcon>
         <AppEnableHighDPI>true</AppEnableHighDPI>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>

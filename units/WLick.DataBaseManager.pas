@@ -25,11 +25,11 @@ function TDataBaseManager.ExecAfter: Boolean;
 var
   vStr: WideString;
 begin
-  inherited ExecAfter;
+  Result := inherited ExecAfter;
 
-  if (FVersaoBD < 1) then
+  if (FVersaoBD < 2) then
   begin
-    vStr := 'alter sequence public.codigocrianca minvalue 0;';
+    vStr := 'drop sequence if exists codigocrianca';
     FDAO.ExecutaSQL(vStr);
   end;
 
@@ -39,22 +39,18 @@ function TDataBaseManager.ExecBefore: Boolean;
 var
   vStr: WideString;
 begin
-  inherited ExecBefore;
+  Result := inherited ExecBefore;
 
   if (FVersaoBD < 2) then
   begin
-//    vStr := 'ALTER TABLE atividades DROP CONSTRAINT "FK_id_crianca_responsaveis";';
-//    FDAO.ExecutaSQL(vStr);
-//
-//    vStr := 'ALTER TABLE atividades DROP CONSTRAINT "FK_id_responsavel_responsaveis";';
-//    FDAO.ExecutaSQL(vStr);
+
   end;
 
 end;
 
 function TDataBaseManager.ExecCargaDeDados: Boolean;
 begin
-  inherited ExecCargaDeDados;
+  Result := inherited ExecCargaDeDados;
 
   if (FVersaoBD < 1) then
   begin
@@ -67,7 +63,7 @@ function TDataBaseManager.ExecFunctions: Boolean;
 var
   vStr: WideString;
 begin
-  inherited ExecFunctions;
+  Result := inherited ExecFunctions;
 
   if (FVersaoBD < 1) then
   begin
@@ -163,7 +159,7 @@ function TDataBaseManager.ExecTables: Boolean;
 var
   vStr: WideString;
 begin
-  inherited ExecTables;
+  Result := inherited ExecTables;
 
   if (FVersaoBD < 1) then
   begin
@@ -217,7 +213,7 @@ end;
 
 function TDataBaseManager.ExecView: Boolean;
 begin
-  inherited ExecView;
+  Result := inherited ExecView;
 
   if (FVersaoBD < 1) then
   begin

@@ -102,7 +102,8 @@ end;
 
 function TInitSistema.LicencaValida: Boolean;
 begin
-  Result := not (Trunc(Now) > StrToDate('01/05/2017'));
+  // Sistema pago 100%!
+  Result := True;
 end;
 
 end.

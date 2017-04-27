@@ -174,7 +174,6 @@ end;
 
 procedure TfrmMain.timerAtividadesTimer(Sender: TObject);
 begin
-  { T - Ao exibir um FormChildren, esconder a tela de atividades para exibir as abas }
   if Assigned(FTelaAtividades) then
     FTelaAtividades.Visible := Self.MDIChildCount = 0;
 end;

@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Brinquedoteca"
-#define MyAppVersion "1.0.0.12"
+#define MyAppVersion "1.0.0.16"
 #define MyAppPublisher "WebLick Sistemas"
 #define MyAppURL "http://www.weblick.com.br/"
 #define MyAppExeName "ControleBrinquedoteca.exe"
